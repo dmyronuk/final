@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './styles/index.css';
 import './styles/header.css';
 import './styles/student-list.css';
-import './styles/transcription-form.css';
+import './styles/main.scss'
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
