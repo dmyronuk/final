@@ -1,37 +1,34 @@
 import React, { Component } from "react";
+import SimpleMap from "./Map";
 
-class StudentList extends Component{
+class Listings extends Component{
   constructor(props){
     super(props)
     this.state = {
-      students: null
+
     }
   }
-
-  getAllStudentInfo = async () => {
-      const response = await fetch("/students");
-      const data = await response.json();
-      if (response.status !== 200){
-        throw Error(data.message)
-      }
-      return data
-    }
+  // getAllStudentInfo = async () => {
+  //     const response = await fetch("/students");
+  //     const data = await response.json();
+  //     if (response.status !== 200){
+  //       throw Error(data.message)
+  //     }
+  //     return data
+  //   }
 
   componentDidMount(){
-    this.getAllStudentInfo()
-    .then(data => {
-      let students = JSON.parse(data);
-      this.setState({students})
-    })
+
   }
 
   render(){
     return(
       <div>
         Listings
+        <SimpleMap listings={this.state.listings} />
       </div>
     )
   }
 }
 
-export default StudentList
+export default Listings
