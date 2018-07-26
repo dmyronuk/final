@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import Main from "./Main";
+import { Route } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom'
 import Header from "./Header";
+import Listings from "./Listings";
+import Home from "./Home";
 
 class App extends Component {
   constructor(props){
@@ -11,10 +14,14 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        <Main />
-      </div>
+
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Route exact path="/" component= { Home } />
+          <Route exact path="/listings" component={ Listings }/>
+        </div>
+      </BrowserRouter>
     );
   }
 }
