@@ -30,4 +30,9 @@ module.exports = {
     return knex('tenants')
       .select()
   },
+
+  getAllListings: () => {
+    return knex('listings')
+      .select()
+  },
 }

@@ -7,7 +7,7 @@
 .map-listings-container{
   margin-left:$map-width;
   width:calc(100vw - $map-width);
-  height:100vh;
+  min-height:100vh;
   background: #eeeeee;
   padding:0 1rem;
   display:flex;
@@ -16,9 +16,16 @@
 
   .home-card{
     width:85%;
-    height:200px;
-    background:red;
+    background:white;
     margin:2rem 0 2rem 0;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+
+    img{
+      height:200px;
+      width:200px;
+    }
   }
 }
 
