@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SimpleMap from "./Map";
+import MyMapComponent from "./Map";
 
 class Listings extends Component{
   constructor(props){
@@ -25,7 +25,13 @@ class Listings extends Component{
     return(
       <div>
         Listings
-        <SimpleMap listings={this.state.listings} />
+        <MyMapComponent
+          isMarkerShown
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div  />}
+          containerElement={<div className="map-container" />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
       </div>
     )
   }
