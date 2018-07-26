@@ -1,9 +1,12 @@
 .header-top{
+  top:0px;
+  width:100vw;
   background:#444444;
   display:flex;
+  position:fixed;
   flex-direction:row;
   justify-content:center;
-  padding:1rem;
+  height: $header-height;
 }
 
 .header-top a{

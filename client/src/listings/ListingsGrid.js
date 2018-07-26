@@ -24,6 +24,7 @@ class Listings extends Component{
           address: "123 Drury Lane",
           photos:[],
           price: "$1800",
+          url: "../../public/images/house.jpg",
           lat: 43.6732,
           lng: -79.3832,
         },

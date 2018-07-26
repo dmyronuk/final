@@ -1,0 +1,24 @@
+.map-container{
+  position:fixed;
+  height:$main-container-height;
+  width:$map-width;
+}
+
+.map-listings-container{
+  margin-left:$map-width;
+  width:calc(100vw - $map-width);
+  height:100vh;
+  background: #eeeeee;
+  padding:0 1rem;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+
+  .home-card{
+    width:85%;
+    height:200px;
+    background:red;
+    margin:2rem 0 2rem 0;
+  }
+}
+
