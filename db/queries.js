@@ -11,25 +11,47 @@ var knex = require("knex")({
 });
 
 module.exports = {
-  getAllStudents: () => {
-    return knex("students").select()
+  getAllUsers: () => {
+    return knex("users").select()
   },
 
-  getStudentInfo: (student_id) => {
-    return knex("students")
-      .where("id", student_id)
+  getUserInfo: (user_id) => {
+    return knex('users')
+      .where('id', user_id)
       .select()
   },
 
-  getAllLessonsByStudent: (student_id) => {
-    return knex("lessons")
-      .where("student_id", student_id)
-      .select();
-  },
-
-  getLessonsInMonthByStudent: (student_id, startDate, endDate) => {
-    return knex("lessons")
-      .where("student_id", student_id)
-      .whereBetween("date", [startDate, "2020-01-01"])
+  getAllLandlords: () => {
+    return knex('landlords')
+      .select()
   }
+
+  getAllTenants: () => {
+    return knex('tenants')
+      .select()
+  }
+
+
+
+  // getAllStudents: () => {
+  //   return knex("students").select()
+  // },
+
+  // getStudentInfo: (student_id) => {
+  //   return knex("students")
+  //     .where("id", student_id)
+  //     .select()
+  // },
+
+  // getAllLessonsByStudent: (student_id) => {
+  //   return knex("lessons")
+  //     .where("student_id", student_id)
+  //     .select();
+  // },
+
+  // getLessonsInMonthByStudent: (student_id, startDate, endDate) => {
+  //   return knex("lessons")
+  //     .where("student_id", student_id)
+  //     .whereBetween("date", [startDate, "2020-01-01"])
+  // }
 }
