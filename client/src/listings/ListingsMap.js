@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import MyMapComponent from "./Map";
 import ListingMapCard from "./ListingMapCard";
+import { getAllListings } from "../ajax/listings"
 
-class Listings extends Component{
+class ListingsMap extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -10,18 +11,8 @@ class Listings extends Component{
     }
   }
 
-  getAllListings = async () => {
-      const response = await fetch("/listings");
-      const data = await response.json();
-      if (response.status !== 200){
-        throw Error(data.message)
-      }
-      return JSON.parse(data)
-    }
-
-
    componentDidMount(){
-    this.getAllListings()
+    getAllListings()
     .then(listings => {
       this.setState({
         listings
@@ -56,4 +47,4 @@ class Listings extends Component{
   }
 }
 
-export default Listings
+export default ListingsMap
