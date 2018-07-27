@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import RentalGridCard from "./RentalGridCard";
 import { getAllListings } from "../ajax/listings"
 
 class RentalsGrid extends Component{
@@ -24,11 +25,13 @@ class RentalsGrid extends Component{
     return(
       <div className="listing-grid-container">
         {this.state.listings && this.state.listings.map((elem, i) =>
-          <div className="listing-grid-item">
-            {elem.address}
-            {elem.photos}
-            {elem.price}
-          </div>
+          <RentalGridCard
+            key={i}
+            id={elem.id}
+            address={elem.address}
+            photos={elem.photos}
+            price={elem.price}
+          />
         )}
       </div>
     )

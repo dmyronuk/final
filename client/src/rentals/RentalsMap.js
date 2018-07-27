@@ -36,6 +36,7 @@ class RentalsMap extends Component{
         <div className ="map-listings-container">
           {this.state.listings && this.state.listings.map((elem, i) =>
               <RentalMapCard
+                id={elem.id}
                 key={i}
                 address={elem.address}
                 photos={elem.photos}
