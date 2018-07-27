@@ -14,17 +14,17 @@ class App extends Component {
     }
   }
 
-  render() {
+  render(){
     return (
-
       <BrowserRouter>
         <div className="main-container">
           <Header />
           <Route exact path="/" component= { Home } />
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
+          <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <Route exact path="/rentals/new" component={ NewRental }/>
-          <Route path="rentals/:id" component={ SingleRental } />
+
         </div>
       </BrowserRouter>
     );

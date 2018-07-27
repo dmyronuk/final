@@ -69,4 +69,10 @@ module.exports = {
     return knex('listings')
     .select()
   },
+
+  getListing: (id) => {
+    return knex('listings')
+    .where('id', id)
+    .select()
+  }
 }

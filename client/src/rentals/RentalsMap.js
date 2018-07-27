@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import MyMapComponent from "./Map";
 import RentalMapCard from "./RentalMapCard";
 import { getAllListings } from "../ajax/listings"
