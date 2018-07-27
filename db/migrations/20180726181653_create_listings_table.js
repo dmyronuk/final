@@ -7,8 +7,8 @@ exports.up = function(knex, Promise) {
     table.float('price');
     table.integer('landlords_id');
     table.foreign('landlords_id').references('landlords.id')
-    table.float('lng');
-    table.float('lat');
+    table.double('lng');
+    table.double('lat');
     table.integer('neighbourhoods_id');
     table.foreign('neighbourhoods_id').references('neighbourhoods.id');
   });
