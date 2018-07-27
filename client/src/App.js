@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
-import RentalsMap from "./listings/RentalsMap";
-import RentalsGrid from "./listings/RentalsGrid";
-import NewRental from "./listings/NewRental"
-import SingleRental from "./listings/SingleRental"
+import RentalsMap from "./rentals/RentalsMap";
+import RentalsGrid from "./rentals/RentalsGrid";
+import NewRental from "./rentals/NewRental";
+import SingleRental from "./rentals/SingleRental";
 
 class App extends Component {
   constructor(props){

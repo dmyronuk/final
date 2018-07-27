@@ -1,6 +1,6 @@
 import React from "react";
 
-const Rental = (props) => {
+const SingleRental = (props) => {
 return(
     <div className="home-card">
       Listing
@@ -8,4 +8,4 @@ return(
   )
 }
 
-export default Rental
+export default SingleRental;
