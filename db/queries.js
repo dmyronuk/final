@@ -1,14 +1,14 @@
 // require("dotenv").config();
 
-// var knex = require("knex")({
-//   client: "pg",
-//   connection: {
-//     host : "127.0.0.1",
-//     user : process.env.DB_USERNAME,
-//     password : process.env.DB_PASSWORD,
-//     database : process.env.DB_NAME
-//   }
-// });
+var knex = require("knex")({
+  client: "pg",
+  connection: {
+    host : "127.0.0.1",
+    user : process.env.DB_USERNAME,
+    password : process.env.DB_PASSWORD,
+    database : process.env.DB_NAME
+  }
+});
 
 //console.log(process.env);
 // getAllUsers1 = () => {
