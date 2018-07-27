@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import { BrowserRouter } from 'react-router-dom'
+import { Route, BrowserRouter } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
-import ListingsMap from "./listings/ListingsMap";
-import ListingsGrid from "./listings/ListingsGrid";
-import NewListing from "./listings/NewListing"
+import RentalsMap from "./listings/RentalsMap";
+import RentalsGrid from "./listings/RentalsGrid";
+import NewRental from "./listings/NewRental"
+import SingleRental from "./listings/SingleRental"
 
 class App extends Component {
   constructor(props){
@@ -21,9 +21,10 @@ class App extends Component {
         <div className="main-container">
           <Header />
           <Route exact path="/" component= { Home } />
-          <Route exact path="/listings/map" component={ ListingsMap }/>
-          <Route exact path="/listings/grid" component={ ListingsGrid }/>
-          <Route exact path="/listings/new" component={ NewListing }/>
+          <Route exact path="/rentals/map" component={ RentalsMap }/>
+          <Route exact path="/rentals/grid" component={ RentalsGrid }/>
+          <Route exact path="/rentals/new" component={ NewRental }/>
+          <Route path="rentals/:id" component={ SingleRental } />
         </div>
       </BrowserRouter>
     );

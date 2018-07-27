@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
-class NewListing extends Component {
+class NewRental extends Component {
   constructor(props) {
     super(props);
 
@@ -56,4 +56,4 @@ class NewListing extends Component {
   }
 }
 
-export default NewListing;
+export default NewRental;

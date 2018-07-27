@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import MyMapComponent from "./Map";
-import ListingMapCard from "./ListingMapCard";
+import RentalMapCard from "./RentalMapCard";
 import { getAllListings } from "../ajax/listings"
 
-class ListingsMap extends Component{
+class RentalsMap extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -34,7 +35,7 @@ class ListingsMap extends Component{
         }
         <div className ="map-listings-container">
           {this.state.listings && this.state.listings.map((elem, i) =>
-              <ListingMapCard
+              <RentalMapCard
                 key={i}
                 address={elem.address}
                 photos={elem.photos}
@@ -47,4 +48,4 @@ class ListingsMap extends Component{
   }
 }
 
-export default ListingsMap
+export default RentalsMap

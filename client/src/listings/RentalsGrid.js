@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getAllListings } from "../ajax/listings"
 
-class ListingsGrid extends Component{
+class RentalsGrid extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -34,4 +35,4 @@ class ListingsGrid extends Component{
   }
 }
 
-export default ListingsGrid
+export default RentalsGrid

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ListingMapCard = (props) => {
+const RentalMapCard = (props) => {
 return(
     <div className="home-card">
       <img alt="Listing" src="../../public/images/house.jpg" />
@@ -21,4 +21,4 @@ return(
   )
 };
 
-export default ListingMapCard
+export default RentalMapCard
