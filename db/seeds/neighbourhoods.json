@@ -1,0 +1,842 @@
+[
+  {
+    "id": 1,
+    "neighbourhood": "West Humber-Clairville",
+    "rank": 139,
+    "grade": "D"
+  },
+  {
+    "id": 2,
+    "neighbourhood": "Mount Olive-Silverstone-Jamestown",
+    "rank": 119,
+    "grade": "C"
+  },
+  {
+    "id": 3,
+    "neighbourhood": "Thistletown-Beaumond Heights",
+    "rank": 26,
+    "grade": "A"
+  },
+  {
+    "id": 4,
+    "neighbourhood": "Rexdale-Kipling",
+    "rank": 15,
+    "grade": "A"
+  },
+  {
+    "id": 5,
+    "neighbourhood": "Elms-Old Rexdale",
+    "rank": 19,
+    "grade": "A"
+  },
+  {
+    "id": 6,
+    "neighbourhood": "Kingsview Village-The Westway",
+    "rank": 79,
+    "grade": "B"
+  },
+  {
+    "id": 7,
+    "neighbourhood": "Willowridge-Martingrove-Richview",
+    "rank": 82,
+    "grade": "B"
+  },
+  {
+    "id": 8,
+    "neighbourhood": "Humber Heights-Westmount",
+    "rank": 36,
+    "grade": "A"
+  },
+  {
+    "id": 9,
+    "neighbourhood": "Edenbridge-Humber Valley",
+    "rank": 65,
+    "grade": "B"
+  },
+  {
+    "id": 10,
+    "neighbourhood": "Princess-Rosethorn",
+    "rank": 29,
+    "grade": "A"
+  },
+  {
+    "id": 11,
+    "neighbourhood": "Eringate-Centennial-West Deane",
+    "rank": 50,
+    "grade": "A"
+  },
+  {
+    "id": 12,
+    "neighbourhood": "Markland Wood",
+    "rank": 13,
+    "grade": "A"
+  },
+  {
+    "id": 13,
+    "neighbourhood": "Etobicoke West Mall",
+    "rank": 14,
+    "grade": "A"
+  },
+  {
+    "id": 14,
+    "neighbourhood": "Islington-City Centre West",
+    "rank": 133,
+    "grade": "D"
+  },
+  {
+    "id": 15,
+    "neighbourhood": "Kingsway South",
+    "rank": 33,
+    "grade": "A"
+  },
+  {
+    "id": 16,
+    "neighbourhood": "Stonegate-Queensway",
+    "rank": 89,
+    "grade": "B"
+  },
+  {
+    "id": 17,
+    "neighbourhood": "Mimico",
+    "rank": 102,
+    "grade": "B"
+  },
+  {
+    "id": 18,
+    "neighbourhood": "New Toronto",
+    "rank": 58,
+    "grade": "A"
+  },
+  {
+    "id": 19,
+    "neighbourhood": "Long Branch",
+    "rank": 25,
+    "grade": "A"
+  },
+  {
+    "id": 20,
+    "neighbourhood": "Alderwood",
+    "rank": 28,
+    "grade": "A"
+  },
+  {
+    "id": 21,
+    "neighbourhood": "Humber Summit",
+    "rank": 108,
+    "grade": "B"
+  },
+  {
+    "id": 22,
+    "neighbourhood": "Humbermede",
+    "rank": 48,
+    "grade": "A"
+  },
+  {
+    "id": 23,
+    "neighbourhood": "Pelmo Park-Humberlea",
+    "rank": 40,
+    "grade": "A"
+  },
+  {
+    "id": 24,
+    "neighbourhood": "Black Creek",
+    "rank": 103,
+    "grade": "B"
+  },
+  {
+    "id": 25,
+    "neighbourhood": "Glenfield-Jane Heights",
+    "rank": 107,
+    "grade": "B"
+  },
+  {
+    "id": 26,
+    "neighbourhood": "Downsview-Roding-CFB",
+    "rank": 126,
+    "grade": "C"
+  },
+  {
+    "id": 27,
+    "neighbourhood": "York University Heights",
+    "rank": 135,
+    "grade": "D"
+  },
+  {
+    "id": 28,
+    "neighbourhood": "Rustic",
+    "rank": 41,
+    "grade": "A"
+  },
+  {
+    "id": 29,
+    "neighbourhood": "Maple Leaf",
+    "rank": 8,
+    "grade": "A"
+  },
+  {
+    "id": 30,
+    "neighbourhood": "Brookhaven-Amesbury",
+    "rank": 42,
+    "grade": "A"
+  },
+  {
+    "id": 31,
+    "neighbourhood": "Yorkdale-Glen Park",
+    "rank": 106,
+    "grade": "B"
+  },
+  {
+    "id": 32,
+    "neighbourhood": "Englemount-Lawrence",
+    "rank": 68,
+    "grade": "B"
+  },
+  {
+    "id": 33,
+    "neighbourhood": "Clanton Park",
+    "rank": 73,
+    "grade": "B"
+  },
+  {
+    "id": 34,
+    "neighbourhood": "Bathurst Manor",
+    "rank": 76,
+    "grade": "B"
+  },
+  {
+    "id": 35,
+    "neighbourhood": "Westminster-Branson",
+    "rank": 74,
+    "grade": "B"
+  },
+  {
+    "id": 36,
+    "neighbourhood": "Newtonbrook West",
+    "rank": 83,
+    "grade": "B"
+  },
+  {
+    "id": 37,
+    "neighbourhood": "Willowdale West",
+    "rank": 24,
+    "grade": "A"
+  },
+  {
+    "id": 38,
+    "neighbourhood": "Lansing-Westgate",
+    "rank": 60,
+    "grade": "A"
+  },
+  {
+    "id": 39,
+    "neighbourhood": "Bedford Park-Nortown",
+    "rank": 125,
+    "grade": "C"
+  },
+  {
+    "id": 40,
+    "neighbourhood": "St.Andrew-Windfields",
+    "rank": 115,
+    "grade": "C"
+  },
+  {
+    "id": 41,
+    "neighbourhood": "Bridle Path-Sunnybrook-York Mills",
+    "rank": 67,
+    "grade": "B"
+  },
+  {
+    "id": 42,
+    "neighbourhood": "Banbury-Don Mills",
+    "rank": 99,
+    "grade": "B"
+  },
+  {
+    "id": 43,
+    "neighbourhood": "Victoria Village",
+    "rank": 27,
+    "grade": "A"
+  },
+  {
+    "id": 44,
+    "neighbourhood": "Flemingdon Park",
+    "rank": 51,
+    "grade": "A"
+  },
+  {
+    "id": 45,
+    "neighbourhood": "Parkwoods-Donalda",
+    "rank": 100,
+    "grade": "B"
+  },
+  {
+    "id": 46,
+    "neighbourhood": "Pleasant View",
+    "rank": 9,
+    "grade": "A"
+  },
+  {
+    "id": 47,
+    "neighbourhood": "Don Valley Village",
+    "rank": 98,
+    "grade": "B"
+  },
+  {
+    "id": 48,
+    "neighbourhood": "Hillcrest Village",
+    "rank": 55,
+    "grade": "A"
+  },
+  {
+    "id": 49,
+    "neighbourhood": "Bayview Woods-Steeles",
+    "rank": 34,
+    "grade": "A"
+  },
+  {
+    "id": 50,
+    "neighbourhood": "Newtonbrook East",
+    "rank": 97,
+    "grade": "B"
+  },
+  {
+    "id": 51,
+    "neighbourhood": "Willowdale East",
+    "rank": 120,
+    "grade": "C"
+  },
+  {
+    "id": 52,
+    "neighbourhood": "Bayview Village",
+    "rank": 64,
+    "grade": "B"
+  },
+  {
+    "id": 53,
+    "neighbourhood": "Henry Farm",
+    "rank": 16,
+    "grade": "A"
+  },
+  {
+    "id": 54,
+    "neighbourhood": "O'Connor-Parkview",
+    "rank": 63,
+    "grade": "A"
+  },
+  {
+    "id": 55,
+    "neighbourhood": "Thorncliffe Park",
+    "rank": 44,
+    "grade": "A"
+  },
+  {
+    "id": 56,
+    "neighbourhood": "Leaside-Bennington",
+    "rank": 43,
+    "grade": "A"
+  },
+  {
+    "id": 57,
+    "neighbourhood": "Broadview North",
+    "rank": 4,
+    "grade": "A"
+  },
+  {
+    "id": 58,
+    "neighbourhood": "Old East York",
+    "rank": 23,
+    "grade": "A"
+  },
+  {
+    "id": 59,
+    "neighbourhood": "Danforth East York",
+    "rank": 18,
+    "grade": "A"
+  },
+  {
+    "id": 60,
+    "neighbourhood": "Woodbine-Lumsden",
+    "rank": 17,
+    "grade": "A"
+  },
+  {
+    "id": 61,
+    "neighbourhood": "Taylor-Massey",
+    "rank": 66,
+    "grade": "B"
+  },
+  {
+    "id": 62,
+    "neighbourhood": "East End-Danforth",
+    "rank": 117,
+    "grade": "C"
+  },
+  {
+    "id": 63,
+    "neighbourhood": "The Beaches",
+    "rank": 72,
+    "grade": "B"
+  },
+  {
+    "id": 64,
+    "neighbourhood": "Woodbine Corridor",
+    "rank": 37,
+    "grade": "A"
+  },
+  {
+    "id": 65,
+    "neighbourhood": "Greenwood-Coxwell",
+    "rank": 69,
+    "grade": "B"
+  },
+  {
+    "id": 66,
+    "neighbourhood": "Danforth",
+    "rank": 90,
+    "grade": "B"
+  },
+  {
+    "id": 67,
+    "neighbourhood": "Playter Estates-Danforth",
+    "rank": 61,
+    "grade": "A"
+  },
+  {
+    "id": 68,
+    "neighbourhood": "North Riverdale",
+    "rank": 57,
+    "grade": "A"
+  },
+  {
+    "id": 69,
+    "neighbourhood": "Blake-Jones",
+    "rank": 7,
+    "grade": "A"
+  },
+  {
+    "id": 70,
+    "neighbourhood": "South Riverdale",
+    "rank": 128,
+    "grade": "D"
+  },
+  {
+    "id": 71,
+    "neighbourhood": "Cabbagetown-South St.James Town",
+    "rank": 105,
+    "grade": "B"
+  },
+  {
+    "id": 72,
+    "neighbourhood": "Regent Park",
+    "rank": 71,
+    "grade": "B"
+  },
+  {
+    "id": 73,
+    "neighbourhood": "Moss Park",
+    "rank": 136,
+    "grade": "D"
+  },
+  {
+    "id": 74,
+    "neighbourhood": "North St.James Town",
+    "rank": 109,
+    "grade": "B"
+  },
+  {
+    "id": 75,
+    "neighbourhood": "Church-Yonge Corridor",
+    "rank": 140,
+    "grade": "D"
+  },
+  {
+    "id": 76,
+    "neighbourhood": "Bay Street Corridor",
+    "rank": 132,
+    "grade": "D"
+  },
+  {
+    "id": 77,
+    "neighbourhood": "Waterfront Communities-The Island",
+    "rank": 138,
+    "grade": "D"
+  },
+  {
+    "id": 78,
+    "neighbourhood": "Kensington-Chinatown",
+    "rank": 131,
+    "grade": "D"
+  },
+  {
+    "id": 79,
+    "neighbourhood": "University",
+    "rank": 96,
+    "grade": "B"
+  },
+  {
+    "id": 80,
+    "neighbourhood": "Palmerston-Little Italy",
+    "rank": 62,
+    "grade": "A"
+  },
+  {
+    "id": 81,
+    "neighbourhood": "Trinity-Bellwoods",
+    "rank": 95,
+    "grade": "B"
+  },
+  {
+    "id": 82,
+    "neighbourhood": "Niagara",
+    "rank": 101,
+    "grade": "B"
+  },
+  {
+    "id": 83,
+    "neighbourhood": "Dufferin Grove",
+    "rank": 21,
+    "grade": "A"
+  },
+  {
+    "id": 84,
+    "neighbourhood": "Little Portugal",
+    "rank": 52,
+    "grade": "A"
+  },
+  {
+    "id": 85,
+    "neighbourhood": "South Parkdale",
+    "rank": 87,
+    "grade": "B"
+  },
+  {
+    "id": 86,
+    "neighbourhood": "Roncesvalles",
+    "rank": 91,
+    "grade": "B"
+  },
+  {
+    "id": 87,
+    "neighbourhood": "High Park-Swansea",
+    "rank": 49,
+    "grade": "A"
+  },
+  {
+    "id": 88,
+    "neighbourhood": "High Park North",
+    "rank": 77,
+    "grade": "B"
+  },
+  {
+    "id": 89,
+    "neighbourhood": "Runnymede-Bloor West Village",
+    "rank": 30,
+    "grade": "A"
+  },
+  {
+    "id": 90,
+    "neighbourhood": "Junction Area",
+    "rank": 70,
+    "grade": "B"
+  },
+  {
+    "id": 91,
+    "neighbourhood": "Weston-Pellam Park",
+    "rank": 22,
+    "grade": "A"
+  },
+  {
+    "id": 92,
+    "neighbourhood": "Corso Italia-Davenport",
+    "rank": 35,
+    "grade": "A"
+  },
+  {
+    "id": 93,
+    "neighbourhood": "Dovercourt-Wallace Emerson-Junction",
+    "rank": 127,
+    "grade": "C"
+  },
+  {
+    "id": 94,
+    "neighbourhood": "Wychwood",
+    "rank": 47,
+    "grade": "A"
+  },
+  {
+    "id": 95,
+    "neighbourhood": "Annex",
+    "rank": 137,
+    "grade": "D"
+  },
+  {
+    "id": 96,
+    "neighbourhood": "Casa Loma",
+    "rank": 32,
+    "grade": "A"
+  },
+  {
+    "id": 97,
+    "neighbourhood": "Yonge-St.Clair",
+    "rank": 5,
+    "grade": "A"
+  },
+  {
+    "id": 98,
+    "neighbourhood": "Rosedale-Moore Park",
+    "rank": 116,
+    "grade": "C"
+  },
+  {
+    "id": 99,
+    "neighbourhood": "Mount Pleasant East",
+    "rank": 12,
+    "grade": "A"
+  },
+  {
+    "id": 100,
+    "neighbourhood": "Yonge-Eglinton",
+    "rank": 11,
+    "grade": "A"
+  },
+  {
+    "id": 101,
+    "neighbourhood": "Forest Hill South",
+    "rank": 46,
+    "grade": "A"
+  },
+  {
+    "id": 102,
+    "neighbourhood": "Forest Hill North",
+    "rank": 56,
+    "grade": "A"
+  },
+  {
+    "id": 103,
+    "neighbourhood": "Lawrence Park South",
+    "rank": 78,
+    "grade": "B"
+  },
+  {
+    "id": 104,
+    "neighbourhood": "Mount Pleasant West",
+    "rank": 94,
+    "grade": "B"
+  },
+  {
+    "id": 105,
+    "neighbourhood": "Lawrence Park North",
+    "rank": 45,
+    "grade": "A"
+  },
+  {
+    "id": 106,
+    "neighbourhood": "Humewood-Cedarvale",
+    "rank": 20,
+    "grade": "A"
+  },
+  {
+    "id": 107,
+    "neighbourhood": "Oakwood Village",
+    "rank": 38,
+    "grade": "A"
+  },
+  {
+    "id": 108,
+    "neighbourhood": "Briar Hill-Belgravia",
+    "rank": 75,
+    "grade": "B"
+  },
+  {
+    "id": 109,
+    "neighbourhood": "Caledonia-Fairbank",
+    "rank": 2,
+    "grade": "A"
+  },
+  {
+    "id": 110,
+    "neighbourhood": "Keelesdale-Eglinton West",
+    "rank": 10,
+    "grade": "A"
+  },
+  {
+    "id": 111,
+    "neighbourhood": "Rockcliffe-Smythe",
+    "rank": 84,
+    "grade": "B"
+  },
+  {
+    "id": 112,
+    "neighbourhood": "Beechborough-Greenbrook",
+    "rank": 31,
+    "grade": "A"
+  },
+  {
+    "id": 113,
+    "neighbourhood": "Weston",
+    "rank": 93,
+    "grade": "B"
+  },
+  {
+    "id": 114,
+    "neighbourhood": "Lambton Baby Point",
+    "rank": 1,
+    "grade": "A"
+  },
+  {
+    "id": 115,
+    "neighbourhood": "Mount Dennis",
+    "rank": 54,
+    "grade": "A"
+  },
+  {
+    "id": 116,
+    "neighbourhood": "Steeles",
+    "rank": 86,
+    "grade": "B"
+  },
+  {
+    "id": 117,
+    "neighbourhood": "L'Amoreaux",
+    "rank": 114,
+    "grade": "C"
+  },
+  {
+    "id": 118,
+    "neighbourhood": "Tam O'Shanter-Sullivan",
+    "rank": 85,
+    "grade": "B"
+  },
+  {
+    "id": 119,
+    "neighbourhood": "Wexford/Maryvale",
+    "rank": 129,
+    "grade": "D"
+  },
+  {
+    "id": 120,
+    "neighbourhood": "Clairlea-Birchmount",
+    "rank": 130,
+    "grade": "D"
+  },
+  {
+    "id": 121,
+    "neighbourhood": "Oakridge",
+    "rank": 104,
+    "grade": "B"
+  },
+  {
+    "id": 122,
+    "neighbourhood": "Birchcliffe-Cliffside",
+    "rank": 111,
+    "grade": "C"
+  },
+  {
+    "id": 123,
+    "neighbourhood": "Cliffcrest",
+    "rank": 80,
+    "grade": "B"
+  },
+  {
+    "id": 124,
+    "neighbourhood": "Kennedy Park",
+    "rank": 88,
+    "grade": "B"
+  },
+  {
+    "id": 125,
+    "neighbourhood": "Ionview",
+    "rank": 53,
+    "grade": "A"
+  },
+  {
+    "id": 126,
+    "neighbourhood": "Dorset Park",
+    "rank": 118,
+    "grade": "C"
+  },
+  {
+    "id": 127,
+    "neighbourhood": "Bendale",
+    "rank": 122,
+    "grade": "C"
+  },
+  {
+    "id": 128,
+    "neighbourhood": "Agincourt South-Malvern West",
+    "rank": 110,
+    "grade": "B"
+  },
+  {
+    "id": 129,
+    "neighbourhood": "Agincourt North",
+    "rank": 92,
+    "grade": "B"
+  },
+  {
+    "id": 130,
+    "neighbourhood": "Milliken",
+    "rank": 124,
+    "grade": "C"
+  },
+  {
+    "id": 131,
+    "neighbourhood": "Rouge",
+    "rank": 121,
+    "grade": "C"
+  },
+  {
+    "id": 132,
+    "neighbourhood": "Malvern",
+    "rank": 112,
+    "grade": "C"
+  },
+  {
+    "id": 133,
+    "neighbourhood": "Centennial Scarborough",
+    "rank": 3,
+    "grade": "A"
+  },
+  {
+    "id": 134,
+    "neighbourhood": "Highland Creek",
+    "rank": 59,
+    "grade": "A"
+  },
+  {
+    "id": 135,
+    "neighbourhood": "Morningside",
+    "rank": 39,
+    "grade": "A"
+  },
+  {
+    "id": 136,
+    "neighbourhood": "West Hill",
+    "rank": 123,
+    "grade": "C"
+  },
+  {
+    "id": 137,
+    "neighbourhood": "Woburn",
+    "rank": 134,
+    "grade": "D"
+  },
+  {
+    "id": 138,
+    "neighbourhood": "Eglinton East",
+    "rank": 113,
+    "grade": "C"
+  },
+  {
+    "id": 139,
+    "neighbourhood": "Scarborough Village",
+    "rank": 81,
+    "grade": "B"
+  },
+  {
+    "id": 140,
+    "neighbourhood": "Guildwood",
+    "rank": 6,
+    "grade": "A"
+  }
+]

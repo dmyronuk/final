@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const fileUpload = require('express-fileupload');
 const PORT = 3001;
 
 require("dotenv").config();
@@ -14,15 +15,10 @@ var knex = require("knex")({
   }
 });
 
+app.use(fileUpload());
 app.use(express.static(__dirname + "/public"));
 
-const routes = require("./routes/main.js")
-
-
-app.get("/students/:id/invoices/:date", routes.invoice)
-app.get("/students/:id/lessons", routes.studentLessons)
-app.get("/students/:id", routes.studentInfo)
-app.get("/students", routes.index);
+const routes = require('./routes.js')(app)
 
 app.listen(PORT, () => {
   console.log(`Server running on Port ${PORT}`);

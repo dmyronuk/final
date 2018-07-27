@@ -68,35 +68,5 @@ module.exports = {
   getAllListings: () => {
     return knex('listings')
     .select()
-  }
-
-  // OTHER QUERIES
-
-  // get latest 20 messages between tenant and landlord
-  //
-
-
-
-
-  // getAllStudents: () => {
-  //   return knex("students").select()
-  // },
-
-  // getStudentInfo: (student_id) => {
-  //   return knex("students")
-  //     .where("id", student_id)
-  //     .select()
-  // },
-
-  // getAllLessonsByStudent: (student_id) => {
-  //   return knex("lessons")
-  //     .where("student_id", student_id)
-  //     .select();
-  // },
-
-  // getLessonsInMonthByStudent: (student_id, startDate, endDate) => {
-  //   return knex("lessons")
-  //     .where("student_id", student_id)
-  //     .whereBetween("date", [startDate, "2020-01-01"])
-  // }
+  },
 }

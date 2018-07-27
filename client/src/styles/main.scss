@@ -1,5 +1,7 @@
+@import "variables.scss";
 @import "header.scss";
-@import "listings.scss";
+@import "listing-map.scss";
+@import "listing-grid.scss";
 
 html, body {
   box-sizing:border-box;
@@ -10,4 +12,11 @@ html, body {
 
 a{
   text-decoration:none;
+}
+
+.main-container{
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  padding-top:$header-height;
 }

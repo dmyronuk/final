@@ -1,0 +1,16 @@
+.listing-grid-container{
+  background:red;
+  margin:1rem;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-gap: 10px;
+  background-color: #eee;
+  color: #444;
+
+  div{
+    background-color: #444;
+    color: #fff;
+    height:200px;
+    font-size: 150%;
+  }
+}
