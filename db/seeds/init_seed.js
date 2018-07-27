@@ -1,10 +1,5 @@
 var faker = require('faker');
 
-console.log(faker.lorem.paragraph());
-console.log(faker.lorem.paragraph());
-console.log(faker.hacker.phrase());
-console.log(faker.hacker.phrase());
-
 exports.seed = function(knex, Promise) {
 
   function deleteUsers(){
