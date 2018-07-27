@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
+import Callback from './Callback';
 import RentalsMap from "./rentals/RentalsMap";
 import RentalsGrid from "./rentals/RentalsGrid";
 import NewRental from "./rentals/NewRental";
@@ -25,6 +26,11 @@ class App extends Component {
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/new" component={ NewRental }/>
           <Route path="rentals/:id" component={ SingleRental } />
+
+
+
+          
+          <Route path="/callback" component={Callback} />
         </div>
       </BrowserRouter>
     );
