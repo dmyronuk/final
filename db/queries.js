@@ -67,12 +67,16 @@ module.exports = {
 
   getAllListings: () => {
     return knex('listings')
+    .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
+    .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
     .select()
   },
 
   getListing: (id) => {
     return knex('listings')
-    .where('id', id)
+    .where('listings.id', id)
+    .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
+    .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
     .select()
   }
 }

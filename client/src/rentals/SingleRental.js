@@ -12,11 +12,13 @@ class SingleRental extends Component {
 
   componentDidMount(){
     getSingleListing(this.state.id)
-    .then(listing => {
+    .then(data => {
       this.setState({
-        listing
+        data
       })
+      console.log(data)
     })
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,9 +29,17 @@ class SingleRental extends Component {
 
   render(){
     return (
-      <div className="home-card">
-        {this.state.listing &&
-          this.state.listing.address
+      <div className="single-home-card">
+        {this.state.data &&
+          <div>
+            <div>{this.state.data.street}</div>
+            <div>{this.state.data.city} {this.state.data.province}</div>
+            <div>{this.state.data.postal_code}</div>
+            <div>${this.state.data.price / 100}</div>
+            <div>{this.state.data.date_available}</div>
+            <div>{this.state.data.description}</div>
+            <div>Bedrooms: {this.state.data.bedrooms} Bathrooms: {this.state.data.bathrooms} </div>
+          </div>
         }
       </div>
     )
