@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const RentalMapCard = (props) => {
+const RentalGridCard = (props) => {
 return(
     <Link to={"/rentals/" + props.id}>
       <div className="home-card">
@@ -17,8 +17,8 @@ return(
             </tbody>
           </table>
       </div>
-    </Link>
+    </ Link>
   )
 };
 
-export default RentalMapCard
+export default RentalGridCard
