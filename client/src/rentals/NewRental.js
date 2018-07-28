@@ -58,10 +58,10 @@ class NewRental extends Component {
     e.preventDefault();
     const { data, imageURLs } = this.state;
     // console.log(data)
-    let formData = new FormData();
-    formData.append('data', JSON.stringify(data));
-    formData.append('images', JSON.stringify(imageURLs))
-    axios.post('/api/listings', formData)
+    axios.post('/api/listings', {
+      data: data,
+      images: imageURLs,
+    })
       .then(res => {
         // access results...
       });
