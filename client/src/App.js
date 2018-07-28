@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
+import { requireAuth } from './utils/AuthService';
 import Header from "./Header";
 import Home from "./Home";
 import Callback from './Callback';
@@ -24,8 +25,8 @@ class App extends Component {
           <Route exact path="/" component= { Home } />
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
-          <Route exact path="/rentals/new" component={ NewRental }/>
-          <Route path="rentals/:id(\d+)" component={ SingleRental } />
+          <Route exact path="/rentals/new" component={ NewRental }  onEnter = {requireAuth}/>
+          <Route path="/rentals/:id(\d+)" component={ SingleRental } />
 
 
 
