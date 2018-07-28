@@ -16,7 +16,14 @@ var knex = require("knex")({
     database : process.env.DB_NAME
   }
 });
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({
+    type: 'application / vnd.api + json'
+}));
 app.use(fileUpload());
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
