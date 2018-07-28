@@ -20,6 +20,7 @@ class NewRental extends Component {
         date: "",
         lng: "",
         lat: "",
+        description: "",
       }
     };
 
@@ -67,7 +68,7 @@ class NewRental extends Component {
   }
 
   render() {
-    const { street, building, unit, city, pCode, province, price, bedrooms, bathrooms, date, lng, lat } = this.state.data;
+    const { street, building, unit, city, pCode, province, price, bedrooms, bathrooms, date, lng, lat, description } = this.state.data;
     return (
       <form onSubmit={this.onSubmit}>
         <div>
@@ -140,6 +141,12 @@ class NewRental extends Component {
           <label>Lng</label>
           <div>
             <input type="number" name="lng" value={lng} onChange={this.onChange} />
+          </div>
+        </div>
+        <div>
+          <label>Description</label>
+          <div>
+            <textarea type="text" name="description" value={description} onChange={this.onChange} />
           </div>
         </div>
         <div>
