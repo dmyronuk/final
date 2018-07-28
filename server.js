@@ -4,8 +4,8 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
-const bodyParser = require('body-parser');
 const PORT = 3001;
+
 
 require("dotenv").config();
 
@@ -28,8 +28,9 @@ app.use(bodyParser.json({
 }));
 app.use(fileUpload());
 app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json());
 
-const routes = require('./routes.js')(app)
+const routes = require('./routes.js')(app);
 
 app.listen(PORT, () => {
   console.log(`Server running on Port ${PORT}`);
