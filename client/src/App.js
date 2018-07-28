@@ -25,7 +25,7 @@ class App extends Component {
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/new" component={ NewRental }/>
-          <Route path="rentals/:id" component={ SingleRental } />
+          <Route path="rentals/:id(\d+)" component={ SingleRental } />
 
 
 
