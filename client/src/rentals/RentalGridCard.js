@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const RentalGridCard = (props) => {
-  console.log("HEYYYY", props.data.city)
 return(
     <Link to={"/rentals/" + props.id}>
       <div className="grid-listing-card">
