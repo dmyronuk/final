@@ -1,8 +1,9 @@
 @import "variables.scss";
 @import "header.scss";
-@import "listing-map.scss";
-@import "listing-grid.scss";
-@import "listing-single.scss";
+@import "rentals-map.scss";
+@import "rentals-grid.scss";
+@import "rentals-single.scss";
+@import "rentals-marker.scss";
 
 html, body {
   box-sizing:border-box;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MyMapComponent from "./Map";
+import MapComponent from "./Map";
 import RentalMapCard from "./RentalMapCard";
 import { getAllListings } from "../ajax/listings"
 
@@ -7,13 +7,20 @@ class RentalsMap extends Component{
   constructor(props){
     super(props)
     this.state = {
-
+      activeInfoBoxId: null,
     }
   }
 
-   componentDidMount(){
+  handleMarkerClick = (key) => {
+    this.setState({
+      activeInfoBoxId: key
+    })
+  }
+
+  componentDidMount(){
     getAllListings()
     .then(listings => {
+      console.log(listings)
       this.setState({
         listings
       })
@@ -24,17 +31,20 @@ class RentalsMap extends Component{
     return(
       <div>
         {this.state.listings &&
-          <MyMapComponent
+          <MapComponent
             listings = {this.state.listings}
             googleMapURL = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
             loadingElement = {<div  />}
             containerElement = {<div className="map-container" />}
             mapElement = {<div style={{ height: `100%` }} />}
+            handleMarkerClick = { this.handleMarkerClick }
+            activeInfoBoxId = { this.state.activeInfoBoxId }
           />
         }
         <div className ="map-listings-container">
           {this.state.listings && this.state.listings.map((elem, i) =>
               <RentalMapCard
+                key={i}
                 id={elem.id}
                 data={elem}
               />
