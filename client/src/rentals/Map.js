@@ -1,10 +1,24 @@
 import React from "react";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
+import RentalMarker from "./RentalMarker"
 
-const MyMapComponent = withScriptjs(withGoogleMap((props) => {
+const MapComponent = withScriptjs(withGoogleMap((props) => {
   const listingMarkers = props.listings.map((elem, i) => {
-    let position = { lat: elem.lat, lng: elem.lng }
-    return <Marker key={i} position={position} />
+    const position = { lat: elem.lat, lng: elem.lng }
+
+    //If the marker's id matches the activeInfoBoxId passed down from Rentals Map
+    //then set showInfoBox to true so that it is rendered
+    const showInfoBox = props.activeInfoBoxId === i ? true : false;
+    return (
+      <RentalMarker
+        key={i}
+        id={i}
+        position={position}
+        address={elem.street + ", " + elem.city}
+        handleMarkerClick = { props.handleMarkerClick }
+        showInfoBox = { showInfoBox }
+      />
+    )
   })
 
   return (
@@ -17,4 +31,4 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => {
   )
 }))
 
-export default MyMapComponent;
+export default MapComponent;

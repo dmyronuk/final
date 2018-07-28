@@ -1,18 +1,21 @@
 import React from "react";
 import { Marker } from "react-google-maps";
-import MarkerIcon from "./images/marker.png";
+import { Link } from "react-router-dom";
+import InfoBox from "react-google-maps/lib/components/addons/InfoBox";
+// import icon from "../images/house-pin.png";
 
 const RentalMarker = (props) => {
-  var image = {
-    url: "./images/marker.png",
-    // scaledSize: new google.maps.Size(31, 43)
-  };
 
   return (
-    <Marker
-      position={props.position}
-      icon={image}
-    >
+    <Marker position={props.position} onClick={() => props.handleMarkerClick(props.id)} >
+      {props.showInfoBox && <InfoBox>
+        <div className="info-box">
+          <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+            <div>{props.address}</div>
+            <Link to={"/rentals/" + props.id}>link</Link>
+          </div>
+        </div>
+      </InfoBox>}
     </Marker>
   )
 }
