@@ -18,7 +18,10 @@ let controller = {
 
   // Add new routes below
   postListings: function(req, res) {
-
+    console.log(req.body)
+    const imageUrls = req.body.images
+    console.log(req.body.data)
+    console.log(imageUrls)
   }
 };
 module.exports = controller;

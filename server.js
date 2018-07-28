@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser');
 const PORT = 3001;
 
 require("dotenv").config();
@@ -14,7 +15,14 @@ var knex = require("knex")({
     database : process.env.DB_NAME
   }
 });
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({
+    type: 'application / vnd.api + json'
+}));
 app.use(fileUpload());
 app.use(express.static(__dirname + "/public"));
 
