@@ -10,7 +10,15 @@ function Header(){
       </Link>
         <div>
            { 
-             (isLoggedIn()) ? ( <button onClick={() => logout()}>Log out </button> ) : ( <button className="btn btn-info log" onClick={() => login()}>Log In</button> )
+             (isLoggedIn()) ? ( 
+               <Link to={"/"}>
+                <button onClick={() => logout()}>Log out </button> 
+               </Link>
+              ) : ( 
+              <button className="btn btn-info log" onClick={() => login()}>
+                Log In
+              </button>
+            )
            }
         </div>
     </header>

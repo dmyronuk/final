@@ -1,6 +1,7 @@
 import decode from 'jwt-decode';
 import auth0 from 'auth0-js';
-import axios from 'axios';
+
+
 
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
@@ -20,14 +21,13 @@ export function login() {
     responseType: 'token id_token',
     redirectUri: REDIRECT,
     audience: AUDIENCE,
-    scope: SCOPE
+    scope: SCOPE  
   });
 }
 
 export function logout() {
   clearIdToken();
   clearAccessToken();
-  axios.get("https://lhl.auth0.com/v2/logout?returnTo=http%3A%2F%2Fwww.google.com");
 }
 
 export function requireAuth(nextState, replace) {
