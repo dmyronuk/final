@@ -12,9 +12,9 @@ class YelpSearch extends Component {
   }
 
   //Yelp Search
-  searchClickHandler = () => {
+  searchClickHandler = (term) => {
     //searchRequest object should contain latitude str, longitude str, radius str, term str
-    let searchRequest = Object.assign({term: "restaurants"}, this.state)
+    let searchRequest = Object.assign({ term }, this.state)
     categorySearchByLocation(searchRequest)
     .then(data => {
       console.log("YELP DATA:    ", data);
@@ -30,7 +30,11 @@ class YelpSearch extends Component {
 
   render(){
     return (
-      <button onClick={this.searchClickHandler}>Search</button>
+      <div>
+        <button onClick={ () => this.searchClickHandler("restaurants")}>Restaurants</button>
+        <button onClick={ () => this.searchClickHandler("entertainment")}>Entertainment</button>
+        <button onClick={ () => this.searchClickHandler("education")}>Education</button>
+      </div>
     )
   }
 }

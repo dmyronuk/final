@@ -14,7 +14,6 @@ class RentalsMap extends Component{
    componentDidMount(){
     getAllListings()
     .then(listings => {
-      console.log(listings)
       this.setState({
         listings
       })
