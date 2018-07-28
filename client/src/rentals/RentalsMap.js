@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import MyMapComponent from "./Map";
 import RentalMapCard from "./RentalMapCard";
 import { getAllListings } from "../ajax/listings"
@@ -15,6 +14,7 @@ class RentalsMap extends Component{
    componentDidMount(){
     getAllListings()
     .then(listings => {
+      console.log(listings)
       this.setState({
         listings
       })
@@ -37,10 +37,7 @@ class RentalsMap extends Component{
           {this.state.listings && this.state.listings.map((elem, i) =>
               <RentalMapCard
                 id={elem.id}
-                key={i}
-                address={elem.address}
-                photos={elem.photos}
-                price={elem.price}
+                data={elem}
               />
           )}
         </div>

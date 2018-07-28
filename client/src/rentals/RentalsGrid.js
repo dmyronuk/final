@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import RentalGridCard from "./RentalGridCard";
 import { getAllListings } from "../ajax/listings"
 
@@ -28,9 +27,7 @@ class RentalsGrid extends Component{
           <RentalGridCard
             key={i}
             id={elem.id}
-            address={elem.address}
-            photos={elem.photos}
-            price={elem.price}
+            data={elem}
           />
         )}
       </div>

@@ -1,4 +1,16 @@
-exports.seed = function(knex, Promise){
+var faker = require('faker');
+
+function randomParagraphGen() {
+  let paragraph = "";
+  for (let i = 0; i < 5; ++i) {
+    paragraph += " " + faker.hacker.phrase();
+  }
+  return paragraph;
+}
+
+console.log(randomParagraphGen());
+
+exports.seed = function(knex, Promise) {
 
   function deleteUsers(){
     return knex("users").del();
@@ -24,35 +36,14 @@ exports.seed = function(knex, Promise){
     return knex("listings").del();
   }
 
-  // ********************************************************
-
-  function truncateUsers(){
-    return knex("users").truncate();
+  function deleteListingAddresses() {
+    return knex("listing_addresses").del();
   }
 
-  function truncateLandlords(){
-    return knex("landlords").truncate();
+  function deleteListingSpecifications() {
+    return knex("listing_specifications").del();
   }
 
-  function truncateTenants(){
-    return knex("tenants").truncate();
-  }
-
-  function truncateMessages(){
-    return knex("messages").truncate();
-  }
-
-  function truncateNeighbourhoods() {
-    return knex('neighbourhoods').truncate();
-  }
-
-  function truncateListings() {
-    return knex('listings').truncate();
-  }
-
-
-
-  // ********************************************************
 
   function insertUsers() {
     return knex('users').insert([
@@ -71,130 +62,404 @@ exports.seed = function(knex, Promise){
     ]).returning("*");
   }
 
-  function insertLandlords() {
+  function insertLandlords(users) {
     return knex('landlords').insert([
     {
       phone_number: "647-234-2345",
-      user_id: users[0],
+      users_id: users[0].id,
     },
     ]).returning("*");
   }
 
-  function insertTenants() {
+  function insertTenants(users) {
     return knex('landlords').insert([
     {
       phone_number: "647-321-4321",
-      user_id: users[1],
+      users_id: users[1].id,
     },
     ]).returning("*");
+  }
+
+  function insertMessages(users) {
+    return knex("messages").insert([
+    {
+     text: "Hello there. I am interested in this rent",
+     sender: users[1].id,
+     recipient: users[0].id,
+     created_at: new Date("2017 02 19 15:45"),
+   },
+   {
+     text: "Hey John, we can book a day. When are you usually free?",
+     sender: users[0].id,
+     recipient: users[1].id,
+     created_at: new Date("2017 02 19 15:45"),
+   },
+   {
+     text: "Hi Mary, I am available this Friday at three",
+     sender: users[1].id,
+     recipient: users[0].id,
+     created_at: new Date("2017 02 19 15:45"),
+   },
+   ]).returning("*")
   }
 
   function insertNeighbourhoods() {
     return knex('neighbourhoods').insert([
     {
       name: "Dovercourt Village",
-      crimeRating: "A"
+      crime_rating: "A"
     },
     {
       name: "Parkview Hills",
-      crimeRating: "B"
+      crime_rating: "B"
     }
-    ]).returning("*");
+    ]).returning("*")
   }
 
-  function insertListings() {
+
+
+  function insertListings(landlords, neighbourhoods) {
     return knex("listings").insert([
     {
-      address: "46 Spadina Ave, Toronto, ON",
+      // address: "46 Spadina Ave, Toronto, ON",
       lat: 43.644576,
       lng: -79.394940,
       price: 12351321,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[0].id
     },
     {
-      address: "725 Bathurst St, Toronto, ON M5S 2R5",
+      // address: "725 Bathurst St, Toronto, ON M5S 2R5",
       lat: 43.663366,
       lng: -79.408472,
       price: 450000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[1].id,
     },
     {
-      address: "25 Breadalbane St, Toronto, ON",
+      // address: "25 Breadalbane St, Toronto, ON",
       lat: 43.663252,
       lng: -79.385720,
       price: 600000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[0].id,
 
     },
     {
-      address: "195-271 Albany Ave, Toronto, ON M5R 3C7",
+      // address: "195-271 Albany Ave, Toronto, ON M5R 3C7",
       lat: 43.672512,
       lng: -79.412786,
       price: 700000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[0].id,
     },
     {
-      address: "67-3 Armstrong Ave, Toronto, ON M6H 1V9",
+      // address: "67-3 Armstrong Ave, Toronto, ON M6H 1V9",
       lat: 43.664022,
       lng: -79.439156,
       price: 10000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[1].id,
     },
     {
-      address: "2-24 St Annes Rd, Toronto, ON M6J 2C1",
+      // address: "2-24 St Annes Rd, Toronto, ON M6J 2C1",
       lat: 43.651874,
       lng: -79.425992,
       price: 120000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[1].id,
     },
     {
-      address: "34 Heydon Park Rd, Toronto, ON M6J 2C8",
+      // address: "34 Heydon Park Rd, Toronto, ON M6J 2C8",
       lat: 43.653323,
       lng: -79.426887,
       price: 850000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[0].id,
     },
     {
-      address: "224 Wallace Ave, Toronto, ON M6H 1V5",
+      // address: "224 Wallace Ave, Toronto, ON M6H 1V5",
       lat: 43.662461,
       lng: -79.446297,
       price: 250000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[0].id,
     },
     {
-      address: "133 Yorkville Ave, Toronto, ON M5R 1C4",
+      // address: "133 Yorkville Ave, Toronto, ON M5R 1C4",
       lat: 43.670510,
       lng: -79.393603,
       price: 23000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[0].id,
     },
     {
-      address: "169 Dufferin St, Toronto, ON M6K 1Y9",
+      // address: "169 Dufferin St, Toronto, ON M6K 1Y9",
       lat: 43.636187,
       lng: -79.425808,
       price: 340000 ,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[1].id,
     },
     {
-      address: "345 Dufferin St, Toronto, ON M6K 3G1",
+      // address: "345 Dufferin St, Toronto, ON M6K 3G1",
       lat: 43.641066,
       lng: -79.427975,
       price: 450000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[1].id,
     },
     {
-      address: "70-8 Brookfield St, Toronto, ON M6J 3A9",
+      // address: "70-8 Brookfield St, Toronto, ON M6J 3A9",
       lat: 43.645325,
       lng: -79.420666,
       price: 90000,
+      landlords_id: landlords[0].id,
+      neighbourhoods_id: neighbourhoods[1].id,
     },
     ]).returning("*")
   }
 
 
-  return deleteUsers()
+  function insertListingSpecifications(listings) {
+    return knex("listing_specifications").insert([
+    {
+      bedrooms: 2,
+      bathrooms: 3,
+      description: randomParagraphGen(),
+      date_available: new Date("2019 02 19 15:45"),
+      listings_id: listings[0].id,
+      // address: "46 Spadina Ave, Toronto, ON",
+    },
+    {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[1].id,
+     // address: "725 Bathurst St, Toronto, ON M5S 2R5",
+   },
+   {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[2].id,
+     // address: "25 Breadalbane St, Toronto, ON M4Y 1C2",
+
+   },
+   {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[3].id,
+     // address: "195-271 Albany Ave, Toronto, ON M5R 3C7",
+   },
+   {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[4].id,
+     // address: "67-3 Armstrong Ave, Toronto, ON M6H 1V9",
+   },
+   {
+    bedrooms: 2,
+    bathrooms: 3,
+    description: randomParagraphGen(),
+    date_available: new Date("2019 02 19 15:45"),
+    listings_id: listings[5].id,
+     // address: "2-24 St Annes Rd, Toronto, ON M6J 2C1",
+   },
+   {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[6].id,
+     // address: "34 Heydon Park Rd, Toronto, ON M6J 2C8",
+   },
+   {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[7].id,
+     // address: "224 Wallace Ave, Toronto, ON M6H 1V5",
+   },
+   {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[8].id,
+     // address: "133 Yorkville Ave, Toronto, ON M5R 1C4",
+   },
+   {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[9].id,
+     // address: "169 Dufferin St, Toronto, ON M6K 1Y9",
+   },
+   {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[10].id,
+     // address: "345 Dufferin St, Toronto, ON M6K 3G1",
+   },
+   {
+     bedrooms: 2,
+     bathrooms: 3,
+     description: randomParagraphGen(),
+     date_available: new Date("2019 02 19 15:45"),
+     listings_id: listings[11].id,
+     // address: "70-8 Brookfield St, Toronto, ON M6J 3A9",
+   },
+   ]).returning("*")
+  }
+
+  function insertListingAddresses(listings) {
+    return knex("listing_addresses").insert([
+    {
+      street: "46 Spadina Ave",
+      city: "Toronto",
+      province: "ON",
+      postal_code: "M5V 2H8",
+      listings_id: listings[0].id,
+      // address: "46 Spadina Ave, Toronto, ON",
+    },
+    {
+     street: "725 Bathurst St",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M5S 2R5",
+     listings_id: listings[1].id,
+     // address: "725 Bathurst St, Toronto, ON M5S 2R5",
+   },
+   {
+     street: "25 Breadalbane St",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M4Y 1C2",
+     listings_id: listings[2].id,
+     // address: "25 Breadalbane St, Toronto, ON M4Y 1C2",
+
+   },
+   {
+     street: "195-271 Albany Ave",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M5R 3C7",
+     listings_id: listings[3].id,
+     // address: "195-271 Albany Ave, Toronto, ON M5R 3C7",
+   },
+   {
+     street: "67-3 Armstrong Ave",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M6H 1V9",
+     listings_id: listings[4].id,
+     // address: "67-3 Armstrong Ave, Toronto, ON M6H 1V9",
+   },
+   {
+     street: "2-24 St Annes Rd",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M6J 2C1",
+     listings_id: listings[5].id,
+     // address: "2-24 St Annes Rd, Toronto, ON M6J 2C1",
+   },
+   {
+     street: "34 Heydon Park Rd",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M6J 2C8",
+     listings_id: listings[6].id,
+     // address: "34 Heydon Park Rd, Toronto, ON M6J 2C8",
+   },
+   {
+     street: "224 Wallace Ave",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M6H 1V5",
+     listings_id: listings[7].id,
+     // address: "224 Wallace Ave, Toronto, ON M6H 1V5",
+   },
+   {
+     street: "133 Yorkville Ave",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M5R 1C4",
+     listings_id: listings[8].id,
+     // address: "133 Yorkville Ave, Toronto, ON M5R 1C4",
+   },
+   {
+     street: "169 Dufferin St",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M6K 1Y9",
+     listings_id: listings[9].id,
+     // address: "169 Dufferin St, Toronto, ON M6K 1Y9",
+   },
+   {
+     street: "345 Dufferin St",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M6K 3G1",
+     listings_id: listings[10].id,
+     // address: "345 Dufferin St, Toronto, ON M6K 3G1",
+   },
+   {
+     street: "70-8 Brookfield St",
+     city: "Toronto",
+     province: "ON",
+     postal_code: "M6J 3A9",
+     listings_id: listings[11].id,
+     // address: "70-8 Brookfield St, Toronto, ON M6J 3A9",
+   },
+   ]).returning("*")
+  }
+
+
+  return deleteListingSpecifications()
+  .then(deleteListingAddresses)
+  .then(deleteListings)
+  .then(deleteNeighbourhoods)
+  .then(deleteMessages)
   .then(deleteLandlords)
   .then(deleteTenants)
-  .then(deleteMessages)
-  .then(deleteNeighbourhoods)
-  .then(deleteListings)
-  // .then(truncateUsers)
-  // .then(truncateLandlords)
-  // .then(truncateTenants)
-  // .then(truncateMessages)
-  // .then(truncateNeighbourhoods)
-  // .then(truncateListings)
+  .then(deleteUsers)
+
+  // .then(deleteListingSpecifications)
+
+
   .then(insertUsers)
-  .then(insertListings)
+  .then(users =>  {
+    return insertLandlords(users)
+    .then(landlords => {
+      return insertTenants(users)
+      .then(() => {
+        return insertMessages(users)
+        .then(insertNeighbourhoods)
+        .then(neighbourhoods => {
+          // console.log(neighbourhoods);
+          return insertListings(landlords, neighbourhoods)
+          .then(listings => {
+            return insertListingSpecifications(listings)
+            .then(() => {
+              return insertListingAddresses(listings)
+            })
+          })
+        })
+      })
+    })
+  });
+
     // .then(insertStudents)
     // .then(students => insertLessons(students))
   }
