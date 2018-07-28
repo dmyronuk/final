@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
-const fileUpload = require('express-fileupload');
 const PORT = 3001;
+const fileUpload = require('express-fileupload');
+const bodyParser = require("body-parser")
+
 
 require("dotenv").config();
 
@@ -17,8 +19,9 @@ var knex = require("knex")({
 
 app.use(fileUpload());
 app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json());
 
-const routes = require('./routes.js')(app)
+const routes = require('./routes.js')(app);
 
 app.listen(PORT, () => {
   console.log(`Server running on Port ${PORT}`);

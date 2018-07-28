@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { getSingleListing } from "../ajax/listings"
+import { getSingleListing } from "../ajax/listings";
+import YelpSearch from "../yelp/YelpSearch";
 
 class SingleRental extends Component {
 
@@ -16,15 +17,7 @@ class SingleRental extends Component {
       this.setState({
         data
       })
-      console.log(data)
     })
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.routeParams !== nextProps.routeParams) {
-      this.props.fetchArticles();
-    }
   }
 
   render(){
@@ -39,6 +32,11 @@ class SingleRental extends Component {
             <div>{this.state.data.date_available}</div>
             <div>{this.state.data.description}</div>
             <div>Bedrooms: {this.state.data.bedrooms} Bathrooms: {this.state.data.bathrooms} </div>
+            <YelpSearch
+              latitude = {this.state.data.lat}
+              longitude = {this.state.data.lng}
+              radius = {"5000"}
+            />
           </div>
         }
       </div>
