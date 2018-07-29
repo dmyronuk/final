@@ -11,10 +11,9 @@ class RentalsGrid extends Component{
     }
   }
 
-  handleSearchSubmit = (query) => {
-    getAllListingsFromQuery(query)
+  handleSearchSubmit = (queryObj) => {
+    getAllListingsFromQuery(queryObj)
     .then(listings => {
-      console.log("Search executed -- query:", query)
       this.setState({
         listings
       })

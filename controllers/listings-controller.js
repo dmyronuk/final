@@ -3,8 +3,7 @@ const helpers = require("../helpers/helpers.js");
 
 let controller = {
   searchListings: function(req, res){
-    console.log("listings search request body:", req.body);
-    queries.getAllListingsByQuery(req.body.query)
+    queries.getAllListingsByQuery(req.body)
       .then(listings => {
         res.json(listings);
       })

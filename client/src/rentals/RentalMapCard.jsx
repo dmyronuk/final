@@ -10,7 +10,7 @@ return(
           <div>{props.data.street}</div>
           <div>{props.data.city}</div>
           <div>{props.data.province}</div>
-          <div>${props.data.price / 100}</div>
+          <div>${props.data.price}</div>
           <div>Bedrooms: {props.data.bedrooms} Bathrooms: {props.data.bathrooms} </div>
         </div>
       </div>
