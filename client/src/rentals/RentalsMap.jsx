@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import MapComponent from "./Map";
 import RentalMapCard from "./RentalMapCard";
-import { getAllListings } from "../ajax/listings"
+import RentalSearchForm from "./SearchForm";
+import { getAllListings, getAllListingsFromQuery } from "../ajax/listings"
 
 class RentalsMap extends Component{
   constructor(props){
@@ -9,6 +10,15 @@ class RentalsMap extends Component{
     this.state = {
       activeInfoBoxId: null,
     }
+  }
+
+  handleSearchSubmit = (queryObj) => {
+    getAllListingsFromQuery(queryObj)
+    .then(listings => {
+      this.setState({
+        listings
+      })
+    })
   }
 
   handleMarkerClick = (key) => {
@@ -30,6 +40,7 @@ class RentalsMap extends Component{
   render(){
     return(
       <div>
+        <RentalSearchForm handleSearchSubmit={this.handleSearchSubmit} />
         {this.state.listings &&
           <MapComponent
             listings = {this.state.listings}
