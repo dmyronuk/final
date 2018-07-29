@@ -93,27 +93,28 @@ module.exports = {
   // Addin new listing
   addNewListing: (data, imageUrls) => {
     return knex('landlords')
-      .where({phone_number: "647-234-2345"})
+    .where({phone_number: "647-234-2345"})
+    .select("id")
+    .then(landlord => {
+      return knex("neighbourhoods")
+      .where({name: "Dovercourt Village"})
       .select("id")
-      .then(landlord => {
-        return knex("neighbourhoods")
-          .where({name: "Dovercourt Village"})
-          .select("id")
-          .then(neighbourhood => {
-            return knex('listings')
-              .insert({photos: imageUrls, price: data.price, lng: data.lng, lat: data.lat, neighbourhoods_id: neighbourhood[0].id, landlords_id: landlord[0].id })
-              .returning('id')
-              .then(listing => {
-                return knex("listing_addresses")
-                .insert({street: data.street, city: data.city, province: data.province, postal_code: data.pCode, listings_id: listing[0]})
-                .then (() => {
-                  return knex("listing_specifications")
-                  .insert({bedrooms: data.bedrooms, bathrooms: data.bathrooms, description: data.description, date_available: data.date, listings_id: listing[0]})
-                })
-              })
-            })
-
+      .then(neighbourhood => {
+        return knex('listings')
+        .insert({photos: imageUrls, price: data.price, lng: data.lng, lat: data.lat, neighbourhoods_id: neighbourhood[0].id, landlords_id: landlord[0].id })
+        .returning('id')
+        .then(listing => {
+          return knex("listing_addresses")
+          .insert({street: data.street, city: data.city, province: data.province, postal_code: data.pCode, listings_id: listing[0]})
+          .then (() => {
+            return knex("listing_specifications")
+            .insert({bedrooms: data.bedrooms, bathrooms: data.bathrooms, description: data.description, date_available: data.date, listings_id: listing[0]})
+          })
+        })
       })
+
+    })
+  }
 
   // currently shows messages between Mary and John
   getAllMessages: () => {
