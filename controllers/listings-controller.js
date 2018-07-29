@@ -29,7 +29,7 @@ let controller = {
     const data = req.body.data
     queries.addNewListing(data, imageUrls)
       .then(res => {
-          res({})
+          res.json({})
         })
   }
 };
