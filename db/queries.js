@@ -78,5 +78,20 @@ module.exports = {
     .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
     .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
     .select()
+  },
+
+  // currently shows messages between Mary and John
+  getAllMessages: () => {
+    return knex('messages')
+    .join('users', 'messages.sender', 'users.id')
+    // .join('users', 'messages.recipient', 'users.id')
+    .select()
+    .where(function() {
+      this.where('sender', 1).andWhere('recipient', 2)
+    })
+    .orWhere(function() {
+      this.where('sender', 2).andWhere('recipient', 1)
+    })
+    .orderBy('created_at')
   }
 }
