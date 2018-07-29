@@ -1,6 +1,6 @@
 import React from "react";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
-import RentalMarker from "./RentalMarker.jsx"
+import RentalMarker from "./RentalMarker"
 
 const MapComponent = withScriptjs(withGoogleMap((props) => {
   const listingMarkers = props.listings.map((elem, i) => {

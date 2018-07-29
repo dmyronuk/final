@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RentalGridCard from "./RentalGridCard";
-import RentalSearchForm from "./SearchForm.jsx";
-import { getAllListings, getSingleListing } from "../ajax/listings"
+import RentalSearchForm from "./SearchForm";
+import { getAllListings } from "../ajax/listings"
 
 class RentalsGrid extends Component{
   constructor(props){
@@ -12,9 +12,9 @@ class RentalsGrid extends Component{
   }
 
   handleSearchSubmit = (query) => {
-    getSingleListing(1)
+    getAllListings()
     .then(listings => {
-      console.log(listings)
+      console.log("Search executed -- query:", query)
       this.setState({
         listings
       })
