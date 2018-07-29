@@ -73,7 +73,6 @@ module.exports = {
   },
 
   getAllListingsByQuery: (queryObj) => {
-
     return knex("listings")
     .join("listing_addresses", "listings.id", "listing_addresses.listings_id")
     .join("neighbourhoods", "listings.neighbourhoods_id", "neighbourhoods.id")
@@ -92,6 +91,7 @@ module.exports = {
         builder.where("listing_specifications.bathrooms", queryObj.bathrooms);
       }
     })
+    .where("listings.price", "<", queryObj.price)
     .select()
   },
 

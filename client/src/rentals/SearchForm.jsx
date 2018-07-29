@@ -3,10 +3,12 @@ import React, { Component } from "react";
 class RentalSearchForm extends Component{
   constructor(props){
     super(props)
+    this.maxPrice = 500000
     this.state = {
       query: "",
       bedrooms: "Any",
       bathrooms: "Any",
+      price: 500000
     }
   }
 
@@ -18,11 +20,19 @@ class RentalSearchForm extends Component{
   //handles change for any dropdown selector like bedrooms, bathrooms etc
   //immediately changes state so a new query is fired off
   handleSelectChange = (e) => {
-    const stateUpdateObj = {}
-    stateUpdateObj[e.target.name] = e.target.value
-    const newState = Object.assign(this.state, stateUpdateObj)
+    const stateUpdateObj = {};
+    stateUpdateObj[e.target.name] = e.target.value;
+    const newState = Object.assign(this.state, stateUpdateObj);
     this.setState(newState);
     this.props.handleSearchSubmit(this.state);
+  }
+
+  //slider change does not fire a search on every change, unlike the select handler
+  handleSliderChange = (e) => {
+    const stateUpdateObj = {};
+    stateUpdateObj[e.target.name] = e.target.value;
+    const newState = Object.assign(this.state, stateUpdateObj);
+    this.setState(newState);
   }
 
   handleSubmit = (e) => {
@@ -61,6 +71,16 @@ class RentalSearchForm extends Component{
           <option value="2">2</option>
           <option value="3">3</option>
         </select>
+        <input
+          type="range"
+          value={this.state.price}
+          id="price"
+          name="price"
+          min="0"
+          max={this.maxPrice}
+          step="25"
+          onChange={this.handleSliderChange}
+        />
       </div>
     )
   }
