@@ -86,11 +86,11 @@ class NewRental extends Component {
         <div>
           <label>Unit</label>
           <div>
-            <input type="text" name="unit" value={unit} onChange={this.onChange} />
+            <input type="number" name="unit" value={unit} onChange={this.onChange} />
           </div>
         </div>
         <div>
-          <label>Sity</label>
+          <label>City</label>
           <div>
             <input type="text" name="city" value={city} onChange={this.onChange} />
           </div>
@@ -110,7 +110,7 @@ class NewRental extends Component {
         <div>
           <label>Price</label>
           <div>
-            <input type="text" name="price" value={price} onChange={this.onChange} />
+            <input type="number" name="price" value={price} onChange={this.onChange} />
           </div>
         </div>
         <div>
