@@ -35,6 +35,10 @@ class RentalSearchForm extends Component{
     this.setState(newState);
   }
 
+  handleSliderRelease = (e) => {
+    this.props.handleSearchSubmit(this.state);
+  }
+
   handleSubmit = (e) => {
     if(e.key === "Enter"){
       this.props.handleSearchSubmit(this.state);
@@ -80,7 +84,9 @@ class RentalSearchForm extends Component{
           max={this.maxPrice}
           step="25"
           onChange={this.handleSliderChange}
+          onMouseUp={this.handleSliderRelease}
         />
+        <div>price: {this.state.price}</div>
       </div>
     )
   }
