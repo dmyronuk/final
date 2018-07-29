@@ -114,7 +114,7 @@ module.exports = {
       })
 
     })
-  }
+  },
 
   // currently shows messages between Mary and John
   getAllMessages: () => {
