@@ -20,6 +20,10 @@ let controller = {
   postListings: function(req, res) {
     const imageUrls = req.body.images
     const data = req.body.data
+    queries.addNewListing(data, imageUrls)
+      .then(res => {
+
+        })
   }
 };
 module.exports = controller;

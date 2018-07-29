@@ -18,8 +18,8 @@ class NewRental extends Component {
         bedrooms: 0,
         bathrooms: 0,
         date: "",
-        lng: "",
-        lat: "",
+        lng: 0,
+        lat: 0,
         description: "",
       }
     };
