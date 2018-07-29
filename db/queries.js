@@ -87,6 +87,11 @@ module.exports = {
         builder.where("listing_specifications.bedrooms", queryObj.bedrooms);
       }
     })
+    .modify((builder) => {
+      if(queryObj.bathrooms != "Any"){
+        builder.where("listing_specifications.bathrooms", queryObj.bathrooms);
+      }
+    })
     .select()
   },
 

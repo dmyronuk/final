@@ -6,6 +6,7 @@ class RentalSearchForm extends Component{
     this.state = {
       query: "",
       bedrooms: "Any",
+      bathrooms: "Any",
     }
   }
 
@@ -14,9 +15,12 @@ class RentalSearchForm extends Component{
     this.setState(newState);
   }
 
+  //handles change for any dropdown selector like bedrooms, bathrooms etc
+  //immediately changes state so a new query is fired off
   handleSelectChange = (e) => {
-    const beds = Number(e.target.value)
-    const newState = Object.assign(this.state, {bedrooms: beds})
+    const stateUpdateObj = {}
+    stateUpdateObj[e.target.name] = e.target.value
+    const newState = Object.assign(this.state, stateUpdateObj)
     this.setState(newState);
     this.props.handleSearchSubmit(this.state);
   }
@@ -39,7 +43,17 @@ class RentalSearchForm extends Component{
         />
         <select
           name="bedrooms"
-          value={this.state.value}
+          value={this.state.bedrooms}
+          onChange={this.handleSelectChange}
+        >
+          <option value="Any">Any</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        <select
+          name="bathrooms"
+          value={this.state.bathrooms}
           onChange={this.handleSelectChange}
         >
           <option value="Any">Any</option>
