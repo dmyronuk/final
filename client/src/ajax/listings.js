@@ -7,14 +7,14 @@ const getAllListings = async () => {
   return data;
 }
 
-const getAllListingsFromQuery = async (query) => {
+const getAllListingsFromQuery = async (queryObj) => {
   const response = await fetch("/api/listings/search", {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify(queryObj),
   })
 
   const data = await response.json();

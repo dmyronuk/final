@@ -72,13 +72,21 @@ module.exports = {
     .select()
   },
 
-  getAllListingsByQuery: (query) => {
+  getAllListingsByQuery: (queryObj) => {
+
     return knex("listings")
     .join("listing_addresses", "listings.id", "listing_addresses.listings_id")
     .join("neighbourhoods", "listings.neighbourhoods_id", "neighbourhoods.id")
     .join("listing_specifications", "listings.id", "listing_specifications.listings_id")
-    .where("listing_addresses.street", "like", `%${query}%`)
-    .orWhere("neighbourhoods.name", "like", `%${query}%`)
+    .where((builder) => {
+      builder.where("listing_addresses.street", "like", `%${queryObj.query}%`)
+      .orWhere("neighbourhoods.name", "like", `%${queryObj.query}%`)
+    })
+    .modify((builder) => {
+      if(queryObj.bedrooms != "Any"){
+        builder.where("listing_specifications.bedrooms", queryObj.bedrooms);
+      }
+    })
     .select()
   },
 
