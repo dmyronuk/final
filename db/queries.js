@@ -72,6 +72,14 @@ module.exports = {
     .select()
   },
 
+  getAllListingsByQuery: (query) => {
+    return knex("listings")
+    .join("listing_addresses", "listings.id", "listing_addresses.listings_id")
+    .join("listing_specifications", "listings.id", "listing_specifications.listings_id")
+    .where("listing_addresses.street", "like", `%${query}%`)
+    .select()
+  },
+
   getListing: (id) => {
     return knex('listings')
     .where('listings.id', id)

@@ -2,6 +2,14 @@ const queries = require("../db/queries.js");
 const helpers = require("../helpers/helpers.js");
 
 let controller = {
+  searchListings: function(req, res){
+    console.log("listings search request body:", req.body);
+    queries.getAllListingsByQuery(req.body.query)
+      .then(listings => {
+        res.json(listings);
+      })
+  },
+
   getAllListings: function (req, res) {
     queries.getAllListings()
       .then(listings => {
