@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import MapComponent from "./Map";
-import RentalMapCard from "./RentalMapCard";
+import MapComponent from "./Map.jsx";
+import RentalMapCard from "./RentalMapCard.jsx";
 import { getAllListings } from "../ajax/listings"
 
 class RentalsMap extends Component{
