@@ -7,6 +7,16 @@ const signup = async (userObj) => {
   return data;
 }
 
+const login = async (userObj) => {
+  const response = await fetch("/api/login");
+  const data = await response.json();
+  if (response.status !== 200){
+    throw Error(data.message);
+  }
+  return data;
+}
+
 export {
-  signup
+  signup,
+  login,
 }
