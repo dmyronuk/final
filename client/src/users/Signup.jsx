@@ -14,7 +14,7 @@ class Signup extends React.Component {
       email: "",
       password: "",
       password_confirmation: "",
-      user_type: "tenant",
+      user_type: "landlord",
     }
   }
 
@@ -41,7 +41,7 @@ class Signup extends React.Component {
             <input
               type="text"
               name="first_name"
-              value={this.state.firstName}
+              value={this.state.first_name}
               onChange={this.handleChange}
             />
           </div>
@@ -49,8 +49,8 @@ class Signup extends React.Component {
             Last Name
             <input
               type="text"
-              name="lastName"
-              value={this.state.lastName}
+              name="last_name"
+              value={this.state.last_name}
               onChange={this.handleChange}
             />
           </div>
@@ -84,7 +84,7 @@ class Signup extends React.Component {
             <input
               type="text"
               name="password_confirmation"
-              value={this.state.passwordConfirmation}
+              value={this.state.password_confirmation}
               onChange={this.handleChange}
             />
           </div>
@@ -97,6 +97,7 @@ class Signup extends React.Component {
           </div>
         </form>
       </div>
+
     )
   }
 }
