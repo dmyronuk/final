@@ -8,9 +8,11 @@ import RentalsGrid from "./rentals/RentalsGrid.jsx";
 import NewRental from "./rentals/NewRental.jsx";
 import SingleRental from "./rentals/SingleRental.jsx";
 import Login from "./Login";
+import Signup from "./users/Signup";
 import PrivateRoute from "./PrivateRoute";
 import Callback from './Callback';
 import Chat from "./messages/Chat.jsx";
+import Profile from  './users/Profile';
 
 class App extends Component {
   constructor(props){
@@ -35,12 +37,14 @@ class App extends Component {
           <Sidebar toggleState={this.state.sidebarClass}/>
           <Route exact path="/" component= { Home } />
           <Route exact path="/login" component= { Login } />
+          <Route exact path="/signup" component= { Signup } />
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <PrivateRoute exact path="/rentals/new" component={ NewRental }/>
           <Route path="/callback" component={Callback} />
           <Route exact path="/chat" component={ Chat }/>
+          <Route path="/profile" component={Profile} />
         </div>
       </BrowserRouter>
     );
