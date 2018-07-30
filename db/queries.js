@@ -176,8 +176,22 @@ module.exports = (function() {
     .insert({text: message, sender: sender, recipient: recipient, created_at: new Date()})
     .then(() => {return getFilteredMessages(sender, recipient)}
     )
-  }
+  },
 
+  signup: data => {
+    return knex('users')
+    .insert({first_name: first_name, last_name: last_name, email: email, password: password })
+    .returning('id')
+    .then(user => {
+      if (data.body.whatever === "landlord") {
+        return knex('landlords')
+        .insert({phone_number: phone_number, users_id: user})
+      } else {
+        return knex('tenants')
+        .insert({phone_number: phone_number, user_id: user})
+      }
+    })
+  }
 
   }
 })();
