@@ -8,7 +8,8 @@ class RentalSearchForm extends Component{
       query: "",
       bedrooms: "Any",
       bathrooms: "Any",
-      price: 500000
+      maxPrice: 500000,
+      minPrice: 0,
     }
   }
 
@@ -33,6 +34,7 @@ class RentalSearchForm extends Component{
     stateUpdateObj[e.target.name] = e.target.value;
     const newState = Object.assign(this.state, stateUpdateObj);
     this.setState(newState);
+    console.log(this.state)
   }
 
   handleSliderRelease = (e) => {
@@ -77,16 +79,29 @@ class RentalSearchForm extends Component{
         </select>
         <input
           type="range"
-          value={this.state.price}
-          id="price"
-          name="price"
+          value={this.state.maxPrice}
+          id="maxPrice"
+          name="maxPrice"
           min="0"
           max={this.maxPrice}
           step="25"
           onChange={this.handleSliderChange}
           onMouseUp={this.handleSliderRelease}
         />
-        <div>price: {this.state.price}</div>
+        <div>Max Price: {this.state.maxPrice}</div>
+        <input
+          type="range"
+          value={this.state.minPrice}
+          id="minPrice"
+          name="minPrice"
+          min="0"
+          max={this.maxPrice}
+          step="25"
+          onChange={this.handleSliderChange}
+          onMouseUp={this.handleSliderRelease}
+        />
+        <div>Min Price: {this.state.minPrice}</div>
+
       </div>
     )
   }

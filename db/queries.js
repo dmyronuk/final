@@ -91,7 +91,8 @@ module.exports = {
         builder.where("listing_specifications.bathrooms", queryObj.bathrooms);
       }
     })
-    .where("listings.price", "<", queryObj.price)
+    .where("listings.price", "<", queryObj.maxPrice)
+    .where("listings.price", ">", queryObj.minPrice)
     .select()
   },
 
