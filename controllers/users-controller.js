@@ -4,7 +4,8 @@ const helpers = require("../helpers/helpers.js");
 let controller = {
 
   signup: function(req, res) {
-    const data = req.body.data;
+    const data = req.body;
+    console.log(data);
     queries.signup(data)
     .then(() => {
       res.send("success");

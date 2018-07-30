@@ -180,15 +180,16 @@ module.exports = (function() {
 
   signup: data => {
     return knex('users')
-    .insert({first_name: first_name, last_name: last_name, email: email, password: password })
+    .insert({first_name: data.first_name, last_name: data.last_name, email: data.email, password_digest: data.password })
     .returning('id')
     .then(user => {
-      if (data.body.whatever === "landlord") {
+      console.log(user);
+      if (data.user_type === "landlord") {
         return knex('landlords')
-        .insert({phone_number: phone_number, users_id: user})
-      } else {
+        .insert({phone_number: data.phone_number, users_id: user[0]})
+      } else if (data.user_type === "tenant"){
         return knex('tenants')
-        .insert({phone_number: phone_number, user_id: user})
+        .insert({phone_number: data.phone, users_id: user[0]})
       }
     })
   }
