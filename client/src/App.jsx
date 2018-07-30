@@ -32,6 +32,8 @@ class App extends Component {
           <PrivateRoute exact path="/rentals/new" component={ NewRental }/>
           <Route exact path="/messages" component={ AllMessages }/>
           <Route path="/callback" component={Callback} />
+          <Route path="/user/rentals/:id(\d+)" component={ NewRental } />
+          <Route path="/user/rentals" component={ RentalsGrid } />
         </div>
       </BrowserRouter>
     );

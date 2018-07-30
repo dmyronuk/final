@@ -65,11 +65,16 @@ module.exports = {
     .select()
   },
 
-  getAllListings: () => {
-    return knex('listings')
-    .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
-    .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
-    .select()
+  getAllListings: (userId) => {
+    let query = knex('listings')
+      .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
+      .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
+
+    if(userId) {
+      query.where('listings.user_id', userId)
+    }
+
+    return query.select()
   },
 
   getAllListingsByQuery: (queryObj) => {
@@ -142,5 +147,37 @@ module.exports = {
       this.where('sender', 2).andWhere('recipient', 1)
     })
     .orderBy('created_at')
+  },
+
+  deleteListing: (listingId) => {
+    return knex('listing_specifications')
+     .where('listings_id', listingId)
+     .del()
+     .then(() =>
+       knex('listing_addresses')
+       .where('listings_id', listingId)
+       .del()
+       .then(() =>
+         knex('listings')
+         .where('id', listingId)
+         .del()
+       )
+     )
+  },
+
+  updateListing: (listingId, data) => {
+    return knex('listings')
+      .where('id', listingId)
+      .update({price: data.price, lng: data.lng, lat: data.lat})
+      .then(() =>
+        knex('listing_addresses')
+        .where('listings_id', listingId)
+        .update({street: data.street, city: data.city, province: data.province, postal_code: data.postal_code})
+        .then(() =>
+          knex('listing_specifications')
+          .where('listings_id', listingId)
+          .update({bedrooms: data.bedrooms, bathrooms: data.bathrooms, description: data.description, date_available: data.date})
+        )
+      )
   }
 }
