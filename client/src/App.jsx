@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import Header from "./Header.jsx";
+import Sidebar from "./navigation/Sidebar";
 import Home from "./Home.jsx";
 import RentalsMap from "./rentals/RentalsMap.jsx";
 import RentalsGrid from "./rentals/RentalsGrid.jsx";
@@ -15,7 +16,14 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
+      sidebarClass: "closed-sidebar",
     }
+  }
+
+  toggleSidebar = () => {
+    const newSidebarClass = this.state.sidebarClass === "closed-sidebar" ? "opened-sidebar" : "closed-sidebar";
+    this.setState({ ...this.state, sidebarClass:newSidebarClass})
+    console.log(this.state)
   }
 
   render() {
@@ -23,7 +31,8 @@ class App extends Component {
 
       <BrowserRouter>
         <div className="main-container">
-          <Header />
+          <Header hamburgerClickHandler={this.toggleSidebar} />
+          <Sidebar toggleState={this.state.sidebarClass}/>
           <Route exact path="/" component= { Home } />
           <Route exact path="/login" component= { Login } />
           <Route exact path="/rentals/map" component={ RentalsMap }/>

@@ -1,0 +1,17 @@
+.sidebar{
+  position:fixed;
+  height:100vh;
+  background:#eeeeee;
+  border-right:solid black 1px;
+  z-index:10000;
+  transition:width 1s;
+  overflow:hidden;
+}
+
+.closed-sidebar{
+  width:0;
+}
+
+.opened-sidebar{
+  width:10vw;
+}

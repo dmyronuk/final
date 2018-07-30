@@ -5,10 +5,23 @@
   display:flex;
   position:fixed;
   flex-direction:row;
+  align-items:center;
   justify-content:center;
   height: $header-height;
 }
 
 .header-top a{
   color:white;
+}
+
+.toggle-nav{
+  position:absolute;
+  left:1rem;
+  cursor:pointer;
+}
+
+.login-button{
+  background:red;
+  position:absolute;
+  right:2rem;
 }
