@@ -8,6 +8,13 @@ function Header(){
       <Link to={"/"}>
         <h1 className="App-title">Title</h1>
       </Link>
+      { (isLoggedIn()) ? (          
+      <Link to={"/rentals/new"}>
+                <button >New listing</button>
+              </Link> 
+               ) : (<div></div>)
+ 
+      }
         <div>
            { 
              (isLoggedIn()) ? ( 
@@ -21,6 +28,8 @@ function Header(){
             )
            }
         </div>
+
+        
     </header>
   )
 }

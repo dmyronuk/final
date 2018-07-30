@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Route, BrowserRouter } from "react-router-dom";
-import { requireAuth } from './utils/AuthService';
+import { Route, BrowserRouter, Redirect } from "react-router-dom";
+import { isLoggedIn, login } from './utils/AuthService';
 import Header from "./Header";
+import Login from "./Login";
+import PrivateRoute from "./PrivateRoute";
 import Home from "./Home";
 import Callback from './Callback';
 import RentalsMap from "./rentals/RentalsMap";
@@ -25,7 +27,15 @@ class App extends Component {
           <Route exact path="/" component= { Home } />
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
-          <Route exact path="/rentals/new" component={ NewRental }  onEnter = {requireAuth}/>
+          <Route exact path="/login" component={Login}/>
+          <PrivateRoute exact path="/rentals/new" component={NewRental}/>
+          {/* <Route exact path="/rentals/new" render={() => (
+  (isLoggedIn()) ? (
+    <NewRental />
+  ) : (
+    <Login/>
+  )
+)}/> */}
           <Route path="/rentals/:id(\d+)" component={ SingleRental } />
 
 
