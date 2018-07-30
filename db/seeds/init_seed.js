@@ -59,6 +59,12 @@ exports.seed = function(knex, Promise) {
       email: "john@gmail.com",
       password_digest: "john",
     },
+    {
+      first_name: "Bob",
+      last_name: "Singh",
+      email: "bob@gmail.com",
+      password_digest: "bob",
+    },
     ]).returning("*");
   }
 
@@ -72,10 +78,14 @@ exports.seed = function(knex, Promise) {
   }
 
   function insertTenants(users) {
-    return knex('landlords').insert([
+    return knex('tenants').insert([
     {
       phone_number: "647-321-4321",
       users_id: users[1].id,
+    },
+    {
+      phone_number: "647-999-9999",
+      users_id: users[2].id,
     },
     ]).returning("*");
   }
@@ -83,22 +93,29 @@ exports.seed = function(knex, Promise) {
   function insertMessages(users) {
     return knex("messages").insert([
     {
+     text: "Hey John, we can book a day. When are you usually free?",
+     sender: users[0].id,
+     recipient: users[1].id,
+     created_at: new Date("2017 02 19 15:46"),
+   },
+   {
      text: "Hello there. I am interested in this rent",
      sender: users[1].id,
      recipient: users[0].id,
      created_at: new Date("2017 02 19 15:45"),
    },
-   {
-     text: "Hey John, we can book a day. When are you usually free?",
-     sender: users[0].id,
-     recipient: users[1].id,
-     created_at: new Date("2017 02 19 15:45"),
-   },
+
    {
      text: "Hi Mary, I am available this Friday at three",
      sender: users[1].id,
      recipient: users[0].id,
-     created_at: new Date("2017 02 19 15:45"),
+     created_at: new Date("2017 02 19 15:48"),
+   },
+   {
+     text: "Hi there, I'm cool",
+     sender: users[2].id,
+     recipient: users[0].id,
+     created_at: new Date("2017 02 19 17:58"),
    },
    ]).returning("*")
   }
@@ -121,6 +138,7 @@ exports.seed = function(knex, Promise) {
   function insertListings(landlords, neighbourhoods) {
     return knex("listings").insert([
     {
+      // lat, lng  in this order
       // address: "46 Spadina Ave, Toronto, ON",
       lat: 43.644576,
       lng: -79.394940,

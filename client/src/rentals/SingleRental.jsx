@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getSingleListing } from "../ajax/listings";
 import YelpSearch from "../yelp/YelpSearch";
+import dateFromTimestamp from "../helpers/time-formatters";
 
 class SingleRental extends Component {
 
@@ -14,13 +15,16 @@ class SingleRental extends Component {
   componentDidMount(){
     getSingleListing(this.state.id)
     .then(data => {
+      const formattedDate = dateFromTimestamp(data.date_available);
       this.setState({
-        data
+        data,
+        formattedDate,
       })
     })
   }
 
   render(){
+
     return (
       <div className="single-home-card">
         {this.state.data &&
@@ -29,7 +33,7 @@ class SingleRental extends Component {
             <div>{this.state.data.city} {this.state.data.province}</div>
             <div>{this.state.data.postal_code}</div>
             <div>${this.state.data.price / 100}</div>
-            <div>{this.state.data.date_available}</div>
+            <div>Available: {this.state.formattedDate}</div>
             <div>{this.state.data.description}</div>
             <div>Bedrooms: {this.state.data.bedrooms} Bathrooms: {this.state.data.bathrooms} </div>
             <YelpSearch

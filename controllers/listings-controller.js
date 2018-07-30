@@ -2,6 +2,13 @@ const queries = require("../db/queries.js");
 const helpers = require("../helpers/helpers.js");
 
 let controller = {
+  searchListings: function(req, res){
+    queries.getAllListingsByQuery(req.body)
+      .then(listings => {
+        res.json(listings);
+      })
+  },
+
   getAllListings: function (req, res) {
     queries.getAllListings()
       .then(listings => {
@@ -20,6 +27,10 @@ let controller = {
   postListings: function(req, res) {
     const imageUrls = req.body.images
     const data = req.body.data
+    queries.addNewListing(data, imageUrls)
+      .then(res => {
+          res.json({})
+        })
   }
 };
 module.exports = controller;
