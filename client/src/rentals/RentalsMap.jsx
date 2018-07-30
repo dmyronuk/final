@@ -9,6 +9,7 @@ class RentalsMap extends Component{
     super(props)
     this.state = {
       activeInfoBoxId: null,
+      googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
     }
   }
 
@@ -44,7 +45,7 @@ class RentalsMap extends Component{
         {this.state.listings &&
           <MapComponent
             listings = {this.state.listings}
-            googleMapURL = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            googleMapURL = { this.state.googleMapURL }
             loadingElement = {<div  />}
             containerElement = {<div className="map-container" />}
             mapElement = {<div style={{ height: `100%` }} />}
