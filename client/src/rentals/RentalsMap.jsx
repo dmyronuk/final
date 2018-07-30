@@ -1,19 +1,36 @@
 import React, { Component } from "react";
-import MyMapComponent from "./Map";
+import MapComponent from "./Map";
 import RentalMapCard from "./RentalMapCard";
-import { getAllListings } from "../ajax/listings"
+import RentalSearchForm from "./SearchForm";
+import { getAllListings, getAllListingsFromQuery } from "../ajax/listings"
 
 class RentalsMap extends Component{
   constructor(props){
     super(props)
     this.state = {
-
+      activeInfoBoxId: null,
     }
   }
 
-   componentDidMount(){
+  handleSearchSubmit = (queryObj) => {
+    getAllListingsFromQuery(queryObj)
+    .then(listings => {
+      this.setState({
+        listings
+      })
+    })
+  }
+
+  handleMarkerClick = (key) => {
+    this.setState({
+      activeInfoBoxId: key
+    })
+  }
+
+  componentDidMount(){
     getAllListings()
     .then(listings => {
+      console.log(listings)
       this.setState({
         listings
       })
@@ -23,18 +40,22 @@ class RentalsMap extends Component{
   render(){
     return(
       <div>
+        <RentalSearchForm handleSearchSubmit={this.handleSearchSubmit} />
         {this.state.listings &&
-          <MyMapComponent
+          <MapComponent
             listings = {this.state.listings}
             googleMapURL = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
             loadingElement = {<div  />}
             containerElement = {<div className="map-container" />}
             mapElement = {<div style={{ height: `100%` }} />}
+            handleMarkerClick = { this.handleMarkerClick }
+            activeInfoBoxId = { this.state.activeInfoBoxId }
           />
         }
         <div className ="map-listings-container">
           {this.state.listings && this.state.listings.map((elem, i) =>
               <RentalMapCard
+                key={i}
                 id={elem.id}
                 data={elem}
               />
