@@ -14,10 +14,11 @@ class Login extends React.Component {
   render() {
 
     return (
-      <div>
-        <p>You must log in to view this page!</p>
-        <button onClick={this.login}>Log in</button>
-      </div>
+      <form>
+        <input type="text" name="email" placeholder="name" />
+        <input type="text" name="password" placeholder="password"/>
+        <input type="submit" value="submit"/>
+      </form>
     )
   }
 }

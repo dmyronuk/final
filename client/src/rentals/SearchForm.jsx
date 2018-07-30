@@ -34,7 +34,6 @@ class RentalSearchForm extends Component{
     stateUpdateObj[e.target.name] = e.target.value;
     const newState = Object.assign(this.state, stateUpdateObj);
     this.setState(newState);
-    console.log(this.state)
   }
 
   handleSliderRelease = (e) => {
