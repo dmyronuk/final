@@ -13,4 +13,6 @@ module.exports = function(app) {
     app.post('/api/listings', listingsController.postListings);
     app.post('/api/upload', photoController.uploadFile);
     app.get ('/api/messages', messagesController.getAllMessages);
+    app.get('/api/filtered-messages', messagesController.getFilteredMessages);
+    app.post('/api/newMessage', messagesController.addNewMessage);
 };

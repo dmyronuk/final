@@ -6,7 +6,8 @@ import RentalsMap from "./rentals/RentalsMap.jsx";
 import RentalsGrid from "./rentals/RentalsGrid.jsx";
 import NewRental from "./rentals/NewRental.jsx";
 import SingleRental from "./rentals/SingleRental.jsx";
-import AllMessages from "./messages/AllMessages";
+// import MessageList from "./messages/MessageList.jsx";
+import Chat from "./messages/Chat.jsx";
 
 class App extends Component {
   constructor(props){
@@ -25,7 +26,7 @@ class App extends Component {
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <Route exact path="/rentals/new" component={ NewRental }/>
-          <Route exact path="/messages" component={ AllMessages }/>
+          <Route exact path="/chat" component={ Chat }/>
         </div>
       </BrowserRouter>
     );
