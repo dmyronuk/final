@@ -12,7 +12,7 @@ class Login extends React.Component {
   }
 
   render() {
-    
+
     return (
       <div>
         <p>You must log in to view this page!</p>

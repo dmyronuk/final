@@ -4,13 +4,13 @@ import { isLoggedIn } from './utils/AuthService';
 
 
 
-const PrivateRoute = ({component: Component, ...rest}) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) => (isLoggedIn())
         ? (<Component {...props} />)
-        : (<Redirect to={{pathname: '/login', state: {from: props.location}}} />)} />
+        : (<Redirect to={{ pathname: '/login', state: { from: props.location } }} />)} />
   )
 }
 
