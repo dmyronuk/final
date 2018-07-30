@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "auth0-js": "^9.7.3",
-=======
     "@google/maps": "^0.5.5",
->>>>>>> 21e8fefdd45ef3b46f0c9b1919913fc81cf90f2e
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
     "babel-core": "6.26.0",
