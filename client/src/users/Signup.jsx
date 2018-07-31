@@ -31,7 +31,7 @@ class Signup extends React.Component {
     const data = await signup(this.state);
     if(data.status === "success"){
       //console.log("token:", data.token)
-      localStorage.setItem("myjwttoken", data.token);
+      localStorage.setItem("JWT_TOKEN", data.token);
       this.setState({ redirect: true })
     }else{
       const msg = "Signup Validation Failed"
