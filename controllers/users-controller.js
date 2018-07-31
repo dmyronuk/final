@@ -22,49 +22,45 @@ let controller = {
   login: (req, res) => {
     let token = null;
     let userData = null;
-    const errorMessages = [];
+    const errors = [];
     const email = req.body.email.toLowerCase();
-    queries.getUserByEmail(email)
-    .then((dataArr) => {
-      userData = dataArr.length > 0 ? dataArr[0] : null;
+    const password = req.body.password;
+    if(email && password){
+      queries.getUserByEmail(email)
+      .then((dataArr) => {
+        userData = dataArr.length > 0 ? dataArr[0] : null;
 
-      if(userData){
-        //check if password matches hash
-        const passwordIsValid = bcrypt.compareSync(req.body.password, userData.password_digest)
-        if(passwordIsValid){
+        //if user exists in database and password is valid, set token
+        if(userData && bcrypt.compareSync(password, userData.password_digest) ){
           token = jwt.sign(userData, process.env.JWT_PRIVATE_KEY, {expiresIn: "24h"});
         }else{
-          errorMessages.push("Incorrect Password")
+          errors.push("Login failed");
         }
-      }else{
-        errorMessages.push("Email does not exist");
-      }
 
-      res.json({
-        errorMessages,
-        token,
-        user: {
+        const user = userData ? {
           first_name: userData.first_name,
           last_name: userData.last_name,
           email: userData.email,
           id: userData.id,
-        }
+        } : null
+
+        res.json({
+          errors,
+          token,
+          user,
+        })
       })
-    })
+    }else{
+      res.json({
+        errors: ["All fields required"],
+      })
+    }
   },
 
   signup: (req, res) => {
     const errors = [];
     const data = req.body;
-    console.log("data: ", data);
 
-  //   first_name: 'Frank',
-  // last_name: 'Tank',
-  // phone: '444-444-4444',
-  // email: 'Frank@tank.com',
-  // password: 'password',
-  // password_confirmation: 'password',
-  // user_type: 'landlord'
     ! validations.passwordIsValid(data.password) && errors.push("Password must be 8 characters");
     ! validations.allFieldsPresent([data.first_name, data.last_name, data.user_type, data.email ]) && errors.push("All fields mandatory");
     ! validations.phoneNumberIsValid(data.phone) && errors.push("Invalid phone number")

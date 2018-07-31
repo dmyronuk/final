@@ -10,7 +10,7 @@ class Login extends Component {
       redirect: false,
       email: "",
       password: "",
-      errorMessages:[]
+      errors: null,
     }
   }
 
@@ -25,6 +25,7 @@ class Login extends Component {
     e.preventDefault();
     const data = await login(this.state);
 
+
     //if the login route returns a token, set the token in user's local storage and redirect to root
     if(data.token){
       localStorage.setItem("JWT_TOKEN", data.token);
@@ -34,8 +35,9 @@ class Login extends Component {
       })
     //if login fails, token will be null and server will return error messages - display errors
     }else{
+      console.log(data)
       this.setState({
-        errorMessages: data.errorMessages,
+        errors: data.errors,
       })
     }
   }
@@ -46,11 +48,11 @@ class Login extends Component {
         { this.state.redirect && <Redirect to="/" /> }
         <form onSubmit={this.handleSubmit }>
           <div>
-            <div>
-              Errors:
-              {this.state.errorMessages.map(err => <div>{ err }</div>)}
-            </div>
-
+            {this.state.errors &&
+              <div>
+                {this.state.errors.map(err => <div>{ err }</div>)}
+              </div>
+            }
             Email
             <input
               type="text"
