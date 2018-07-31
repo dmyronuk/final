@@ -8,7 +8,6 @@ function randomParagraphGen() {
   return paragraph;
 }
 
-console.log(randomParagraphGen());
 
 exports.seed = function(knex, Promise) {
 
@@ -22,6 +21,10 @@ exports.seed = function(knex, Promise) {
 
   function deleteTenants(){
     return knex("tenants").del();
+  }
+
+  function deleteRatings(){
+    return knex("ratings").del();
   }
 
   function deleteMessages(){
@@ -443,6 +446,32 @@ exports.seed = function(knex, Promise) {
    ]).returning("*")
   }
 
+  function insertRatings(users){
+    return knex('ratings').insert([
+      {
+        rating: 5,
+        rater: users[0].id,
+        ratee: users[1].id,
+      },
+      {
+        rating: 5,
+        rater: users[2].id,
+        ratee: users[0].id,
+      },
+      {
+        rating: 4,
+        rater: users[2].id,
+        ratee: users[1].id,
+      },
+      {
+        rating: 4,
+        rater: users[0].id,
+        ratee: users[2].id,
+      },
+      ]).returning("*");
+    
+  }
+
 
   return deleteListingSpecifications()
   .then(deleteListingAddresses)
@@ -451,6 +480,7 @@ exports.seed = function(knex, Promise) {
   .then(deleteMessages)
   .then(deleteLandlords)
   .then(deleteTenants)
+  .then(deleteRatings)
   .then(deleteUsers)
 
   // .then(deleteListingSpecifications)
@@ -458,19 +488,23 @@ exports.seed = function(knex, Promise) {
 
   .then(insertUsers)
   .then(users =>  {
-    return insertLandlords(users)
-    .then(landlords => {
-      return insertTenants(users)
-      .then(() => {
-        return insertMessages(users)
-        .then(insertNeighbourhoods)
-        .then(neighbourhoods => {
-          // console.log(neighbourhoods);
-          return insertListings(landlords, neighbourhoods)
-          .then(listings => {
-            return insertListingSpecifications(listings)
-            .then(() => {
-              return insertListingAddresses(listings)
+    console.log(users)
+    return insertRatings(users)
+    .then(()=>{
+      return insertLandlords(users)
+      .then(landlords => {
+        return insertTenants(users)
+        .then(() => {
+          return insertMessages(users)
+          .then(insertNeighbourhoods)
+          .then(neighbourhoods => {
+            // console.log(neighbourhoods);
+            return insertListings(landlords, neighbourhoods)
+            .then(listings => {
+              return insertListingSpecifications(listings)
+              .then(() => {
+                return insertListingAddresses(listings)
+              })
             })
           })
         })
