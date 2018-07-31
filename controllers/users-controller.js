@@ -11,6 +11,7 @@ let controller = {
       if(err){
         console.log(err)
       }
+      console.log("User id:", decoded.id)
       res.json({
         status: "Success",
       })
@@ -19,11 +20,12 @@ let controller = {
 
   login: (req, res) => {
     let token = null;
+    let userData = null;
     const errorMessages = [];
     const email = req.body.email.toLowerCase();
     queries.getUserByEmail(email)
     .then((dataArr) => {
-      const userData = dataArr.length > 0 ? dataArr[0] : null;
+      userData = dataArr.length > 0 ? dataArr[0] : null;
 
       if(userData){
         //check if password matches hash
@@ -40,6 +42,12 @@ let controller = {
       res.json({
         errorMessages,
         token,
+        user: {
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          email: userData.email,
+          id: userData.id,
+        }
       })
     })
   },
@@ -53,18 +61,19 @@ let controller = {
     queries.signup(data)
     .then(() => {
       const tokenPayload = {
-        email: data.email,
         first_name: data.first_name,
         last_name: data.last_name,
+        email: data.email,
+        id: data.id,
       }
       var token = jwt.sign(tokenPayload, process.env.JWT_PRIVATE_KEY, {expiresIn: "24h"});
       res.json({
         token,
+        user: tokenPayload,
         status: "success",
       });
     })
   }
-
 }
 
 module.exports = controller;

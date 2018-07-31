@@ -7,7 +7,11 @@ function Header(props){
       <button className="toggle-nav" onClick={props.hamburgerClickHandler}>
         Toggle Nav
       </button>
-
+      {props.user &&
+        <div>
+          Signed in as: {props.user.email}
+        </div>
+      }
       <Link to={"/"}>
         <h1 className="App-title">Title</h1>
       </Link>
