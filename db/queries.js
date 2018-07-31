@@ -229,10 +229,17 @@ module.exports = (function() {
       if (data.user_type === "landlord") {
         return knex('landlords')
         .insert({phone_number: data.phone, users_id: user[0]})
+        .then(() => {
+          return user[0];
+        })
       } else if (data.user_type === "tenant"){
         return knex('tenants')
         .insert({phone_number: data.phone, users_id: user[0]})
+        .then(() => {
+          return user[0];
+        })
       }
+
     })
   }
 

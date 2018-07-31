@@ -1,5 +1,6 @@
 const queries = require("../db/queries");
 const helpers = require("../helpers/helpers.js");
+const validations = require("../helpers/validations.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -21,58 +22,74 @@ let controller = {
   login: (req, res) => {
     let token = null;
     let userData = null;
-    const errorMessages = [];
+    const errors = [];
     const email = req.body.email.toLowerCase();
-    queries.getUserByEmail(email)
-    .then((dataArr) => {
-      userData = dataArr.length > 0 ? dataArr[0] : null;
+    const password = req.body.password;
+    if(email && password){
+      queries.getUserByEmail(email)
+      .then((dataArr) => {
+        userData = dataArr.length > 0 ? dataArr[0] : null;
 
-      if(userData){
-        //check if password matches hash
-        const passwordIsValid = bcrypt.compareSync(req.body.password, userData.password_digest)
-        if(passwordIsValid){
+        //if user exists in database and password is valid, set token
+        if(userData && bcrypt.compareSync(password, userData.password_digest) ){
           token = jwt.sign(userData, process.env.JWT_PRIVATE_KEY, {expiresIn: "24h"});
         }else{
-          errorMessages.push("Incorrect Password")
+          errors.push("Login failed");
         }
-      }else{
-        errorMessages.push("Email does not exist");
-      }
 
-      res.json({
-        errorMessages,
-        token,
-        user: {
+        const user = userData ? {
           first_name: userData.first_name,
           last_name: userData.last_name,
           email: userData.email,
           id: userData.id,
-        }
+        } : null
+
+        res.json({
+          errors,
+          token,
+          user,
+        })
       })
-    })
+    }else{
+      res.json({
+        errors: ["All fields required"],
+      })
+    }
   },
 
   signup: (req, res) => {
+    const errors = [];
     const data = req.body;
-    const hashed_password = bcrypt.hashSync(data.password, 10);
-    data.password = null;
-    data.password_confirmation = null;
-    data.hashed_password = hashed_password;
-    queries.signup(data)
-    .then(() => {
-      const tokenPayload = {
-        first_name: data.first_name,
-        last_name: data.last_name,
-        email: data.email,
-        id: data.id,
-      }
-      var token = jwt.sign(tokenPayload, process.env.JWT_PRIVATE_KEY, {expiresIn: "24h"});
+
+    ! validations.passwordIsValid(data.password) && errors.push("Password must be 8 characters");
+    ! validations.allFieldsPresent([data.first_name, data.last_name, data.user_type, data.email ]) && errors.push("All fields mandatory");
+    ! validations.phoneNumberIsValid(data.phone) && errors.push("Invalid phone number")
+    ! validations.passwordsMatch(data.password, data.password_confirmation) && errors.push("Passwords do not match")
+
+    //if all validations pass then insert the new user into the database
+    if(errors.length === 0){
+      const hashed_password = bcrypt.hashSync(data.password, 10);
+      data.hashed_password = hashed_password;
+      queries.signup(data)
+      .then((userId) => {
+        const tokenPayload = {
+          first_name: data.first_name,
+          last_name: data.last_name,
+          email: data.email,
+          id: userId,
+        }
+        var token = jwt.sign(tokenPayload, process.env.JWT_PRIVATE_KEY, {expiresIn: "24h"});
+        res.json({
+          token,
+          user: tokenPayload,
+          errors: null,
+        });
+      })
+    }else{
       res.json({
-        token,
-        user: tokenPayload,
-        status: "success",
-      });
-    })
+        errors
+      })
+    }
   }
 }
 
