@@ -40,9 +40,10 @@ class App extends Component {
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
-          <PrivateRoute exact path="/rentals/new" component={ NewRental }/>
+          <Route exact path="/rentals/new" component={ NewRental }/>
           <Route exact path="/chat" component={ Chat }/>
           <Route path="/profile" component={Profile} />
+          <Route path="/rentals/:id(\d+)/edit" component={ NewRental } />
         </div>
       </BrowserRouter>
     );

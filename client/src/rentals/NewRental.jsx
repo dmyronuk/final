@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import { getSingleListing } from "../ajax/listings";
 
 class NewRental extends Component {
   constructor(props) {
@@ -24,7 +25,17 @@ class NewRental extends Component {
     this.autocomplete = null
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    let listingId = this.props.match.params.id
+    let listing = listingId && await getSingleListing(listingId)
+    if (listing) {
+      this.setState({
+        data: listing,
+        imageURLs: listing.photos || [],
+        edit: true
+      })
+    }
+
     let options = {
       componentRestrictions: { country: "CA" }
     }
@@ -62,19 +73,29 @@ class NewRental extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { data, imageURLs } = this.state;
-    axios.post('/api/listings', {
-      data: data,
-      images: imageURLs,
-    })
+    if (this.state.edit) {
+      axios.patch(`/api/listings/${this.props.match.params.id}`, {
+        data: data,
+      })
       .then(res => {
-        // redirect
-      });
+
+      })
+    } else {
+      axios.post('/api/listings', {
+        data: data,
+        images: imageURLs,
+      })
+        .then(res => {
+          // redirect
+        });
+      }
   }
 
   handlePlaceSelect = async () => {
     // Google Place Autocomplete call
     let addressObject = await this.autocomplete.getPlace()
     let address = addressObject.address_components
+    console.log(addressObject)
     let geocoder = new window.google.maps.Geocoder();
     // Google Geocode call
     geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
