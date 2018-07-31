@@ -34,15 +34,19 @@ class Chat extends Component {
 
   
   addNewRating = () => {
-    axios.post("/api/ratings",{
+    axios.post("/api/ratings", {
       rater: 1,
       ratee: 2,
       rating: this.state.rating
     })
     .then(res =>{
-      // redirect to somewhere?
-      console.log(res)
+      console.log("Success")
     })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.addNewRating()
   }
   
   componentDidUpdate() {
@@ -84,7 +88,7 @@ class Chat extends Component {
               value={this.state.rating}
               onChange={this.handleInputChange} />
           </label>
-          <button onSubmit={this.addNewRating}>Submit Rating</button>
+          <button onSubmit={this.handleSubmit}>Submit Rating</button>
         </form>
 
       {this.state.messages &&

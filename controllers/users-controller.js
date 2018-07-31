@@ -19,10 +19,6 @@ let controller = {
   },
 
   login: (req, res) => {
-    console.log(231231231231231231312)
-    res.json({
-      test:1
-    })
     let token = null;
     let userData = null;
     const errorMessages = [];
