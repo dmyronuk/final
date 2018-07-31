@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { login, logout, isLoggedIn } from "./utils/AuthService";
 
 function Header(props){
   return (
@@ -12,14 +11,15 @@ function Header(props){
       <Link to={"/"}>
         <h1 className="App-title">Title</h1>
       </Link>
-
-      {(isLoggedIn()) ? (
-        <Link to={"/"}>
-          <button className="login-button" onClick={() => logout()}>Logout </button>
-        </Link>
-        ) : (
-        <button className="login-button" onClick={() => login()}>Login</button>
-      )}
+      <Link to={"/login"}>
+        <button className="login-button">Login</button>
+      </Link>
+      <Link to={"/logout"}>
+        <button className="login-button">Logout</button>
+      </Link>
+      <Link to={"/signup"}>
+        <button className="login-button">Signup</button>
+      </Link>
     </header>
   )
 }

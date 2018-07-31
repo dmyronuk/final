@@ -73,6 +73,12 @@ module.exports = (function() {
     .select()
   },
 
+  getUserByEmail: (email) => {
+    return knex('users')
+    .where('email', email)
+    .select('email', 'first_name', 'last_name', 'password_digest')
+  },
+
   getAllLandlords: () => {
     return knex('landlords')
     .select()
@@ -196,13 +202,13 @@ module.exports = (function() {
 
   signup: data => {
     return knex('users')
-    .insert({first_name: data.first_name, last_name: data.last_name, email: data.email, password_digest: data.password })
+    .insert({first_name: data.first_name, last_name: data.last_name, email: data.email, password_digest: data.hashed_password })
     .returning('id')
     .then(user => {
       console.log(user);
       if (data.user_type === "landlord") {
         return knex('landlords')
-        .insert({phone_number: data.phone_number, users_id: user[0]})
+        .insert({phone_number: data.phone, users_id: user[0]})
       } else if (data.user_type === "tenant"){
         return knex('tenants')
         .insert({phone_number: data.phone, users_id: user[0]})

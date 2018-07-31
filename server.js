@@ -1,10 +1,8 @@
 const express = require("express");
 const app = express();
-const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const fileUpload = require('express-fileupload');
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
 const PORT = 3001;
 
 
@@ -24,13 +22,13 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({
-    type: 'application / vnd.api + json'
+    type: "application / vnd.api + json"
 }));
 app.use(fileUpload());
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-const routes = require('./routes.js')(app);
+const routes = require("./routes.js")(app);
 
 app.listen(PORT, () => {
   console.log(`Server running on Port ${PORT}`);

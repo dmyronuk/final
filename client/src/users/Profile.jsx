@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import getProfile from "../ajax/auth";
+import { getUserProfile } from "../ajax/profile";
 
 class Profile extends Component {
   constructor(props){
@@ -8,7 +8,8 @@ class Profile extends Component {
   }
 
   componentDidMount(){
-
+    const tokenObj = {token: localStorage.getItem("JWT_TOKEN")};
+    const profileData = getUserProfile(tokenObj);
   }
 
   render(){

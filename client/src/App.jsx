@@ -8,6 +8,7 @@ import RentalsGrid from "./rentals/RentalsGrid.jsx";
 import NewRental from "./rentals/NewRental.jsx";
 import SingleRental from "./rentals/SingleRental.jsx";
 import Login from "./users/Login";
+import Logout from "./users/Logout";
 import Signup from "./users/Signup";
 import PrivateRoute from "./PrivateRoute";
 import Chat from "./messages/Chat.jsx";
@@ -36,6 +37,7 @@ class App extends Component {
           <Sidebar toggleState={this.state.sidebarClass}/>
           <Route exact path="/" component= { Home } />
           <Route exact path="/login" component= { Login } />
+          <Route exact path="/logout" component= { Logout } />
           <Route exact path="/signup" component= { Signup } />
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>

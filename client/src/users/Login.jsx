@@ -1,13 +1,16 @@
 import React from "react";
 import { login } from "../ajax/auth";
+import { Redirect } from "react-router-dom";
 
 class Login extends React.Component {
 
   constructor() {
     super();
     this.state = {
+      redirect: false,
       email: "",
       password: "",
+      errorMessages:[]
     }
   }
 
@@ -18,37 +21,58 @@ class Login extends React.Component {
     this.setState(newState);
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    login(this.state);
+    const data = await login(this.state);
+
+    //if the login route returns a token, set the token in user's local storage and redirect to root
+    if(data.token){
+      localStorage.setItem("JWT_TOKEN", data.token);
+      this.setState({
+        redirect: true,
+      })
+    //if login fails, token will be null and server will return error messages - display errors
+    }else{
+      this.setState({
+        errorMessages: data.errorMessages,
+      })
+    }
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit }>
-        <div>
-          Email
-          <input
-            type="text"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          Password
-          <input
-            type="text"
-            name="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-        </div>
+      <div>
+        { this.state.redirect && <Redirect to="/" /> }
+        <form onSubmit={this.handleSubmit }>
+          <div>
+            <div>
+              Errors:
+              {this.state.errorMessages.map(err => <div>{ err }</div>)}
+            </div>
 
-        <div>
-          <input type="submit" value="submit"/>
-        </div>
-      </form>
+            Email
+            <input
+              type="text"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div>
+            Password
+            <input
+              type="text"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div>
+            <input type="submit" value="submit"/>
+          </div>
+        </form>
+      </div>
     )
   }
 }

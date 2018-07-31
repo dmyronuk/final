@@ -20,4 +20,6 @@ module.exports = function(app) {
     app.post('/api/signup', usersController.signup);
     app.get('/api/ratings', ratingsController.getAllRatingsOfUser)
     app.post('/api/ratings', ratingsController.addNewRating)
+    app.post('/api/profile', usersController.profile)
+    app.post('/api/login', usersController.login)
 };
