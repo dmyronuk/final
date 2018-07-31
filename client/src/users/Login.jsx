@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { login } from "../ajax/auth";
 import { Redirect } from "react-router-dom";
 
-class Login extends React.Component {
+class Login extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       redirect: false,
       email: "",
@@ -28,6 +28,7 @@ class Login extends React.Component {
     //if the login route returns a token, set the token in user's local storage and redirect to root
     if(data.token){
       localStorage.setItem("JWT_TOKEN", data.token);
+      this.props.setUser(data.user)
       this.setState({
         redirect: true,
       })

@@ -5,8 +5,8 @@ import { fieldIsValidLength, fieldIsValidPhone } from "../helpers/validations";
 
 class Signup extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       redirect: false,
       errorMessages: null,
@@ -32,7 +32,11 @@ class Signup extends React.Component {
     if(data.status === "success"){
       //console.log("token:", data.token)
       localStorage.setItem("JWT_TOKEN", data.token);
-      this.setState({ redirect: true })
+      console.log("Data after submit", data)
+      this.props.setUser(data.user)
+      this.setState({
+        redirect: true
+      })
     }else{
       const msg = "Signup Validation Failed"
       this.setState({errorMessages: msg})
