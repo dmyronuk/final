@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import { getSingleListing } from "../ajax/listings";
+import { Redirect } from "react-router-dom";
 
-class NewRental extends Component {
+class RentalForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -11,8 +12,8 @@ class NewRental extends Component {
         city: '',
         province: '',
         postal_code: '',
-        lat: '',
-        lng: '',
+        lat: 0,
+        lng: 0,
         unit: '',
         price: "",
         bedrooms: "",
@@ -26,22 +27,10 @@ class NewRental extends Component {
   }
 
   async componentDidMount() {
-    let listingId = this.props.match.params.id
-    let listing = listingId && await getSingleListing(listingId)
-    if (listing) {
-      this.setState({
-        data: listing,
-        imageURLs: listing.photos || [],
-        edit: true
-      })
-    }
-
     let options = {
       componentRestrictions: { country: "CA" }
     }
-
     this.autocomplete = new window.google.maps.places.Autocomplete(document.getElementById('autocomplete'), options)
-
     this.autocomplete.addListener("place_changed", this.handlePlaceSelect)
   }
 
@@ -73,22 +62,14 @@ class NewRental extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { data, imageURLs } = this.state;
-    if (this.state.edit) {
-      axios.patch(`/api/listings/${this.props.match.params.id}`, {
-        data: data,
-      })
-      .then(res => {
 
-      })
-    } else {
-      axios.post('/api/listings', {
-        data: data,
-        images: imageURLs,
-      })
-        .then(res => {
-          // redirect
-        });
-      }
+    axios.post('/api/listings', {
+      data: data,
+      images: imageURLs,
+    })
+    .then(res => {
+      // redirect
+    });
   }
 
   handlePlaceSelect = async () => {
@@ -100,12 +81,12 @@ class NewRental extends Component {
     // Google Geocode call
     geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
       let currData = Object.assign({}, this.state.data, {
-        street: addressObject.name,
-        city: address[3].long_name,
-        province: address[5].long_name,
-        postal_code: results[0].address_components[7].long_name,
-        lat: addressObject.geometry.location.lat(),
-        lng: addressObject.geometry.location.lng(),
+        street: addressObject.name || "",
+        city: address[3].long_name || "",
+        province: address[5].long_name || "",
+        postal_code: results[0].address_components[7].long_name || "",
+        lat: addressObject.geometry.location.lat() ,
+        lng: addressObject.geometry.location.lng() ,
       })
       this.setState({ data: currData })
     })
@@ -202,7 +183,7 @@ class NewRental extends Component {
 
 }
 
-export default NewRental
+export default RentalForm
 
 
 
