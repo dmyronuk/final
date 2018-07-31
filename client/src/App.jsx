@@ -8,6 +8,7 @@ import RentalsGrid from "./rentals/RentalsGrid.jsx";
 import NewRental from "./rentals/NewRental.jsx";
 import SingleRental from "./rentals/SingleRental.jsx";
 import Login from "./users/Login";
+import Logout from "./users/Logout";
 import Signup from "./users/Signup";
 import PrivateRoute from "./PrivateRoute";
 import Chat from "./messages/Chat.jsx";
@@ -18,6 +19,7 @@ class App extends Component {
     super(props)
     this.state = {
       sidebarClass: "closed-sidebar",
+      user: null,
     }
   }
 
@@ -27,16 +29,25 @@ class App extends Component {
     console.log(this.state)
   }
 
+  setUser = (userObj) => {
+    this.setState({ user: userObj })
+  }
+
+  clearUser = () => {
+    this.setState({ user: null })
+  }
+
   render() {
     return (
 
       <BrowserRouter>
         <div className="main-container">
-          <Header hamburgerClickHandler={this.toggleSidebar} />
+          <Header user={this.state.user} hamburgerClickHandler={this.toggleSidebar} />
           <Sidebar toggleState={this.state.sidebarClass}/>
           <Route exact path="/" component= { Home } />
-          <Route exact path="/login" component= { Login } />
-          <Route exact path="/signup" component= { Signup } />
+          <Route exact path="/login" render={() => <Login setUser={this.setUser} />}/>
+          <Route exact path="/logout" render={() => <Logout clearUser={this.clearUser} />} />
+          <Route exact path="/signup" render={() => <Signup setUser={this.setUser} />} />
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
