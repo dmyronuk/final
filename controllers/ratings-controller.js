@@ -9,6 +9,7 @@ let controller = {
       })
   },
   addNewRating: function(req, res) {
+    console.log(req)
     let rater = req.body.rater;
     let ratee = req.body.ratee;
     let rating = req.body.rating;
