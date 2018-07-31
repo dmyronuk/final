@@ -7,10 +7,9 @@ import RentalsMap from "./rentals/RentalsMap.jsx";
 import RentalsGrid from "./rentals/RentalsGrid.jsx";
 import NewRental from "./rentals/NewRental.jsx";
 import SingleRental from "./rentals/SingleRental.jsx";
-import Login from "./Login";
+import Login from "./users/Login";
 import Signup from "./users/Signup";
 import PrivateRoute from "./PrivateRoute";
-import Callback from './Callback';
 import Chat from "./messages/Chat.jsx";
 import Profile from  './users/Profile';
 
@@ -42,9 +41,6 @@ class App extends Component {
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <PrivateRoute exact path="/rentals/new" component={ NewRental }/>
-          <Route path="/callback" component={Callback} />
-          <Route path="/user/rentals/:id(\d+)" component={ NewRental } />
-          <Route path="/user/rentals" component={ RentalsGrid } />
           <Route exact path="/chat" component={ Chat }/>
           <Route path="/profile" component={Profile} />
         </div>
