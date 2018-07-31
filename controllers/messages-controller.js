@@ -26,8 +26,9 @@ let controller = {
     const message = req.body.message;
     queries.addNewMessage(sender, recipient, message)
       .then(messages => {
-        console.log(messages);
-        res.json(messages);
+        // console.log(messages);
+        // res.json(messages);
+        res.sendStatus(200);
       })
   }
 }
