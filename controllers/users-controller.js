@@ -1,5 +1,6 @@
 const queries = require("../db/queries");
 const helpers = require("../helpers/helpers.js");
+const validations = require("../helpers/validations.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -53,26 +54,46 @@ let controller = {
   },
 
   signup: (req, res) => {
+    const errors = [];
     const data = req.body;
-    const hashed_password = bcrypt.hashSync(data.password, 10);
-    data.password = null;
-    data.password_confirmation = null;
-    data.hashed_password = hashed_password;
-    queries.signup(data)
-    .then(() => {
-      const tokenPayload = {
-        first_name: data.first_name,
-        last_name: data.last_name,
-        email: data.email,
-        id: data.id,
-      }
-      var token = jwt.sign(tokenPayload, process.env.JWT_PRIVATE_KEY, {expiresIn: "24h"});
+    console.log("data: ", data);
+
+  //   first_name: 'Frank',
+  // last_name: 'Tank',
+  // phone: '444-444-4444',
+  // email: 'Frank@tank.com',
+  // password: 'password',
+  // password_confirmation: 'password',
+  // user_type: 'landlord'
+    ! validations.passwordIsValid(data.password) && errors.push("Password must be 8 characters");
+    ! validations.allFieldsPresent([data.first_name, data.last_name, data.user_type, data.email ]) && errors.push("All fields mandatory");
+    ! validations.phoneNumberIsValid(data.phone) && errors.push("Invalid phone number")
+    ! validations.passwordsMatch(data.password, data.password_confirmation) && errors.push("Passwords do not match")
+
+    //if all validations pass then insert the new user into the database
+    if(errors.length === 0){
+      const hashed_password = bcrypt.hashSync(data.password, 10);
+      data.hashed_password = hashed_password;
+      queries.signup(data)
+      .then((userId) => {
+        const tokenPayload = {
+          first_name: data.first_name,
+          last_name: data.last_name,
+          email: data.email,
+          id: userId,
+        }
+        var token = jwt.sign(tokenPayload, process.env.JWT_PRIVATE_KEY, {expiresIn: "24h"});
+        res.json({
+          token,
+          user: tokenPayload,
+          errors: null,
+        });
+      })
+    }else{
       res.json({
-        token,
-        user: tokenPayload,
-        status: "success",
-      });
-    })
+        errors
+      })
+    }
   }
 }
 

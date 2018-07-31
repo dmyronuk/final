@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { signup } from "../ajax/auth";
-import { fieldIsValidLength, fieldIsValidPhone } from "../helpers/validations";
 
 class Signup extends React.Component {
 
@@ -9,7 +8,7 @@ class Signup extends React.Component {
     super(props);
     this.state = {
       redirect: false,
-      errorMessages: null,
+      errors: null,
       first_name: "",
       last_name: "",
       phone: "",
@@ -29,25 +28,23 @@ class Signup extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     const data = await signup(this.state);
-    if(data.status === "success"){
-      //console.log("token:", data.token)
+    if(! data.errors){
       localStorage.setItem("JWT_TOKEN", data.token);
-      console.log("Data after submit", data)
       this.props.setUser(data.user)
       this.setState({
         redirect: true
       })
     }else{
-      const msg = "Signup Validation Failed"
-      this.setState({errorMessages: msg})
+      this.setState({errors: data.errors})
     }
   }
 
   render() {
     return (
       <div>
+
         { this.state.redirect && <Redirect to="/" /> }
-        { this.state.errorMessages }
+        { this.state.errors && this.state.errors.map((err) => <div>{err}</div> )}
         <form onSubmit={this.handleSubmit }>
           <div>
           First Name

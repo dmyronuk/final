@@ -10,7 +10,6 @@ import SingleRental from "./rentals/SingleRental.jsx";
 import Login from "./users/Login";
 import Logout from "./users/Logout";
 import Signup from "./users/Signup";
-import PrivateRoute from "./PrivateRoute";
 import Chat from "./messages/Chat.jsx";
 import Profile from  './users/Profile';
 
@@ -51,7 +50,7 @@ class App extends Component {
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
-          <PrivateRoute exact path="/rentals/new" component={ NewRental }/>
+          <Route exact path="/rentals/new" component={ NewRental }/>
           <Route exact path="/chat" component={ Chat }/>
           <Route path="/profile" component={Profile} />
         </div>
