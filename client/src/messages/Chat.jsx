@@ -36,12 +36,33 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    this.socket = new WebSocket('ws://localhost:8080');
+    this.socket.addEventListener('open', e => {
+      console.log("connected to server");
+    })
+
+    this.socket.onmessage = (event) => {
+      // The socket event data is encoded as a JSON string.
+      // This line turns it into an object
+      const data = JSON.parse(event.data);
+      console.log("went through");
+      console.log(event.data);
+      switch(data.type) {
+        case "incomingMessage":
+        this.setState({ this.state.messages.concat[data]})
+        break;
+        default:
+        // show an error in the console if the message type is unknown
+        throw new Error("Unknown event type: " + data.type);
+      }
+    }
+
     getFilteredMessages(1, 2)
     .then(messages => {
       this.setState({
         messages
       })
-      // console.log(messages);
+      console.log(messages);
     });
   }
 
