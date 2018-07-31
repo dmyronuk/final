@@ -5,13 +5,15 @@ import Sidebar from "./navigation/Sidebar";
 import Home from "./Home.jsx";
 import RentalsMap from "./rentals/RentalsMap.jsx";
 import RentalsGrid from "./rentals/RentalsGrid.jsx";
-import NewRental from "./rentals/NewRental.jsx";
+import NewRentalForm from "./rentals/NewRentalForm.jsx";
+import EditRentalForm from "./rentals/EditRentalForm.jsx";
 import SingleRental from "./rentals/SingleRental.jsx";
 import Login from "./users/Login";
 import Logout from "./users/Logout";
 import Signup from "./users/Signup";
 import Chat from "./messages/Chat.jsx";
 import Profile from  './users/Profile';
+
 
 class App extends Component {
   constructor(props){
@@ -50,10 +52,10 @@ class App extends Component {
           <Route exact path="/rentals/map" component={ RentalsMap }/>
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
-          <Route exact path="/rentals/new" component={ NewRental }/>
+          <Route exact path="/rentals/new" render={() => <NewRentalForm user={this.state.user} />} />
           <Route exact path="/chat" component={ Chat }/>
-          <Route path="/profile" component={Profile} />
-          <Route path="/rentals/:id(\d+)/edit" component={ NewRental } />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/rentals/:id/edit" component={ EditRentalForm } />
         </div>
       </BrowserRouter>
     );
