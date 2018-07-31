@@ -6,6 +6,8 @@ import { getAllListings, getAllListingsFromQuery } from "../ajax/listings"
 class RentalsGrid extends Component{
   constructor(props){
     super(props)
+    this.state = {
+    }
   }
 
   handleSearchSubmit = (queryObj) => {

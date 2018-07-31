@@ -15,4 +15,6 @@ module.exports = function(app) {
     app.get ('/api/messages', messagesController.getAllMessages);
     app.delete('/api/listings/:id', listingsController.deleteListing);
     app.patch('/api/listings/:id', listingsController.editListing);
+    app.get('/api/filtered-messages', messagesController.getFilteredMessages);
+    app.post('/api/newMessage', messagesController.addNewMessage);
 };
