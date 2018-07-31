@@ -18,8 +18,8 @@ module.exports = function(app) {
     app.get('/api/filtered-messages', messagesController.getFilteredMessages);
     app.post('/api/newMessage', messagesController.addNewMessage);
     app.post('/api/signup', usersController.signup);
-    app.get('/api/ratings', ratingsController.getAllRatingsOfUser)
-    app.post('/api/ratings', ratingsController.addNewRating)
     app.post('/api/profile', usersController.profile)
     app.post('/api/login', usersController.login)
+    app.get('/api/ratings', ratingsController.getAllRatingsOfUser)
+    app.post('/api/ratings', ratingsController.addNewRating)
 };
