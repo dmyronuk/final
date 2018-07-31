@@ -11,7 +11,7 @@ const Sidebar = (props) => {
         <Link to="/rentals/map">Rentals Map</Link>
       </div>
       <div>
-        <Link to="/messages">Messages</Link>
+        <Link to="/chat">Messages</Link>
       </div>
 
       { isLoggedIn() &&
