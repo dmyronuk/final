@@ -1,6 +1,6 @@
 const queries = require("../db/queries");
 const helpers = require("../helpers/helpers.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 let controller = {
@@ -19,6 +19,10 @@ let controller = {
   },
 
   login: (req, res) => {
+    console.log(231231231231231231312)
+    res.json({
+      test:1
+    })
     let token = null;
     let userData = null;
     const errorMessages = [];
