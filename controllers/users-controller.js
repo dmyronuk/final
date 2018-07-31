@@ -8,7 +8,10 @@ let controller = {
     console.log(data);
     queries.signup(data)
     .then(() => {
-      res.send("success");
+      res.send({
+        token: "123456",
+        status: "success",
+      });
     })
   }
 

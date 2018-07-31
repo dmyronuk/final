@@ -1,5 +1,10 @@
+// localStorage.setItem('myCat', 'Tom');
+// var cat = localStorage.getItem('myCat');
+// localStorage.removeItem('myCat');
+// localStorage.clear();
+
+
 const signup = async (userObj) => {
-  console.log(userObj);
   const response = await fetch("/api/signup", {
     method: "POST",
     mode: "cors",
@@ -12,7 +17,7 @@ const signup = async (userObj) => {
   if (response.status !== 200){
     throw Error(data.message);
   }
-  return data;
+  return data
 }
 
 const login = async (userObj) => {
