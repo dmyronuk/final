@@ -169,6 +169,13 @@ module.exports = (function() {
     .limit(100)
   },
 
+  getAllRatingsOfUser: (user_id) => {
+    return knex('ratings')
+    .join('users', 'ratings.ratee', 'users.id')
+    .where('id', user_id)
+    .select()
+  },
+
   getFilteredMessages: getFilteredMessages,
 
   addNewMessage: (sender, recipient, message) => {
