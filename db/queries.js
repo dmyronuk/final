@@ -4,9 +4,9 @@ var knex = require("knex")({
   client: "pg",
   connection: {
     host : "127.0.0.1",
-    user : process.env.DB_USERNAME,
-    password : process.env.DB_PASSWORD,
-    database : process.env.DB_NAME
+    user : "housing",
+    password : "housing",
+    database : "final_project",
   }
 });
 
@@ -172,8 +172,17 @@ module.exports = (function() {
   getAllRatingsOfUser: (user_id) => {
     return knex('ratings')
     .join('users', 'ratings.ratee', 'users.id')
-    .where('id', user_id)
-    .select()
+    .where('users.id', user_id)
+  },
+
+  addNewRating: (rater, ratee, rating) => {
+    return knex('ratings')
+    .insert({
+      rater:rater,
+      ratee:ratee,
+      rating:rating
+    })
+    .asCallback()
   },
 
   getFilteredMessages: getFilteredMessages,

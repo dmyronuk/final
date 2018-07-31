@@ -488,7 +488,6 @@ exports.seed = function(knex, Promise) {
 
   .then(insertUsers)
   .then(users =>  {
-    console.log(users)
     return insertRatings(users)
     .then(()=>{
       return insertLandlords(users)

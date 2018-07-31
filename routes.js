@@ -5,6 +5,7 @@ const photoController = require('./controllers/photo-controller.js');
 const yelpController = require('./controllers/yelp-controller.js');
 const messagesController = require('./controllers/messages-controller.js');
 const usersController = require('./controllers/users-controller.js');
+const ratingsController = require('./controllers/ratings-controller.js');
 
 module.exports = function(app) {
     app.post('/api/listings/search', listingsController.searchListings);
@@ -17,4 +18,6 @@ module.exports = function(app) {
     app.get('/api/filtered-messages', messagesController.getFilteredMessages);
     app.post('/api/newMessage', messagesController.addNewMessage);
     app.post('/api/signup', usersController.signup);
+    app.get('/api/ratings', ratingsController.getAllRatingsOfUser)
+    app.post('/api/ratings', ratingsController.addNewRating)
 };
