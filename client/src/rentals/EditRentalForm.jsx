@@ -21,12 +21,24 @@ class EditRentalForm extends RentalForm {
 
   handleSubmit = (event) => {
     event.preventDefault()
+    const token = localStorage.getItem("JWT_TOKEN");
     const { data, imageURLs } = this.state;
     axios.patch(`/api/listings/${this.props.match.params.id}`, {
       data: data,
+      imageURLs: imageURLs,
+      token: token,
     })
     .then(res => {
 
+    })
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    console.log(this.props.match.params.id)
+    const token = localStorage.getItem("JWT_TOKEN");
+    axios.delete(`/api/listings/${this.props.match.params.id}`, {
+      data: { token: token,}
     })
   }
 

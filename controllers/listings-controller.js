@@ -1,5 +1,7 @@
 const queries = require("../db/queries.js");
 const helpers = require("../helpers/helpers.js");
+const jwt = require("jsonwebtoken");
+var fs = require('fs');
 
 let controller = {
   searchListings: function(req, res){
@@ -24,30 +26,64 @@ let controller = {
       })
   },
 
-  postListings: function(req, res) {
-    const imageUrls = req.body.images
-    const data = req.body.data
-    queries.addNewListing(data, imageUrls)
-      .then(data => {
-          res.json({})
+  postListings: async function(req, res) {
+    let imageUrls = req.body.images
+    let data = req.body.data
+
+     let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
+      queries.addNewListing(data, imageUrls, landlord.id)
+        .then(data => {
+          res.end();
+        })
+        .catch(error => {
+          console.log(error);
+          res.json({status: "refused"});
         })
   },
 
-  editListing: function(req, res) {
-    let data = req.body.data
+  editListing: async function(req, res) {
+    let listingData = req.body.data
     let listingId = req.params.id
-    queries.updateListing(listingId, data)
-      .then(data => {
-        res.json({message: "Done!"})
+    let imageUrls = req.body.imageURLs
+    let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
+
+    queries.getListing(listingId)
+      .then(rows => {
+        if (rows[0].landlords_id !== landlord.id) {
+          res.status(401).end();
+          return
+        }
+        queries.updateListing(listingId, listingData, imageUrls)
+        .then(rows => {
+          res.json({message: "success"})
+        })
       })
   },
 
-  deleteListing: function(req, res) {
+  deleteListing: async function(req, res) {
     const listingId = req.params.id;
-    console.log(listingId);
-    queries.deleteListing(listingId)
+    let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
+    let photos ;
+    queries.getListing(listingId)
       .then(data => {
-        res.json({message: "Done!"})
+        if (data[0].landlords_id !== landlord.id) {
+          res.status(401).end();
+          return
+        }
+        photos = data[0].photos
+        photos.forEach(elm =>
+          fs.unlink("./public" + elm.replace("http://localhost:3001", ""), (err) => {
+            if (err) {
+              console.log("failed to delete local image:"+err);
+            } else {
+              console.log('successfully deleted local image');
+            }
+          })
+        )
+        queries.deleteListing(listingId)
+        .then(data => {
+          res.json({message: "Done!"})
+        })
       })
   }
 };

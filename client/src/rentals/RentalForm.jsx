@@ -22,6 +22,7 @@ class RentalForm extends Component {
         description: "",
       },
       imageURLs: [],
+      redirect: false,
     }
     this.autocomplete = null
   }
@@ -59,24 +60,10 @@ class RentalForm extends Component {
     this.setState({ data: currData });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    const { data, imageURLs } = this.state;
-
-    axios.post('/api/listings', {
-      data: data,
-      images: imageURLs,
-    })
-    .then(res => {
-      // redirect
-    });
-  }
-
   handlePlaceSelect = async () => {
     // Google Place Autocomplete call
     let addressObject = await this.autocomplete.getPlace()
     let address = addressObject.address_components
-    console.log(addressObject)
     let geocoder = new window.google.maps.Geocoder();
     // Google Geocode call
     geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
@@ -97,6 +84,7 @@ class RentalForm extends Component {
     const { street, city, province, postal_code, lat, lng, unit, price, bedrooms, bathrooms, date, description } = this.state.data;
     return(
       <div>
+        { this.state.redirect && <Redirect to="/profile" /> }
         <h1>Create New Listing</h1>
         <form onSubmit={this.handleSubmit}>
           <label> Autocomplete: </label>
@@ -176,6 +164,7 @@ class RentalForm extends Component {
             accept=".jpg, .jpeg, .png" /><br/>
           <button onSubmit={this.handleSubmit}>Submit</button>
         </form>
+        <button onClick={this.handleDelete}> Delete</button>
         {this.createImgTag(this.state.imageURLs)}
       </div>
     )
