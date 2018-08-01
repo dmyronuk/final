@@ -45,6 +45,7 @@ class Chat extends Component {
     })
   }
 
+  
   addNewRating = (e) => {
     e.preventDefault();
     axios.post("/api/ratings", {
@@ -56,6 +57,29 @@ class Chat extends Component {
       .then(res => {
         console.log("Success")
       })
+  }
+
+  
+  checkIfRated = async (rater, ratee) => {
+    let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
+    console.log(AllRatingsOfRater)
+    AllRatingsOfRater.forEach(e =>{
+      if (e.rater === rater && e.ratee === ratee){
+        return this.setState({alreadyRated:true})
+      }
+      this.setState({alreadyRated:false})
+    })
+  }
+
+
+  handleInputChange = e => {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   componentDidUpdate() {
@@ -100,28 +124,6 @@ class Chat extends Component {
 
     // replace (1,3) with (user.id value, recipient.id) later
     this.checkIfRated(1, 2)
-  }
-
-  checkIfRated = async (rater, ratee) => {
-    let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
-    console.log(AllRatingsOfRater)
-    AllRatingsOfRater.forEach(e =>{
-      if (e.rater === rater && e.ratee === ratee){
-        return this.setState({alreadyRated:true})
-      }
-      this.setState({alreadyRated:false})
-    })
-  }
-
-
-  handleInputChange = e => {
-    const target = e.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
   }
 
   render() {
