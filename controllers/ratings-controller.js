@@ -2,21 +2,29 @@ const queries = require("../db/queries");
 const helpers = require("../helpers/helpers.js");
 
 let controller = {
-  getAllRatingsOfUser: function (req, res) {
-    queries.getAllRatingsOfUser(user)
+  getAllRatingsThatUserRated: (req, res) => {
+    console.log(req.query)
+    let user_id = req.query.user_id
+    queries.getAllRatingsThatUserRated(user_id)
       .then(rating => {
         res.json(rating);
       })
   },
-  addNewRating: function(req, res) {
-    console.log(req)
+  getAllRatingsOfRatee: (req, res) => {
+    console.log(req.query)
+    let user_id = req.query.user_id
+    queries.getAllRatingsOfRatee(user_id)
+      .then(rating => {
+        res.json(rating);
+      })
+  },
+  addNewRating: (req, res) => {
     let rater = req.body.rater;
     let ratee = req.body.ratee;
     let rating = req.body.rating;
     queries.addNewRating(rater, ratee, rating)
-      .then(rating => {
-        console.log(rating);
-        res.json(rating);
+      .then(() => {
+        res.sendStatus(200);
       })
   }
 }

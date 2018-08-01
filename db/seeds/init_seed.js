@@ -452,22 +452,7 @@ exports.seed = function(knex, Promise) {
         rating: 5,
         rater: users[0].id,
         ratee: users[1].id,
-      },
-      {
-        rating: 5,
-        rater: users[2].id,
-        ratee: users[0].id,
-      },
-      {
-        rating: 4,
-        rater: users[2].id,
-        ratee: users[1].id,
-      },
-      {
-        rating: 4,
-        rater: users[0].id,
-        ratee: users[2].id,
-      },
+      }
       ]).returning("*");
     
   }

@@ -175,9 +175,15 @@ module.exports = (function() {
     .limit(100)
   },
 
-  getAllRatingsOfUser: (user_id) => {
-    return knex('ratings')
-    .join('users', 'ratings.ratee', 'users.id')
+  getAllRatingsThatUserRated: (user_id) => {
+    return knex('users')
+    .join('ratings', 'ratings.rater', 'users.id')
+    .where('users.id', user_id)
+  },
+
+  getAllRatingsOfRatee: (user_id) => {
+    return knex('users')
+    .join('ratings', 'ratings.ratee', 'users.id')
     .where('users.id', user_id)
   },
 

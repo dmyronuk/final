@@ -1,15 +1,18 @@
-import React, { Component } from  "react";
+import React, { Component } from "react";
 import { getFilteredMessages } from "../ajax/messages";
-import { getAllRatingsOfUser } from "../ajax/ratings";
+import { getAllRatingsThatUserRated } from "../ajax/ratings";
 import MessageList from "./MessageList.jsx";
+import RatingsForm from "./RatingsForm.jsx";
 import ChatBar from "./ChatBar.jsx";
 import axios from 'axios';
+import { isNullOrUndefined } from "util";
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rating: 1,
+      rating: 5,
+      alreadyRated: true,
     }
   }
 
@@ -42,23 +45,19 @@ class Chat extends Component {
     })
   }
 
-  
-  addNewRating = () => {
+  addNewRating = (e) => {
+    e.preventDefault();
     axios.post("/api/ratings", {
+      // replace rater with currentUser.id later, and ratee with message.recipient.user.id
       rater: 1,
       ratee: 2,
       rating: this.state.rating
     })
-    .then(res =>{
-      console.log("Success")
-    })
+      .then(res => {
+        console.log("Success")
+      })
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.addNewRating()
-  }
-  
   componentDidUpdate() {
     this.scrollToBottom();
   }
@@ -77,27 +76,41 @@ class Chat extends Component {
       console.log("went through");
       console.log(data);
 
-      let createMessage = {text: data.text, first_name: data.first_name, email: data.email};
+      let createMessage = { text: data.text, first_name: data.first_name, email: data.email };
 
-      switch(data.type) {
+      switch (data.type) {
         // adds new message to pre-existing messages
         case "incomingMessage":
-        this.setState({ messages: this.state.messages.concat([createMessage]) })
-        console.log(this.state.messages);
-        break;
+          this.setState({ messages: this.state.messages.concat([createMessage]) })
+          console.log(this.state.messages);
+          break;
         default:
-        // show an error in the console if the message type is unknown
-        throw new Error("Unknown event type: " + data.type);
+          // show an error in the console if the message type is unknown
+          throw new Error("Unknown event type: " + data.type);
       }
     }
 
     getFilteredMessages(1, 2)
-    .then(messages => {
-      this.setState({
-        messages
-      })
-      console.log(messages);
-    });
+      .then(messages => {
+        this.setState({
+          messages
+        })
+        // console.log(messages);
+      });
+
+    // replace (1,3) with (user.id value, recipient.id) later
+    this.checkIfRated(1, 2)
+  }
+
+  checkIfRated = async (rater, ratee) => {
+    let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
+    console.log(AllRatingsOfRater)
+    AllRatingsOfRater.forEach(e =>{
+      if (e.rater === rater && e.ratee === ratee){
+        return this.setState({alreadyRated:true})
+      }
+      this.setState({alreadyRated:false})
+    })
   }
 
 
@@ -114,33 +127,26 @@ class Chat extends Component {
   render() {
     return (
       <div>
-        <form>
-          <label>
-            Rate this user:
-            <input
-              min={1}
-              max={5}
-              name="rating"
-              type="number"
-              value={this.state.rating}
-              onChange={this.handleInputChange} />
-          </label>
-          <button onSubmit={this.handleSubmit}>Submit Rating</button>
-        </form>
-
-      {this.state.messages &&
-        <div>
-          <MessageList messages={this.state.messages}/>
-        </div>
-      }
-
-
-        <div style={{ float:"left", clear: "both" }}
+        {
+          !this.state.alreadyRated &&
+          <RatingsForm 
+            addNewRating={this.addNewRating}
+            handleInputChange ={this.handleInputChange}
+            rating = {this.state.rating}
+          />
+        }
+       
+        {this.state.messages &&
+          <div>
+            <MessageList messages={this.state.messages} />
+          </div>
+        }
+        <div style={{ float: "left", clear: "both" }}
           ref={(el) => { this.messagesEnd = el; }}>
         </div>
-        <ChatBar addNewMessage = {this.addNewMessage}/>
+        <ChatBar addNewMessage={this.addNewMessage} />
       </div>
-      )
+    )
   }
 }
 
