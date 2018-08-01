@@ -11,29 +11,39 @@ import Login from "./users/Login";
 import Logout from "./users/Logout";
 import Signup from "./users/Signup";
 import Chat from "./messages/Chat.jsx";
-import Profile from  './users/Profile';
+import Profile from  "./users/Profile";
+import { refetchUser } from "./ajax/auth";
 
 class App extends Component {
   constructor(props){
-    super(props)
+    super(props);
+
     this.state = {
       sidebarClass: "closed-sidebar",
-      user: null,
     }
   }
 
   toggleSidebar = () => {
     const newSidebarClass = this.state.sidebarClass === "closed-sidebar" ? "opened-sidebar" : "closed-sidebar";
-    this.setState({ ...this.state, sidebarClass:newSidebarClass})
-    console.log(this.state)
+    this.setState({ ...this.state, sidebarClass:newSidebarClass});
+    console.log(this.state);
   }
 
   setUser = (userObj) => {
-    this.setState({ user: userObj })
+    this.setState({ user: userObj });
   }
 
   clearUser = () => {
-    this.setState({ user: null })
+    this.setState({ user: null });
+  }
+
+  componentWillMount(){
+    if(localStorage.JWT_TOKEN){
+      refetchUser({token: localStorage.JWT_TOKEN})
+      .then(user => {
+        this.setUser(user);
+      })
+    }
   }
 
   render() {

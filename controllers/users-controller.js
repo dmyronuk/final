@@ -12,9 +12,12 @@ let controller = {
       if(err){
         console.log(err)
       }
-      console.log("User id:", decoded.id)
+
       res.json({
-        status: "Success",
+        id: decoded.id,
+        first_name: decoded.first_name,
+        last_name: decoded.last_name,
+        email: decoded.email,
       })
     })
   },
