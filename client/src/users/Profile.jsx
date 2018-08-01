@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getUserProfile } from "../ajax/profile";
+import { getAllRatingsOfUser } from "../ajax/ratings";
 
 class Profile extends Component {
   constructor(props){

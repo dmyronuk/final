@@ -1,7 +1,6 @@
 const signup = async (userObj) => {
   const response = await fetch("/api/signup", {
     method: "POST",
-    mode: "cors",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },
@@ -17,7 +16,6 @@ const signup = async (userObj) => {
 const login = async (userObj) => {
   const response = await fetch("/api/login", {
     method: "POST",
-    mode: "cors",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },

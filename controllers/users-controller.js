@@ -1,7 +1,7 @@
 const queries = require("../db/queries");
 const helpers = require("../helpers/helpers.js");
 const validations = require("../helpers/validations.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 let controller = {
