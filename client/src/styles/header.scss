@@ -1,26 +1,35 @@
 .header-top{
-  top:0px;
-  width:100vw;
-  background:#444444;
-  display:flex;
-  position:fixed;
-  flex-direction:row;
-  align-items:center;
-  justify-content:center;
+  top: 0px;
+  width: 100vw;
+  background: #444444;
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   height: $header-height;
+  z-index:5000;
 }
 
 .header-top a{
-  color:white;
+  color: white;
 }
 
 .toggle-nav{
-  position:absolute;
-  left:1rem;
-  cursor:pointer;
+  position: absolute;
+  left: 1rem;
+  padding: 0;
+  height: 3rem;
+  width: 3.5rem;
+  border-radius: 0.2rem;
+
+  img{
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .login-button{
-  cursor:pointer;
-  right:2rem;
+  cursor: pointer;
+  right: 2rem;
 }

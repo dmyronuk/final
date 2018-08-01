@@ -1,17 +1,43 @@
 .sidebar{
-  position:fixed;
-  height:100vh;
-  background:#eeeeee;
-  border-right:solid black 1px;
-  z-index:10000;
-  transition:width 1s;
-  overflow:hidden;
+  position: fixed;
+  top: 0px;
+  height: 100vh;
+  background: white;
+  border-right: solid black 1px;
+  z-index: 30000;
+  transition: width 1s;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
 }
 
 .closed-sidebar{
-  width:0;
+  width: 0;
 }
 
 .opened-sidebar{
-  width:10vw;
+  width: $sidebar-width;
+}
+
+.sidebar-item{
+  width: $sidebar-width;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  img{
+    width: 30%;
+    height: 30%;
+  }
+
+  div{
+    margin-left: 0.5rem;
+    width: 30%;
+  }
+
+  &:hover{
+    background:#eeeeee;
+  }
 }

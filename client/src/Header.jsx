@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import hamburger from "./icons/hamburger.png";
 
 function Header(props){
   return (
     <header className="header-top">
       <button className="toggle-nav" onClick={props.hamburgerClickHandler}>
-        Toggle Nav
+        <img src={hamburger}/>
       </button>
       {props.user &&
         <div>

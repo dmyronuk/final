@@ -29,7 +29,7 @@ app.use(bodyParser.json({
 }));
 
 app.use(fileUpload());
-app.use(express.static(__dirname + "/public"));
+app.use("/images", express.static(__dirname + "public/images"));
 app.use(bodyParser.json());
 
 const routes = require("./routes.js")(app);
