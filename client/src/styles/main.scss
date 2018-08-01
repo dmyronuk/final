@@ -20,6 +20,7 @@ button{
 }
 
 @import "variables.scss";
+@import "default-containers.scss";
 @import "header.scss";
 @import "rentals-map.scss";
 @import "rentals-grid.scss";
@@ -33,6 +34,6 @@ button{
 .main-container{
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: $main-container-height;
   padding-top: $header-height;
 }

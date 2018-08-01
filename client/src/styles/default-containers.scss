@@ -1,0 +1,6 @@
+.default-flex-row-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-height: $main-container-height;
+}

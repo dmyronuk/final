@@ -1,7 +1,15 @@
-.single-home-card{
+.single-rental-card{
   background:#eeeeee;
-  width:800px;
-  height:500px;
+  width: 700px;
   border:1px solid #cccccc;
   margin-top:2rem;
+  border:1px solid #aaaaaa;
+
+  img{
+    width: 100%;
+  }
+
+  .rental-card-info{
+    padding: 1rem;
+  }
 }
