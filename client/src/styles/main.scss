@@ -1,4 +1,26 @@
+html, body {
+  box-sizing: border-box;
+  margin: 0;
+  font-size: 15px
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+button{
+  border: none;
+  background: white;
+  cursor: pointer;
+
+  &:focus{
+    outline:none;
+  }
+}
+
 @import "variables.scss";
+@import "default-containers.scss";
 @import "header.scss";
 @import "rentals-map.scss";
 @import "rentals-grid.scss";
@@ -6,20 +28,12 @@
 @import "rentals-marker.scss";
 @import "sidebar.scss";
 @import "chat.scss";
+@import "page-mask.scss";
 
-html, body {
-  box-sizing:border-box;
-  margin:0;
-  font-size:15px
-}
-
-a{
-  text-decoration:none;
-}
 
 .main-container{
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-  padding-top:$header-height;
+  display: flex;
+  flex-direction: column;
+  min-height: $main-container-height;
+  padding-top: $header-height;
 }

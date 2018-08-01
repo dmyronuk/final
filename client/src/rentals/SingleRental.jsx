@@ -26,23 +26,29 @@ class SingleRental extends Component {
   render(){
 
     return (
-      <div className="single-home-card">
-        {this.state.data &&
+      <div className="default-flex-row-container">
+        <div className="single-rental-card">
           <div>
-            <div>{this.state.data.street}</div>
-            <div>{this.state.data.city} {this.state.data.province}</div>
-            <div>{this.state.data.postal_code}</div>
-            <div>${this.state.data.price / 100}</div>
-            <div>Available: {this.state.formattedDate}</div>
-            <div>{this.state.data.description}</div>
-            <div>Bedrooms: {this.state.data.bedrooms} Bathrooms: {this.state.data.bathrooms} </div>
-            <YelpSearch
-              latitude = {this.state.data.lat}
-              longitude = {this.state.data.lng}
-              radius = {"5000"}
-            />
+            <img src="/images/house.jpg" />
           </div>
-        }
+          {this.state.data &&
+            <div className="rental-card-info">
+
+              <div>{this.state.data.street}</div>
+              <div>{this.state.data.city} {this.state.data.province}</div>
+              <div>{this.state.data.postal_code}</div>
+              <div>${this.state.data.price / 100}</div>
+              <div>Available: {this.state.formattedDate}</div>
+              <div>{this.state.data.description}</div>
+              <div>Bedrooms: {this.state.data.bedrooms} Bathrooms: {this.state.data.bathrooms} </div>
+              <YelpSearch
+                latitude = {this.state.data.lat}
+                longitude = {this.state.data.lng}
+                radius = {"5000"}
+              />
+            </div>
+          }
+        </div>
       </div>
     )
   }

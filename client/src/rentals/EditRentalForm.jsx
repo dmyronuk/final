@@ -39,6 +39,8 @@ class EditRentalForm extends RentalForm {
     const token = localStorage.getItem("JWT_TOKEN");
     axios.delete(`/api/listings/${this.props.match.params.id}`, {
       data: { token: token,}
+    }).then(res => {
+      this.setState({redirect: true })
     })
   }
 
