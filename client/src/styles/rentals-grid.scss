@@ -3,19 +3,26 @@
   background:red;
   margin:1rem;
   display: grid;
-  grid-template-columns: 33% 33% 33%;
-  grid-gap: 0.5rem;
+  grid-template-columns: 31vw 31vw 31vw;
+  grid-gap: 1rem;
   background-color: #eee;
   color: #444;
 
   .listing-grid-card{
     position:relative;
-    background-color: #444;
     color: #fff;
     margin-bottom: 0.08rem;
 
-    img{
+    .listing-grid-photo-container{
       width:100%;
+      height:31vw;
+      display:flex;
+      flex-direction:row;
+      img{
+        object-fit:cover;
+        flex:1;
+        overflow:hidden;
+      }
     }
 
     .listing-grid-info{
