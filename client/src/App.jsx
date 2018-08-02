@@ -62,6 +62,7 @@ class App extends Component {
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <Route exact path="/rentals/new" component={ NewRental }/>
           <Route exact path="/chat" component={ Chat }/>
+          <Route exact path="/chat/:d(\d+)" component= { Chat }/>
           <Route path="/profile" component={Profile} />
         </div>
       </BrowserRouter>

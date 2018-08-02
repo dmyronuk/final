@@ -19,4 +19,5 @@ module.exports = function(app) {
     app.post('/api/signup', usersController.signup);
     app.post('/api/profile', usersController.profile)
     app.post('/api/login', usersController.login)
+    app.get('/api/threads', usersController.threads)
 };
