@@ -5,7 +5,11 @@ const RentalMapCard = (props) => {
 return(
     <Link to={"/rentals/" + props.id}>
       <div className="home-card">
-        <img alt="Listing" src={props.data.photos[0]} />
+      { props.data.photos ?
+        <img alt="Rental Photo" src={props.data.photos[0]} />
+        : <img alt="No Image Available" src="/images/no-image.png" />
+      }
+
         <div>
           <div>{props.data.street}</div>
           <div>{props.data.city}</div>
