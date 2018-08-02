@@ -11,7 +11,7 @@ return(
           <div>{props.data.bedrooms} Bedrooms | {props.data.bathrooms} Bathrooms | ${props.data.price}</div>
         </div>
       </div>
-    </ Link>
+    </Link>
   )
 };
 

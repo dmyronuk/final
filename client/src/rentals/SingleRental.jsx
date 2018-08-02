@@ -16,7 +16,6 @@ class SingleRental extends Component {
   }
 
   setYelpData = (data) => {
-    console.log(data)
     this.setState({
       yelpResults: data,
       yelpResultsClass: "visible",

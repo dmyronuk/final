@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import RentalForm from "./RentalForm";
 import { getSingleListing } from "../ajax/listings";
 import axios from 'axios';
