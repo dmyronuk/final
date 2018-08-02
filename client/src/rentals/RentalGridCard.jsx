@@ -4,14 +4,11 @@ import { Link } from "react-router-dom";
 const RentalGridCard = (props) => {
 return(
     <Link to={"/rentals/" + props.id}>
-      <div className="grid-listing-card">
+      <div className="listing-grid-card">
         <img alt="Listing" src="/images/house.jpg" />
-        <div>
-          <div>{props.data.city}</div>
-          <div>{props.data.street}</div>
-          <div>{props.data.province}</div>
-          <div>${props.data.price}</div>
-          <div>Bedrooms: {props.data.bedrooms} Bathrooms: {props.data.bathrooms} </div>
+        <div className="listing-grid-info">
+          <div className="listing-grid-address">{props.data.street}, {props.data.city}</div>
+          <div>{props.data.bedrooms} Bedrooms | {props.data.bathrooms} Bathrooms | ${props.data.price}</div>
         </div>
       </div>
     </ Link>

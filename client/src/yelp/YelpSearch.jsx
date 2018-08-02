@@ -32,13 +32,13 @@ class YelpSearch extends Component {
   render(){
     return (
       <div className="yelp-search-container">
-        <button className="yelp-button" onClick={ () => this.searchClickHandler("restaurants")}>
+        <button onClick={ () => this.searchClickHandler("restaurants")}>
           <img alt="Search restaurants" src={ RestaurantIcon } />
         </button>
-        <button className="yelp-button" onClick={ () => this.searchClickHandler("entertainment")}>
+        <button onClick={ () => this.searchClickHandler("entertainment")}>
           <img alt="Search entertainment" src={ RestaurantIcon } />
         </button>
-        <button className="yelp-button" onClick={ () => this.searchClickHandler("education")}>
+        <button onClick={ () => this.searchClickHandler("education")}>
            <img alt="Search education" src={ EducationIcon } />
         </button>
       </div>
