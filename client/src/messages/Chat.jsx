@@ -6,11 +6,13 @@ import RatingsForm from "./RatingsForm.jsx";
 import ChatBar from "./ChatBar.jsx";
 import axios from 'axios';
 import { isNullOrUndefined } from "util";
+import { refetchUser } from "../ajax/auth";
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+       id: this.props.match.params.id,
       rating: 5,
       alreadyRated: true,
     }
@@ -24,28 +26,32 @@ class Chat extends Component {
   // allow user to add a new message
   addNewMessage = (content) => {
     console.log(content);
-    // this is hardcoded, change using jwt
-    const newMessage = {
-      type: "postMessage",
-      text: content,
-      first_name: "Mary",
-      email: "mary@gmail.com"
+    if(localStorage.JWT_TOKEN){
+      refetchUser({token: localStorage.JWT_TOKEN})
+      .then(user => {
+        const newMessage = {
+          type: "postMessage",
+          text: content,
+          first_name: user.first_name,
+          email: user.email,
+          sender: user.id,
+          recipient: this.state.id
+        }
+
+        this.socket.send(JSON.stringify(newMessage));
+        axios.post('/api/newMessage', {
+          sender: user.id,
+          recipient: this.state.id,
+          message: content,
+        }).then(messages => {
+        })
+      })
     }
-    this.socket.send(JSON.stringify(newMessage));
-    // end of hard code
-    axios.post('/api/newMessage', {
-      sender: 1,
-      recipient: 2,
-      message: content,
-    }).then(messages => {
-      // console.log(messages);
-      // this.setState({
-      //   messages: messages.data
-      // })
-    })
+
+
   }
 
-  
+
   addNewRating = (e) => {
     e.preventDefault();
     axios.post("/api/ratings", {
@@ -59,7 +65,7 @@ class Chat extends Component {
       })
   }
 
-  
+
   checkIfRated = async (rater, ratee) => {
     let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
     console.log(AllRatingsOfRater)
@@ -113,17 +119,23 @@ class Chat extends Component {
           throw new Error("Unknown event type: " + data.type);
       }
     }
-
-    getFilteredMessages(1, 2)
-      .then(messages => {
-        this.setState({
+     if(localStorage.JWT_TOKEN){
+      refetchUser({token: localStorage.JWT_TOKEN})
+      .then(user => {
+        console.log(user);
+        getFilteredMessages(user.id, this.state.id)
+        .then(messages => {
+          this.setState({
           messages
         })
         // console.log(messages);
       });
+      })
+    }
+
 
     // replace (1,3) with (user.id value, recipient.id) later
-    this.checkIfRated(1, 2)
+  this.checkIfRated(1, 2)
   }
 
   render() {
@@ -131,13 +143,13 @@ class Chat extends Component {
       <div>
         {
           !this.state.alreadyRated &&
-          <RatingsForm 
+          <RatingsForm
             addNewRating={this.addNewRating}
             handleInputChange ={this.handleInputChange}
             rating = {this.state.rating}
           />
         }
-       
+
         {this.state.messages &&
           <div>
             <MessageList messages={this.state.messages} />
