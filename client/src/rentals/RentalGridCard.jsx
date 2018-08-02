@@ -5,7 +5,7 @@ const RentalGridCard = (props) => {
 return(
     <Link to={"/rentals/" + props.id}>
       <div className="grid-listing-card">
-        <img alt="Listing" src="../../public/images/house.jpg" />
+        <img alt="Listing" src="/images/house.jpg" />
         <div>
           <div>{props.data.city}</div>
           <div>{props.data.street}</div>

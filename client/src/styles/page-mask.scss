@@ -1,0 +1,20 @@
+.page-mask{
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background:black;
+  transition: opacity 1s;
+  z-index:20000;
+}
+
+.hidden-mask{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.visible-mask{
+  opacity: 0.5;
+}
+

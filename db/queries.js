@@ -84,6 +84,12 @@ module.exports = (function() {
     .select()
   },
 
+  getLandlorByUserId: (userId) => {
+    return knex('landlords')
+      .where('users_id', userId)
+      .first()
+  },
+
   getAllTenants: () => {
     return knex('tenants')
     .select()
@@ -94,11 +100,16 @@ module.exports = (function() {
     .select()
   },
 
-  getAllListings: () => {
-    return knex('listings')
-    .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
-    .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
-    .select()
+  getAllListings: (userId) => {
+    let query = knex('listings')
+      .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
+      .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
+
+    if(userId) {
+      query.where('listings.user_id', userId)
+    }
+
+    return query.select()
   },
 
   getAllListingsByQuery: (queryObj) => {
@@ -134,29 +145,19 @@ module.exports = (function() {
   },
 
   // Addin new listing
-  addNewListing: (data, imageUrls) => {
-    return knex('landlords')
-    .where({phone_number: "647-234-2345"})
-    .select("id")
-    .then(landlord => {
-      return knex("neighbourhoods")
-      .where({name: "Dovercourt Village"})
-      .select("id")
-      .then(neighbourhood => {
-        return knex('listings')
-          .insert({photos: imageUrls, price: data.price, lng: data.lng, lat: data.lat, neighbourhoods_id: neighbourhood[0].id, landlords_id: landlord[0].id })
-          .returning('id')
-          .then(listing => {
-            return knex("listing_addresses")
-            .insert({street: data.street, city: data.city, province: data.province, postal_code: data.postal_code, listings_id: listing[0]})
-            .then (() => {
-              return knex("listing_specifications")
-              .insert({bedrooms: data.bedrooms, bathrooms: data.bathrooms, description: data.description, date_available: data.date, listings_id: listing[0]})
-            })
-          })
+  addNewListing: (data, imageUrls, landlordId) => {
+    return knex('listings')
+      .insert({photos: imageUrls,landlords_id: landlordId, price: data.price, lng: data.lng, lat: data.lat})
+      .returning('id')
+      .then(listing => {
+        console.log(listing)
+        return knex("listing_addresses")
+        .insert({street: data.street, city: data.city, province: data.province, postal_code: data.postal_code, listings_id: listing[0]})
+        .then (() => {
+          return knex("listing_specifications")
+          .insert({bedrooms: data.bedrooms, bathrooms: data.bathrooms, description: data.description, date_available: data.date, listings_id: listing[0]})
+        })
       })
-
-    })
   },
 
   // currently shows messages between Mary and John
@@ -173,6 +174,38 @@ module.exports = (function() {
     })
     .orderBy('created_at')
     .limit(100)
+  },
+
+  deleteListing: (listingId) => {
+    return knex('listing_specifications')
+     .where('listings_id', listingId)
+     .del()
+     .then(() =>
+       knex('listing_addresses')
+       .where('listings_id', listingId)
+       .del()
+       .then(() =>
+         knex('listings')
+         .where('id', listingId)
+         .del()
+       )
+     )
+  },
+
+  updateListing: (listingId, data, imageUrls) => {
+    return knex('listings')
+      .where('id', listingId)
+      .update({price: data.price, lng: data.lng, lat: data.lat, photos: imageUrls})
+      .then(() =>
+        knex('listing_addresses')
+        .where('listings_id', listingId)
+        .update({street: data.street, city: data.city, province: data.province, postal_code: data.postal_code})
+        .then(() =>
+          knex('listing_specifications')
+          .where('listings_id', listingId)
+          .update({bedrooms: data.bedrooms, bathrooms: data.bathrooms, description: data.description, date_available: data.date})
+        )
+      )
   },
 
   getAllRatingsThatUserRated: (user_id) => {

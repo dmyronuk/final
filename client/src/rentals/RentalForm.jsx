@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import { getSingleListing } from "../ajax/listings";
+import { Redirect } from "react-router-dom";
 
-class NewRental extends Component {
+class RentalForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -10,8 +12,8 @@ class NewRental extends Component {
         city: '',
         province: '',
         postal_code: '',
-        lat: '',
-        lng: '',
+        lat: 0,
+        lng: 0,
         unit: '',
         price: "",
         bedrooms: "",
@@ -20,17 +22,16 @@ class NewRental extends Component {
         description: "",
       },
       imageURLs: [],
+      redirect: false,
     }
     this.autocomplete = null
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     let options = {
       componentRestrictions: { country: "CA" }
     }
-
     this.autocomplete = new window.google.maps.places.Autocomplete(document.getElementById('autocomplete'), options)
-
     this.autocomplete.addListener("place_changed", this.handlePlaceSelect)
   }
 
@@ -59,18 +60,6 @@ class NewRental extends Component {
     this.setState({ data: currData });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    const { data, imageURLs } = this.state;
-    axios.post('/api/listings', {
-      data: data,
-      images: imageURLs,
-    })
-      .then(res => {
-        // redirect
-      });
-  }
-
   handlePlaceSelect = async () => {
     // Google Place Autocomplete call
     let addressObject = await this.autocomplete.getPlace()
@@ -79,12 +68,12 @@ class NewRental extends Component {
     // Google Geocode call
     geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
       let currData = Object.assign({}, this.state.data, {
-        street: addressObject.name,
-        city: address[3].long_name,
-        province: address[5].long_name,
-        postal_code: results[0].address_components[7].long_name,
-        lat: addressObject.geometry.location.lat(),
-        lng: addressObject.geometry.location.lng(),
+        street: addressObject.name || "",
+        city: address[3].long_name || "",
+        province: address[5].long_name || "",
+        postal_code: results[0].address_components[7].long_name || "",
+        lat: addressObject.geometry.location.lat() ,
+        lng: addressObject.geometry.location.lng() ,
       })
       this.setState({ data: currData })
     })
@@ -95,6 +84,7 @@ class NewRental extends Component {
     const { street, city, province, postal_code, lat, lng, unit, price, bedrooms, bathrooms, date, description } = this.state.data;
     return(
       <div>
+        { this.state.redirect && <Redirect to="/profile" /> }
         <h1>Create New Listing</h1>
         <form onSubmit={this.handleSubmit}>
           <label> Autocomplete: </label>
@@ -174,6 +164,7 @@ class NewRental extends Component {
             accept=".jpg, .jpeg, .png" /><br/>
           <button onSubmit={this.handleSubmit}>Submit</button>
         </form>
+        <button onClick={this.handleDelete}> Delete</button>
         {this.createImgTag(this.state.imageURLs)}
       </div>
     )
@@ -181,7 +172,7 @@ class NewRental extends Component {
 
 }
 
-export default NewRental
+export default RentalForm
 
 
 

@@ -6,11 +6,11 @@ let controller = {
     let fileName = uuid();
     let imageFile = req.files.file;
     let extension = imageFile.name.split(".").pop()
-    imageFile.mv(`${__dirname}/../public/uploads/listings/${fileName}.${extension}`, function(err) {
+    imageFile.mv(`${__dirname}/../public/images/${fileName}.${extension}`, function(err) {
       if (err) {
         return res.status(500).send(err);
       }
-      res.json({file: `http://localhost:3001/uploads/listings/${fileName}.${extension}`});
+      res.json({file: `/images/${fileName}.${extension}`});
     });
   }
 };
