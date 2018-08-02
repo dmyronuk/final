@@ -22,6 +22,7 @@ button{
 
 @import "variables.scss";
 @import "default-containers.scss";
+@import "default-styles.scss";
 @import "header.scss";
 @import "rentals-map.scss";
 @import "rentals-grid.scss";
@@ -31,7 +32,7 @@ button{
 @import "chat.scss";
 @import "page-mask.scss";
 @import "yelp-search.scss";
-@import "yelp-results.scss";
+@import "rental-search-container.scss";
 
 
 .main-container{
