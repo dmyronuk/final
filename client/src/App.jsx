@@ -15,7 +15,7 @@ import Sidebar from "./navigation/Sidebar";
 import Signup from "./users/Signup";
 import SingleRental from "./rentals/SingleRental.jsx";
 import { refetchUser } from "./ajax/auth";
-import 'bootstrap';
+
 
 
 let UserContext = React.createContext()
@@ -52,7 +52,7 @@ class App extends Component {
       })
     }
   }
-    
+
     render() {
     return (
 
