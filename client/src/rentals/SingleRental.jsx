@@ -67,6 +67,9 @@ class SingleRental extends Component {
                       </tbody>
                     </table>
                   </div>
+                  <div>
+                    <h4>Nearby Amenities</h4>
+                  </div>
                   <YelpSearch
                     latitude = {this.state.data.lat}
                     longitude = {this.state.data.lng}

@@ -16,21 +16,23 @@ function Header(props){
       <Link to={"/"}>
         <h1 className="App-title">Title</h1>
       </Link>
-      { !props.user &&
-        <div>
-          <Link to={"/login"}>
-            <button className="login-button">Login</button>
-          </Link>
-          <Link to={"/signup"}>
-            <button className="login-button">Signup</button>
-          </Link>
+        <div className="login-container">
+          { !props.user &&
+            <div>
+              <Link to={"/login"}>
+                <button className="default-auth-button">Login</button>
+              </Link>
+              <Link to={"/signup"}>
+                <button className="default-auth-button">Signup</button>
+              </Link>
+            </div>
+          }
+          { props.user &&
+            <Link to={"/logout"}>
+              <button className="default-auth-button">Logout</button>
+            </Link>
+          }
         </div>
-      }
-      { props.user &&
-        <Link to={"/logout"}>
-          <button className="login-button">Logout</button>
-        </Link>
-      }
     </header>
   )
 }

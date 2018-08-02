@@ -4,7 +4,7 @@
   margin:2rem 0;
   border:1px solid #999999;
   box-shadow: -2px 2px 2px #aaaaaa;
-  height: 75vh;
+  height: 80vh;
 
   .single-rental-card{
     background:#eeeeee;
@@ -50,6 +50,12 @@
         flex-direction:column;
         justify-content:space-between;
         position:relative;
+
+        h4{
+          margin:0;
+          color:grey;
+
+        }
 
         .table-container{
 

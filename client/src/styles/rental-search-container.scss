@@ -1,0 +1,33 @@
+.rental-search-container{
+  position:fixed;
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:middle;
+  padding:0.2rem 0 0.5rem 0;
+  z-index:1000;
+  width:100vw;
+  background:white;
+  border-bottom:1px solid #888888;
+  box-shadow:0rem 0rem 1rem black;
+
+  input{
+    height:1.5rem;
+  }
+
+  select{
+    height:1.9rem;
+  }
+
+  .rental-input-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    margin-right:1rem;
+
+    .query-input{
+      width:16rem;
+    }
+  }
+
+}
