@@ -5,7 +5,7 @@ import hamburger from "./icons/hamburger.png";
 function Header(props){
   return (
     <header className="header-top">
-      <button className="toggle-nav" onClick={props.hamburgerClickHandler}>
+      <button alt="Sidebar Toggle Button" className="toggle-nav" onClick={props.hamburgerClickHandler}>
         <img src={hamburger}/>
       </button>
       {props.user &&

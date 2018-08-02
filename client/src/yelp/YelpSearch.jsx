@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { categorySearchByLocation } from "../ajax/yelp"
+import EducationIcon from "../icons/education_icon1.png";
+import RestaurantIcon from "../icons/wine.png";
+
 
 class YelpSearch extends Component {
   constructor(props){
@@ -17,10 +20,8 @@ class YelpSearch extends Component {
     let searchRequest = Object.assign({ term }, this.state)
     categorySearchByLocation(searchRequest)
     .then(data => {
-      console.log("YELP DATA:    ", data);
-      this.setState({
-        yelpData: data
-      })
+      //yelp data is saved in SingleRental component state for display
+      this.props.setYelpData(data)
     })
   }
 
@@ -30,10 +31,16 @@ class YelpSearch extends Component {
 
   render(){
     return (
-      <div>
-        <button onClick={ () => this.searchClickHandler("restaurants")}>Restaurants</button>
-        <button onClick={ () => this.searchClickHandler("entertainment")}>Entertainment</button>
-        <button onClick={ () => this.searchClickHandler("education")}>Education</button>
+      <div className="yelp-search-container">
+        <button className="yelp-button" onClick={ () => this.searchClickHandler("restaurants")}>
+          <img alt="Search restaurants" src={ RestaurantIcon } />
+        </button>
+        <button className="yelp-button" onClick={ () => this.searchClickHandler("entertainment")}>
+          <img alt="Search entertainment" src={ RestaurantIcon } />
+        </button>
+        <button className="yelp-button" onClick={ () => this.searchClickHandler("education")}>
+           <img alt="Search education" src={ EducationIcon } />
+        </button>
       </div>
     )
   }

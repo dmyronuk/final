@@ -11,19 +11,19 @@ const Sidebar = (props) => {
     <div className={"sidebar " + props.toggleState}>
       <Link to="/rentals/grid" onClick={props.linkClickHandler}>
         <div className="sidebar-item">
-          <img src={ GridIcon } />
+          <img alt="grid-icon" src={ GridIcon } />
           <div>Grid View</div>
         </div>
       </Link>
       <Link to="/rentals/map" onClick={props.linkClickHandler}>
         <div className="sidebar-item">
-          <img src={ MapIcon } />
+          <img alt="map-icon" src={ MapIcon } />
           <div>Map View</div>
         </div>
       </Link>
       <Link to="/chat" onClick={props.linkClickHandler}>
         <div className="sidebar-item">
-          <img src={ ProfileIcon } />
+          <img alt="profile-icon" src={ ProfileIcon } />
           <div>Profile</div>
         </div>
       </Link>
@@ -31,7 +31,7 @@ const Sidebar = (props) => {
       { isLoggedIn() &&
         <Link to={"/rentals/new"} onClick={props.linkClickHandler}>
           <div className="sidebar-item">
-            <img src={ NewRentalIcon } />
+            <img alt="new-rental-icon" src={ NewRentalIcon } />
             <div>Add Rental</div>
           </div>
         </Link>

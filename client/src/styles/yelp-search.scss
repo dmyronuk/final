@@ -1,0 +1,16 @@
+.yelp-search-container{
+  display:flex;
+  flex-direction:row;
+  position:relative;
+}
+
+.yelp-button{
+  background:#eeeeee;
+  width:4rem;
+  height:4rem;
+
+  img{
+    height:100%;
+    width:100%;
+  }
+}
