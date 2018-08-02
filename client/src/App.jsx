@@ -67,8 +67,9 @@ class App extends Component {
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <Route exact path="/rentals/new" render={() => <NewRentalForm user={this.state.user} />} />
           <Route exact path="/chat" component={ Chat }/>
-          <Route exact path="/profile" component={Profile} />
           <Route exact path="/rentals/:id/edit" component={ EditRentalForm } />
+          <Route exact path="/chat/:d(\d+)" component= { Chat }/>
+          <Route path="/profile" component={Profile} />
         </div>
       </BrowserRouter>
     );

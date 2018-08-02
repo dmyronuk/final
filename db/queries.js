@@ -57,7 +57,7 @@ module.exports = (function() {
       this.where('sender', recipient).andWhere('recipient', sender)
     })
     .orderBy('created_at')
-    .limit(100)
+    // .limit(100)
   }
 
   return {
@@ -259,9 +259,40 @@ module.exports = (function() {
       }
 
     })
-  }
+  },
 
+  getAllThreads: user => {
+  //   return knex.distinct('recipient')
+  //   .from('messages')
+  //   .where('sender', user)
+  //   .orWhere('recipient', user)
+  //   .union(function() {
+  //     return this.distinct('sender')
+  //     .from('messages')
+  //     .where('sender', user)
+  //     .orWhere('recipient', user)
+  //   })
+  //   .as('c')
+  //   .then(() => {
+  //     return knex('users').join('c', 'c.recipient', 'users.id')
+  //             .select('c.recipient', 'users.first_name')
+  //             .whereNot('c.recipient', user)
+  //   })
+  // }
+
+  return knex.raw(`
+    select c.id, users.first_name from
+      (select distinct recipient as id from messages where sender = ?
+      union
+      select distinct sender from messages where recipient = ?)
+      as c join users on users.id = c.id`
+    , [user, user])
+    .then(cool => {
+      console.log(cool.rows)
+      return cool.rows;
+    })
   }
+}
 })();
 
 // module.exports = {
