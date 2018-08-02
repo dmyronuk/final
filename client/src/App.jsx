@@ -58,18 +58,7 @@ class App extends Component {
     }
   }
 
-<<<<<<< HEAD
-    render() {
-=======
-
-
-
   render() {
-
-
-
-
->>>>>>> feature/context
     return (
 
       <BrowserRouter>
