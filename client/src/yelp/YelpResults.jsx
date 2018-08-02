@@ -11,7 +11,7 @@ const YelpResults = (props) => {
             <div className="yelp-results-item">
               <div>{amenity.name}</div>
               <div>
-                <img src={amenity.image_url}/>
+                <img alt={amenity.name + "image"} src={amenity.image_url}/>
               </div>
               <div>{distance}</div>
               <div>{amenity.location.address1}</div>

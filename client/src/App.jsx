@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createContext } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import Chat from "./messages/Chat.jsx";
 import Header from "./Header.jsx";
@@ -16,6 +16,9 @@ import Signup from "./users/Signup";
 import SingleRental from "./rentals/SingleRental.jsx";
 import { refetchUser } from "./ajax/auth";
 
+
+
+let UserContext = React.createContext()
 
 class App extends Component {
   constructor(props){
@@ -50,7 +53,7 @@ class App extends Component {
     }
   }
 
-  render() {
+    render() {
     return (
 
       <BrowserRouter>

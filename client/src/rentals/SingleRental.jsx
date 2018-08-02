@@ -16,7 +16,6 @@ class SingleRental extends Component {
   }
 
   setYelpData = (data) => {
-    console.log(data)
     this.setState({
       yelpResults: data,
       yelpResultsClass: "visible",
@@ -28,6 +27,7 @@ class SingleRental extends Component {
     getSingleListing(this.state.id)
     .then(data => {
       const formattedDate = dateFromTimestamp(data.date_available);
+      console.log(data)
       this.setState({
         data,
         formattedDate,
@@ -43,7 +43,10 @@ class SingleRental extends Component {
           <div className="card-container">
             <div className="single-rental-card">
               <div className="image-container">
-                <img alt="rental" src="/images/house.jpg" />
+                { this.state.data.photos ?
+                  <img alt="Rental Photo" src={this.state.data.photos[0]} />
+                  : <img alt="No Photo Available" src="/images/no-image.png" />
+                }
                 <div className="mask"></div>
                 <div >
                   {this.state.data.street}, {this.state.data.city} | {this.state.data.postal_code}
@@ -65,6 +68,9 @@ class SingleRental extends Component {
                         </tr>
                       </tbody>
                     </table>
+                  </div>
+                  <div>
+                    <h4>Nearby Amenities</h4>
                   </div>
                   <YelpSearch
                     latitude = {this.state.data.lat}

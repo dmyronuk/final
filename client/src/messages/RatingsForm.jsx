@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
+import ReactStars from 'react-stars'
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import classNames from 'classnames';
+
+
+
 
 class RatingsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rating: this.props.rating,
+      ratingSubmitted: this.props.ratingSubmitted,
     }
   }
   render (){
     return (
+      
       <div>
-        <form onSubmit={this.props.addNewRating}>
+        <form>
           <label>
             Rate this user:
-              <input
-              min={1}
-              max={5}
-              name="rating"
-              type="number"
-              value={this.props.rating}
-              onChange={this.props.handleInputChange} />
           </label>
-          <button onSubmit={this.props.addNewRating}>Submit Rating</button>
+            <ReactStars
+              half = {false}
+              value={this.props.rating}
+              onChange={this.props.handleInputChange}
+            />  
+          <Button onClick={this.props.addNewRating} variant="contained" color="primary">
+           Rate
+         </Button>
         </form>
       </div>
     )

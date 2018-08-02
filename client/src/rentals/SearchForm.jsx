@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SearchIcon from "../icons/search.png"
 
 class RentalSearchForm extends Component{
   constructor(props){
@@ -48,59 +49,76 @@ class RentalSearchForm extends Component{
 
   render(){
     return(
-      <div>
-        <input
-          type="text"
-          name="query"
-          value={this.state.query}
-          onChange={this.handleQueryChange}
-          onKeyDown={this.handleSubmit}
-        />
-        <select
-          name="bedrooms"
-          value={this.state.bedrooms}
-          onChange={this.handleSelectChange}
-        >
-          <option value="Any">Any</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-        <select
-          name="bathrooms"
-          value={this.state.bathrooms}
-          onChange={this.handleSelectChange}
-        >
-          <option value="Any">Any</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-        <input
-          type="range"
-          value={this.state.maxPrice}
-          id="maxPrice"
-          name="maxPrice"
-          min="0"
-          max={this.maxPrice}
-          step="25"
-          onChange={this.handleSliderChange}
-          onMouseUp={this.handleSliderRelease}
-        />
-        <div>Max Price: {this.state.maxPrice}</div>
-        <input
-          type="range"
-          value={this.state.minPrice}
-          id="minPrice"
-          name="minPrice"
-          min="0"
-          max={this.maxPrice}
-          step="25"
-          onChange={this.handleSliderChange}
-          onMouseUp={this.handleSliderRelease}
-        />
-        <div>Min Price: {this.state.minPrice}</div>
+      <div className="rental-search-container">
+        <div className="rental-input-container">
+          <input
+            className="query-input"
+            type="text"
+            name="query"
+            value={this.state.query}
+            onChange={this.handleQueryChange}
+            onKeyDown={this.handleSubmit}
+          />
+        </div>
+        <div className="rental-input-container">
+          <div>
+            Bedrooms:
+          </div>
+          <select
+            name="bedrooms"
+            value={this.state.bedrooms}
+            onChange={this.handleSelectChange}
+          >
+            <option value="Any">Any</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div className="rental-input-container">
+          <div className="rental-input-container">
+            Bathrooms:
+          </div>
+          <select
+            name="bathrooms"
+            value={this.state.bathrooms}
+            onChange={this.handleSelectChange}
+          >
+            <option value="Any">Any</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div className="rental-input-container">
+          <div>Min Price: {this.state.minPrice}</div>
+          <input
+            type="range"
+            value={this.state.minPrice}
+            id="minPrice"
+            name="minPrice"
+            min="0"
+            max={this.maxPrice}
+            step="25"
+            onChange={this.handleSliderChange}
+            onMouseUp={this.handleSliderRelease}
+          />
 
+        </div>
+        <div className="rental-input-container">
+           <div>Max Price: {this.state.maxPrice}</div>
+          <input
+            type="range"
+            value={this.state.maxPrice}
+            id="maxPrice"
+            name="maxPrice"
+            min="0"
+            max={this.maxPrice}
+            step="25"
+            onChange={this.handleSliderChange}
+            onMouseUp={this.handleSliderRelease}
+          />
+        </div>
       </div>
     )
   }
