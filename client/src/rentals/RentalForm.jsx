@@ -23,6 +23,7 @@ class RentalForm extends Component {
       },
       imageURLs: [],
       redirect: false,
+      edit: false,
     }
     this.autocomplete = null
   }
@@ -51,7 +52,7 @@ class RentalForm extends Component {
   }
 
   createImgTag(arr) {
-    return arr.map(elm => <img key={elm} src={elm} alt="img" />)
+    return arr.map((elm, i) => <img key={i} src={elm} alt="img" />)
   }
 
   handleChange = (e) => {
@@ -63,20 +64,21 @@ class RentalForm extends Component {
   handlePlaceSelect = async () => {
     // Google Place Autocomplete call
     let addressObject = await this.autocomplete.getPlace()
+    if (!addressObject.address_components) return
     let address = addressObject.address_components
     let geocoder = new window.google.maps.Geocoder();
     // Google Geocode call
-    geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
+    // geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
       let currData = Object.assign({}, this.state.data, {
-        street: addressObject.name || "",
-        city: address[3].long_name || "",
-        province: address[5].long_name || "",
-        postal_code: results[0].address_components[7].long_name || "",
+        street: addressObject.name,
+        city: address[3].long_name ,
+        province: address[5].long_name,
+        postal_code: address[address.length > 7 ? 7 : 6].long_name,
         lat: addressObject.geometry.location.lat() ,
         lng: addressObject.geometry.location.lng() ,
       })
       this.setState({ data: currData })
-    })
+    // })
 
   }
 
@@ -97,22 +99,26 @@ class RentalForm extends Component {
             name={"street"}
             value={street}
             placeholder={"Street Address"}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            disabled/>
           <input
             name={"city"}
             value={city}
             placeholder={"City"}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            disabled/>
           <input
             name={"province"}
             value={province}
             placeholder={"Province"}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            disabled/>
           <input
             name={"postal_code"}
             value={postal_code}
             placeholder={"Postal Code"}
-            onChange={this.handleChange}/><br/>
+            onChange={this.handleChange}
+            disabled/><br/>
           <label>Unit#</label>
           <input
             type="number"
@@ -164,7 +170,7 @@ class RentalForm extends Component {
             accept=".jpg, .jpeg, .png" /><br/>
           <button onSubmit={this.handleSubmit}>Submit</button>
         </form>
-        <button onClick={this.handleDelete}> Delete</button>
+        {this.state.edit && <button onClick={this.handleDelete}> Delete</button>}
         {this.createImgTag(this.state.imageURLs)}
       </div>
     )

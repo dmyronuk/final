@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import RentalForm from "./RentalForm";
 import { getSingleListing } from "../ajax/listings";
+import dateFromTimestamp from "../helpers/time-formatters";
 import axios from 'axios';
 
 class EditRentalForm extends RentalForm {
 
+
   async componentDidMount() {
     super.componentDidMount()
+    this.setState({edit: true})
     let listingId = this.props.match.params.id
     let listing = listingId && await getSingleListing(listingId)
     if (listing) {
@@ -42,6 +45,7 @@ class EditRentalForm extends RentalForm {
     }).then(res => {
       this.setState({redirect: true })
     })
+    this.setState({redirect: true })
   }
 
 }
