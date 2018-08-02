@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from 'axios';
 import { getSingleListing } from "../ajax/listings";
 import { Redirect } from "react-router-dom";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 class RentalForm extends Component {
   constructor(props) {
@@ -88,11 +90,12 @@ class RentalForm extends Component {
         <h1>Create New Listing</h1>
         <form onSubmit={this.handleSubmit}>
           <label> Autocomplete: </label>
-          <input id="autocomplete"
+          <TextField
+            id="autocomplete"
             className="input-field"
             ref="input"
-            type="text"
-            required/><br/>
+            required
+          /><br/>
           <input
             name={"street"}
             value={street}
@@ -162,7 +165,7 @@ class RentalForm extends Component {
             ref={(ref) => { this.uploadInput = ref; }}
             type="file" onChange={this.handleUploadImage}
             accept=".jpg, .jpeg, .png" /><br/>
-          <button onSubmit={this.handleSubmit}>Submit</button>
+          <Button variant="contained" color="primary" onSubmit={this.handleSubmit}>Submit</Button>
         </form>
         <button onClick={this.handleDelete}> Delete</button>
         {this.createImgTag(this.state.imageURLs)}

@@ -80,8 +80,8 @@ class Chat extends Component {
 
   handleInputChange = e => {
     const target = e.target;
-    const value = target.value;
-    const name = target.name;
+    const value = e;
+    const name = "rating";
 
     this.setState({
       [name]: value
