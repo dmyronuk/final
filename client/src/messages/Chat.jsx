@@ -5,6 +5,7 @@ import MessageList from "./MessageList.jsx";
 import RatingsForm from "./RatingsForm.jsx";
 import ChatBar from "./ChatBar.jsx";
 import axios from 'axios';
+import { refetchUser } from "../ajax/auth";
 import { isNullOrUndefined } from "util";
 
 class Chat extends Component {
@@ -13,6 +14,7 @@ class Chat extends Component {
     this.state = {
       rating: 5,
       alreadyRated: true,
+      ratingSubmitted: false,
     }
   }
 
@@ -45,7 +47,7 @@ class Chat extends Component {
     })
   }
 
-  
+
   addNewRating = (e) => {
     e.preventDefault();
     axios.post("/api/ratings", {
@@ -55,20 +57,24 @@ class Chat extends Component {
       rating: this.state.rating
     })
       .then(res => {
-        console.log("Success")
+        console.log("rating sent")
+        this.setState({ ratingSubmitted: true })
       })
   }
 
-  
+
   checkIfRated = async (rater, ratee) => {
     let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
-    console.log(AllRatingsOfRater)
-    AllRatingsOfRater.forEach(e =>{
-      if (e.rater === rater && e.ratee === ratee){
-        return this.setState({alreadyRated:true})
+    AllRatingsOfRater.forEach(e => {
+      this.setState({ alreadyRated: false })
+      if (e.rater === rater && e.ratee === ratee) {
+        return this.setState({ alreadyRated: true })
       }
-      this.setState({alreadyRated:false})
     })
+  }
+
+  getUserIDFromState = () =>{
+    this.setState({user:this.props.user})
   }
 
 
@@ -123,21 +129,32 @@ class Chat extends Component {
       });
 
     // replace (1,3) with (user.id value, recipient.id) later
-    this.checkIfRated(1, 2)
+    this.checkIfRated(1, 3)
+
+    console.log("this.props.user======", this.props.user)
+    console.log("this.props.state======", this.props.state)
+    
   }
+
+
 
   render() {
     return (
       <div>
         {
-          !this.state.alreadyRated &&
-          <RatingsForm 
-            addNewRating={this.addNewRating}
-            handleInputChange ={this.handleInputChange}
-            rating = {this.state.rating}
-          />
+          (!this.state.ratingSubmitted) ?
+            (!this.state.alreadyRated &&
+              <RatingsForm
+                addNewRating={this.addNewRating}
+                handleInputChange={this.handleInputChange}
+                rating={this.state.rating}
+                ratingSubmitted={this.state.ratingSubmitted}
+              />
+            ) :
+            (<div>Rating sent!</div>)
         }
-       
+
+
         {this.state.messages &&
           <div>
             <MessageList messages={this.state.messages} />

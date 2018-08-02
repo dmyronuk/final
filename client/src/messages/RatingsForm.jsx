@@ -5,6 +5,7 @@ class RatingsForm extends Component {
     super(props);
     this.state = {
       rating: this.props.rating,
+      ratingSubmitted: this.props.ratingSubmitted,
     }
   }
   render (){

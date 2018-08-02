@@ -45,8 +45,8 @@ class App extends Component {
       })
     }
   }
-
-  render() {
+    
+    render() {
     return (
 
       <BrowserRouter>
@@ -61,7 +61,7 @@ class App extends Component {
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <Route exact path="/rentals/new" component={ NewRental }/>
-          <Route exact path="/chat" component={ Chat }/>
+          <Route exact path="/chat" render={() => <Chat props ={this.props} state={this.state} user="user" />}/>
           <Route path="/profile" component={Profile} />
         </div>
       </BrowserRouter>
