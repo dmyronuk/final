@@ -1,7 +1,8 @@
 html, body {
   box-sizing: border-box;
   margin: 0;
-  font-size: 15px
+  font-size: 15px;
+  font-family: Arial;
 }
 
 a{
@@ -29,6 +30,8 @@ button{
 @import "sidebar.scss";
 @import "chat.scss";
 @import "page-mask.scss";
+@import "yelp-search.scss";
+@import "yelp-results.scss";
 
 
 .main-container{

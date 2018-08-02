@@ -4,3 +4,9 @@
   justify-content: center;
   min-height: $main-container-height;
 }
+
+.default-flex-column-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
