@@ -7,7 +7,6 @@ import ChatBar from "./ChatBar.jsx";
 import axios from 'axios';
 import { refetchUser } from "../ajax/auth";
 import { isNullOrUndefined } from "util";
-import { refetchUser } from "../ajax/auth";
 
 class Chat extends Component {
   constructor(props) {

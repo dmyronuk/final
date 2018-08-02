@@ -1,6 +1,6 @@
 var faker = require('faker');
 
-
+const bcrypt = require('bcryptjs');
 
 function randomParagraphGen() {
   let paragraph = "";
