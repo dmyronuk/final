@@ -15,6 +15,7 @@ import Sidebar from "./navigation/Sidebar";
 import Signup from "./users/Signup";
 import SingleRental from "./rentals/SingleRental.jsx";
 import { refetchUser } from "./ajax/auth";
+import 'bootstrap';
 
 
 class App extends Component {

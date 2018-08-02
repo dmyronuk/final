@@ -28,6 +28,7 @@ class SingleRental extends Component {
     getSingleListing(this.state.id)
     .then(data => {
       const formattedDate = dateFromTimestamp(data.date_available);
+      console.log(data)
       this.setState({
         data,
         formattedDate,
@@ -43,7 +44,7 @@ class SingleRental extends Component {
           <div className="card-container">
             <div className="single-rental-card">
               <div className="image-container">
-                <img alt="rental" src="/images/house.jpg" />
+                <img alt="rental" src={this.state.data.photos[0]} />
                 <div className="mask"></div>
                 <div >
                   {this.state.data.street}, {this.state.data.city} | {this.state.data.postal_code}
