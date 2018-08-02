@@ -17,7 +17,7 @@ return(
           <div>Bedrooms: {props.data.bedrooms} Bathrooms: {props.data.bathrooms} </div>
         </div>
       </div>
-    </ Link>
+    </Link>
   )
 };
 
