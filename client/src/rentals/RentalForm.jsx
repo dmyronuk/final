@@ -25,6 +25,7 @@ class RentalForm extends Component {
       },
       imageURLs: [],
       redirect: false,
+      edit: false,
     }
     this.autocomplete = null
   }
@@ -53,7 +54,7 @@ class RentalForm extends Component {
   }
 
   createImgTag(arr) {
-    return arr.map(elm => <img key={elm} src={elm} alt="img" />)
+    return arr.map((elm, i) => <img key={i} src={elm} alt="img" />)
   }
 
   handleChange = (e) => {
@@ -65,20 +66,21 @@ class RentalForm extends Component {
   handlePlaceSelect = async () => {
     // Google Place Autocomplete call
     let addressObject = await this.autocomplete.getPlace()
+    if (!addressObject.address_components) return
     let address = addressObject.address_components
     let geocoder = new window.google.maps.Geocoder();
     // Google Geocode call
-    geocoder.geocode({ 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}` }, (results, status) => {
+    // geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
       let currData = Object.assign({}, this.state.data, {
-        street: addressObject.name || "",
-        city: address[3].long_name || "",
-        province: address[5].long_name || "",
-        postal_code: results[0].address_components[7].long_name || "",
-        lat: addressObject.geometry.location.lat(),
-        lng: addressObject.geometry.location.lng(),
+        street: addressObject.name,
+        city: address[3].long_name ,
+        province: address[5].long_name,
+        postal_code: address[address.length > 7 ? 7 : 6].long_name,
+        lat: addressObject.geometry.location.lat() ,
+        lng: addressObject.geometry.location.lng() ,
       })
       this.setState({ data: currData })
-    })
+    // })
 
   }
 
@@ -87,7 +89,7 @@ class RentalForm extends Component {
 
     return (
       <div className="new-rental-container">
-        {this.state.redirect && <Redirect to="/profile" />}
+        {this.state.redirect && <Redirect to="/my-messages" />}
         <h1>Create New Listing</h1>
 
         <form onSubmit={this.handleSubmit}>
@@ -200,10 +202,12 @@ class RentalForm extends Component {
               type="file" onChange={this.handleUploadImage}
               accept=".jpg, .jpeg, .png" />
           </div>
+          <div>
+            <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
+          </div>
         </form>
 
-        <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
-        <button onClick={this.handleDelete}> Delete</button>
+        {this.state.edit && <button onClick={this.handleDelete}> Delete</button>}
         {this.createImgTag(this.state.imageURLs)}
       </div>
     )

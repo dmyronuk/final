@@ -12,6 +12,7 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+       id: this.props.match.params.id,
       rating: 5,
       alreadyRated: true,
       ratingSubmitted: false,
@@ -26,25 +27,29 @@ class Chat extends Component {
   // allow user to add a new message
   addNewMessage = (content) => {
     console.log(content);
-    // this is hardcoded, change using jwt
-    const newMessage = {
-      type: "postMessage",
-      text: content,
-      first_name: "Mary",
-      email: "mary@gmail.com"
+    if(localStorage.JWT_TOKEN){
+      refetchUser({token: localStorage.JWT_TOKEN})
+      .then(user => {
+        const newMessage = {
+          type: "postMessage",
+          text: content,
+          first_name: user.first_name,
+          email: user.email,
+          sender: user.id,
+          recipient: this.state.id
+        }
+
+        this.socket.send(JSON.stringify(newMessage));
+        axios.post('/api/newMessage', {
+          sender: user.id,
+          recipient: this.state.id,
+          message: content,
+        }).then(messages => {
+        })
+      })
     }
-    this.socket.send(JSON.stringify(newMessage));
-    // end of hard code
-    axios.post('/api/newMessage', {
-      sender: 1,
-      recipient: 2,
-      message: content,
-    }).then(messages => {
-      // console.log(messages);
-      // this.setState({
-      //   messages: messages.data
-      // })
-    })
+
+
   }
 
 
@@ -119,21 +124,26 @@ class Chat extends Component {
           throw new Error("Unknown event type: " + data.type);
       }
     }
-
-    getFilteredMessages(1, 2)
-      .then(messages => {
-        this.setState({
+     if(localStorage.JWT_TOKEN){
+      refetchUser({token: localStorage.JWT_TOKEN})
+      .then(user => {
+        console.log(user);
+        getFilteredMessages(user.id, this.state.id)
+        .then(messages => {
+          this.setState({
           messages
         })
         // console.log(messages);
       });
+      })
+    }
+
 
     // replace (1,3) with (user.id value, recipient.id) later
     this.checkIfRated(1, 3)
 
     console.log("this.props.user======", this.props.user)
     console.log("this.props.state======", this.props.state)
-    
   }
 
 
@@ -153,7 +163,6 @@ class Chat extends Component {
             ) :
             (<div>Rating sent!</div>)
         }
-
 
         {this.state.messages &&
           <div>
