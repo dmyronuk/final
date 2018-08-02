@@ -1,5 +1,7 @@
 var faker = require('faker');
 
+
+
 function randomParagraphGen() {
   let paragraph = "";
   for (let i = 0; i < 5; ++i) {
@@ -77,19 +79,19 @@ exports.seed = function(knex, Promise) {
       first_name: "Mary",
       last_name: "Ann",
       email: "mary@gmail.com",
-      password_digest: "mary",
+      password_digest: bcrypt.hashSync("mary", 10),
     },
     {
       first_name: "John",
       last_name: "Smith",
       email: "john@gmail.com",
-      password_digest: "john",
+      password_digest: bcrypt.hashSync("john", 10),
     },
     {
       first_name: "Bob",
       last_name: "Singh",
       email: "bob@gmail.com",
-      password_digest: "bob",
+      password_digest: bcrypt.hashSync("bob", 10),
     },
     ]).returning("*");
   }
