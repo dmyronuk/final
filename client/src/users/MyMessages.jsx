@@ -4,6 +4,7 @@ import { getAllRatingsOfUser } from "../ajax/ratings";
 import { getAllThreads } from "../ajax/threads";
 import SingleThread  from "./SingleThread.jsx";
 import { refetchUser } from "../ajax/auth";
+import { Redirect } from "react-router-dom";
 
 // context
 // import AppContext from "../provider.jsx";
@@ -42,6 +43,7 @@ class MyMessages extends Component {
   render(){
     return(
       <div>
+        {!localStorage.JWT_TOKEN && <Redirect to="/login"/> }
         {this.state.threads &&
          <table>
           <tr>

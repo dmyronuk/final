@@ -68,4 +68,5 @@ module.exports = function(app) {
     app.get('/api/threads', usersController.threads)
     app.post('/api/users/:id', usersController.getUsernameById)
     app.get('/api/get-user-from-landlord-id', usersController.getUserFromLandlordId)
+    app.post('/api/landlord', usersController.getLandlord)
 };

@@ -125,7 +125,21 @@ let controller = {
     .then(users_id => {
       res.json(users_id);
     })
+  },
+
+  getLandlord: (req, res) => {
+    const token = req.body.token;
+    jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
+      if(err){
+        console.log(err)
+      }
+      queries.getLandlorByUserId(decoded.id)
+      .then(data => {
+        data? res.json({id: data.id}) : res.json({id: false})
+      })
+    })
   }
 }
+
 
 module.exports = controller;

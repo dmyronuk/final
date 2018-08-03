@@ -4,6 +4,7 @@ import { getSingleListing } from "../ajax/listings";
 import { Redirect } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import {fetchLandlord} from "../ajax/auth.js";
 
 class RentalForm extends Component {
   constructor(props) {
@@ -27,15 +28,23 @@ class RentalForm extends Component {
       redirect: false,
       edit: false,
     }
-    this.autocomplete = null
+  this.autocomplete = null
   }
 
-  async componentDidMount() {
+   async componentDidMount() {
     let options = {
       componentRestrictions: { country: "CA" }
     }
     this.autocomplete = new window.google.maps.places.Autocomplete(document.getElementById('autocomplete'), options)
     this.autocomplete.addListener("place_changed", this.handlePlaceSelect)
+
+    if(localStorage.JWT_TOKEN){
+      fetchLandlord({token: localStorage.JWT_TOKEN})
+      .then(res => {
+        this.setState({landlordId : res.id})
+      })
+    }
+
   }
 
   handleUploadImage = (e) => {
@@ -61,11 +70,12 @@ class RentalForm extends Component {
     const currData = Object.assign({}, this.state.data)
     currData[e.target.name] = e.target.value
     this.setState({ data: currData });
+    console.log(this.state.landlordId);
   }
 
   handlePlaceSelect = async () => {
     // Google Place Autocomplete call
-    let addressObject = await this.autocomplete.getPlace()
+    let addressObject = this.autocomplete.getPlace()
     if (!addressObject.address_components) return
     let address = addressObject.address_components
     let geocoder = new window.google.maps.Geocoder();
@@ -83,13 +93,20 @@ class RentalForm extends Component {
     // })
 
   }
+  // {!this.state.landlordId && <Redirect to="/" />}
 
   render() {
     const { street, city, province, postal_code, lat, lng, unit, price, bedrooms, bathrooms, date, description } = this.state.data;
-
+    if (!localStorage.JWT_TOKEN) {
+      return <Redirect to="/login"/>
+    } else if (this.state.landlordId === undefined) {
+      return <div> Loading... </div>
+    } else if (!this.state.landlordId) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="new-rental-container">
-        {this.state.redirect && <Redirect to="/my-messages" />}
+        {this.state.redirect && <Redirect to="/my-listings" />}
         <h1>Create New Listing</h1>
 
         <form onSubmit={this.handleSubmit}>
