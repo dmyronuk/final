@@ -44,37 +44,44 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        { this.state.redirect && <Redirect to="/" /> }
-        <form onSubmit={this.handleSubmit }>
-          <div>
-            {this.state.errors &&
-              <div>
-                {this.state.errors.map(err => <div>{ err }</div>)}
-              </div>
-            }
-            Email
-            <input
-              type="text"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Password
-            <input
-              type="text"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </div>
 
-          <div>
-            <input type="submit" value="submit"/>
-          </div>
-        </form>
+      <div className="default-flex-column-container">
+        <div className="login-container" >
+          { this.state.redirect && <Redirect to="/" /> }
+          {this.state.errors &&
+            <div>
+              {this.state.errors.map(err => <div>{ err }</div>)}
+            </div>
+          }
+          <section className="login" id="login">
+            <header>
+              <h2>Rental App</h2>
+              <h4>Login</h4>
+            </header>
+            <form className="login-form" onSubmit={this.handleSubmit }>
+              <input
+               type="text"
+               name="email"
+               value={this.state.email}
+               onChange={this.handleChange}
+               className="login-input"
+               placeholder="Email"
+               required
+               autofocus/>
+              <input
+               type="password"
+               name="password"
+               value={this.state.password}
+               onChange={this.handleChange}
+               className="login-input"
+               placeholder="Password"
+               required />
+              <div className="submit-container">
+                <input type="submit" value="LogIn" className="login-button"/>
+              </div>
+          </form>
+          </section>
+        </div>
       </div>
     )
   }
