@@ -8,11 +8,6 @@ function Header(props){
       <button alt="Sidebar Toggle Button" className="toggle-nav" onClick={props.hamburgerClickHandler}>
         <img src={hamburger}/>
       </button>
-      {props.user &&
-        <div>
-          Signed in as: {props.user.email}
-        </div>
-      }
       <Link to={"/"}>
         <h1 className="App-title">Title</h1>
       </Link>
@@ -32,6 +27,9 @@ function Header(props){
             </div>
           :
             <div>
+              <div className="navbar-email">
+                {props.user.email}
+              </div>
               <Link to={"/logout"}>
                 <button className="default-auth-button logout-button">Logout</button>
               </Link>
