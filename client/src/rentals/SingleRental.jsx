@@ -15,8 +15,9 @@ class SingleRental extends Component {
     }
   }
 
-  setYelpData = (data) => {
+  setYelpData = (data, term) => {
     this.setState({
+      yelpSearchTerm: term,
       yelpResults: data,
       yelpResultsClass: "visible",
     })
@@ -86,7 +87,7 @@ class SingleRental extends Component {
             </div>
             <div className={this.state.yelpResultsClass + " yelp-results-container"}>
               {this.state.yelpResults &&
-                <YelpResults results={this.state.yelpResults} />
+                <YelpResults results={this.state.yelpResults} searchTerm={this.state.yelpSearchTerm} />
               }
             </div>
           </div>

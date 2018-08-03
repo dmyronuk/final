@@ -1,9 +1,45 @@
+.search-category{
+  width: 100%;
+  background: #23272a;
+  color: white;
+  text-align: center;
+  padding: 0.7rem 0;
+  box-shadow: 0 0.18rem 0.18rem #777777;
+}
+
 .yelp-results-item{
-  background:white;
-  padding: 1rem;
+  background: white;
+  border: 1px solid #cccccc;
+  box-shadow: -0.2rem 0.2rem 0.2rem #aaaaaa;
   margin: 1rem 0;
 
-  img{
-    width: 15rem;
+  &:hover{
+
+  }
+
+  header{
+    text-align: center;
+    width: 18rem;
+    padding: 0.3rem 0;
+    color: blue;
+    font-size: 1.2rem;
+  }
+
+  .image-container{
+    width: 18rem;
+    height: 18rem;
+    display: flex;
+    flex-direction: row;
+    background: red;
+
+    img{
+      flex: 1;
+      object-fit: cover;
+      overflow: hidden;
+    }
+  }
+
+  .yelp-results-info-container{
+    padding: 0.3rem 0.6rem;
   }
 }
