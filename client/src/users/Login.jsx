@@ -47,7 +47,7 @@ class Login extends Component {
       <div className="default-flex-column-container">
         <div className="login-container" >
           { this.state.redirect && <Redirect to="/" /> }
-          <section class="login" id="login">
+          <section className="login" id="login">
             <header>
               <h2>Rental App</h2>
               <h4>Login</h4>

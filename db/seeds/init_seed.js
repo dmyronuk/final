@@ -16,7 +16,7 @@ function randomIntegerGenerator(min, max) {
 }
 
 function numberBedroomsGen() {
-  return randomIntegerGenerator(1, 7);
+  return randomIntegerGenerator(1, 5);
 }
 
 function numberBathroomsGen() {
