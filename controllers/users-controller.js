@@ -93,6 +93,13 @@ let controller = {
         errors
       })
     }
+  },
+
+  threads: (req, res) => {
+    queries.getAllThreads(1)
+    .then(thread => {
+      res.json(thread);
+    })
   }
 }
 

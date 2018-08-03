@@ -3,7 +3,6 @@ const helpers = require("../helpers/helpers.js");
 
 let controller = {
   getAllRatingsThatUserRated: (req, res) => {
-    console.log(req.query)
     let user_id = req.query.user_id
     queries.getAllRatingsThatUserRated(user_id)
       .then(rating => {
@@ -11,7 +10,6 @@ let controller = {
       })
   },
   getAllRatingsOfRatee: (req, res) => {
-    console.log(req.query)
     let user_id = req.query.user_id
     queries.getAllRatingsOfRatee(user_id)
       .then(rating => {

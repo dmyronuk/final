@@ -26,7 +26,6 @@ class YelpSearch extends Component {
   }
 
   componentDidMount(){
-    console.log(this.state)
   }
 
   render(){
