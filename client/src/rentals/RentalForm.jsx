@@ -92,7 +92,7 @@ class RentalForm extends Component {
         {this.state.redirect && <Redirect to="/my-messages" />}
 
         <form className="new-listing-container" onSubmit={this.handleSubmit}>
-        <h2>Create Your Listing</h2>
+        <h2>Your Listing</h2>
 
           <h3> Address </h3>
           <div className="address-container">

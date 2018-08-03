@@ -15,7 +15,7 @@ class Chat extends Component {
       redirect: false,
       id: Number(this.props.match.params.id),
       rating: 5,
-      alreadyRated: false,
+      alreadyRated: null,
       ratingSubmitted: false,
     }
   }
@@ -64,13 +64,14 @@ class Chat extends Component {
   }
 
   checkIfRated = async (rater, ratee) => {
-    this.setState({ alreadyRated: false})
     let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
+    let foundRating = false;
     AllRatingsOfRater.forEach(e => {
       if (e.rater === rater && e.ratee === ratee) {
-        return this.setState({ alreadyRated: true})
+        foundRating = true
       }
     })
+    return this.setState({ alreadyRated: foundRating})
   }
 
   handleRatingChange = e => {
@@ -149,7 +150,7 @@ class Chat extends Component {
             <div className="rating-outer-container">
               {
                 (!this.state.ratingSubmitted) ?
-                (!this.state.alreadyRated &&
+                (this.state.alreadyRated === false &&
                   <RatingsForm
                     addNewRating={this.addNewRating}
                     handleRatingChange={this.handleRatingChange}
