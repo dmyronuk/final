@@ -273,127 +273,18 @@ module.exports = (function() {
       .then(talked_to => {
         return talked_to.rows;
       })
-    }
+  },
+
+  getUserFromLandlordId: landlord_id => {
+    return knex.raw(`
+      select users_id from landlords where id = ?
+      `, [landlord_id])
+    .then(query => {
+      let users_id = query.rows[0];
+      return users_id;
+    })
   }
+}
+
 })();
 
-// module.exports = {
-//   getAllUsers: () => {
-//     return knex("users").select();
-//   },
-
-//   getUserInfo: (user_id) => {
-//     return knex('users')
-//     .where('id', user_id)
-//     .select()
-//   },
-
-//   getAllLandlords: () => {
-//     return knex('landlords')
-//     .select()
-//   },
-
-//   getAllTenants: () => {
-//     return knex('tenants')
-//     .select()
-//   },
-
-//   getAllNeighourhoods: () => {
-//     return knex('neighbourhoods')
-//     .select()
-//   },
-
-//   getAllListings: () => {
-//     return knex('listings')
-//     .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
-//     .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
-//     .select()
-//   },
-
-//   getAllListingsByQuery: (query) => {
-//     return knex("listings")
-//     .join("listing_addresses", "listings.id", "listing_addresses.listings_id")
-//     .join("neighbourhoods", "listings.neighbourhoods_id", "neighbourhoods.id")
-//     .join("listing_specifications", "listings.id", "listing_specifications.listings_id")
-//     .where("listing_addresses.street", "like", `%${query}%`)
-//     .orWhere("neighbourhoods.name", "like", `%${query}%`)
-//     .select()
-//   },
-
-//   getListing: (id) => {
-//     return knex('listings')
-//     .where('listings.id', id)
-//     .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
-//     .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
-//     .select()
-//   },
-
-//   // Addin new listing
-//   addNewListing: (data, imageUrls) => {
-//     return knex('landlords')
-//     .where({phone_number: "647-234-2345"})
-//     .select("id")
-//     .then(landlord => {
-//       return knex("neighbourhoods")
-//       .where({name: "Dovercourt Village"})
-//       .select("id")
-//       .then(neighbourhood => {
-//         return knex('listings')
-//         .insert({photos: imageUrls, price: data.price, lng: data.lng, lat: data.lat, neighbourhoods_id: neighbourhood[0].id, landlords_id: landlord[0].id })
-//         .returning('id')
-//         .then(listing => {
-//           return knex("listing_addresses")
-//           .insert({street: data.street, city: data.city, province: data.province, postal_code: data.pCode, listings_id: listing[0]})
-//           .then (() => {
-//             return knex("listing_specifications")
-//             .insert({bedrooms: data.bedrooms, bathrooms: data.bathrooms, description: data.description, date_available: data.date, listings_id: listing[0]})
-//           })
-//         })
-//       })
-
-//     })
-//   },
-
-//   // currently shows messages between Mary and John
-//   getAllMessages: () => {
-//     return knex('messages')
-//     .join('users', 'messages.sender', 'users.id')
-//     // .join('users', 'messages.recipient', 'users.id')
-//     .select()
-//     .where(function() {
-//       this.where('sender', 1).andWhere('recipient', 2)
-//     })
-//     .orWhere(function() {
-//       this.where('sender', 2).andWhere('recipient', 1)
-//     })
-//     .orderBy('created_at')
-//     .limit(100)
-//   },
-
-//   getFilteredMessages (sender, recipient) {
-//     console.log(sender);
-//     console.log(recipient);
-//     return knex('messages')
-//     .join('users', 'messages.sender', 'users.id')
-//     // .join('users', 'messages.recipient', 'users.id')
-//     .select('users.id', 'created_at', 'text', 'first_name', 'email')
-//     .where(function() {
-//       this.where('sender', sender).andWhere('recipient', recipient)
-//     })
-//     .orWhere(function() {
-//       this.where('sender', recipient).andWhere('recipient', sender)
-//     })
-//     .orderBy('created_at')
-//     .limit(100)
-//   },
-
-//   addNewMessage: (sender, recipient, message) => {
-//     return knex('messages')
-//     .insert({text: message, sender: sender, recipient: recipient})
-//     .then(() => getFilteredMessages(sender, recipient)
-//     )
-//     .then((query) => {
-//       console.log("asdfasdf", query);
-//     })
-//   }
-// }

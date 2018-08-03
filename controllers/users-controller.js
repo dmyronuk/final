@@ -103,11 +103,13 @@ let controller = {
     })
   },
 
-  // getUserFromLandlordId: (req, res) => {
-  //   let user_id = req.query.user_id
-  //   queries.getUserFromLandlordId(user_id)
-  //     .then
-  // }
+  getUserFromLandlordId: (req, res) => {
+    let landlord_id = req.query.landlord_id;
+    queries.getUserFromLandlordId(landlord_id)
+      .then(users_id => {
+        res.json(users_id);
+      })
+  }
 }
 
 module.exports = controller;

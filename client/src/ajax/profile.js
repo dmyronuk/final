@@ -15,16 +15,16 @@ const getUserProfile = async (tokenObj) => {
   return data;
 }
 
-// const getUserFromLandlordId = async (landlordId) => {
-//   const response = await fetch("/api/get-user-from-landlord-id");
-//   const data = await response.json();
-//   if (response.status !== 200){
-//     throw Error(data.message);
-//   }
-//   return data;
-// }
+const getUserFromLandlordId = async (landlordId) => {
+  const response = await fetch(`/api/get-user-from-landlord-id?landlord_id=${landlordId}`);
+  const data = await response.json();
+  if (response.status !== 200){
+    throw Error(data.message);
+  }
+  return data;
+}
 
 export {
   getUserProfile,
-  // getUserFromLandlordId,
+  getUserFromLandlordId,
 }
