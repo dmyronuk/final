@@ -1,20 +1,54 @@
-.chatbar {
-      background: grey;
-      border-top: 1px solid black;
-      bottom: 0;
-      display: flex;
-      left: 0;
-      padding: 5px;
-      position: fixed;
-      right: 0;
+.chat-container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40vw;
+  height: 75vh;
+  margin-top: 2.5rem;
+  border: #aaaaaa solid 1px;
+
+  header{
+    background: $blue-header;
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .username{
+      font-size: 2rem;
+    }
+    div{
+      margin: 0.3rem 1rem;
     }
 
-.chatbar-message {
-      border: 1px solid black;
-      display: block;
-      height: 40px;
-      line-height: 40px;
-      margin: 5px;
-      padding: 0 9px;
-      flex: 8;
+    .rating-outer-container{
+      form{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
+  }
+}
+
+.chatbar {
+  position: absolute;
+  bottom: 0;
+  width:100%;
+  background: grey;
+  border-top: 1px solid black;
+  display: flex;
+}
+
+.chatbar-message {
+  border: 1px solid black;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  padding: 0 9px;
+  flex: 8;
+}

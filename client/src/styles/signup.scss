@@ -22,8 +22,7 @@
 
 
 /* Login Form */
-.login-container {
-  margin-top: 4rem;
+.register-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +33,7 @@
   box-sizing: border-box;
 }
 
-.login {
+.register {
   position: relative;
   width: 100%;
   padding: 10px;
@@ -49,7 +48,7 @@
               0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
-.login > header {
+.register > header {
   position: relative;
   width: 100%;
   padding: 10px;
@@ -65,7 +64,7 @@
               0px 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
-.login > header:before {
+.register > header:before {
   content: '';
   display: flex;
   justify-content: center;
@@ -83,38 +82,48 @@
   z-index: 5;
 }
 
-.login.error_1 > header:before,
-.login.error_2 > header:before {
+.register.error_1 > header:before,
+.register.error_2 > header:before,
+.register.error_3 > header:before,
+.register.error_4 > header:before {
   animation: error_before 3s cubic-bezier(.55, 0, .1, 1);
 }
 
-.login.error_1 > header:before {
-  content: 'All fields required!';
+.register.error_1 > header:before {
+  content: 'All fields mandatory!';
 }
 
-.login.error_2 > header:before {
-  content: 'Login failed!';
+.register.error_2 > header:before {
+  content: 'Invalid phone number';
 }
 
-.login > header h2 {
+.register.error_3 > header:before {
+  content: 'Password must be 8 characters';
+}
+
+.register.error_4 > header:before {
+  content: 'Passwords do not match';
+}
+
+.register > header h2 {
   margin: 50px 0 10px 0;
 }
 
-.login > header h4 {
+.register > header h4 {
   font-size: 0.7em;
   animation: text_opacity 1.5s cubic-bezier(.55, 0, .1, 1);
   color: rgba(255, 255, 255, 0.4);
 }
 
 /* Form */
-.login-form {
+.register-form {
   padding: 15px;
   box-sizing: border-box;
 }
 
 
 /* Inputs */
-.login-input {
+.register-input {
   position: relative;
   width: 100%;
   padding: 10px 5px;
@@ -131,7 +140,7 @@
   transition: border-bottom 0.2s cubic-bezier(.55, 0, .1, 1);
 }
 
-.login-input:focus {
+.register-input:focus {
   outline: none;
   border-bottom: 2px solid #E37F00;
 }
@@ -148,7 +157,7 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.login-button {
+.register-button {
   padding: 10px;
   border: none;
   border-radius: 3px;
@@ -163,7 +172,7 @@
   transition: background 0.2s ease-in-out;
 }
 
-.login-button.raised {
+.register-button.raised {
   padding: 5px 10px;
   color: #FAFAFA;
   background: #E37F00;
@@ -172,10 +181,33 @@
               0px 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
-.login-button:hover {
+.register-button:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 
-.login-button.raised:hover {
+.register-button.raised:hover {
   background: #FDAB43;
+}
+
+.select-style {
+  text-align-last:center;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.select-style select {
+  padding: 5px 8px;
+  width: 130%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select:focus {
+  outline: none;
 }
