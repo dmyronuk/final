@@ -11,8 +11,8 @@ const RentalMapCard = (props) => {
         <div className="listing-map-card">
           <div className="listing-map-img-container">
             { props.data.photos ?
-              <img alt="Rental Photo" src={props.data.photos[0]} />
-              : <img alt="No Image Available" src="/images/no-image.png" />
+              <img alt="Rental Property" src={props.data.photos[0]} />
+              : <img alt="Not Available" src="/images/no-image.png" />
             }
           </div>
           <div className="listing-map-info-container">
