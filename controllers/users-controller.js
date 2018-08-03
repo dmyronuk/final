@@ -64,9 +64,9 @@ let controller = {
     const errors = [];
     const data = req.body;
 
-    ! validations.passwordIsValid(data.password) && errors.push("Password must be 8 characters");
     ! validations.allFieldsPresent([data.first_name, data.last_name, data.user_type, data.email ]) && errors.push("All fields mandatory");
     ! validations.phoneNumberIsValid(data.phone) && errors.push("Invalid phone number")
+    ! validations.passwordIsValid(data.password) && errors.push("Password must be 8 characters");
     ! validations.passwordsMatch(data.password, data.password_confirmation) && errors.push("Passwords do not match")
 
     //if all validations pass then insert the new user into the database
@@ -93,6 +93,38 @@ let controller = {
         errors
       })
     }
+  },
+
+  threads: (req, res) => {
+    const current_user = req.query.user_id
+    queries.getAllThreads(current_user)
+    .then(thread => {
+      res.json(thread);
+    })
+  },
+
+  //route to fetch username of other user in chat
+  getUsernameById: (req, res) => {
+    const token = req.body.token;
+    jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
+      //if jwt is invalid, do not send back user info
+      if(err){
+        res.json({userInfo: null})
+      }else{
+        queries.getUsernameById(req.params.id)
+        .then(userInfo => {
+          res.json(userInfo[0])
+        })
+      }
+    })
+  },
+
+  getUserFromLandlordId: (req, res) => {
+    let landlord_id = req.query.landlord_id;
+    queries.getUserFromLandlordId(landlord_id)
+    .then(users_id => {
+      res.json(users_id);
+    })
   }
 }
 

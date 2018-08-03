@@ -12,7 +12,6 @@ let controller = {
   },
 
   getListings: function (req, res) {
-    console.log(req.query.user_id)
     queries.getAllListings(req.query.user_id)
       .then(listings => {
         res.json(listings);

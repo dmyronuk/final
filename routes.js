@@ -65,4 +65,7 @@ module.exports = function(app) {
     app.get('/api/ratings', ratingsController.getAllRatingsThatUserRated)
     app.get('/api/ratee', ratingsController.getAllRatingsOfRatee)
     app.post('/api/ratings', ratingsController.addNewRating)
+    app.get('/api/threads', usersController.threads)
+    app.post('/api/users/:id', usersController.getUsernameById)
+    app.get('/api/get-user-from-landlord-id', usersController.getUserFromLandlordId)
 };

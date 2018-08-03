@@ -38,74 +38,114 @@ class Signup extends React.Component {
       this.setState({errors: data.errors})
     }
   }
+  addError = (err) => {
+    console.log(err)
+    let errType;
+    switch(err) {
+      case "All fields mandatory" :
+        errType = 'error_1'
+        break;
+      case "Invalid phone number" :
+        errType = "error_2"
+        break;
+      case "Password must be 8 characters" :
+        errType = "error_3"
+        break;
+      case "Passwords do not match" :
+        errType = "error_4"
+        break;
+    }
+    let form = document.getElementById('form')
+    form.classList.add(errType)
+    setTimeout(function () {
+     form.classList.remove(errType);
+    }, 3000)
+    this.setState({errors: null});
+  }
 
   render() {
     return (
-      <div>
-
+      <div className="default-flex-column-container">
         { this.state.redirect && <Redirect to="/" /> }
-        { this.state.errors && this.state.errors.map((err) => <div>{err}</div> )}
-        <form onSubmit={this.handleSubmit }>
-          <div>
-          First Name
-            <input
-              type="text"
-              name="first_name"
-              value={this.state.first_name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Last Name
-            <input
-              type="text"
-              name="last_name"
-              value={this.state.last_name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Phone
-            <input
-              type="text"
-              name="phone"
-              value={this.state.phone}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Email
-            <input
-              type="text"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Password
-            <input
-              type="text"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}/></div>
-          <div>
-            Password Confirmation
-            <input
-              type="text"
-              name="password_confirmation"
-              value={this.state.password_confirmation}
-              onChange={this.handleChange}
-            />
-          </div>
-          <select name="user_type" onChange={this.handleChange}>
-            <option value="landlord">Landlord</option>
-            <option value="tenant">Tenant</option>
-          </select>
-          <div>
-            <input type="submit" value="submit"/>
-          </div>
-        </form>
+        <div className="register-container">
+          { this.state.errors && this.addError(this.state.errors[0])}
+          <section className="register" id="form">
+            <header>
+              <h2>Rental App</h2>
+              <h4>Register</h4>
+            </header>
+            <form className="register-form" onSubmit={this.handleSubmit}>
+              <div>
+                <input
+                  className="register-input"
+                  type="text"
+                  name="first_name"
+                  value={this.state.first_name}
+                  onChange={this.handleChange}
+                  placeholder="First Name"
+                />
+              </div>
+              <div>
+                <input
+                  className="register-input"
+                  type="text"
+                  name="last_name"
+                  value={this.state.last_name}
+                  onChange={this.handleChange}
+                  placeholder="Last Name"
+                />
+              </div>
+              <div>
+                <input
+                  className="register-input"
+                  type="tel"
+                  name="phone"
+                  value={this.state.phone}
+                  onChange={this.handleChange}
+                  placeholder="Phone #"
+                />
+              </div>
+              <div>
+                <input
+                  className="register-input"
+                  type="email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  placeholder="Email@"
+                />
+              </div>
+              <div>
+                <input
+                  className="register-input"
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  placeholder="Password" />
+              </div>
+              <div>
+                <input
+                  className="register-input"
+                  type="password"
+                  name="password_confirmation"
+                  value={this.state.password_confirmation}
+                  onChange={this.handleChange}
+                  placeholder="Password Confirmation"
+                />
+              </div>
+              <div className="select-style">
+                <select name="user_type" onChange={this.handleChange}>
+                  <option value="landlord">Landlord</option>
+                  <option value="tenant">Tenant</option>
+                </select>
+              </div>
+              <div className="submit-container">
+                <input type="submit" value="Register" className="register-button"/>
+              </div>
+            </form>
+            </section>
+        </div>
       </div>
     )
   }

@@ -1,19 +1,21 @@
 import React, { Component } from "react";
-import { getFilteredMessages } from "../ajax/messages";
-import { getAllRatingsThatUserRated } from "../ajax/ratings";
+import { Redirect } from "react-router-dom";
+import axios from 'axios';
 import MessageList from "./MessageList.jsx";
 import RatingsForm from "./RatingsForm.jsx";
 import ChatBar from "./ChatBar.jsx";
-import axios from 'axios';
+import { getFilteredMessages, getUsernameById } from "../ajax/messages";
+import { getAllRatingsThatUserRated } from "../ajax/ratings";
 import { refetchUser } from "../ajax/auth";
-import { isNullOrUndefined } from "util";
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      redirect: false,
+      id: Number(this.props.match.params.id),
       rating: 5,
-      alreadyRated: true,
+      alreadyRated: false,
       ratingSubmitted: false,
     }
   }
@@ -25,73 +27,61 @@ class Chat extends Component {
 
   // allow user to add a new message
   addNewMessage = (content) => {
-    console.log(content);
-    // this is hardcoded, change using jwt
-    const newMessage = {
-      type: "postMessage",
-      text: content,
-      first_name: "Mary",
-      email: "mary@gmail.com"
-    }
-    this.socket.send(JSON.stringify(newMessage));
-    // end of hard code
-    axios.post('/api/newMessage', {
-      sender: 1,
-      recipient: 2,
-      message: content,
-    }).then(messages => {
-      // console.log(messages);
-      // this.setState({
-      //   messages: messages.data
-      // })
-    })
-  }
+    if(localStorage.JWT_TOKEN){
+      refetchUser({token: localStorage.JWT_TOKEN})
+      .then(user => {
+        const newMessage = {
+          type: "postMessage",
+          text: content,
+          first_name: user.first_name,
+          email: user.email,
+          sender: user.id,
+          recipient: this.state.id
+        }
 
-
-  addNewRating = (e) => {
-    e.preventDefault();
-    axios.post("/api/ratings", {
-      // replace rater with currentUser.id later, and ratee with message.recipient.user.id
-      rater: 1,
-      ratee: 2,
-      rating: this.state.rating
-    })
-      .then(res => {
-        console.log("rating sent")
-        this.setState({ ratingSubmitted: true })
+        this.socket.send(JSON.stringify(newMessage));
+        axios.post('/api/newMessage', {
+          sender: user.id,
+          recipient: this.state.id,
+          message: content,
+        }).then(messages => {
+        })
       })
+    }
   }
 
+  addNewRating = async (e) => {
+    if(localStorage.JWT_TOKEN){
+      let userObj = await refetchUser({token: localStorage.JWT_TOKEN})
+      e.preventDefault();
+      this.setState({ ratingSubmitted: true })
+      return axios.post("/api/ratings", {
+        rater: userObj.id,
+        ratee: this.state.id,
+        rating: this.state.rating
+      })
+    }
+  }
 
   checkIfRated = async (rater, ratee) => {
+    this.setState({ alreadyRated: false})
     let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
     AllRatingsOfRater.forEach(e => {
-      this.setState({ alreadyRated: false })
       if (e.rater === rater && e.ratee === ratee) {
-        return this.setState({ alreadyRated: true })
+        return this.setState({ alreadyRated: true})
       }
     })
   }
 
-  getUserIDFromState = () =>{
-    this.setState({user:this.props.user})
-  }
-
-
-  handleInputChange = e => {
-    const target = e.target;
-    const value = e;
-    const name = "rating";
-
+  handleRatingChange = e => {
     this.setState({
-      [name]: value
+      "rating": e
     });
   }
 
   componentDidUpdate() {
     this.scrollToBottom();
   }
-
   componentDidMount() {
     this.socket = new WebSocket('ws://localhost:8080');
     this.socket.addEventListener('open', e => {
@@ -103,67 +93,84 @@ class Chat extends Component {
       // The socket event data is encoded as a JSON string.
       // This line turns it into an object
       const data = JSON.parse(event.data);
-      console.log("went through");
-      console.log(data);
-
       let createMessage = { text: data.text, first_name: data.first_name, email: data.email };
 
       switch (data.type) {
         // adds new message to pre-existing messages
         case "incomingMessage":
           this.setState({ messages: this.state.messages.concat([createMessage]) })
-          console.log(this.state.messages);
           break;
         default:
           // show an error in the console if the message type is unknown
           throw new Error("Unknown event type: " + data.type);
       }
     }
-
-    getFilteredMessages(1, 2)
-      .then(messages => {
-        this.setState({
+    //check if logged in
+    if(localStorage.JWT_TOKEN){
+      refetchUser({token: localStorage.JWT_TOKEN})
+      .then(user => {
+        this.checkIfRated(user.id, this.state.id)
+        getFilteredMessages(user.id, this.state.id)
+        .then(messages => {
+          this.setState({
           messages
-        })
-        // console.log(messages);
-      });
+          })
+        });
+      })
+    }else{
+      //if user is not logged in, redirect to login page
+      this.setState({redirect: true})
+    }
 
-    // replace (1,3) with (user.id value, recipient.id) later
-    this.checkIfRated(1, 3)
-
-    console.log("this.props.user======", this.props.user)
-    console.log("this.props.state======", this.props.state)
-    
+    //get the username of the other user connected to chat
+    getUsernameById(this.state.id, localStorage.JWT_TOKEN)
+    .then(userInfo => {
+      this.setState({
+        chatPartner: userInfo,
+      })
+    })
   }
-
-
 
   render() {
     return (
-      <div>
-        {
-          (!this.state.ratingSubmitted) ?
-            (!this.state.alreadyRated &&
-              <RatingsForm
-                addNewRating={this.addNewRating}
-                handleInputChange={this.handleInputChange}
-                rating={this.state.rating}
-                ratingSubmitted={this.state.ratingSubmitted}
-              />
-            ) :
-            (<div>Rating sent!</div>)
-        }
+      <div className="default-flex-column-container">
+        {this.state.redirect && <Redirect to="/login" /> }
 
-
-        {this.state.messages &&
-          <div>
-            <MessageList messages={this.state.messages} />
+        <div className="chat-container">
+          <header>
+            <div>
+              <div>Chatting with:</div>
+              <div className="username">
+                {this.state.chatPartner &&
+                  this.state.chatPartner.first_name
+                }
+              </div>
+            </div>
+            <div className="rating-outer-container">
+              {
+                (!this.state.ratingSubmitted) ?
+                (!this.state.alreadyRated &&
+                  <RatingsForm
+                    addNewRating={this.addNewRating}
+                    handleRatingChange={this.handleRatingChange}
+                    rating={this.state.rating}
+                    ratingSubmitted={this.state.ratingSubmitted}
+                  />
+                ) :
+                (<div>Rating submitted!</div>)
+              }
+            </div>
+          </header>
+          {this.state.messages &&
+            <div>
+              <MessageList messages={this.state.messages} />
+            </div>
+          }
+          <div style={{ float: "left", clear: "both" }}
+            ref={(el) => { this.messagesEnd = el; }}>
           </div>
-        }
-        <div style={{ float: "left", clear: "both" }}
-          ref={(el) => { this.messagesEnd = el; }}>
+          <ChatBar addNewMessage={this.addNewMessage} />
         </div>
-        <ChatBar addNewMessage={this.addNewMessage} />
       </div>
     )
   }

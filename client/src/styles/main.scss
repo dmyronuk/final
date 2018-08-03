@@ -10,6 +10,10 @@ a{
   color: black;
 }
 
+h1, h2, h3, h4, h5{
+  margin:0;
+}
+
 button{
   border: none;
   background: white;
@@ -25,6 +29,7 @@ button{
 @import "default-styles.scss";
 @import "header.scss";
 @import "rentals-map.scss";
+@import "new-rentals.scss";
 @import "rentals-grid.scss";
 @import "rentals-single.scss";
 @import "rentals-marker.scss";
@@ -35,7 +40,7 @@ button{
 @import "yelp-results.scss";
 @import "login.scss";
 @import "rental-search-container.scss";
-
+@import "signup.scss";
 
 .main-container{
   display: flex;

@@ -1,26 +1,30 @@
 import React from "react";
 
 const YelpResults = (props) => {
+  const searchTerm = props.searchTerm[0].toUpperCase() + props.searchTerm.slice(1)
 
   return(
     <div className="default-flex-column-container">
-      <h3> </h3>
+      <div className="search-category">
+        <h3>Local {searchTerm}</h3>
+      </div>
       { props.results.map(amenity => {
         const distance = Math.round(amenity.distance) + "m"
         return(
-            <div className="yelp-results-item">
-              <div>{amenity.name}</div>
-              <div>
-                <img src={amenity.image_url}/>
+          <a href={amenity.url}>
+            <div key={amenity.id} className="yelp-results-item">
+              <header>{amenity.name}</header>
+              <div className="image-container">
+                <img alt={amenity.name + "image"} src={amenity.image_url}/>
               </div>
-              <div>{distance}</div>
-              <div>{amenity.location.address1}</div>
-              <div>{amenity.display_phone}</div>
-              <div>{amenity.rating}</div>
-              <a href={amenity.url}>
-                Link
-              </a>
+              <div className="yelp-results-info-container">
+                <div>{distance}</div>
+                <div>{amenity.location.address1}</div>
+                <div>{amenity.display_phone}</div>
+                <div>{amenity.rating}</div>
+              </div>
             </div>
+          </a>
           )
         })
       }

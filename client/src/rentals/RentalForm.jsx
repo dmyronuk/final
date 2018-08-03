@@ -92,93 +92,126 @@ class RentalForm extends Component {
 
   render() {
     const { street, city, province, postal_code, lat, lng, unit, price, bedrooms, bathrooms, date, description } = this.state.data;
-    return(
-      <div>
-        { this.state.redirect && <Redirect to="/profile" /> }
+
+    return (
+      <div className="new-rental-container">
+        {this.state.redirect && <Redirect to="/my-messages" />}
         <h1>Create New Listing</h1>
         <form onSubmit={this.handleSubmit}>
-          <label> Autocomplete: </label>
-          <TextField
-            id="autocomplete"
-            className="input-field"
-            ref="input"
-            required
-          /><br/>
-          <input
-            name={"street"}
-            value={street}
-            placeholder={"Street Address"}
-            onChange={this.handleChange}
-            disabled/>
-          <input
-            name={"city"}
-            value={city}
-            placeholder={"City"}
-            onChange={this.handleChange}
-            disabled/>
-          <input
-            name={"province"}
-            value={province}
-            placeholder={"Province"}
-            onChange={this.handleChange}
-            disabled/>
-          <input
-            name={"postal_code"}
-            value={postal_code}
-            placeholder={"Postal Code"}
-            onChange={this.handleChange}
-            disabled/><br/>
-          <label>Unit#</label>
-          <input
-            type="number"
-            name="unit"
-            value={unit}
-            onChange={this.handleChange}
-            min="0"/><br/>
-          <label>Price</label>
-          <input
-            type="number"
-            name="price"
-            value={price}
-            onChange={this.handleChange}
-            min="1"
-            required/><br/>
-          <label>Bedrooms</label>
-          <input
-           type="number"
-           name="bedrooms"
-           value={bedrooms}
-           onChange={this.handleChange}
-           min="0"
-           max="10"
-           required/><br/>
-          <label>Bashrooms</label>
-          <input
-            type="number"
-            name="bathrooms"
-            value={bathrooms}
-            onChange={this.handleChange}
-            min="0"
-            max="5"
-            required/><br/>
-          <label>Date Av</label>
-          <input
-            type="date"
-            name="date" value={date}
-            onChange={this.handleChange}
-            required/><br/>
-          <label>Description</label><br/>
-          <textarea
-            type="text"
-            name="description"
-            value={description}
-            onChange={this.handleChange} /><br/>
-          <input
-            ref={(ref) => { this.uploadInput = ref; }}
-            type="file" onChange={this.handleUploadImage}
-            accept=".jpg, .jpeg, .png" /><br/>
-          <input type="submit"  value="Create Listing"/>
+          <div className="autocomplete-container">
+            <label> Input Address Here: </label>
+            <TextField
+              id="autocomplete"
+              ref="input"
+              required
+            />
+          </div>
+
+          <div className="address-container">
+            <TextField
+              required
+              label="Street Address"
+              name={"street"}
+              value={street}
+              placeholder={"Street Address"}
+              InputProps={{
+                readOnly: true,
+              }}
+              onChange={this.handleChange} />
+            <TextField
+              required
+              name={"city"}
+              label="City"
+              value={city}
+              placeholder={"City"}
+              InputProps={{
+                readOnly: true,
+              }}
+              onChange={this.handleChange} />
+            <TextField
+              required
+              name={"province"}
+              label="Province"
+              value={province}
+              placeholder={"Province"}
+              InputProps={{
+                readOnly: true,
+              }}
+              onChange={this.handleChange} />
+            <TextField
+              required
+              name={"postal_code"}
+              label="Postal Code"
+              value={postal_code}
+              placeholder={"Postal Code"}
+              InputProps={{
+                readOnly: true,
+              }}
+              onChange={this.handleChange} />
+            <TextField
+              type="number"
+              label="Unit Number"
+              name="unit"
+              value={unit}
+              min={0}
+              onChange={this.handleChange} />
+          </div>
+
+          <div className="listing-description-container">
+            <TextField
+              type="number"
+              label="Price"
+              name="price"
+              value={price}
+              onChange={this.handleChange}
+              min="1"
+              max ="10000"
+              required />
+            <TextField
+              label="Bedrooms"
+              type="number"
+              name="bedrooms"
+              value={bedrooms}
+              onChange={this.handleChange}
+              min="0"
+              max="10"
+              required />
+            <TextField
+              label="Bathrooms"
+              type="number"
+              name="bathrooms"
+              value={bathrooms}
+              onChange={this.handleChange}
+              min="0"
+              max="5"
+              required />
+            <TextField
+              label="Date Available"
+              type="date"
+              name="date" value={date}
+              onChange={this.handleChange}
+              required />
+            <TextField
+              multiline
+              required
+              label="Description"
+              type="text"
+              name="description"
+              value={description}
+              onChange={this.handleChange} />
+          </div>
+
+          <div className="images-container">
+            <input
+              ref={(ref) => { this.uploadInput = ref; }}
+              type="file" onChange={this.handleUploadImage}
+              accept=".jpg, .jpeg, .png" />
+          </div>
+          <div>
+            <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
+          </div>
         </form>
+
         {this.state.edit && <button onClick={this.handleDelete}> Delete</button>}
         {this.createImgTag(this.state.imageURLs)}
       </div>
