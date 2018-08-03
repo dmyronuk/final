@@ -2,15 +2,21 @@
   display:flex;
   flex-direction:row;
   position:relative;
-}
 
-.yelp-button{
-  background:#eeeeee;
-  width:4rem;
-  height:4rem;
+  button{
+    border:solid 1px #aaaaaa;
+    margin:0.2rem;
+    width:4rem;
+    height:4rem;
+    transition:background 1s;
 
-  img{
-    height:100%;
-    width:100%;
+    &:hover{
+      background:blue;
+    }
+
+    img{
+      height:100%;
+      width:100%;
+    }
   }
 }

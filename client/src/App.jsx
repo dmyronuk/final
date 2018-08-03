@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createContext } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import Chat from "./messages/Chat.jsx";
 import Header from "./Header.jsx";
@@ -8,7 +8,7 @@ import EditRentalForm from "./rentals/EditRentalForm.jsx";
 import Login from "./users/Login";
 import Logout from "./users/Logout";
 import PageMask from "./PageMask"
-import Profile from  "./users/Profile";
+import MyMessages from  "./users/MyMessages";
 import RentalsGrid from "./rentals/RentalsGrid.jsx";
 import RentalsMap from "./rentals/RentalsMap.jsx";
 import Sidebar from "./navigation/Sidebar";
@@ -16,6 +16,13 @@ import Signup from "./users/Signup";
 import SingleRental from "./rentals/SingleRental.jsx";
 import { refetchUser } from "./ajax/auth";
 
+// context
+// import AppProvider from "./provider.jsx";
+// import AppContext from "./provider.jsx";
+
+
+
+let UserContext = React.createContext()
 
 class App extends Component {
   constructor(props){
@@ -41,10 +48,11 @@ class App extends Component {
     this.setState({ user: null });
   }
 
-  componentWillMount(){
+  componentDidMount(){
     if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
+        console.log(user);
         this.setUser(user);
       })
     }
@@ -67,8 +75,9 @@ class App extends Component {
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <Route exact path="/rentals/new" render={() => <NewRentalForm user={this.state.user} />} />
           <Route exact path="/chat" component={ Chat }/>
-          <Route exact path="/profile" component={Profile} />
           <Route exact path="/rentals/:id/edit" component={ EditRentalForm } />
+          <Route exact path="/chat/:id(\d+)" component= { Chat }/>
+          <Route path="/my-messages" component={MyMessages} />
         </div>
       </BrowserRouter>
     );

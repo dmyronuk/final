@@ -44,15 +44,15 @@ class Login extends Component {
 
   render() {
     return (
-
       <div className="default-flex-column-container">
-        <div className="login-container" >
           { this.state.redirect && <Redirect to="/" /> }
           {this.state.errors &&
             <div>
               {this.state.errors.map(err => <div>{ err }</div>)}
             </div>
           }
+        <div className="login-container" >
+          { this.state.redirect && <Redirect to="/" /> }
           <section className="login" id="login">
             <header>
               <h2>Rental App</h2>
@@ -79,7 +79,7 @@ class Login extends Component {
               <div className="submit-container">
                 <input type="submit" value="LogIn" className="login-button"/>
               </div>
-          </form>
+            </form>
           </section>
         </div>
       </div>

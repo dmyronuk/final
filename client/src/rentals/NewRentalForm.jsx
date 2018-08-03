@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import RentalForm from "./RentalForm";
 import axios from 'axios';
 

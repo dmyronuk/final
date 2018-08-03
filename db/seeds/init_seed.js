@@ -1,5 +1,7 @@
 var faker = require('faker');
 
+const bcrypt = require('bcryptjs');
+
 function randomParagraphGen() {
   let paragraph = "";
   for (let i = 0; i < 5; ++i) {
@@ -77,19 +79,19 @@ exports.seed = function(knex, Promise) {
       first_name: "Mary",
       last_name: "Ann",
       email: "mary@gmail.com",
-      password_digest: "mary",
+      password_digest: bcrypt.hashSync("mary", 10),
     },
     {
       first_name: "John",
       last_name: "Smith",
       email: "john@gmail.com",
-      password_digest: "john",
+      password_digest: bcrypt.hashSync("john", 10),
     },
     {
       first_name: "Bob",
       last_name: "Singh",
       email: "bob@gmail.com",
-      password_digest: "bob",
+      password_digest: bcrypt.hashSync("bob", 10),
     },
     ]).returning("*");
   }
@@ -170,7 +172,8 @@ exports.seed = function(knex, Promise) {
       lng: -79.394940,
       price: randomCostGen(),
       landlords_id: landlords[0].id,
-      neighbourhoods_id: neighbourhoods[0].id
+      neighbourhoods_id: neighbourhoods[0].id,
+      photos: ["/images/listing1.1.jpg", "/images/listing1.2.jpg", "/images/listing1.3.jpg"]
     },
     {
       // address: "725 Bathurst St, Toronto, ON M5S 2R5",
@@ -179,6 +182,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[1].id,
+      photos: ["/images/listing2.1.jpg", "/images/listing2.2.jpg", "/images/listing2.3.jpg"]
     },
     {
       // address: "25 Breadalbane St, Toronto, ON",
@@ -187,7 +191,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[0].id,
-
+      photos: ["/images/listing3.1.jpg", "/images/listing3.2.jpg", "/images/listing3.3.jpg"]
     },
     {
       // address: "195-271 Albany Ave, Toronto, ON M5R 3C7",
@@ -196,7 +200,9 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[0].id,
+      photos: ["/images/listing4.1.jpg", "/images/listing4.2.jpg", "/images/listing4.3.jpg"]
     },
+
     {
       // address: "67-3 Armstrong Ave, Toronto, ON M6H 1V9",
       lat: 43.664022,
@@ -204,6 +210,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[1].id,
+      photos: ["/images/listing5.1.jpg", "/images/listing5.2.jpg"]
     },
     {
       // address: "2-24 St Annes Rd, Toronto, ON M6J 2C1",
@@ -212,6 +219,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[1].id,
+      photos: ["/images/listing6.1.jpg", "/images/listing6.2.jpg"]
     },
     {
       // address: "34 Heydon Park Rd, Toronto, ON M6J 2C8",
@@ -220,6 +228,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[0].id,
+      photos: ["/images/listing7.1.jpg", "/images/listing7.2.jpg", "/images/listing7.3.jpg"]
     },
     {
       // address: "224 Wallace Ave, Toronto, ON M6H 1V5",
@@ -228,6 +237,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[0].id,
+      photos: ["/images/listing8.1.jpg", "/images/listing8.2.jpg", "/images/listing8.3.jpg"]
     },
     {
       // address: "133 Yorkville Ave, Toronto, ON M5R 1C4",
@@ -236,6 +246,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[0].id,
+      photos: ["/images/listing9.1.jpg", "/images/listing9.2.jpg"]
     },
     {
       // address: "169 Dufferin St, Toronto, ON M6K 1Y9",
@@ -244,6 +255,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[1].id,
+      photos: ["/images/listing10.1.jpg", "/images/listing10.2.jpg"]
     },
     {
       // address: "345 Dufferin St, Toronto, ON M6K 3G1",
@@ -252,6 +264,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[1].id,
+      photos: ["/images/listing11.1.jpg", "/images/listing11.2.jpg", "/images/listing11.3.jpg"]
     },
     {
       // address: "70-8 Brookfield St, Toronto, ON M6J 3A9",
@@ -260,6 +273,7 @@ exports.seed = function(knex, Promise) {
       price: randomCostGen(),
       landlords_id: landlords[0].id,
       neighbourhoods_id: neighbourhoods[1].id,
+      photos: ["/images/listing12.1.jpg"]
     },
     ]).returning("*")
   }
