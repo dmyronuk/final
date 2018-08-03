@@ -13,8 +13,10 @@ class RentalsGrid extends Component{
   handleSearchSubmit = (queryObj) => {
     getAllListingsFromQuery(queryObj)
     .then(listings => {
+      const noResults = listings.length === 0;
       this.setState({
-        listings
+        listings,
+        noResults,
       })
     })
   }
@@ -32,6 +34,9 @@ class RentalsGrid extends Component{
     return(
       <div>
         <RentalSearchForm handleSearchSubmit={this.handleSearchSubmit} />
+        {this.state.noResults &&
+          <div className="no-results">No Results</div>
+        }
         <div className="listing-grid-container">
           {this.state.listings && this.state.listings.map((elem, i) =>
             <RentalGridCard
