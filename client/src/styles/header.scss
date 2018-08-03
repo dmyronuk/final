@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   height: $header-height;
-  z-index:5000;
+  z-index: 5000;
 }
 
 .header-top a{
@@ -29,7 +29,22 @@
   }
 }
 
-.login-button{
-  cursor: pointer;
-  right: 2rem;
+.nav-login-container{
+  position: absolute;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  .login-button{
+    right: 1rem;
+  }
+
+  .logout-button{
+    background: #ee4035;
+
+    &:hover{
+      background: lighten(#ee4035, 5%);
+    }
+  }
 }
+
