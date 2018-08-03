@@ -4,12 +4,12 @@ import SearchIcon from "../icons/search.png"
 class RentalSearchForm extends Component{
   constructor(props){
     super(props)
-    this.maxPrice = 500000
+    this.maxPrice = 6000
     this.state = {
       query: "",
       bedrooms: "Any",
       bathrooms: "Any",
-      maxPrice: 500000,
+      maxPrice: 6000,
       minPrice: 0,
     }
   }
