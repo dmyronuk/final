@@ -59,6 +59,8 @@ wss.broadcast = (data, ws) => {
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
+  // var userID = parseInt(ws.upgradeReq.url.substr(1), 10)
+  // console.log(userID);
   // console.log(wss.clients.size);
 
   ws.on('message', function incoming(message) {
