@@ -126,6 +126,7 @@ class Chat extends Component {
     //get the username of the other user connected to chat
     getUsernameById(this.state.id, localStorage.JWT_TOKEN)
     .then(userInfo => {
+      console.log("skdjfhskdjfhsd", userInfo)
       this.setState({
         chatPartner: userInfo,
       })
