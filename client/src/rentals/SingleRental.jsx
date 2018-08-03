@@ -119,6 +119,11 @@ class SingleRental extends Component {
                     Contact Landlord!
                   </Link>}
             </div>
+
+            {/* if user is not logged in, it will show a please login to contact landlord, there is a slight blink*/}
+            <div>
+              {(this.state.landlordUserId && !this.state.current_user) && <p>Please login to contact landlord</p> }
+            </div>
           </div>
         }
       </div>
