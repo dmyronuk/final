@@ -38,22 +38,46 @@ class Signup extends React.Component {
       this.setState({errors: data.errors})
     }
   }
+  addError = (err) => {
+    console.log(err)
+    let errType;
+    switch(err) {
+      case "All fields mandatory" :
+        errType = 'error_1'
+        break;
+      case "Invalid phone number" :
+        errType = "error_2"
+        break;
+      case "Password must be 8 characters" :
+        errType = "error_3"
+        break;
+      case "Passwords do not match" :
+        errType = "error_4"
+        break;
+    }
+    let form = document.getElementById('form')
+    form.classList.add(errType)
+    setTimeout(function () {
+     form.classList.remove(errType);
+    }, 3000)
+    this.setState({errors: null});
+  }
 
   render() {
     return (
       <div className="default-flex-column-container">
         { this.state.redirect && <Redirect to="/" /> }
         <div className="register-container">
-          { this.state.errors && this.state.errors.map((err) => <div>{err}</div> )}
-          <section className="login" id="login">
+          { this.state.errors && this.addError(this.state.errors[0])}
+          <section className="register" id="form">
             <header>
               <h2>Rental App</h2>
               <h4>Register</h4>
             </header>
-            <form className="login-form" onSubmit={this.handleSubmit }>
+            <form className="register-form" onSubmit={this.handleSubmit}>
               <div>
                 <input
-                  className="login-input"
+                  className="register-input"
                   type="text"
                   name="first_name"
                   value={this.state.first_name}
@@ -63,7 +87,7 @@ class Signup extends React.Component {
               </div>
               <div>
                 <input
-                  className="login-input"
+                  className="register-input"
                   type="text"
                   name="last_name"
                   value={this.state.last_name}
@@ -73,7 +97,7 @@ class Signup extends React.Component {
               </div>
               <div>
                 <input
-                  className="login-input"
+                  className="register-input"
                   type="tel"
                   name="phone"
                   value={this.state.phone}
@@ -83,7 +107,7 @@ class Signup extends React.Component {
               </div>
               <div>
                 <input
-                  className="login-input"
+                  className="register-input"
                   type="email"
                   name="email"
                   value={this.state.email}
@@ -93,7 +117,7 @@ class Signup extends React.Component {
               </div>
               <div>
                 <input
-                  className="login-input"
+                  className="register-input"
                   type="password"
                   name="password"
                   value={this.state.password}
@@ -102,7 +126,7 @@ class Signup extends React.Component {
               </div>
               <div>
                 <input
-                  className="login-input"
+                  className="register-input"
                   type="password"
                   name="password_confirmation"
                   value={this.state.password_confirmation}
@@ -110,12 +134,14 @@ class Signup extends React.Component {
                   placeholder="Password Confirmation"
                 />
               </div>
-              <select name="user_type" onChange={this.handleChange}>
-                <option value="landlord">Landlord</option>
-                <option value="tenant">Tenant</option>
-              </select>
+              <div className="select-style">
+                <select name="user_type" onChange={this.handleChange}>
+                  <option value="landlord">Landlord</option>
+                  <option value="tenant">Tenant</option>
+                </select>
+              </div>
               <div className="submit-container">
-                <input type="submit" value="submit" className="login-button"/>
+                <input type="submit" value="Register" className="register-button"/>
               </div>
             </form>
             </section>

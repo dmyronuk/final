@@ -64,9 +64,9 @@ let controller = {
     const errors = [];
     const data = req.body;
 
-    ! validations.passwordIsValid(data.password) && errors.push("Password must be 8 characters");
     ! validations.allFieldsPresent([data.first_name, data.last_name, data.user_type, data.email ]) && errors.push("All fields mandatory");
     ! validations.phoneNumberIsValid(data.phone) && errors.push("Invalid phone number")
+    ! validations.passwordIsValid(data.password) && errors.push("Password must be 8 characters");
     ! validations.passwordsMatch(data.password, data.password_confirmation) && errors.push("Passwords do not match")
 
     //if all validations pass then insert the new user into the database
