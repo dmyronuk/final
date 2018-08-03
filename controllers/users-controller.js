@@ -96,7 +96,8 @@ let controller = {
   },
 
   threads: (req, res) => {
-    queries.getAllThreads(1)
+    const current_user = req.query.user_id
+    queries.getAllThreads(current_user)
     .then(thread => {
       res.json(thread);
     })
@@ -116,6 +117,13 @@ let controller = {
         })
       }
     })
+
+  getUserFromLandlordId: (req, res) => {
+    let landlord_id = req.query.landlord_id;
+    queries.getUserFromLandlordId(landlord_id)
+      .then(users_id => {
+        res.json(users_id);
+      })
   }
 }
 
