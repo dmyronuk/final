@@ -7,8 +7,8 @@ return(
       <div className="listing-grid-card">
         <div className="listing-grid-photo-container">
           { props.data.photos ?
-            <img alt="Rental Photo" src={props.data.photos[0]} />
-            : <img alt="No Image Available" src="/images/no-image.jpg" />
+            <img alt="Rental Property" src={props.data.photos[0]} />
+            : <img alt="Not Available" src="/images/no-image.jpg" />
           }
         </div>
         <div className="listing-grid-info">

@@ -21,11 +21,8 @@ class YelpSearch extends Component {
     categorySearchByLocation(searchRequest)
     .then(data => {
       //yelp data is saved in SingleRental component state for display
-      this.props.setYelpData(data)
+      this.props.setYelpData(data, term)
     })
-  }
-
-  componentDidMount(){
   }
 
   render(){
