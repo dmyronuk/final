@@ -42,12 +42,32 @@ class Login extends Component {
     }
   }
 
+  addError = (err) => {
+    let errType;
+    switch(err) {
+      case "Login failed" :
+        errType = 'error_2'
+        break;
+      case "All fields required" :
+        errType = "error_1"
+        break;
+    }
+    let form = document.getElementById('form')
+    form.classList.add(errType)
+    setTimeout(function () {
+     form.classList.remove(errType);
+    }, 3000)
+    this.setState({errors: null});
+  }
+
   render() {
     return (
       <div className="default-flex-column-container">
+        { this.state.redirect && <Redirect to="/" /> }
+        { this.state.errors && this.addError(this.state.errors[0]) }
         <div className="login-container" >
           { this.state.redirect && <Redirect to="/" /> }
-          <section className="login" id="login">
+          <section className="login" id="form">
             <header>
               <h2>Rental App</h2>
               <h4>Login</h4>
@@ -59,17 +79,14 @@ class Login extends Component {
                value={this.state.email}
                onChange={this.handleChange}
                className="login-input"
-               placeholder="Email"
-               required
-               autofocus/>
+               placeholder="Email"/>
               <input
                type="password"
                name="password"
                value={this.state.password}
                onChange={this.handleChange}
                className="login-input"
-               placeholder="Password"
-               required />
+               placeholder="Password"/>
               <div className="submit-container">
                 <input type="submit" value="LogIn" className="login-button"/>
               </div>

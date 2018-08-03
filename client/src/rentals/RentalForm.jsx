@@ -71,15 +71,15 @@ class RentalForm extends Component {
     let geocoder = new window.google.maps.Geocoder();
     // Google Geocode call
     // geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
-      let currData = Object.assign({}, this.state.data, {
-        street: addressObject.name,
-        city: address[3].long_name ,
-        province: address[5].long_name,
-        postal_code: address[address.length > 7 ? 7 : 6].long_name,
-        lat: addressObject.geometry.location.lat() ,
-        lng: addressObject.geometry.location.lng() ,
-      })
-      this.setState({ data: currData })
+    let currData = Object.assign({}, this.state.data, {
+      street: addressObject.name,
+      city: address[3].long_name,
+      province: address[5].long_name,
+      postal_code: address[address.length > 7 ? 7 : 6].long_name,
+      lat: addressObject.geometry.location.lat(),
+      lng: addressObject.geometry.location.lng(),
+    })
+    this.setState({ data: currData })
     // })
 
   }
@@ -90,120 +90,171 @@ class RentalForm extends Component {
     return (
       <div className="new-rental-container">
         {this.state.redirect && <Redirect to="/my-messages" />}
-        <h1>Create New Listing</h1>
 
-        <form onSubmit={this.handleSubmit}>
-          <div className="autocomplete-container">
-            <label> Input Address Here: </label>
-            <TextField
-              id="autocomplete"
-              ref="input"
-              required
-            />
-          </div>
+        <form className="new-listing-container" onSubmit={this.handleSubmit}>
+        <h2>Create Your Listing</h2>
 
+          <h3> Address </h3>
           <div className="address-container">
-            <TextField
-              required
-              label="Street Address"
-              name={"street"}
-              value={street}
-              placeholder={"Street Address"}
-              InputProps={{
-                readOnly: true,
-              }}
-              onChange={this.handleChange} />
-            <TextField
-              required
-              name={"city"}
-              label="City"
-              value={city}
-              placeholder={"City"}
-              InputProps={{
-                readOnly: true,
-              }}
-              onChange={this.handleChange} />
-            <TextField
-              required
-              name={"province"}
-              label="Province"
-              value={province}
-              placeholder={"Province"}
-              InputProps={{
-                readOnly: true,
-              }}
-              onChange={this.handleChange} />
-            <TextField
-              required
-              name={"postal_code"}
-              label="Postal Code"
-              value={postal_code}
-              placeholder={"Postal Code"}
-              InputProps={{
-                readOnly: true,
-              }}
-              onChange={this.handleChange} />
-            <TextField
-              type="number"
-              label="Unit Number"
-              name="unit"
-              value={unit}
-              min={0}
-              onChange={this.handleChange} />
+            <div className="textfield">
+              <TextField
+                id="autocomplete"
+                label="Type Address Here"
+                ref="input"
+                required
+                fullWidth
+              />
+            </div>
+
+            <div className="textfield">
+              <TextField
+                required
+                fullWidth
+                label="Street Address"
+                name={"street"}
+                value={street}
+                InputProps={{
+                  readOnly: true,
+                }}
+                onChange={this.handleChange} />
+            </div>
+
+
+            <div className="textfield">
+              <TextField
+                required
+                fullWidth
+                name={"city"}
+                label="City"
+                value={city}
+                InputProps={{
+                  readOnly: true,
+                }}
+                onChange={this.handleChange} />
+            </div>
+
+            <div className="textfield">
+              <TextField
+                required
+                fullWidth
+                name={"province"}
+                label="Province"
+                value={province}
+                InputProps={{
+                  readOnly: true,
+                }}
+                onChange={this.handleChange} />
+            </div>
+
+            <div className="textfield">
+              <TextField
+                required
+                fullWidth
+                name={"postal_code"}
+                label="Postal Code"
+                value={postal_code}
+                InputProps={{
+                  readOnly: true,
+                }}
+                onChange={this.handleChange} />
+            </div>
+
+            <div className="textfield">
+              <TextField
+                type="number"
+                label="Unit Number"
+                name="unit"
+                fullWidth
+                value={unit}
+                min={0}
+                onChange={this.handleChange} />
+            </div>
+
           </div>
 
+            <h3> Listing Details </h3>
           <div className="listing-description-container">
-            <TextField
-              type="number"
-              label="Price"
-              name="price"
-              value={price}
-              onChange={this.handleChange}
-              min="1"
-              max ="10000"
-              required />
-            <TextField
-              label="Bedrooms"
-              type="number"
-              name="bedrooms"
-              value={bedrooms}
-              onChange={this.handleChange}
-              min="0"
-              max="10"
-              required />
-            <TextField
-              label="Bathrooms"
-              type="number"
-              name="bathrooms"
-              value={bathrooms}
-              onChange={this.handleChange}
-              min="0"
-              max="5"
-              required />
-            <TextField
-              label="Date Available"
-              type="date"
-              name="date" value={date}
-              onChange={this.handleChange}
-              required />
-            <TextField
-              multiline
-              required
-              label="Description"
-              type="text"
-              name="description"
-              value={description}
-              onChange={this.handleChange} />
+
+            <div className="textfield">
+              <TextField
+                inputStyle={{ fontSize: '2rem' }}
+                type="number"
+                label="Price"
+                name="price"
+                value={price}
+                onChange={this.handleChange}
+                min="1"
+                max="10000"
+                required
+              />
+            </div>
+
+            <div className="textfield">
+              <TextField
+                inputStyle={{ fontSize: '2rem' }}
+                label="Bedrooms"
+                type="number"
+                name="bedrooms"
+                value={bedrooms}
+                onChange={this.handleChange}
+                min="0"
+                max="10"
+                required
+              />
+            </div>
+
+            <div className="textfield">
+              <TextField
+                inputStyle={{ fontSize: '2rem' }}
+                label="Bathrooms"
+                type="number"
+                name="bathrooms"
+                value={bathrooms}
+                onChange={this.handleChange}
+                min="0"
+                max="5"
+                required
+              />
+            </div>
+
+            <div className="textfield">
+              <TextField
+                inputStyle={{ fontSize: '2rem' }}
+                label="Date Available"
+                type="date"
+                name="date"
+                value={date}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={this.handleChange}
+                require
+              />
+            </div>
+            <div className="textfield">
+              <TextField
+                inputStyle={{ fontSize: '2rem' }}
+                multiline
+                required
+                fullWidth
+                label="Description"
+                type="text"
+                name="description"
+                value={description}
+                onChange={this.handleChange} />
+            </div>
           </div>
 
+
+            <h3> Images </h3>
           <div className="images-container">
             <input
               ref={(ref) => { this.uploadInput = ref; }}
               type="file" onChange={this.handleUploadImage}
               accept=".jpg, .jpeg, .png" />
           </div>
-          <div>
-            <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
+          <div className = "submit">
+            <Button variant="contained" color="primary" onClick={this.handleSubmit}>Post Your Listing</Button>
           </div>
         </form>
 
