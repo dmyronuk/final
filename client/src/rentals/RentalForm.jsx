@@ -171,7 +171,7 @@ class RentalForm extends Component {
             ref={(ref) => { this.uploadInput = ref; }}
             type="file" onChange={this.handleUploadImage}
             accept=".jpg, .jpeg, .png" /><br/>
-          <Button variant="contained" color="primary" onSubmit={this.handleSubmit}>Submit</Button>
+          <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
         </form>
         {this.state.edit && <button onClick={this.handleDelete}> Delete</button>}
         {this.createImgTag(this.state.imageURLs)}
