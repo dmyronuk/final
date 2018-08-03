@@ -22,7 +22,7 @@ class Chat extends Component {
 
   // allows the messages to be viewed from the most recent
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+
   }
 
   // allow user to add a new message
@@ -133,7 +133,7 @@ class Chat extends Component {
 
   render() {
     return (
-      <div className="default-flex-column-container">
+      <div>
         {this.state.redirect && <Redirect to="/login" /> }
 
         <div className="chat-container">
@@ -162,13 +162,9 @@ class Chat extends Component {
             </div>
           </header>
           {this.state.messages &&
-            <div>
-              <MessageList messages={this.state.messages} />
-            </div>
+            <MessageList messages={this.state.messages} currentUserId={this.state.id} />
           }
-          <div style={{ float: "left", clear: "both" }}
-            ref={(el) => { this.messagesEnd = el; }}>
-          </div>
+
           <ChatBar addNewMessage={this.addNewMessage} />
         </div>
       </div>

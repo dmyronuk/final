@@ -1,17 +1,13 @@
 .chat-container{
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 40vw;
-  height: 75vh;
+  width:50vw;
+  margin:auto;
   margin-top: 2.5rem;
   border: #aaaaaa solid 1px;
 
   header{
     background: $blue-header;
     color: white;
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,23 +28,52 @@
       }
     }
   }
+
+  .message-list{
+    overflow-y: scroll;
+    height: 60vh;
+    background: #eeeeee;
+    margin-bottom: 3rem;
+    display: block;
+
+    li{
+      list-style-type: none;
+    }
+
+    .chat-msg{
+      border: 1px solid black;
+      background:white;
+    }
+
+    .cur-user-msg{
+      position: relative;
+      right: 0px;
+      box-shadow: -2px 2px 2px black;
+    }
+
+    .other-user-msg{
+      position: relative;
+      left: 0;
+      align-self:flex-end;
+    }
+  }
 }
 
 .chatbar {
   position: absolute;
   bottom: 0;
+  background: white;
   width:100%;
-  background: grey;
   border-top: 1px solid black;
   display: flex;
+  justify-content: center;
 }
 
 .chatbar-message {
   border: 1px solid black;
   display: block;
-  height: 40px;
-  line-height: 40px;
+  height: 3rem;
   margin: 5px;
   padding: 0 9px;
-  flex: 8;
+  flex: 1;
 }

@@ -24,7 +24,11 @@ class ChatBar extends Component {
 
     return (
       <footer className="chatbar">
-        <input className="chatbar-message" onChange = {this.changeMessage} onKeyPress= {submitMessage} placeholder="Type a message and hit ENTER" />
+        <input
+          className="chatbar-message"
+          onChange = {this.changeMessage}
+          onKeyPress= {submitMessage}
+          placeholder="Type a message" />
       </footer>
     )
   }
