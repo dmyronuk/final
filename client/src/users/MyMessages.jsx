@@ -3,6 +3,7 @@ import { getUserProfile } from "../ajax/profile";
 import { getAllRatingsOfUser } from "../ajax/ratings";
 import { getAllThreads } from "../ajax/threads";
 import SingleThread  from "./SingleThread.jsx";
+import { refetchUser } from "../ajax/auth";
 
 // context
 // import AppContext from "../provider.jsx";
@@ -17,15 +18,19 @@ class MyMessages extends Component {
 
 
   componentDidMount(){
-    const tokenObj = {token: localStorage.getItem("JWT_TOKEN")};
-    const profileData = getUserProfile(tokenObj);
-    getAllThreads()
-    .then(threads => {
-      this.setState({
-        threads
+    // const tokenObj = {token: localStorage.getItem("JWT_TOKEN")};
+    // const profileData = getUserProfile(tokenObj);
+    if(localStorage.JWT_TOKEN){
+      refetchUser({token: localStorage.JWT_TOKEN})
+      .then(user => {
+        getAllThreads(user.id)
+        .then(threads => {
+          this.setState({
+            threads
+          })
+        })
       })
-      console.log(threads);
-    })
+    }
   }
 
   // renderOne(data) {

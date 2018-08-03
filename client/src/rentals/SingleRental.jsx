@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getSingleListing } from "../ajax/listings";
+import { getUserFromLandlordId } from "../ajax/profile";
 import YelpSearch from "../yelp/YelpSearch";
 import YelpResults from "../yelp/YelpResults";
 import dateFromTimestamp from "../helpers/time-formatters";
@@ -27,6 +28,7 @@ class SingleRental extends Component {
   componentDidMount(){
     getSingleListing(this.state.id)
     .then(data => {
+
       const formattedDate = dateFromTimestamp(data.date_available);
       console.log(data)
       this.setState({

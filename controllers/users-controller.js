@@ -96,11 +96,18 @@ let controller = {
   },
 
   threads: (req, res) => {
-    queries.getAllThreads(1)
+    const current_user = req.query.user_id
+    queries.getAllThreads(current_user)
     .then(thread => {
       res.json(thread);
     })
-  }
+  },
+
+  // getUserFromLandlordId: (req, res) => {
+  //   let user_id = req.query.user_id
+  //   queries.getUserFromLandlordId(user_id)
+  //     .then
+  // }
 }
 
 module.exports = controller;
