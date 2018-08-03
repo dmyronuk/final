@@ -117,13 +117,14 @@ let controller = {
         })
       }
     })
+  },
 
   getUserFromLandlordId: (req, res) => {
     let landlord_id = req.query.landlord_id;
     queries.getUserFromLandlordId(landlord_id)
-      .then(users_id => {
-        res.json(users_id);
-      })
+    .then(users_id => {
+      res.json(users_id);
+    })
   }
 }
 
