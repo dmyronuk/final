@@ -74,7 +74,6 @@ class App extends Component {
           <Route exact path="/rentals/grid" component={ RentalsGrid }/>
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <Route exact path="/rentals/new" render={() => <NewRentalForm user={this.state.user} />} />
-          <Route exact path="/chat" component={ Chat }/>
           <Route exact path="/rentals/:id/edit" component={ EditRentalForm } />
           <Route exact path="/chat/:id(\d+)" component= { Chat }/>
           <Route path="/my-messages" component={MyMessages} />
