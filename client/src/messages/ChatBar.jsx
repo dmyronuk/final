@@ -11,10 +11,7 @@ class ChatBar extends Component {
     this.setState({inputMessage: evt.target.value});
   }
 
-
-
   render() {
-
   // pressing enter to submit the message
     const submitMessage = evt => {
       const newMessageInput = evt.target;
@@ -29,7 +26,7 @@ class ChatBar extends Component {
       <footer className="chatbar">
         <input className="chatbar-message" onChange = {this.changeMessage} onKeyPress= {submitMessage} placeholder="Type a message and hit ENTER" />
       </footer>
-      )
+    )
   }
 }
 

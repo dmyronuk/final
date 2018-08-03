@@ -73,6 +73,12 @@ module.exports = (function() {
     .select()
   },
 
+  getUsernameById: (user_id) => {
+    return knex('users')
+    .where('id', user_id)
+    .select('first_name', 'last_name')
+  },
+
   getUserByEmail: (email) => {
     return knex('users')
     .where('email', email)

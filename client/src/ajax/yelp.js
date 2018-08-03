@@ -1,7 +1,6 @@
 //searchRequest object should contain latitude str, longitude str, radius str, term str
 //term examples: education, restaurants
 const categorySearchByLocation = async (searchRequest) => {
-  console.log(searchRequest)
   const url = `/api/listings/:id/yelp`;
   const response = await fetch(url, {
     method: "POST",

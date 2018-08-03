@@ -100,6 +100,22 @@ let controller = {
     .then(thread => {
       res.json(thread);
     })
+  },
+
+  //route to fetch username of other user in chat
+  getUsernameById: (req, res) => {
+    const token = req.body.token;
+    jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
+      //if jwt is invalid, do not send back user info
+      if(err){
+        res.json({userInfo: null})
+      }else{
+        queries.getUsernameById(req.params.id)
+        .then(userInfo => {
+          res.json(userInfo[0])
+        })
+      }
+    })
   }
 }
 

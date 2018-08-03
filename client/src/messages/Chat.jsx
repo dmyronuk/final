@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import { getFilteredMessages } from "../ajax/messages";
-import { getAllRatingsThatUserRated } from "../ajax/ratings";
+import { Redirect } from "react-router-dom";
+import axios from 'axios';
 import MessageList from "./MessageList.jsx";
 import RatingsForm from "./RatingsForm.jsx";
 import ChatBar from "./ChatBar.jsx";
-import axios from 'axios';
+import { getFilteredMessages, getUsernameById } from "../ajax/messages";
+import { getAllRatingsThatUserRated } from "../ajax/ratings";
 import { refetchUser } from "../ajax/auth";
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      redirect: false,
       id: Number(this.props.match.params.id),
       rating: 5,
       alreadyRated: false,
@@ -25,7 +27,6 @@ class Chat extends Component {
 
   // allow user to add a new message
   addNewMessage = (content) => {
-    console.log(content);
     if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
@@ -47,10 +48,7 @@ class Chat extends Component {
         })
       })
     }
-
-
   }
-
 
   addNewRating = async (e) => {
     if(localStorage.JWT_TOKEN){
@@ -65,7 +63,6 @@ class Chat extends Component {
     }
   }
 
-
   checkIfRated = async (rater, ratee) => {
     this.setState({ alreadyRated: false})
     let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
@@ -76,13 +73,7 @@ class Chat extends Component {
     })
   }
 
-  getUserIDFromState = () =>{
-    this.setState({user:this.props.user})
-  }
-
-
   handleRatingChange = e => {
-
     this.setState({
       "rating": e
     });
@@ -102,23 +93,20 @@ class Chat extends Component {
       // The socket event data is encoded as a JSON string.
       // This line turns it into an object
       const data = JSON.parse(event.data);
-      console.log("went through");
-      console.log(data);
-
       let createMessage = { text: data.text, first_name: data.first_name, email: data.email };
 
       switch (data.type) {
         // adds new message to pre-existing messages
         case "incomingMessage":
           this.setState({ messages: this.state.messages.concat([createMessage]) })
-          console.log(this.state.messages);
           break;
         default:
           // show an error in the console if the message type is unknown
           throw new Error("Unknown event type: " + data.type);
       }
     }
-     if(localStorage.JWT_TOKEN){
+    //check if logged in
+    if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
         this.checkIfRated(user.id, this.state.id)
@@ -126,40 +114,63 @@ class Chat extends Component {
         .then(messages => {
           this.setState({
           messages
-        })
-        // console.log(messages);
-      });
+          })
+        });
       })
+    }else{
+      //if user is not logged in, redirect to login page
+      this.setState({redirect: true})
     }
+
+    //get the username of the other user connected to chat
+    getUsernameById(this.state.id, localStorage.JWT_TOKEN)
+    .then(userInfo => {
+      this.setState({
+        chatPartner: userInfo,
+      })
+    })
   }
-
-
 
   render() {
     return (
-      <div>
-        {
-          (!this.state.ratingSubmitted) ?
-          (!this.state.alreadyRated &&
-            <RatingsForm
-              addNewRating={this.addNewRating}
-              handleRatingChange={this.handleRatingChange}
-              rating={this.state.rating}
-              ratingSubmitted={this.state.ratingSubmitted}
-            />
-          ) :
-          (<div>Rating submitted!</div>)
-        }
+      <div className="default-flex-column-container">
+        {this.state.redirect && <Redirect to="/login" /> }
 
-        {this.state.messages &&
-          <div>
-            <MessageList messages={this.state.messages} />
+        <div className="chat-container">
+          <header>
+            <div>
+              <div>Chatting with:</div>
+              <div className="username">
+                {this.state.chatPartner &&
+                  this.state.chatPartner.first_name
+                }
+              </div>
+            </div>
+            <div className="rating-outer-container">
+              {
+                (!this.state.ratingSubmitted) ?
+                (!this.state.alreadyRated &&
+                  <RatingsForm
+                    addNewRating={this.addNewRating}
+                    handleRatingChange={this.handleRatingChange}
+                    rating={this.state.rating}
+                    ratingSubmitted={this.state.ratingSubmitted}
+                  />
+                ) :
+                (<div>Rating submitted!</div>)
+              }
+            </div>
+          </header>
+          {this.state.messages &&
+            <div>
+              <MessageList messages={this.state.messages} />
+            </div>
+          }
+          <div style={{ float: "left", clear: "both" }}
+            ref={(el) => { this.messagesEnd = el; }}>
           </div>
-        }
-        <div style={{ float: "left", clear: "both" }}
-          ref={(el) => { this.messagesEnd = el; }}>
+          <ChatBar addNewMessage={this.addNewMessage} />
         </div>
-        <ChatBar addNewMessage={this.addNewMessage} />
       </div>
     )
   }
