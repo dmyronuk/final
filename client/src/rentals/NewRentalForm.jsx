@@ -5,6 +5,7 @@ import axios from 'axios';
 class NewRentalForm extends RentalForm {
 
   handleSubmit = (e) => {
+    console.log(this.state.data)
     e.preventDefault()
     const token = localStorage.getItem("JWT_TOKEN");
     const { data, imageURLs } = this.state;

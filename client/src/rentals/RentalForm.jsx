@@ -3,7 +3,9 @@ import axios from 'axios';
 import { getSingleListing } from "../ajax/listings";
 import { Redirect } from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import SingleImage from './SingleImage.jsx';
 import TextField from '@material-ui/core/TextField';
+
 
 class RentalForm extends Component {
   constructor(props) {
@@ -53,8 +55,12 @@ class RentalForm extends Component {
       })
   }
 
+  handleDeleteImage = (imageURL) => {
+    console.log(imageURL)
+  }
+
   createImgTag(arr) {
-    return arr.map((elm, i) => <img key={i} src={elm} alt="img" />)
+    return arr.map((elm, i) => <SingleImage key={i} image={elm} handleDeleteImage={this.handleDeleteImage}/>)
   }
 
   handleChange = (e) => {
@@ -171,7 +177,7 @@ class RentalForm extends Component {
             ref={(ref) => { this.uploadInput = ref; }}
             type="file" onChange={this.handleUploadImage}
             accept=".jpg, .jpeg, .png" /><br/>
-          <Button variant="contained" color="primary" onSubmit={this.handleSubmit}>Submit</Button>
+          <input type="submit"  value="Create Listing"/>
         </form>
         {this.state.edit && <button onClick={this.handleDelete}> Delete</button>}
         {this.createImgTag(this.state.imageURLs)}

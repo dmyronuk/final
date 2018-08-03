@@ -29,6 +29,7 @@ let controller = {
   postListings: async function(req, res) {
     let imageUrls = req.body.images
     let data = req.body.data
+    console.log(data, req.decodedToken.id)
 
      let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
       queries.addNewListing(data, imageUrls, landlord.id)
