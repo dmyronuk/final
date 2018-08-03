@@ -26,7 +26,7 @@ class RatingsForm extends Component {
             <ReactStars
               half = {false}
               value={this.props.rating}
-              onChange={this.props.handleInputChange}
+              onChange={this.props.handleRatingChange}
             />  
           <Button onClick={this.props.addNewRating} variant="contained" color="primary">
            Rate

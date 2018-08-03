@@ -6,15 +6,14 @@ import RatingsForm from "./RatingsForm.jsx";
 import ChatBar from "./ChatBar.jsx";
 import axios from 'axios';
 import { refetchUser } from "../ajax/auth";
-import { isNullOrUndefined } from "util";
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       id: this.props.match.params.id,
+      id: Number(this.props.match.params.id),
       rating: 5,
-      alreadyRated: true,
+      alreadyRated: false,
       ratingSubmitted: false,
     }
   }
@@ -53,27 +52,26 @@ class Chat extends Component {
   }
 
 
-  addNewRating = (e) => {
-    e.preventDefault();
-    axios.post("/api/ratings", {
-      // replace rater with currentUser.id later, and ratee with message.recipient.user.id
-      rater: 1,
-      ratee: 2,
-      rating: this.state.rating
-    })
-      .then(res => {
-        console.log("rating sent")
-        this.setState({ ratingSubmitted: true })
+  addNewRating = async (e) => {
+    if(localStorage.JWT_TOKEN){
+      let userObj = await refetchUser({token: localStorage.JWT_TOKEN})
+      e.preventDefault();
+      this.setState({ ratingSubmitted: true })
+      return axios.post("/api/ratings", {
+        rater: userObj.id,
+        ratee: this.state.id,
+        rating: this.state.rating
       })
+    }
   }
 
 
   checkIfRated = async (rater, ratee) => {
+    this.setState({ alreadyRated: false})
     let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
     AllRatingsOfRater.forEach(e => {
-      this.setState({ alreadyRated: false })
       if (e.rater === rater && e.ratee === ratee) {
-        return this.setState({ alreadyRated: true })
+        return this.setState({ alreadyRated: true})
       }
     })
   }
@@ -83,20 +81,16 @@ class Chat extends Component {
   }
 
 
-  handleInputChange = e => {
-    const target = e.target;
-    const value = e;
-    const name = "rating";
+  handleRatingChange = e => {
 
     this.setState({
-      [name]: value
+      "rating": e
     });
   }
 
   componentDidUpdate() {
     this.scrollToBottom();
   }
-
   componentDidMount() {
     this.socket = new WebSocket('ws://localhost:8080');
     this.socket.addEventListener('open', e => {
@@ -127,7 +121,7 @@ class Chat extends Component {
      if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
-        console.log(user);
+        this.checkIfRated(user.id, this.state.id)
         getFilteredMessages(user.id, this.state.id)
         .then(messages => {
           this.setState({
@@ -137,13 +131,6 @@ class Chat extends Component {
       });
       })
     }
-
-
-    // replace (1,3) with (user.id value, recipient.id) later
-    this.checkIfRated(1, 3)
-
-    console.log("this.props.user======", this.props.user)
-    console.log("this.props.state======", this.props.state)
   }
 
 
@@ -153,15 +140,15 @@ class Chat extends Component {
       <div>
         {
           (!this.state.ratingSubmitted) ?
-            (!this.state.alreadyRated &&
-              <RatingsForm
-                addNewRating={this.addNewRating}
-                handleInputChange={this.handleInputChange}
-                rating={this.state.rating}
-                ratingSubmitted={this.state.ratingSubmitted}
-              />
-            ) :
-            (<div>Rating sent!</div>)
+          (!this.state.alreadyRated &&
+            <RatingsForm
+              addNewRating={this.addNewRating}
+              handleRatingChange={this.handleRatingChange}
+              rating={this.state.rating}
+              ratingSubmitted={this.state.ratingSubmitted}
+            />
+          ) :
+          (<div>Rating submitted!</div>)
         }
 
         {this.state.messages &&
