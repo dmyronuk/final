@@ -21,10 +21,10 @@ const Sidebar = (props) => {
           <div>Map View</div>
         </div>
       </Link>
-      <Link to="/chat" onClick={props.linkClickHandler}>
+      <Link to="/my-messages" onClick={props.linkClickHandler}>
         <div className="sidebar-item">
           <img alt="profile-icon" src={ ProfileIcon } />
-          <div>Profile</div>
+          <div>My Messages</div>
         </div>
       </Link>
 
