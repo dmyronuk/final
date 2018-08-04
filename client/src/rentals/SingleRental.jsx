@@ -115,7 +115,7 @@ class SingleRental extends Component {
             <div>
 
               {(this.state.landlordUserId && this.state.current_user && this.state.landlordUserId !== this.state.current_user) &&
-                  <Link to={"/chat/" + this.state.landlordUserId}>
+                  <Link to={"/messages/" + this.state.landlordUserId}>
                     Contact Landlord!
                   </Link>}
             </div>
