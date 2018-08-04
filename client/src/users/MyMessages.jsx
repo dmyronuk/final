@@ -5,21 +5,13 @@ import { getAllThreads } from "../ajax/threads";
 import SingleThread  from "./SingleThread.jsx";
 import { refetchUser } from "../ajax/auth";
 
-// context
-// import AppContext from "../provider.jsx";
-
-
 class MyMessages extends Component {
   constructor(props){
     super(props)
     this.state = {}
   }
 
-
-
   componentDidMount(){
-    // const tokenObj = {token: localStorage.getItem("JWT_TOKEN")};
-    // const profileData = getUserProfile(tokenObj);
     if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
@@ -32,12 +24,6 @@ class MyMessages extends Component {
       })
     }
   }
-
-  // renderOne(data) {
-  //   return (
-
-  //     )
-  // }
 
   render(){
     return(

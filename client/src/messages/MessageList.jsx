@@ -22,7 +22,7 @@ class MessageList extends Component {
           {
             this.props.messages.map((data, i) => {
               //Class to distinguish the current user's messages from chat partner's messages in the UI
-              const msgClassname = data.id === this.props.currentUserId ? "cur-user-msg" : "other-user-msg";
+              const msgClassname = data.id === this.props.currentUserId ? "other-user-msg" : "cur-user-msg";
               return <SingleMessage key={i} message={data} msgClassname={msgClassname}/>
             })
           }

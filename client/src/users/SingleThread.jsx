@@ -7,7 +7,7 @@ const SingleThread = (props) => {
         <td>Thread {props.theKey + 1}</td>
         <td>{props.thread.first_name}</td>
         <td>
-          <Link to={{pathname:`/chat/${props.thread.id}`, state:{id:props.thread.id}}}>Link {props.thread.id}</Link>
+          <Link to={{pathname:`/messages/${props.thread.id}`, state:{id:props.thread.id}}}>Link {props.thread.id}</Link>
         </td>
       </tr>
       )
