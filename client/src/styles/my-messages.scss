@@ -1,0 +1,39 @@
+.converstions-container{
+  margin-top: 2rem;
+
+  table{
+    border-radius: 0.3rem;
+    border: 1px solid #aaaaaa;
+    min-width: 20rem;
+    box-shadow: -0.2rem 0.2rem 0.2rem #aaaaaa;
+    border-collapse: collapse;
+  }
+
+  th{
+    color: white;
+    background: #0392cf;
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+
+  tr{
+    transition:background 1s;
+
+
+
+    &:hover{
+      background: #eeeeee;
+    }
+  }
+
+  td{
+    border-collapse: collapse;
+    padding:0 1rem;
+  }
+
+  .thread-message-icon{
+    height: 3rem;
+    width: 3rem;
+    transition: height 1s;
+  }
+}

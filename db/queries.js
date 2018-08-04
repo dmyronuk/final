@@ -270,7 +270,7 @@ module.exports = (function() {
   // gets the users that talked to the current user and get their first name
   getAllThreads: current_user => {
     return knex.raw(`
-      select c.id, users.first_name from
+      select c.id, users.first_name, users.last_name from
         (select distinct recipient as id from messages where sender = ?
         union
         select distinct sender from messages where recipient = ?)

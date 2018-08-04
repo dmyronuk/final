@@ -9,7 +9,7 @@ import EditRentalForm from "./rentals/EditRentalForm.jsx";
 import Login from "./users/Login";
 import Logout from "./users/Logout";
 import PageMask from "./PageMask"
-import MyMessages from  "./users/MyMessages";
+import MyMessages from  "./messages/MyMessages";
 import RentalsGrid from "./rentals/RentalsGrid.jsx";
 import RentalsMap from "./rentals/RentalsMap.jsx";
 import Sidebar from "./navigation/Sidebar";
