@@ -1,11 +1,16 @@
+.no-results{
+  margin-top: 5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
 .listing-grid-container{
   padding-top: 4rem;
-  background:red;
   margin:1rem;
   display: grid;
   grid-template-columns: 31vw 31vw 31vw;
   grid-gap: 1rem;
-  background-color: #eee;
   color: #444;
 
   .listing-grid-card{

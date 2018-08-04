@@ -15,14 +15,14 @@ class Chat extends Component {
       redirect: false,
       id: Number(this.props.match.params.id),
       rating: 5,
-      alreadyRated: false,
+      alreadyRated: null,
       ratingSubmitted: false,
     }
   }
 
   // allows the messages to be viewed from the most recent
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+
   }
 
   // allow user to add a new message
@@ -64,13 +64,14 @@ class Chat extends Component {
   }
 
   checkIfRated = async (rater, ratee) => {
-    this.setState({ alreadyRated: false})
     let AllRatingsOfRater = await getAllRatingsThatUserRated(rater)
+    let foundRating = false;
     AllRatingsOfRater.forEach(e => {
       if (e.rater === rater && e.ratee === ratee) {
-        return this.setState({ alreadyRated: true})
+        foundRating = true
       }
     })
+    return this.setState({ alreadyRated: foundRating})
   }
 
   handleRatingChange = e => {
@@ -125,6 +126,7 @@ class Chat extends Component {
     //get the username of the other user connected to chat
     getUsernameById(this.state.id, localStorage.JWT_TOKEN)
     .then(userInfo => {
+      console.log("skdjfhskdjfhsd", userInfo)
       this.setState({
         chatPartner: userInfo,
       })
@@ -133,7 +135,7 @@ class Chat extends Component {
 
   render() {
     return (
-      <div className="default-flex-column-container">
+      <div>
         {this.state.redirect && <Redirect to="/login" /> }
 
         <div className="chat-container">
@@ -149,7 +151,7 @@ class Chat extends Component {
             <div className="rating-outer-container">
               {
                 (!this.state.ratingSubmitted) ?
-                (!this.state.alreadyRated &&
+                (this.state.alreadyRated === false &&
                   <RatingsForm
                     addNewRating={this.addNewRating}
                     handleRatingChange={this.handleRatingChange}
@@ -162,13 +164,9 @@ class Chat extends Component {
             </div>
           </header>
           {this.state.messages &&
-            <div>
-              <MessageList messages={this.state.messages} />
-            </div>
+            <MessageList messages={this.state.messages} currentUserId={this.state.id} />
           }
-          <div style={{ float: "left", clear: "both" }}
-            ref={(el) => { this.messagesEnd = el; }}>
-          </div>
+
           <ChatBar addNewMessage={this.addNewMessage} />
         </div>
       </div>

@@ -113,7 +113,11 @@ let controller = {
       }else{
         queries.getUsernameById(req.params.id)
         .then(userInfo => {
-          res.json(userInfo[0])
+          if(userInfo[0]){
+            res.json(userInfo[0] === undefined)
+          }else{
+            res.json({first_name:null, last_name:null})
+          }
         })
       }
     })
