@@ -4,9 +4,9 @@ var knex = require("knex")({
   client: "pg",
   connection: {
     host : "127.0.0.1",
-    user : "housing",
-    password : "housing",
-    database : "final_project",
+    user : process.env.DB_USERNAME,
+    password : process.env.DB_PASSWORD,
+    database : process.env.DB_NAME,
   }
 });
 
