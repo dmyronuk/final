@@ -4,7 +4,7 @@ const SingleMessage = (props) => {
   return (
     <li>
       <div className={"chat-msg " + props.msgClassname}>
-        <div>
+        <div className={"username-container"}>
           {props.message.first_name}
         </div>
         <div>

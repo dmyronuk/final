@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 import MessageList from "./MessageList.jsx";
 import RatingsForm from "./RatingsForm.jsx";
@@ -7,6 +7,7 @@ import ChatBar from "./ChatBar.jsx";
 import { getFilteredMessages, getUsernameById } from "../ajax/messages";
 import { getAllRatingsThatUserRated } from "../ajax/ratings";
 import { refetchUser } from "../ajax/auth";
+import BackArrow from "../icons/blue-back-arrow.png"
 
 class Chat extends Component {
   constructor(props) {
@@ -126,7 +127,6 @@ class Chat extends Component {
     //get the username of the other user connected to chat
     getUsernameById(this.state.id, localStorage.JWT_TOKEN)
     .then(userInfo => {
-      console.log("skdjfhskdjfhsd", userInfo)
       this.setState({
         chatPartner: userInfo,
       })
@@ -138,6 +138,12 @@ class Chat extends Component {
       <div>
         {this.state.redirect && <Redirect to="/login" /> }
 
+        <Link to="/messages">
+          <div className="messages-link">
+            <img src={ BackArrow } />
+            Messages
+          </div>
+        </Link>
         <div className="chat-container">
           <header>
             <div>

@@ -25,7 +25,7 @@ const Sidebar = (props) => {
           <div>Map View</div>
         </div>
       </Link>
-      <Link to="/my-messages" onClick={props.linkClickHandler}>
+      <Link to="/messages" onClick={props.linkClickHandler}>
         <div className="sidebar-item">
           <div className="img-container">
             <img alt="Messages Icon" src={ MessagesIcon } id="messages-icon" />

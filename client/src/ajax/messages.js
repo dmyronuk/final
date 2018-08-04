@@ -11,12 +11,10 @@ const getUsernameById = async (otherUserId, token) => {
     body: JSON.stringify({ token }),
   });
   const data = await response.json();
-  console.log("in messages", data)
 
   if (response.status !== 200){
     throw Error(data.message);
   }
-  console.log("in messages", data)
   return data;
 }
 
