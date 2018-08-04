@@ -28,23 +28,23 @@ class RentalForm extends Component {
       redirect: false,
       edit: false,
     }
-  this.autocomplete = null
+    this.autocomplete = null
   }
 
-   async componentDidMount() {
-    let options = {
-      componentRestrictions: { country: "CA" }
-    }
-    this.autocomplete = new window.google.maps.places.Autocomplete(document.getElementById('autocomplete'), options)
-    this.autocomplete.addListener("place_changed", this.handlePlaceSelect)
-
+  componentDidMount() {
     if(localStorage.JWT_TOKEN){
       fetchLandlord({token: localStorage.JWT_TOKEN})
       .then(res => {
         this.setState({landlordId : res.id})
       })
     }
-
+  }
+  componentDidUpdate() {
+    let options = {
+      componentRestrictions: { country: "CA" }
+    }
+    this.autocomplete = new window.google.maps.places.Autocomplete(document.getElementById('autocomplete'), options)
+    this.autocomplete.addListener("place_changed", this.handlePlaceSelect)
   }
 
   handleUploadImage = (e) => {
@@ -75,7 +75,7 @@ class RentalForm extends Component {
 
   handlePlaceSelect = async () => {
     // Google Place Autocomplete call
-    let addressObject = this.autocomplete.getPlace()
+    let addressObject = await this.autocomplete.getPlace()
     if (!addressObject.address_components) return
     let address = addressObject.address_components
     let geocoder = new window.google.maps.Geocoder();
