@@ -42,9 +42,12 @@ class Chat extends Component {
 
         this.socket.send(JSON.stringify(newMessage));
         axios.post('/api/newMessage', {
+          created_at: new Date(),
+          text: content,
+          email: user.email,
+          first_name: user.first_name,
           sender: user.id,
           recipient: this.state.id,
-          message: content,
         }).then(messages => {
         })
       })
@@ -95,8 +98,9 @@ class Chat extends Component {
       // The socket event data is encoded as a JSON string.
       // This line turns it into an object
       const data = JSON.parse(event.data);
-      let createMessage = { text: data.text, first_name: data.first_name, email: data.email };
-
+      console.log(data)
+      let createMessage = { id: data.sender, created_at: data.created_at, text: data.text, first_name: data.first_name, email: data.email };
+      console.log(createMessage);
       switch (data.type) {
         // adds new message to pre-existing messages
         case "incomingMessage":
@@ -114,6 +118,7 @@ class Chat extends Component {
         this.checkIfRated(user.id, this.state.id)
         getFilteredMessages(user.id, this.state.id)
         .then(messages => {
+          console.log(messages);
           this.setState({
           messages
           })

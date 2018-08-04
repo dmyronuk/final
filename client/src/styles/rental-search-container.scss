@@ -61,11 +61,11 @@
 
       }
 
-      /*  the other circle */
+
       &:focus {
         &::-webkit-slider-thumb {
           box-shadow: 0 0 0 0.2rem white,
-          0 0 0 0.4rem green ;
+          0 0 0 0.4rem green; /*  the outside circle */
         }
       }
 
