@@ -5,7 +5,7 @@ import MessageList from "./MessageList.jsx";
 import RatingsForm from "./RatingsForm.jsx";
 import ChatBar from "./ChatBar.jsx";
 import { getFilteredMessages, getUsernameById } from "../ajax/messages";
-import { getAllRatingsThatUserRated } from "../ajax/ratings";
+import { getAllRatingsThatUserRated, getAllRatingsOfRatee } from "../ajax/ratings";
 import { refetchUser } from "../ajax/auth";
 import BackArrow from "../icons/blue-back-arrow.png"
 
@@ -78,6 +78,14 @@ class Chat extends Component {
     return this.setState({ alreadyRated: foundRating})
   }
 
+  getRatingofRatee = async() => {
+    let allRatings = await getAllRatingsOfRatee(this.state.id)
+    let sum = allRatings.reduce((a,e) => {
+      return a + e.rating
+    }, 0)
+    return this.setState({ratingOfRecipient: sum/allRatings.length})
+  }
+
   handleRatingChange = e => {
     this.setState({
       "rating": e
@@ -136,6 +144,10 @@ class Chat extends Component {
         chatPartner: userInfo,
       })
     })
+
+    this.getRatingofRatee()
+
+    console.log("avg rating", this.state.ratingOfRecipient)
   }
 
   render() {
