@@ -52,7 +52,6 @@ class App extends Component {
     if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
-        console.log(user);
         this.setUser(user);
       })
     }
@@ -75,8 +74,8 @@ class App extends Component {
           <Route exact path="/rentals/:id(\d+)" component={ SingleRental } />
           <Route exact path="/rentals/new" render={() => <NewRentalForm user={this.state.user} />} />
           <Route exact path="/rentals/:id/edit" component={ EditRentalForm } />
-          <Route exact path="/chat/:id(\d+)" component= { Chat }/>
-          <Route path="/my-messages" component={MyMessages} />
+          <Route exact path="/messages/:id(\d+)" component= { Chat }/>
+          <Route exact path="/messages" component={MyMessages} />
         </div>
       </BrowserRouter>
     );

@@ -4,6 +4,7 @@ import { getSingleListing } from "../ajax/listings";
 import { Redirect } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import {fetchLandlord} from "../ajax/auth.js";
 
 class RentalForm extends Component {
   constructor(props) {
@@ -30,7 +31,15 @@ class RentalForm extends Component {
     this.autocomplete = null
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    if(localStorage.JWT_TOKEN){
+      fetchLandlord({token: localStorage.JWT_TOKEN})
+      .then(res => {
+        this.setState({landlordId : res.id})
+      })
+    }
+  }
+  componentDidUpdate() {
     let options = {
       componentRestrictions: { country: "CA" }
     }
@@ -61,6 +70,7 @@ class RentalForm extends Component {
     const currData = Object.assign({}, this.state.data)
     currData[e.target.name] = e.target.value
     this.setState({ data: currData });
+    console.log(this.state.landlordId);
   }
 
   handlePlaceSelect = async () => {
@@ -83,14 +93,20 @@ class RentalForm extends Component {
     // })
 
   }
+  // {!this.state.landlordId && <Redirect to="/" />}
 
   render() {
     const { street, city, province, postal_code, lat, lng, unit, price, bedrooms, bathrooms, date, description } = this.state.data;
-
+    if (!localStorage.JWT_TOKEN) {
+      return <Redirect to="/login"/>
+    } else if (this.state.landlordId === undefined) {
+      return <div> Loading... </div>
+    } else if (!this.state.landlordId) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="new-rental-container">
         {this.state.redirect && <Redirect to="/my-messages" />}
-
         <form className="new-listing-container" onSubmit={this.handleSubmit}>
         <h2>Your Listing</h2>
 

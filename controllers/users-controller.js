@@ -113,7 +113,11 @@ let controller = {
       }else{
         queries.getUsernameById(req.params.id)
         .then(userInfo => {
-          res.json(userInfo[0])
+          if(userInfo[0]){
+            res.json(userInfo[0])
+          }else{
+            res.json({first_name:null, last_name:null})
+          }
         })
       }
     })
@@ -125,7 +129,21 @@ let controller = {
     .then(users_id => {
       res.json(users_id);
     })
+  },
+
+  getLandlord: (req, res) => {
+    const token = req.body.token;
+    jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
+      if(err){
+        console.log(err)
+      }
+      queries.getLandlorByUserId(decoded.id)
+      .then(data => {
+        data? res.json({id: data.id}) : res.json({id: false})
+      })
+    })
   }
 }
+
 
 module.exports = controller;

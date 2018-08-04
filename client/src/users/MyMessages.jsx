@@ -4,10 +4,7 @@ import { getAllRatingsOfUser } from "../ajax/ratings";
 import { getAllThreads } from "../ajax/threads";
 import SingleThread  from "./SingleThread.jsx";
 import { refetchUser } from "../ajax/auth";
-
-// context
-// import AppContext from "../provider.jsx";
-
+import { Redirect } from "react-router-dom";
 
 class MyMessages extends Component {
   constructor(props){
@@ -15,11 +12,7 @@ class MyMessages extends Component {
     this.state = {}
   }
 
-
-
   componentDidMount(){
-    // const tokenObj = {token: localStorage.getItem("JWT_TOKEN")};
-    // const profileData = getUserProfile(tokenObj);
     if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
@@ -33,15 +26,10 @@ class MyMessages extends Component {
     }
   }
 
-  // renderOne(data) {
-  //   return (
-
-  //     )
-  // }
-
   render(){
     return(
       <div>
+        {!localStorage.JWT_TOKEN && <Redirect to="/login"/> }
         {this.state.threads &&
          <table>
           <tr>
