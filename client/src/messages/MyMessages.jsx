@@ -6,6 +6,8 @@ import SingleThread  from "./SingleThread.jsx";
 import { refetchUser } from "../ajax/auth";
 import { Redirect } from "react-router-dom";
 
+
+
 class MyMessages extends Component {
   constructor(props){
     super(props)
@@ -31,16 +33,16 @@ class MyMessages extends Component {
       <div>
         {!localStorage.JWT_TOKEN && <Redirect to="/login"/> }
         {this.state.threads &&
-         <table>
-          <tr>
-            <th>messages</th>
-            <th>recipient</th>
-            <th>link</th>
-          </tr>
-          {this.state.threads.map((data, i) => {
-            return <SingleThread key={i} theKey={i} thread={data}/>
-          })}
-         </table>
+          <div className="default-flex-column-container converstions-container">
+            <table>
+              <tr>
+                <th colspan={3}>Messages</th>
+              </tr>
+              {this.state.threads.map((data, i) => {
+                return <SingleThread key={i} theKey={i} thread={data}/>
+              })}
+            </table>
+          </div>
         }
       </div>
 
