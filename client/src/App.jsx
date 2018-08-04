@@ -31,7 +31,6 @@ class App extends Component {
     this.state = {
       sidebarClass: "closed-sidebar",
       maskClass: "hidden-mask",
-      user: false,
     }
   }
 

@@ -12,7 +12,7 @@ function Header(props){
         <h1 className="App-title">Title</h1>
       </Link>
         <div className="nav-login-container">
-          { props.user === null ?
+          { !props.user ?
             <div>
               <div>
                 <Link to={"/login"}>
