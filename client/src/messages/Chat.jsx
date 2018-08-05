@@ -22,10 +22,7 @@ class Chat extends Component {
       alreadyRated: null,
       ratingSubmitted: false
     };
-
-
   }
-
 
   // allow user to add a new message
   addNewMessage = content => {
