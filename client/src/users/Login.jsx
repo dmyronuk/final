@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { login } from "../ajax/auth";
 import { Redirect } from "react-router-dom";
+import BackgroundImage from "../BackgroundImage";
 
 class Login extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      nextUrl: "/",
       redirect: false,
       email: "",
       password: "",
@@ -61,11 +63,12 @@ class Login extends Component {
 
   render() {
     return (
+
       <div className="default-flex-column-container">
-        {this.state.redirect && <Redirect to="/" />}
+        <BackgroundImage />
+        {this.state.redirect && <Redirect to={this.state.nextUrl} />}
         {this.state.errors && this.addError(this.state.errors[0])}
         <div className="login-container" >
-          {this.state.redirect && <Redirect to="/" />}
           <section className="login" id="form">
             <header>
               <h2>Login</h2>

@@ -52,9 +52,9 @@
   position: relative;
   width: 100%;
   padding: 10px;
-  margin: -10px -10px 25px -10px;
+  margin: -10px -10px 0 -10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background: #009688;
+  background: $blue-header;
   font-family: 'Roboto', sans-serif;
   font-size: 1.3rem;
   color: #FAFAFA;
@@ -106,7 +106,8 @@
 }
 
 .register > header h2 {
-  margin: 50px 0 10px 0;
+  margin: 1rem 0;
+  color: white;
 }
 
 .register > header h4 {
@@ -127,7 +128,7 @@
   position: relative;
   width: 100%;
   padding: 10px 5px;
-  margin: 0 0 25px 0;
+  margin: 0 0 1rem 0;
   border: none;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
@@ -153,7 +154,7 @@
   justify-content: flex-end;
   position: relative;
   padding: 10px;
-  margin: 35px -25px -25px -25px;
+  margin: 1rem -25px -25px -25px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -196,6 +197,7 @@
   border: 1px solid #ccc;
   border-radius: 3px;
   overflow: hidden;
+  margin-top: 1rem;
 }
 
 .select-style select {

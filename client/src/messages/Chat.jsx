@@ -5,13 +5,12 @@ import MessageList from "./MessageList.jsx";
 import RatingsForm from "./RatingsForm.jsx";
 import ChatBar from "./ChatBar.jsx";
 import { getFilteredMessages, getUsernameById } from "../ajax/messages";
-import {
-  getAllRatingsThatUserRated,
-  getAllRatingsOfRatee
-} from "../ajax/ratings";
+import { getAllRatingsThatUserRated, getAllRatingsOfRatee } from "../ajax/ratings";
 import ReactStars from "react-stars";
 import { refetchUser } from "../ajax/auth";
+import BackgroundImage from "../BackgroundImage";
 import BackArrow from "../icons/blue-back-arrow.png";
+
 
 class Chat extends Component {
   constructor(props) {
@@ -160,11 +159,12 @@ class Chat extends Component {
   }
 
   render() {
-    
+
     this.getRatingofRatee();
 
     return (
       <div>
+        <BackgroundImage />
         {this.state.redirect && <Redirect to="/login" />}
         <Link to="/messages">
           <div className="messages-link">
