@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { categorySearchByLocation } from "../ajax/yelp"
 import EducationIcon from "../icons/education_icon1.png";
-import RestaurantIcon from "../icons/wine.png";
+import EntertainmentIcon from "../icons/entertainment_icon1.png";
+import RestaurantIcon from "../icons/restaurants_icon5.png";
 
 
 class YelpSearch extends Component {
@@ -32,7 +33,7 @@ class YelpSearch extends Component {
           <img alt="Search restaurants" src={ RestaurantIcon } />
         </button>
         <button onClick={ () => this.searchClickHandler("entertainment")}>
-          <img alt="Search entertainment" src={ RestaurantIcon } />
+          <img alt="Search entertainment" src={ EntertainmentIcon } />
         </button>
         <button onClick={ () => this.searchClickHandler("education")}>
            <img alt="Search education" src={ EducationIcon } />
