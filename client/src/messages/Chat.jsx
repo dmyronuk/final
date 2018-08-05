@@ -26,8 +26,6 @@ class Chat extends Component {
 
   }
 
-  // allows the messages to be viewed from the most recent
-  scrollToBottom = () => {};
 
   // allow user to add a new message
   addNewMessage = content => {
@@ -96,10 +94,8 @@ class Chat extends Component {
     });
   };
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
   componentDidMount() {
+    this.getRatingofRatee();
     this.socket = new WebSocket("ws://localhost:8080");
     this.socket.addEventListener("open", e => {
       console.log("connected to server");
@@ -147,9 +143,7 @@ class Chat extends Component {
       this.setState({ redirect: true });
     }
 
-
     //get the username of the other user connected to chat
-
     getUsernameById(this.state.id, localStorage.JWT_TOKEN).then(userInfo => {
       this.setState({
         chatPartner: userInfo
@@ -159,8 +153,6 @@ class Chat extends Component {
   }
 
   render() {
-
-    this.getRatingofRatee();
 
     return (
       <div>

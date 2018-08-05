@@ -4,14 +4,15 @@ import  SingleMessage from "./SingleMessage.jsx";
 class MessageList extends Component {
 
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    this.messagesEnd.scrollIntoView({ behavior: "instant" });
   }
 
   componentDidMount() {
-    this.scrollToBottom();
+    this.messagesEnd.scrollIntoView({ behavior: "instant" });
   }
 
   componentDidUpdate() {
+    console.log("updating")
     this.scrollToBottom();
   }
 
