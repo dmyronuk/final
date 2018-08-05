@@ -3,15 +3,17 @@ html, body {
   margin: 0;
   font-size: 15px;
   font-family: Arial;
+  color: #333;
 }
 
 a{
   text-decoration: none;
-  color: black;
+  color: #333;
 }
 
 h1, h2, h3, h4, h5{
   margin:0;
+  color: black;
 }
 
 button{
@@ -35,12 +37,14 @@ button{
 @import "rentals-marker.scss";
 @import "sidebar.scss";
 @import "chat.scss";
+@import "my-messages.scss";
 @import "page-mask.scss";
 @import "yelp-search.scss";
 @import "yelp-results.scss";
 @import "login.scss";
 @import "rental-search-container.scss";
 @import "signup.scss";
+@import "errors.scss";
 
 .main-container{
   display: flex;

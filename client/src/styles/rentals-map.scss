@@ -13,6 +13,13 @@
   display:flex;
   flex-direction: column;
 
+  .no-results{
+    margin-top: 1rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
   .listing-map-card{
     background:#eeeeee;
     margin-bottom:1rem;

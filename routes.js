@@ -11,21 +11,22 @@ const jwt = require("jsonwebtoken");
 
 
 function authMiddleware(req,res,next) {
-    let token = req.body.token;
-    if (!token) {
-      console.log("No token");
-        res.status(401).end();
-        return;
+  let token = req.body.token || req.headers.authorization
+  if (!token) {
+    console.log("No token");
+    res.status(401).end();
+    return;
+  }
+  jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
+    if(err) {
+      console.log("Invalid token")
+      res.status(401).end();
+      return;
     }
-    jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
-      if(err) {
-        console.log("Invalid token")
-        res.status(401).end();
-        return;
-      }
-      req.decodedToken = decoded;
-      next();
-    });
+    req.decodedToken = decoded;
+    console.log("User authorized")
+    next();
+  });
 }
 
 module.exports = function(app) {
@@ -38,6 +39,7 @@ module.exports = function(app) {
     app.get('/api/listings/:id', listingsController.getListing);
     app.get('/api/listings', listingsController.getListings);
     //protected routes
+    app.get('/api/landlord-listings', authMiddleware, listingsController.getLandlordListings);
     app.post('/api/listings', authMiddleware, listingsController.postListings);
     app.delete('/api/listings/:id', authMiddleware, listingsController.deleteListing);
     app.patch('/api/listings/:id', authMiddleware, listingsController.editListing);
@@ -68,4 +70,5 @@ module.exports = function(app) {
     app.get('/api/threads', usersController.threads)
     app.post('/api/users/:id', usersController.getUsernameById)
     app.get('/api/get-user-from-landlord-id', usersController.getUserFromLandlordId)
+    app.post('/api/landlord', usersController.getLandlord)
 };

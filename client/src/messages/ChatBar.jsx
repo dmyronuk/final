@@ -7,7 +7,6 @@ class ChatBar extends Component {
 
     // updates message when user changes it
   changeMessage = (evt) => {
-    // console.log(evt.target.value);
     this.setState({inputMessage: evt.target.value});
   }
 
@@ -16,7 +15,6 @@ class ChatBar extends Component {
     const submitMessage = evt => {
       const newMessageInput = evt.target;
       if (evt.key === "Enter" && this.state.inputMessage !== "") {
-        // console.log(newMessageInput);
         this.props.addNewMessage(this.state.inputMessage);
         newMessageInput.value = "";
       }
@@ -24,7 +22,11 @@ class ChatBar extends Component {
 
     return (
       <footer className="chatbar">
-        <input className="chatbar-message" onChange = {this.changeMessage} onKeyPress= {submitMessage} placeholder="Type a message and hit ENTER" />
+        <input
+          className="chatbar-message"
+          onChange = {this.changeMessage}
+          onKeyPress= {submitMessage}
+          placeholder="Type a message" />
       </footer>
     )
   }

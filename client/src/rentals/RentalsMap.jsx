@@ -16,8 +16,10 @@ class RentalsMap extends Component{
   handleSearchSubmit = (queryObj) => {
     getAllListingsFromQuery(queryObj)
     .then(listings => {
+      const noResults = listings.length === 0;
       this.setState({
-        listings
+        listings,
+        noResults,
       })
     })
   }
@@ -39,6 +41,8 @@ class RentalsMap extends Component{
   }
 
   render(){
+
+
     return(
       <div>
         <RentalSearchForm handleSearchSubmit={this.handleSearchSubmit} />
@@ -61,6 +65,9 @@ class RentalsMap extends Component{
                 data={elem}
               />
           )}
+          {this.state.noResults &&
+            <div className="no-results">No Results</div>
+          }
         </div>
       </div>
     )

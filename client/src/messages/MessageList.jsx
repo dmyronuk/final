@@ -1,16 +1,38 @@
-import React from "react";
+import React, { Component } from "react";
 import  SingleMessage from "./SingleMessage.jsx";
 
-const MessageList = (props) => {
-  return (
-    <div>
-      {
-        props.messages.map((data, i) => {
-          return <SingleMessage key={i} message={data}/>
-        })
-      }
-    </div>
-  )
+class MessageList extends Component {
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  render(){
+    return (
+      <div className="message-list">
+        <ul>
+          {
+            this.props.messages.map((data, i) => {
+              //Class to distinguish the current user's messages from chat partner's messages in the UI
+              const msgClassname = data.id != this.props.currentUserId ?  "cur-user-msg" : "other-user-msg";
+              return <SingleMessage key={i} message={data} msgClassname={msgClassname}/>
+            })
+          }
+          <div style={{ float:"left", clear: "both" }}
+            ref={(el) => { this.messagesEnd = el; }}>
+          </div>
+        </ul>
+      </div>
+    )
+  }
 }
 
 export default MessageList;

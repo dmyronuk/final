@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import SearchIcon from "../icons/search.png"
+import searchIcon from "../icons/search.png"
 
 class RentalSearchForm extends Component{
   constructor(props){
     super(props)
-    this.maxPrice = 500000
+    this.maxPrice = 6000
     this.state = {
       query: "",
       bedrooms: "Any",
       bathrooms: "Any",
-      maxPrice: 500000,
+      maxPrice: 6000,
       minPrice: 0,
     }
   }
@@ -50,11 +50,16 @@ class RentalSearchForm extends Component{
   render(){
     return(
       <div className="rental-search-container">
+        <div className="rental-icon-container">
+          <img src={searchIcon}/>
+        </div>
+
         <div className="rental-input-container">
           <input
             className="query-input"
             type="text"
             name="query"
+            placeholder="Search by Street"
             value={this.state.query}
             onChange={this.handleQueryChange}
             onKeyDown={this.handleSubmit}
@@ -93,6 +98,7 @@ class RentalSearchForm extends Component{
         <div className="rental-input-container">
           <div>Min Price: {this.state.minPrice}</div>
           <input
+            className="range-slider"
             type="range"
             value={this.state.minPrice}
             id="minPrice"
@@ -108,6 +114,7 @@ class RentalSearchForm extends Component{
         <div className="rental-input-container">
            <div>Max Price: {this.state.maxPrice}</div>
           <input
+            className="range-slider"
             type="range"
             value={this.state.maxPrice}
             id="maxPrice"

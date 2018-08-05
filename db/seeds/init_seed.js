@@ -27,13 +27,6 @@ function randomCostGen() {
   return randomIntegerGenerator(50, 600) * 10;
 }
 
-
-// function repeat(min, max) {
-//   for (let i = 0; i < 100; ++i) {
-//     console.log(randomIntegerGenerator(min, max));
-//   }
-// }
-
 exports.seed = function(knex, Promise) {
 
   function deleteUsers(){

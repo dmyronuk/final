@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { isLoggedIn } from "../utils/AuthService";
 import MapIcon from "../icons/map_icon1.png";
 import GridIcon from "../icons/grid_icon2.png";
-import ProfileIcon from "../icons/user_icon2.png";
+import MessagesIcon from "../icons/message_icon1.png";
 import NewRentalIcon from "../icons/new_house_icon2.png";
 
 const Sidebar = (props) => {
@@ -11,27 +11,35 @@ const Sidebar = (props) => {
     <div className={"sidebar " + props.toggleState}>
       <Link to="/rentals/grid" onClick={props.linkClickHandler}>
         <div className="sidebar-item">
-          <img alt="grid-icon" src={ GridIcon } />
+          <div className="img-container">
+            <img alt="Grid Icon" src={ GridIcon } id="grid-icon" />
+          </div>
           <div>Grid View</div>
         </div>
       </Link>
       <Link to="/rentals/map" onClick={props.linkClickHandler}>
         <div className="sidebar-item">
-          <img alt="map-icon" src={ MapIcon } />
+          <div className="img-container">
+            <img alt="Map Icon" src={ MapIcon } id="map-icon" />
+          </div>
           <div>Map View</div>
         </div>
       </Link>
-      <Link to="/chat" onClick={props.linkClickHandler}>
+      <Link to="/messages" onClick={props.linkClickHandler}>
         <div className="sidebar-item">
-          <img alt="profile-icon" src={ ProfileIcon } />
-          <div>Profile</div>
+          <div className="img-container">
+            <img alt="Messages Icon" src={ MessagesIcon } id="messages-icon" />
+          </div>
+          <div>Messages</div>
         </div>
       </Link>
 
       { isLoggedIn() &&
         <Link to={"/rentals/new"} onClick={props.linkClickHandler}>
           <div className="sidebar-item">
-            <img alt="new-rental-icon" src={ NewRentalIcon } />
+            <div className="img-container">
+              <img alt="new-rental-icon" src={ NewRentalIcon } />
+            </div>
             <div>Add Rental</div>
           </div>
         </Link>

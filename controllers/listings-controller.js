@@ -12,7 +12,7 @@ let controller = {
   },
 
   getListings: function (req, res) {
-    queries.getAllListings(req.query.user_id)
+    queries.getAllListings()
       .then(listings => {
         res.json(listings);
       })
@@ -22,6 +22,18 @@ let controller = {
     queries.getListing(req.params.id)
       .then(listing => {
         res.json(listing);
+      })
+  },
+
+  getLandlordListings:  async function (req, res) {
+    let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
+    if (!landlord) {
+      res.status(401).end()
+      return
+    }
+    queries.getAllListings(landlord.id)
+      .then(listings => {
+        res.json(listings)
       })
   },
 

@@ -1,21 +1,21 @@
 .chat-container{
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 40vw;
-  height: 75vh;
-  margin-top: 2.5rem;
+  width:45vw;
+  margin:auto;
+  margin-top: 0.8rem;
   border: #aaaaaa solid 1px;
 
   header{
     background: $blue-header;
     color: white;
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid darken($blue-header, 10%);
+    position:relative;
+    z-index: 1000;
+    box-shadow: 0 0.1rem 0.1rem #777777;
 
     .username{
       font-size: 2rem;
@@ -23,7 +23,6 @@
     div{
       margin: 0.3rem 1rem;
     }
-
     .rating-outer-container{
       form{
         display:flex;
@@ -32,23 +31,79 @@
       }
     }
   }
+
+  .message-list{
+    position: relative;
+    overflow-y: scroll;
+    height: 60vh;
+    background: #eeeeee;
+    margin-bottom: 3rem;
+
+    ul{
+      padding:0;
+    }
+
+    li{
+      width: 100%;
+      list-style-type: none;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .chat-msg{
+      display:inline-block;
+      border-radius: 0.4rem;
+      background:white;
+      padding: 0.3rem 0.7rem;
+      margin: 0.7rem 0;
+      min-width: 10rem;
+      max-width: 30rem;
+      word-break: break-all;
+    }
+
+    .cur-user-msg{
+      margin-right: 1rem;
+      margin-left: auto;
+      border: 1px solid #cccccc;
+    }
+
+    .other-user-msg{
+      margin-left: 1rem;
+      background: $blue-header;
+      border: 1px solid darken($blue-header, 10%);
+      color: white;
+    }
+  }
 }
 
 .chatbar {
   position: absolute;
   bottom: 0;
+  background: white;
   width:100%;
-  background: grey;
-  border-top: 1px solid black;
+  border: 1px solid #aaaaaa;
   display: flex;
+  justify-content: center;
 }
 
 .chatbar-message {
-  border: 1px solid black;
+  border: 1px solid #aaaaaa;
   display: block;
-  height: 40px;
-  line-height: 40px;
+  height: 3rem;
   margin: 5px;
   padding: 0 9px;
-  flex: 8;
+  flex: 1;
+}
+
+.messages-link{
+  margin-top: 0.3rem;
+  color: blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  img{
+    height: 2rem;
+    width: 2rem;
+  }
 }

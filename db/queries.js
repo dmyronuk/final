@@ -4,9 +4,9 @@ var knex = require("knex")({
   client: "pg",
   connection: {
     host : "127.0.0.1",
-    user : "housing",
-    password : "housing",
-    database : "final_project",
+    user : process.env.DB_USERNAME,
+    password : process.env.DB_PASSWORD,
+    database : process.env.DB_NAME,
   }
 });
 
@@ -106,13 +106,13 @@ module.exports = (function() {
     .select()
   },
 
-  getAllListings: (userId) => {
+  getAllListings: (landlordId) => {
     let query = knex('listings')
       .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
       .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
 
-    if(userId) {
-      query.where('listings.user_id', userId)
+    if(landlordId) {
+      query.where('listings.landlords_id', landlordId)
     }
 
     return query.select()
@@ -270,7 +270,7 @@ module.exports = (function() {
   // gets the users that talked to the current user and get their first name
   getAllThreads: current_user => {
     return knex.raw(`
-      select c.id, users.first_name from
+      select c.id, users.first_name, users.last_name from
         (select distinct recipient as id from messages where sender = ?
         union
         select distinct sender from messages where recipient = ?)

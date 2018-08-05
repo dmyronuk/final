@@ -46,8 +46,26 @@ const refetchUser = async (jwtObj) => {
   return data;
 }
 
+const fetchLandlord = async (jwtObj) => {
+  const response = await fetch("/api/landlord", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(jwtObj),
+  });
+  const data = await response.json();
+    if (response.status !== 200){
+    throw Error(data.message);
+  }
+  return data;
+}
+
 export {
   signup,
   login,
   refetchUser,
+  fetchLandlord,
 }
+

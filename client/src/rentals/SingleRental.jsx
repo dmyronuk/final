@@ -6,6 +6,7 @@ import YelpSearch from "../yelp/YelpSearch";
 import YelpResults from "../yelp/YelpResults";
 import dateFromTimestamp from "../helpers/time-formatters";
 import { refetchUser } from "../ajax/auth";
+import MessageIcon from "../icons/message_icon3.png";
 
 class SingleRental extends Component {
 
@@ -80,7 +81,7 @@ class SingleRental extends Component {
                     <table>
                       <tbody>
                         <tr>
-                          <td>${this.state.data.price}/mo</td>
+                          <td>${this.state.data.price} / Month</td>
                         </tr>
                         <tr>
                           <td>{this.state.data.bedrooms} Bedrooms</td>
@@ -93,16 +94,32 @@ class SingleRental extends Component {
                   </div>
                   <div>
                     <h4>Nearby Amenities</h4>
-                  </div>
-                  <YelpSearch
+                    <YelpSearch
                     latitude = {this.state.data.lat}
                     longitude = {this.state.data.lng}
                     radius = {"5000"}
                     setYelpData = {this.setYelpData}
                   />
+                  </div>
                 </div>
                 <div className="description">
                   <div>{this.state.data.description}</div>
+
+                  {/* the div below is the link to contact the landlord, the landlord cannot contact himself */}
+                  <div className="landlord-contact-container">
+
+                    {(this.state.landlordUserId && this.state.current_user && this.state.landlordUserId !== this.state.current_user) &&
+                        <Link to={"/messages/" + this.state.landlordUserId}>
+                            <img src={MessageIcon}/>  <br/>
+                            Contact
+                        </Link>}
+                  </div>
+
+                  {/* if user is not logged in, it will show a please login to contact landlord, there is a slight blink*/}
+                  <div>
+                    {(this.state.landlordUserId && !this.state.current_user) && <p>Please login to contact landlord</p> }
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -111,14 +128,7 @@ class SingleRental extends Component {
                 <YelpResults results={this.state.yelpResults} searchTerm={this.state.yelpSearchTerm} />
               }
             </div>
-          {/* the div below is the link to contact the landlord, the landlord himself cannot contact himself */}
-            <div>
 
-              {(this.state.landlordUserId && this.state.current_user && this.state.landlordUserId !== this.state.current_user) &&
-                  <Link to={"/chat/" + this.state.landlordUserId}>
-                    Contact Landlord!
-                  </Link>}
-            </div>
           </div>
         }
       </div>

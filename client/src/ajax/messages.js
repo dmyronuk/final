@@ -2,7 +2,6 @@
 //need to send token to authenticate
 const getUsernameById = async (otherUserId, token) => {
   const url = `/api/users/${otherUserId}`;
-  console.log(url)
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -12,6 +11,7 @@ const getUsernameById = async (otherUserId, token) => {
     body: JSON.stringify({ token }),
   });
   const data = await response.json();
+
   if (response.status !== 200){
     throw Error(data.message);
   }

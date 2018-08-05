@@ -1,4 +1,4 @@
-.new-rental-container{
+.new-rental-container {
   height: 100%;
   padding: 0;
   margin: 0;
@@ -10,41 +10,82 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 100%;
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
 }
 
-.address-container{
-  border: 1px solid darkblue;
+.new-listing-container {
   padding: 2rem;
-  display:flex;
+  display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 2rem;
+  margin: 1rem;
+  width: 80%;
 }
 
-.autocomplete-container{
-  border: 1px solid darkblue;
-  padding: 2rem;
-  display:flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 2rem;
+.textfield {
+  width: 69%;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
 }
 
-.listing-description-container{
-  border: 1px solid darkblue;
-  padding: 2rem;
-  display:flex;
+.new-listing-container h3 {
+  border: 1px solid #bdbdbd;
+  border-radius: 3px 3px 0 0;
+  display: flex;
   align-items: center;
-  flex-direction: column;
-  margin: 2rem;
+  flex-direction: row;
+  width: 80%;
+  padding: 2rem 2rem 1rem;
+  background-color: #fefefe;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.images-container{
+.new-listing-container h2 {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 80%;
+  padding: 0 2rem 1rem;
+}
 
-  border: 1px solid darkblue;
-  padding: 2rem;
-  display:flex;
+.address-container {
+  border: 1px solid #bdbdbd;
+  border-radius: 0 0 3px 3px;
+  padding: 0 2rem 2rem;
+  display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 2rem;
+  margin: 0 1rem 1rem;
+  width: 80%;
+  background-color: #fefefe;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.listing-description-container {
+  border: 1px solid #bdbdbd;
+  border-radius: 0 0 3px 3px;
+  padding: 0 2rem 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 1rem 1rem;
+  width: 80%;
+  background-color: #fefefe;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.images-container {
+  border: 1px solid #bdbdbd;
+  border-radius: 0 0 3px 3px;
+  padding: 0 2rem 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 1rem 1rem;
+  width: 80%;
+  background-color: #fefefe;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
