@@ -6,7 +6,7 @@ const fileUpload = require("express-fileupload");
 const PORT = 3001;
 
 
-
+const users = [];
 
 
 require("dotenv").config();
@@ -49,6 +49,15 @@ const wss = new SocketServer({ port: 8080 });
 // broadcast to all current online users
 wss.broadcast = (data, ws) => {
   wss.clients.forEach(function each(client) {
+    users.forEach(function(user) {
+      if (user === client) {
+        console.log('yay');
+      } else {
+        console.log("goddammit");
+      }
+    })
+  });
+  wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
       client.send(JSON.stringify(data));
     }
@@ -59,7 +68,7 @@ wss.broadcast = (data, ws) => {
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  console.log(ws);
+  users.push(ws);
   // var userID = parseInt(ws.upgradeReq.url.substr(1), 10)
   // console.log(userID);
   // console.log(wss.clients.size);

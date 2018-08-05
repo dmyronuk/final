@@ -59,7 +59,7 @@ class RentalSearchForm extends Component{
             className="query-input"
             type="text"
             name="query"
-            placeholder="Search by Street"
+            placeholder="Search.."
             value={this.state.query}
             onChange={this.handleQueryChange}
             onKeyDown={this.handleSubmit}
@@ -78,6 +78,7 @@ class RentalSearchForm extends Component{
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
+            <option value="4">4+</option>
           </select>
         </div>
         <div className="rental-input-container">
@@ -93,6 +94,7 @@ class RentalSearchForm extends Component{
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
+            <option value="4">4</option>
           </select>
         </div>
         <div className="rental-input-container">
