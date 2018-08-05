@@ -64,7 +64,6 @@ class App extends Component {
       <BrowserRouter>
         <div className="main-container">
 
-
           <PageMask toggleState={ this.state.maskClass} maskClickHandler={ this.toggleSidebar }/>
           <Header user={this.state.user} hamburgerClickHandler={ this.toggleSidebar } />
           <Sidebar toggleState={this.state.sidebarClass} linkClickHandler={ this.toggleSidebar }/>

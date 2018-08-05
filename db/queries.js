@@ -44,8 +44,6 @@ module.exports = (function() {
   // declare utility functions
   // function xyz () {}
  function getFilteredMessages (sender, recipient) {
-    console.log(sender);
-    console.log(recipient);
     return knex('messages')
     .join('users', 'messages.sender', 'users.id')
     // .join('users', 'messages.recipient', 'users.id')

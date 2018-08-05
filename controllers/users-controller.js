@@ -11,14 +11,15 @@ let controller = {
     jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decoded) => {
       if(err){
         console.log(err)
+        res.status(403).json({error: "token expired"})
+      }else{
+          res.json({
+          id: decoded.id,
+          first_name: decoded.first_name,
+          last_name: decoded.last_name,
+          email: decoded.email,
+        })
       }
-
-      res.json({
-        id: decoded.id,
-        first_name: decoded.first_name,
-        last_name: decoded.last_name,
-        email: decoded.email,
-      })
     })
   },
 

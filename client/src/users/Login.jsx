@@ -35,7 +35,6 @@ class Login extends Component {
       })
       //if login fails, token will be null and server will return error messages - display errors
     } else {
-      console.log(data)
       this.setState({
         errors: data.errors,
       })
@@ -69,8 +68,7 @@ class Login extends Component {
           {this.state.redirect && <Redirect to="/" />}
           <section className="login" id="form">
             <header>
-              <h2>Rental App</h2>
-              <h4>Login</h4>
+              <h2>Login</h2>
             </header>
             <form className="login-form" onSubmit={this.handleSubmit}>
               <input

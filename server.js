@@ -5,10 +5,6 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const PORT = 3001;
 
-
-
-
-
 require("dotenv").config();
 
 var knex = require("knex")({
@@ -59,7 +55,6 @@ wss.broadcast = (data, ws) => {
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  console.log(ws);
   // var userID = parseInt(ws.upgradeReq.url.substr(1), 10)
   // console.log(userID);
   // console.log(wss.clients.size);
