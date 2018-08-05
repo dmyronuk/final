@@ -106,13 +106,13 @@ module.exports = (function() {
     .select()
   },
 
-  getAllListings: (userId) => {
+  getAllListings: (landlordId) => {
     let query = knex('listings')
       .join('listing_addresses', 'listings.id', 'listing_addresses.listings_id')
       .join('listing_specifications', 'listings.id', 'listing_specifications.listings_id')
 
-    if(userId) {
-      query.where('listings.user_id', userId)
+    if(landlordId) {
+      query.where('listings.landlords_id', landlordId)
     }
 
     return query.select()
