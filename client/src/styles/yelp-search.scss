@@ -6,12 +6,13 @@
   button{
     border:solid 1px #aaaaaa;
     margin:0.2rem;
-    width:4rem;
-    height:4rem;
+    width: 4rem;
+    height: 4rem;
+    background: #dddddd;
     transition:background 1s;
 
     &:hover{
-      background:blue;
+      background:white;
     }
 
     img{
