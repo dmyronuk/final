@@ -3,15 +3,17 @@ html, body {
   margin: 0;
   font-size: 15px;
   font-family: Arial;
+  color: #333;
 }
 
 a{
   text-decoration: none;
-  color: black;
+  color: #333;
 }
 
 h1, h2, h3, h4, h5{
   margin:0;
+  color: black;
 }
 
 button{
@@ -43,6 +45,7 @@ button{
 @import "rental-search-container.scss";
 @import "signup.scss";
 @import "errors.scss";
+@import "background.scss";
 
 .main-container{
   display: flex;

@@ -39,11 +39,13 @@ const refetchUser = async (jwtObj) => {
     },
     body: JSON.stringify(jwtObj),
   });
-  const data = await response.json();
   if (response.status !== 200){
-    throw Error(data.message);
+    localStorage.removeItem("JWT_TOKEN")
+    return({data: null})
+  }else{
+    const data = await response.json();
+    return data;
   }
-  return data;
 }
 
 const fetchLandlord = async (jwtObj) => {

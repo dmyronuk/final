@@ -5,10 +5,13 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const PORT = 3001;
 
+<<<<<<< HEAD
 
 const users = [];
 
 
+=======
+>>>>>>> working
 require("dotenv").config();
 
 var knex = require("knex")({

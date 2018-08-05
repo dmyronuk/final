@@ -5,6 +5,7 @@ import { getAllThreads } from "../ajax/threads";
 import SingleThread  from "./SingleThread.jsx";
 import { refetchUser } from "../ajax/auth";
 import { Redirect } from "react-router-dom";
+import BackgroundImage from "../BackgroundImage";
 
 
 
@@ -31,6 +32,7 @@ class MyMessages extends Component {
   render(){
     return(
       <div>
+        <BackgroundImage />
         {!localStorage.JWT_TOKEN && <Redirect to="/login"/> }
         {this.state.threads &&
           <div className="default-flex-column-container converstions-container">

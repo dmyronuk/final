@@ -15,6 +15,7 @@ import RentalsMap from "./rentals/RentalsMap.jsx";
 import Sidebar from "./navigation/Sidebar";
 import Signup from "./users/Signup";
 import SingleRental from "./rentals/SingleRental.jsx";
+import MyRentals from "./rentals/MyRentals.jsx";
 import { refetchUser } from "./ajax/auth";
 
 // context
@@ -63,8 +64,6 @@ class App extends Component {
 
       <BrowserRouter>
         <div className="main-container">
-
-
           <PageMask toggleState={ this.state.maskClass} maskClickHandler={ this.toggleSidebar }/>
           <Header user={this.state.user} hamburgerClickHandler={ this.toggleSidebar } />
           <Sidebar toggleState={this.state.sidebarClass} linkClickHandler={ this.toggleSidebar }/>
@@ -79,8 +78,9 @@ class App extends Component {
             <Route exact path="/rentals/new" render={() => <NewRentalForm user={this.state.user} />} />
             <Route exact path="/rentals/:id/edit" component={ EditRentalForm } />
             <Route exact path="/messages/:id(\d+)" component= { Chat }/>
-            <Route exact path="/messages" component={MyMessages} />
+            <Route exact path="/messages" component={ MyMessages } />
             <Route exact path="/" component= { Home } />
+            <Route exact path="/rentals/my" component={ MyRentals } />
             <Route component={ NotFound } />
           </Switch>
         </div>

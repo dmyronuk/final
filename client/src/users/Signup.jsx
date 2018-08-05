@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { signup } from "../ajax/auth";
+import BackgroundImage from "../BackgroundImage";
 
 class Signup extends React.Component {
 
@@ -66,13 +67,13 @@ class Signup extends React.Component {
   render() {
     return (
       <div className="default-flex-column-container">
+        <BackgroundImage />
         { this.state.redirect && <Redirect to="/" /> }
         <div className="register-container">
           { this.state.errors && this.addError(this.state.errors[0])}
           <section className="register" id="form">
             <header>
-              <h2>Rental App</h2>
-              <h4>Register</h4>
+              <h2>Register</h2>
             </header>
             <form className="register-form" onSubmit={this.handleSubmit}>
               <div>
@@ -102,7 +103,7 @@ class Signup extends React.Component {
                   name="phone"
                   value={this.state.phone}
                   onChange={this.handleChange}
-                  placeholder="Phone #"
+                  placeholder="Phone"
                 />
               </div>
               <div>
@@ -112,7 +113,7 @@ class Signup extends React.Component {
                   name="email"
                   value={this.state.email}
                   onChange={this.handleChange}
-                  placeholder="Email@"
+                  placeholder="Email"
                 />
               </div>
               <div>

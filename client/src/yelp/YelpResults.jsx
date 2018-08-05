@@ -15,7 +15,11 @@ const YelpResults = (props) => {
             <div key={amenity.id} className="yelp-results-item">
               <header>{amenity.name}</header>
               <div className="image-container">
-                <img alt={amenity.name + "image"} src={amenity.image_url}/>
+                <img
+                  alt={amenity.name + "image"}
+                  src={amenity.image_url}
+                  onError={(e)=>{e.target.src="/images/no-image.jpg"}}
+                />
               </div>
               <div className="yelp-results-info-container">
                 <div>{distance}</div>
