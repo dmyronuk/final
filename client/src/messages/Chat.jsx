@@ -96,6 +96,18 @@ class Chat extends Component {
     this.socket = new WebSocket("ws://localhost:8080");
     this.socket.addEventListener("open", e => {
       console.log("connected to server");
+
+      // sends
+      if (localStorage.JWT_TOKEN) {
+      refetchUser({ token: localStorage.JWT_TOKEN }).then(user => {
+        const socketData = {
+          type: "postSocket",
+          talking_pair: {current_user: user.id, other_user: this.state.id}
+        };
+        console.log(socketData);
+          this.socket.send(JSON.stringify(socketData));
+        });
+      }
     });
 
     // when a new message is recieved
