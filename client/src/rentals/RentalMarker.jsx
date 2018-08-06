@@ -12,7 +12,7 @@ const RentalMarker = (props) => {
         <div className="info-box">
           <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
             <div>{props.address}</div>
-            <Link to={"/rentals/" + props.id}>link</Link>
+            <Link to={"/rentals/" + (props.id+1)}>link</Link>
           </div>
         </div>
       </InfoBox>}
