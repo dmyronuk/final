@@ -46,7 +46,7 @@ class Chat extends Component {
             sender: user.id,
             recipient: this.state.id
           })
-          .then(messages => { });
+          // .then(messages => { });
       });
     }
   };
