@@ -13,23 +13,16 @@ function Header(props){
       </Link>
         <div className="nav-login-container">
           { !props.user ?
-            <div>
-              <div>
+            <span>
                 <Link to={"/login"}>
                   <button className="default-auth-button">Login</button>
                 </Link>
-              </div>
-              <div>
                 <Link to={"/signup"}>
                   <button className="default-auth-button">Signup</button>
                 </Link>
-              </div>
-            </div>
+            </span>
           :
             <div>
-              <div className="navbar-email">
-                {props.user.email}
-              </div>
               <Link to={"/logout"}>
                 <button className="default-auth-button logout-button">Logout</button>
               </Link>

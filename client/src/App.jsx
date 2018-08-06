@@ -66,7 +66,7 @@ class App extends Component {
         <div className="main-container">
 
 
-          <PageMask toggleState={ this.state.maskClass} maskClickHandler={ this.toggleSidebar }/>
+          <PageMask toggleState={ this.state.maskClass} maskClickHandler={ this.toggleSidebar} user={this.state.user}/>
           <Header user={this.state.user} hamburgerClickHandler={ this.toggleSidebar } />
           <Sidebar user={this.state.user} toggleState={this.state.sidebarClass} linkClickHandler={ this.toggleSidebar }/>
 
