@@ -1,20 +1,20 @@
 .converstions-container{
-  margin-top: 2rem;
+  margin-top: $default-table-margin-top;
 
   table{
     background: white;
     border-radius: 0.3rem;
     border: 1px solid #aaaaaa;
     min-width: 20rem;
-    box-shadow: -0.2rem 0.2rem 0.2rem #aaaaaa;
+    box-shadow: $default-table-shadow;
     border-collapse: collapse;
   }
 
   th{
     color: white;
     background: #0392cf;
-    font-size: 1.5rem;
-    padding: 1rem;
+    font-size: $default-th-font-size;
+    padding: $default-th-padding;
   }
 
   tr{

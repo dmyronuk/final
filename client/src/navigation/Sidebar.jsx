@@ -34,13 +34,13 @@ const Sidebar = (props) => {
         </div>
       </Link>
 
-      { isLoggedIn() &&
-        <Link to={"/rentals/new"} onClick={props.linkClickHandler}>
+      { props.user &&
+        <Link to={"/rentals/manage"} onClick={props.linkClickHandler}>
           <div className="sidebar-item">
             <div className="img-container">
-              <img alt="new-rental-icon" src={ NewRentalIcon } />
+              <img alt="new-rental-icon" src={ NewRentalIcon } id="manage-icon" />
             </div>
-            <div>Add Rental</div>
+            <div>Manage <br/> Listings</div>
           </div>
         </Link>
       }

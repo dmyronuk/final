@@ -9,8 +9,7 @@ import { getAllRatingsThatUserRated, getAllRatingsOfRatee } from "../ajax/rating
 import ReactStars from "react-stars";
 import { refetchUser } from "../ajax/auth";
 import BackgroundImage from "../BackgroundImage";
-import BackArrow from "../icons/blue-back-arrow.png";
-
+import BackArrow from "../icons/back_arrow2.png";
 
 class Chat extends Component {
   constructor(props) {
@@ -155,49 +154,51 @@ class Chat extends Component {
       <div>
         <BackgroundImage />
         {this.state.redirect && <Redirect to="/login" />}
-        <Link to="/messages">
-          <div className="messages-link">
-            <img src={BackArrow} />
-            Messages
-          </div>
-        </Link>
-        <div className="chat-container">
-          <header>
-            <div>
-              <div>Chatting with:</div>
-              <div className="username">
-                  {this.state.chatPartner && this.state.chatPartner.first_name}
-              </div>
-                  <ReactStars
-                    half={true}
-                    edit={false}
-                    size={20}
-                    value={this.state.ratingOfRecipient}
-                  />
-            </div>
-            <div className="rating-outer-container">
-              {!this.state.ratingSubmitted ? (
-                this.state.alreadyRated === false && (
-                  <RatingsForm
-                    addNewRating={this.addNewRating}
-                    handleRatingChange={this.handleRatingChange}
-                    rating={this.state.rating}
-                    ratingSubmitted={this.state.ratingSubmitted}
-                  />
-                )
-              ) : (
-                <div>Rating submitted!</div>
-              )}
-            </div>
-          </header>
-          {this.state.messages && (
-            <MessageList
-              messages={this.state.messages}
-              currentUserId={this.state.id}
-            />
-          )}
 
-          <ChatBar addNewMessage={this.addNewMessage} />
+        <div className="chat-container">
+          <div className="chat-inner">
+            <header>
+              <div className="messages-link">
+                <Link to="/messages">
+                  <img src={BackArrow} />
+                </Link>
+              </div>
+              <div className="username-container">
+                <div>Chatting with:</div>
+                <div className="username">
+                    {this.state.chatPartner && this.state.chatPartner.first_name}
+                </div>
+                    <ReactStars
+                      half={true}
+                      edit={false}
+                      size={20}
+                      value={this.state.ratingOfRecipient}
+                    />
+              </div>
+              <div className="rating-outer-container">
+                {!this.state.ratingSubmitted ? (
+                  this.state.alreadyRated === false && (
+                    <RatingsForm
+                      addNewRating={this.addNewRating}
+                      handleRatingChange={this.handleRatingChange}
+                      rating={this.state.rating}
+                      ratingSubmitted={this.state.ratingSubmitted}
+                    />
+                  )
+                ) : (
+                  <div>Rating submitted!</div>
+                )}
+              </div>
+            </header>
+            {this.state.messages && (
+              <MessageList
+                messages={this.state.messages}
+                currentUserId={this.state.id}
+              />
+            )}
+
+            <ChatBar addNewMessage={this.addNewMessage} />
+          </div>
         </div>
       </div>
     );
