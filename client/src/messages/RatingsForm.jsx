@@ -19,6 +19,7 @@ class RatingsForm extends Component {
           </label>
             <ReactStars
               half = {false}
+              size ={22}
               value={this.props.rating}
               onChange={this.props.handleRatingChange}
             />

@@ -15,7 +15,7 @@
     font-size: 2.5rem;
   }
 }
-
+/*  filter invert */
 
 
 .toggle-nav{
@@ -24,11 +24,13 @@
   padding: 0;
   height: 3rem;
   width: 3.5rem;
-  border-radius: 0.2rem;
+  border-radius: 0.05rem;
+  background-color: #444444;
 
   img{
     height: 100%;
     width: 100%;
+    filter: invert(1);
   }
 }
 
