@@ -183,7 +183,7 @@ class Chat extends Component {
                   <ReactStars
                     half={true}
                     edit={false}
-                    size={20}
+                    size={25}
                     value={this.state.ratingOfRecipient}
                   />
             </div>
