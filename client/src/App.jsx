@@ -64,9 +64,11 @@ class App extends Component {
 
       <BrowserRouter>
         <div className="main-container">
+
+
           <PageMask toggleState={ this.state.maskClass} maskClickHandler={ this.toggleSidebar }/>
           <Header user={this.state.user} hamburgerClickHandler={ this.toggleSidebar } />
-          <Sidebar toggleState={this.state.sidebarClass} linkClickHandler={ this.toggleSidebar }/>
+          <Sidebar user={this.state.user} toggleState={this.state.sidebarClass} linkClickHandler={ this.toggleSidebar }/>
 
           <Switch>
             <Route exact path="/login" render={() => <Login setUser={this.setUser} />}/>
@@ -80,7 +82,7 @@ class App extends Component {
             <Route exact path="/messages/:id(\d+)" component= { Chat }/>
             <Route exact path="/messages" component={ MyMessages } />
             <Route exact path="/" component= { Home } />
-            <Route exact path="/rentals/my" component={ MyRentals } />
+            <Route exact path="/rentals/manage" component={ MyRentals } />
             <Route component={ NotFound } />
           </Switch>
         </div>

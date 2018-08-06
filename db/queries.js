@@ -126,13 +126,19 @@ module.exports = (function() {
       .orWhere("neighbourhoods.name", "like", `%${queryObj.query}%`)
     })
     .modify((builder) => {
-      if(queryObj.bedrooms != "Any"){
-        builder.where("listing_specifications.bedrooms", queryObj.bedrooms);
+      const number_bedrooms = Number(queryObj.bedrooms);
+      if (number_bedrooms === 4) { // refactor to not hardcode 4
+        builder.where("listing_specifications.bedrooms", ">=", number_bedrooms);
+      } else if(queryObj.bedrooms !== "Any"){
+        builder.where("listing_specifications.bedrooms", number_bedrooms);
       }
     })
     .modify((builder) => {
-      if(queryObj.bathrooms != "Any"){
-        builder.where("listing_specifications.bathrooms", queryObj.bathrooms);
+      const number_bathrooms = Number(queryObj.bathrooms);
+      if (number_bathrooms === 4) {
+        builder.where("listing_specifications.bathrooms", ">=", number_bathrooms);
+      } else if(queryObj.bathrooms !== "Any"){
+        builder.where("listing_specifications.bathrooms", ">=", number_bathrooms);
       }
     })
     .where("listings.price", "<", queryObj.maxPrice)

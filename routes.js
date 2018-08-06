@@ -24,6 +24,7 @@ function authMiddleware(req,res,next) {
       return;
     }
     req.decodedToken = decoded;
+    console.log("User authorized")
     next();
   });
 }
@@ -46,8 +47,8 @@ module.exports = function(app) {
     /**
      * Photo
      */
-    //public routes
-    app.post('/api/upload', photoController.uploadFile);
+    //protected routes
+    app.post('/api/upload', authMiddleware, photoController.uploadFile);
 
     /**
      * Messages

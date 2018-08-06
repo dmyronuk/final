@@ -15,7 +15,7 @@ class EditRentalForm extends RentalForm {
       this.setState({
         data: listing,
         imageURLs: listing.photos || [],
-        edit: true,
+        // edit: true,
         id: listing.id
       })
     }
@@ -31,7 +31,7 @@ class EditRentalForm extends RentalForm {
       token: token,
     })
     .then(res => {
-
+      this.setState({redirect: true})
     })
   }
 
@@ -44,7 +44,7 @@ class EditRentalForm extends RentalForm {
     }).then(res => {
       this.setState({redirect: true })
     })
-    this.setState({redirect: true })
+    // this.setState({redirect: true })
   }
 
 }
