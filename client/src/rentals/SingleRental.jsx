@@ -32,7 +32,6 @@ class SingleRental extends Component {
     getSingleListing(this.state.id)
     .then(data => {
       const formattedDate = dateFromTimestamp(data.date_available);
-      console.log(data, "hi")
       this.setState({
         data,
         formattedDate,

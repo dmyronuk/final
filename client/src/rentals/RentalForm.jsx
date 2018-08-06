@@ -7,7 +7,6 @@ import SingleImage from './SingleImage.jsx';
 import TextField from '@material-ui/core/TextField';
 import {fetchLandlord} from "../ajax/auth.js";
 
-
 class RentalForm extends Component {
   constructor(props) {
     super(props)

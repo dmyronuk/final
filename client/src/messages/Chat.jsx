@@ -5,13 +5,12 @@ import MessageList from "./MessageList.jsx";
 import RatingsForm from "./RatingsForm.jsx";
 import ChatBar from "./ChatBar.jsx";
 import { getFilteredMessages, getUsernameById } from "../ajax/messages";
-import {
-  getAllRatingsThatUserRated,
-  getAllRatingsOfRatee
-} from "../ajax/ratings";
+import { getAllRatingsThatUserRated, getAllRatingsOfRatee } from "../ajax/ratings";
 import ReactStars from "react-stars";
 import { refetchUser } from "../ajax/auth";
+import BackgroundImage from "../BackgroundImage";
 import BackArrow from "../icons/blue-back-arrow.png";
+
 
 class Chat extends Component {
   constructor(props) {
@@ -23,12 +22,7 @@ class Chat extends Component {
       alreadyRated: null,
       ratingSubmitted: false
     };
-
-
   }
-
-  // allows the messages to be viewed from the most recent
-  scrollToBottom = () => {};
 
   // allow user to add a new message
   addNewMessage = content => {
@@ -97,13 +91,23 @@ class Chat extends Component {
     });
   };
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
   componentDidMount() {
+    this.getRatingofRatee();
     this.socket = new WebSocket("ws://localhost:8080");
     this.socket.addEventListener("open", e => {
       console.log("connected to server");
+
+      // sends
+      if (localStorage.JWT_TOKEN) {
+      refetchUser({ token: localStorage.JWT_TOKEN }).then(user => {
+        const socketData = {
+          type: "postSocket",
+          talking_pair: {current_user: user.id, other_user: this.state.id}
+        };
+        console.log(socketData);
+          this.socket.send(JSON.stringify(socketData));
+        });
+      }
     });
 
     // when a new message is recieved
@@ -150,7 +154,6 @@ class Chat extends Component {
 
 
     //get the username of the other user connected to chat
-
     getUsernameById(this.state.id, localStorage.JWT_TOKEN).then(userInfo => {
       this.setState({
         chatPartner: userInfo
@@ -160,11 +163,10 @@ class Chat extends Component {
   }
 
   render() {
-    
-    this.getRatingofRatee();
 
     return (
       <div>
+        <BackgroundImage />
         {this.state.redirect && <Redirect to="/login" />}
         <Link to="/messages">
           <div className="messages-link">

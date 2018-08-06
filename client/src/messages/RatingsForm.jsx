@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-stars'
-import Button from '@material-ui/core/Button';
-
-
-
-
 
 class RatingsForm extends Component {
   constructor(props) {
@@ -27,9 +22,9 @@ class RatingsForm extends Component {
               value={this.props.rating}
               onChange={this.props.handleRatingChange}
             />
-          <Button id="rating-button" onClick={this.props.addNewRating} variant="contained" color="primary">
+          <button id="rating-button" onClick={this.props.addNewRating} variant="contained" color="primary">
             Rate
-          </Button>
+          </button>
         </form>
       </div>
     )

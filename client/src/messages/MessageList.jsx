@@ -8,7 +8,7 @@ class MessageList extends Component {
   }
 
   componentDidMount() {
-    this.scrollToBottom();
+    this.messagesEnd.scrollIntoView({ behavior: "instant" });
   }
 
   componentDidUpdate() {
