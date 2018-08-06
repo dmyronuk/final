@@ -295,7 +295,7 @@ class RentalForm extends Component {
           {this.state.edit && <button onClick={this.handleDelete}> Delete </button>}
           {this.createImgTag(this.state.imageURLs)}
         </div>
-      <div/>
+      </div>
     )
   }
 
