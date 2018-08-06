@@ -3,6 +3,7 @@ import axios from 'axios';
 import { getSingleListing } from "../ajax/listings";
 import { Redirect } from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import SingleImage from './SingleImage.jsx';
 import TextField from '@material-ui/core/TextField';
 import {fetchLandlord} from "../ajax/auth.js";
 
@@ -53,17 +54,31 @@ class RentalForm extends Component {
     const data = new FormData();
     data.append('file', this.uploadInput.files[0]);
 
-    axios.post('/api/upload', data)
-      .then(res => {
-        let prevUrls = this.state.imageURLs;
-        this.setState({
-          imageURLs: [...prevUrls, res.data.file],
-        })
+    axios.post('/api/upload', data,
+      { headers: { Authorization: localStorage.getItem("JWT_TOKEN") } }
+    )
+    .then(res => {
+      let prevUrls = this.state.imageURLs;
+      this.setState({
+        imageURLs: [...prevUrls, res.data.file],
       })
+    })
+    .catch(err => {
+      alert("Sorry, we only accept image files.")
+    })
+  }
+
+  handleDeleteImage = (imageURL) => {
+    let imagesArr = this.state.imageURLs
+    let index = imagesArr.indexOf(imageURL);
+    if (index > -1) {
+      imagesArr.splice(index, 1);
+      this.setState({...this.state, imageURLs: imagesArr})
+    }
   }
 
   createImgTag(arr) {
-    return arr.map((elm, i) => <img key={i} src={elm} alt="img" />)
+    return arr.map((elm, i) => <SingleImage key={i} index={i} image={elm} handleDeleteImage={this.handleDeleteImage}/>)
   }
 
   handleChange = (e) => {
@@ -106,7 +121,7 @@ class RentalForm extends Component {
     }
     return (
       <div className="new-rental-container">
-        {this.state.redirect && <Redirect to="/my-messages" />}
+        {this.state.redirect && <Redirect to="/rentals/my" />}
         <form className="new-listing-container" onSubmit={this.handleSubmit}>
         <h2>Your Listing</h2>
 
@@ -270,11 +285,11 @@ class RentalForm extends Component {
               accept=".jpg, .jpeg, .png" />
           </div>
           <div className = "submit">
-            <Button variant="contained" color="primary" onClick={this.handleSubmit}>Post Your Listing</Button>
+            <Button variant="contained" color="primary" onClick={this.handleSubmit}>{this.state.edit? "Submit Changes" : "Post Your Listing"}</Button>
           </div>
         </form>
 
-        {this.state.edit && <button onClick={this.handleDelete}> Delete</button>}
+        {this.state.edit && <button onClick={this.handleDelete}> Delete </button>}
         {this.createImgTag(this.state.imageURLs)}
       </div>
     )

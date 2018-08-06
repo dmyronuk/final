@@ -152,6 +152,7 @@ class Chat extends Component {
       this.setState({ redirect: true });
     }
 
+
     //get the username of the other user connected to chat
     getUsernameById(this.state.id, localStorage.JWT_TOKEN).then(userInfo => {
       this.setState({

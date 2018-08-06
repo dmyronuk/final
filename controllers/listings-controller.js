@@ -40,16 +40,15 @@ let controller = {
   postListings: async function(req, res) {
     let imageUrls = req.body.images
     let data = req.body.data
-
-     let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
-      queries.addNewListing(data, imageUrls, landlord.id)
-        .then(data => {
-          res.end();
-        })
-        .catch(error => {
-          console.log(error);
-          res.json({status: "refused"});
-        })
+    let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
+     queries.addNewListing(data, imageUrls, landlord.id)
+       .then(data => {
+         res.end();
+       })
+       .catch(error => {
+         console.log(error);
+         res.json({status: "refused"});
+       })
   },
 
   editListing: async function(req, res) {

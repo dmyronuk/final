@@ -70,15 +70,16 @@ class RentalSearchForm extends Component{
             Bedrooms:
           </div>
           <select
+            className="number-selector"
             name="bedrooms"
             value={this.state.bedrooms}
             onChange={this.handleSelectChange}
           >
-            <option value="Any">Any</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4+</option>
+            <option value="Any" className="selector-options">Any</option>
+            <option value="1" className="selector-options">1</option>
+            <option value="2" className="selector-options">2</option>
+            <option value="3" className="selector-options">3</option>
+            <option value="4" className="selector-options">4+</option>
           </select>
         </div>
         <div className="rental-input-container">
@@ -86,15 +87,16 @@ class RentalSearchForm extends Component{
             Bathrooms:
           </div>
           <select
+            className="number-selector"
             name="bathrooms"
             value={this.state.bathrooms}
             onChange={this.handleSelectChange}
           >
-            <option value="Any">Any</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <option value="Any" className="selector-options">Any</option>
+            <option value="1" className="selector-options">1</option>
+            <option value="2" className="selector-options">2</option>
+            <option value="3" className="selector-options">3</option>
+            <option value="4" className="selector-options">4+</option>
           </select>
         </div>
         <div className="rental-input-container">
