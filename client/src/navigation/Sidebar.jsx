@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { isLoggedIn } from "../utils/AuthService";
 import MapIcon from "../icons/map_icon1.png";
 import GridIcon from "../icons/grid_icon2.png";
 import MessagesIcon from "../icons/message_icon1.png";
