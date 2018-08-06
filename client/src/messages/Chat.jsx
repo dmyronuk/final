@@ -138,14 +138,16 @@ class Chat extends Component {
     //check if logged in
 
     if (localStorage.JWT_TOKEN) {
-      refetchUser({ token: localStorage.JWT_TOKEN }).then(user => {
-        this.checkIfRated(user.id, this.state.id);
-        getFilteredMessages(user.id, this.state.id).then(messages => {
-          this.setState({
-            messages
-          });
+      refetchUser({ token: localStorage.JWT_TOKEN })
+        .then(user => {
+          this.checkIfRated(user.id, this.state.id);
+          getFilteredMessages(user.id, this.state.id)
+            .then(messages => {
+              this.setState({
+                messages
+              });
+            });
         });
-      });
     } else {
       //if user is not logged in, redirect to login page
       this.setState({ redirect: true });
@@ -184,7 +186,7 @@ class Chat extends Component {
                 <ReactStars
                   half={true}
                   edit={false}
-                  size={25}
+                  size={27}
                   value={this.state.ratingOfRecipient}
                 />
               </div>
