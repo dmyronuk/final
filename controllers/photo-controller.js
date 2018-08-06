@@ -3,7 +3,7 @@ const uuid = require('uuid-v4');
 
 let controller = {
  uploadFile: (req, res) => {
-    const ValidImageTypes = ["image/gif", "image/jpeg", "image/png"];
+    const ValidImageTypes = ["image/gif", "image/jpeg", "image/png", "image/jpg"];
     const imageFile = req.files.file;
     const fileType = imageFile.mimetype;
     if (ValidImageTypes.indexOf(fileType) === -1) {

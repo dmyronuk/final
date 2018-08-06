@@ -14,12 +14,11 @@ class SingleImage extends Component {
     return (
       <div>
         {this.props.index === 0 && <h3>Main Picture</h3>}
+         <button type="submit" onClick={() => this.props.handleDeleteImage(this.props.image)}>Remove</button><br/>
         <img src={this.props.image} alt="img" />
-        <button type="submit" onClick={() => this.props.handleDeleteImage(this.props.image)}>Remove</button>
       </div>
     )
   }
 }
 
 export default SingleImage
-
