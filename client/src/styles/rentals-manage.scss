@@ -1,0 +1,35 @@
+.rentals-manage-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  table{
+    margin-top: $default-table-margin-top;
+    background: white;
+    border-collapse: collapse;
+    box-shadow: $default-table-shadow;
+
+    a{
+      color: blue;
+    }
+
+    th{
+      background: $blue-header;
+      padding: $default-th-padding;
+      font-size: $default-th-font-size;
+      color: white;
+    }
+
+    tr{
+      border-bottom: 1px solid #cccccc;
+    }
+
+    td{
+      padding: 0.5rem 1rem;
+    }
+
+    .add-listing-td{
+      text-align: center;
+    }
+  }
+}
