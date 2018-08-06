@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import numberWithCommas from "../helpers/number-formatters";
 
 const RentalGridCard = (props) => {
 return(
@@ -13,7 +14,7 @@ return(
         </div>
         <div className="listing-grid-info">
           <div className="listing-grid-address">{props.data.street}, {props.data.city}</div>
-          <div>{props.data.bedrooms} Bedrooms | {props.data.bathrooms} Bathrooms | ${props.data.price}</div>
+          <div>{props.data.bedrooms} Bedrooms | {props.data.bathrooms} Bathrooms | ${numberWithCommas(props.data.price)}</div>
         </div>
       </div>
     </Link>

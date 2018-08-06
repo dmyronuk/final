@@ -100,7 +100,7 @@ class RentalSearchForm extends Component{
           </select>
         </div>
         <div className="rental-input-container">
-          <div>Min Price: {this.state.minPrice}</div>
+          <div>Min Price: ${this.state.minPrice}</div>
           <input
             className="range-slider"
             type="range"
@@ -116,7 +116,7 @@ class RentalSearchForm extends Component{
 
         </div>
         <div className="rental-input-container">
-           <div>Max Price: {this.state.maxPrice}</div>
+           <div>Max Price: ${this.state.maxPrice}</div>
           <input
             className="range-slider"
             type="range"

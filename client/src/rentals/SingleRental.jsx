@@ -8,6 +8,7 @@ import dateFromTimestamp from "../helpers/time-formatters";
 import { refetchUser } from "../ajax/auth";
 import MessageIcon from "../icons/message_icon3.png";
 import ImageGallery from "react-image-gallery";
+import numberWithCommas from "../helpers/number-formatters";
 
 import "../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
@@ -99,7 +100,7 @@ class SingleRental extends Component {
                     <table>
                       <tbody>
                         <tr>
-                          <td>${this.state.data.price} / Month</td>
+                          <td>${numberWithCommas(this.state.data.price)} / Month</td>
                         </tr>
                         <tr>
                           <td>{this.state.data.bedrooms} Bedrooms</td>
