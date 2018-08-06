@@ -1,8 +1,6 @@
 import decode from 'jwt-decode';
 import auth0 from 'auth0-js';
 
-
-
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 const CLIENT_ID = 'lnnf4peiZGREkzVeomZ7HnCJYBvrf2VU';
@@ -21,7 +19,7 @@ export function login(path) {
     responseType: 'token id_token',
     redirectUri: REDIRECT,
     audience: AUDIENCE,
-    scope: SCOPE  
+    scope: SCOPE
   });
 }
 
