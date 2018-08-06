@@ -91,6 +91,7 @@ class Chat extends Component {
   };
 
   componentDidMount() {
+    document.title = `Messages | Kiro `
     this.getRatingofRatee();
     this.socket = new WebSocket("ws://localhost:8080");
     this.socket.addEventListener("open", e => {
