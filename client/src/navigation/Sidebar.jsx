@@ -22,7 +22,7 @@ const Sidebar = (props) => {
           <div className="img-container">
             <img alt="Grid Icon" src={ GridIcon } id="grid-icon" />
           </div>
-          <div>Grid view</div>
+          <div>Grid View</div>
         </div>
       </Link>
       <Link to="/rentals/map" onClick={props.linkClickHandler}>
@@ -30,7 +30,7 @@ const Sidebar = (props) => {
           <div className="img-container">
             <img alt="Map Icon" src={ MapIcon } id="map-icon" />
           </div>
-          <div>Map view</div>
+          <div>Map View</div>
         </div>
       </Link>
       <Link to="/messages" onClick={props.linkClickHandler}>
@@ -48,7 +48,7 @@ const Sidebar = (props) => {
             <div className="img-container">
               <img alt="new-rental-icon" src={ NewRentalIcon } id="manage-icon" />
             </div>
-            <div>Manage listings</div>
+            <div>Manage Listings</div>
           </div>
         </Link>
       }

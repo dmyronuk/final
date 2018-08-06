@@ -126,7 +126,7 @@ class RentalForm extends Component {
       <div>
         <BackgroundImage/>
         <div className="new-rental-container">
-          {this.state.redirect && <Redirect to="/rentals/my" />}
+          {this.state.redirect && <Redirect to="/rentals/manage" />}
           <form className="new-listing-container" onSubmit={this.handleSubmit}>
             <h2>{this.FORM_TITLE}</h2>
 
