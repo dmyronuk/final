@@ -9,7 +9,7 @@ function Header(props){
         <img alt="Menu Toggle" src={hamburger}/>
       </button>
       <Link to={"/"}>
-        <h1 className="app-title">Title</h1>
+        <h1 className="app-title">Kiro</h1>
       </Link>
         <div className="nav-login-container">
           { !props.user ?
