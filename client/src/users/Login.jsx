@@ -89,7 +89,7 @@ class Login extends Component {
                 className="login-input"
                 placeholder="Password" />
               <div className="submit-container">
-                <input type="submit" value="LogIn" className="login-button" />
+                <input type="submit" value="Login" className="login-button" />
               </div>
             </form>
           </section>
