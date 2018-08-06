@@ -46,7 +46,7 @@ class Chat extends Component {
             sender: user.id,
             recipient: this.state.id
           })
-          .then(messages => {});
+          .then(messages => { });
       });
     }
   };
@@ -98,12 +98,12 @@ class Chat extends Component {
 
       // sends
       if (localStorage.JWT_TOKEN) {
-      refetchUser({ token: localStorage.JWT_TOKEN }).then(user => {
-        const socketData = {
-          type: "postSocket",
-          talking_pair: {current_user: user.id, other_user: this.state.id}
-        };
-        console.log(socketData);
+        refetchUser({ token: localStorage.JWT_TOKEN }).then(user => {
+          const socketData = {
+            type: "postSocket",
+            talking_pair: { current_user: user.id, other_user: this.state.id }
+          };
+          console.log(socketData);
           this.socket.send(JSON.stringify(socketData));
         });
       }
@@ -138,14 +138,16 @@ class Chat extends Component {
     //check if logged in
 
     if (localStorage.JWT_TOKEN) {
-      refetchUser({ token: localStorage.JWT_TOKEN }).then(user => {
-        this.checkIfRated(user.id, this.state.id);
-        getFilteredMessages(user.id, this.state.id).then(messages => {
-          this.setState({
-            messages
-          });
+      refetchUser({ token: localStorage.JWT_TOKEN })
+        .then(user => {
+          this.checkIfRated(user.id, this.state.id);
+          getFilteredMessages(user.id, this.state.id)
+            .then(messages => {
+              this.setState({
+                messages
+              });
+            });
         });
-      });
     } else {
       //if user is not logged in, redirect to login page
       this.setState({ redirect: true });
@@ -179,14 +181,14 @@ class Chat extends Component {
               <div className="username-container">
                 <div>Chatting with:</div>
                 <div className="username">
-                    {this.state.chatPartner && this.state.chatPartner.first_name}
+                  {this.state.chatPartner && this.state.chatPartner.first_name}
                 </div>
-                    <ReactStars
-                      half={true}
-                      edit={false}
-                      size={20}
-                      value={this.state.ratingOfRecipient}
-                    />
+                <ReactStars
+                  half={true}
+                  edit={false}
+                  size={27}
+                  value={this.state.ratingOfRecipient}
+                />
               </div>
               <div className="rating-outer-container">
                 {!this.state.ratingSubmitted ? (
@@ -199,8 +201,8 @@ class Chat extends Component {
                     />
                   )
                 ) : (
-                  <div>Rating submitted!</div>
-                )}
+                    <div>Rating submitted!</div>
+                  )}
               </div>
             </header>
             {this.state.messages && (
