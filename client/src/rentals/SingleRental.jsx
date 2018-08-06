@@ -7,12 +7,9 @@ import YelpResults from "../yelp/YelpResults";
 import dateFromTimestamp from "../helpers/time-formatters";
 import { refetchUser } from "../ajax/auth";
 import MessageIcon from "../icons/message_icon3.png";
-import ImageGallery from 'react-image-gallery';
-
+import ImageGallery from "react-image-gallery";
 
 import "../../node_modules/react-image-gallery/styles/css/image-gallery.css";
-
-
 
 class SingleRental extends Component {
 
@@ -45,49 +42,43 @@ class SingleRental extends Component {
     return outputArr
   }
 
-
   componentDidMount() {
     // getUserFromLandlordId(this.props.id)
     getSingleListing(this.state.id)
-      .then(data => {
-        const formattedDate = dateFromTimestamp(data.date_available);
-        this.setState({
-          data,
-          formattedDate,
-          images: this.createArrayForImageGalleryFormat(data),
-        })
-        // gets the user id corresponding the landlord who created the listing
-        getUserFromLandlordId(this.state.data.landlords_id)
-          .then(landlordUserId => {
-            this.setState({
-              landlordUserId: landlordUserId.users_id,
-            })
-
-            // gets the user ID
-            if (localStorage.JWT_TOKEN) {
-              refetchUser({ token: localStorage.JWT_TOKEN })
-                .then(user => {
-                  this.setState({
-                    current_user: user.id,
-                  })
-                })
-            }
-          })
-
+    .then(data => {
+      const formattedDate = dateFromTimestamp(data.date_available);
+      this.setState({
+        data,
+        formattedDate,
+        images: this.createArrayForImageGalleryFormat(data),
       })
+      // gets the user id corresponding the landlord who created the listing
+      getUserFromLandlordId(this.state.data.landlords_id)
+      .then(landlordUserId => {
+        this.setState({
+          landlordUserId: landlordUserId.users_id,
+        })
 
+        // gets the user ID
+        if (localStorage.JWT_TOKEN) {
+          refetchUser({ token: localStorage.JWT_TOKEN })
+          .then(user => {
+            this.setState({
+              current_user: user.id,
+            })
+          })
+        }
+      })
+    })
   }
 
-
-
   render() {
-
     return (
       <div className="default-flex-row-container">
         {this.state.data &&
           <div className="card-container">
             <div className="single-rental-card">
-              <div className="image-container">
+
                 {this.state.data.photos ?
                   // <img alt="Rental Photo" src={this.state.data.photos[0]} />
                   <ImageGallery
@@ -98,12 +89,11 @@ class SingleRental extends Component {
                   />
                   : <img alt="No Photo Available" src="/images/no-image.png" />
                 }
-                <article className="mask"></article>
-                <article >
-                  {this.state.data.street}, {this.state.data.city} | {this.state.data.postal_code}
-                </article>
-              </div>
               <div className="rental-card-info">
+                <div className="mask"></div>
+                <div className="single-card-address-container">
+                  {this.state.data.street}, {this.state.data.city} | {this.state.data.postal_code}
+                </div>
                 <div className="summary">
                   <div className="table-container">
                     <table>
@@ -136,18 +126,12 @@ class SingleRental extends Component {
                   {/* the div below is the link to contact the landlord, the landlord cannot contact himself */}
                   <div className="landlord-contact-container">
 
-                    {(this.state.landlordUserId && this.state.current_user && this.state.landlordUserId !== this.state.current_user) &&
+                    {(this.state.landlordUserId && this.state.landlordUserId !== this.state.current_user) &&
                       <Link to={"/messages/" + this.state.landlordUserId}>
                         <img src={MessageIcon} />  <br />
                         Contact
                         </Link>}
                   </div>
-
-                  {/* if user is not logged in, it will show a please login to contact landlord, there is a slight blink*/}
-                  <div>
-                    {(this.state.landlordUserId && !this.state.current_user) && <p>Please login to contact landlord</p>}
-                  </div>
-
                 </div>
               </div>
             </div>
@@ -163,6 +147,5 @@ class SingleRental extends Component {
     )
   }
 }
-
 
 export default SingleRental;
