@@ -55,13 +55,18 @@ class RentalForm extends Component {
     const data = new FormData();
     data.append('file', this.uploadInput.files[0]);
 
-    axios.post('/api/upload', data)
-      .then(res => {
-        let prevUrls = this.state.imageURLs;
-        this.setState({
-          imageURLs: [...prevUrls, res.data.file],
-        })
+    axios.post('/api/upload', data,
+      { headers: { Authorization: localStorage.getItem("JWT_TOKEN") } }
+    )
+    .then(res => {
+      let prevUrls = this.state.imageURLs;
+      this.setState({
+        imageURLs: [...prevUrls, res.data.file],
       })
+    })
+    .catch(err => {
+      alert("Sorry, we only accept image files.")
+    })
   }
 
   handleDeleteImage = (imageURL) => {

@@ -47,8 +47,8 @@ module.exports = function(app) {
     /**
      * Photo
      */
-    //public routes
-    app.post('/api/upload', photoController.uploadFile);
+    //protected routes
+    app.post('/api/upload', authMiddleware, photoController.uploadFile);
 
     /**
      * Messages
