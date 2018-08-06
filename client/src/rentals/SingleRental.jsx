@@ -7,10 +7,16 @@ import YelpResults from "../yelp/YelpResults";
 import dateFromTimestamp from "../helpers/time-formatters";
 import { refetchUser } from "../ajax/auth";
 import MessageIcon from "../icons/message_icon3.png";
+import ImageGallery from 'react-image-gallery';
+
+
+import "../../node_modules/react-image-gallery/styles/css/image-gallery.css";
+
+
 
 class SingleRental extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       id: Number(this.props.match.params.id),
@@ -26,38 +32,55 @@ class SingleRental extends Component {
     })
   }
 
-
-  componentDidMount(){
-    // getUserFromLandlordId(this.props.id)
-    getSingleListing(this.state.id)
-    .then(data => {
-      const formattedDate = dateFromTimestamp(data.date_available);
-      this.setState({
-        data,
-        formattedDate,
-      })
-      // gets the user id corresponding the landlord who created the listing
-      getUserFromLandlordId(this.state.data.landlords_id)
-      .then(landlordUserId => {
-        this.setState({
-          landlordUserId: landlordUserId.users_id,
-        })
-
-        // gets the user ID
-        if(localStorage.JWT_TOKEN){
-          refetchUser({token: localStorage.JWT_TOKEN})
-          .then(user => {
-            this.setState({
-              current_user: user.id,
-            })
-          })
-        }
-      })
-
+  createArrayForImageGalleryFormat = (obj) => {
+    let photosArr = obj.photos
+    let outputArr = photosArr.map(photoURL => {
+      let obj = {}
+      obj.original = photoURL
+      obj.thumbnail = photoURL
+      obj.originalClass = "mappedImages"
+      return obj
     })
+
+    return outputArr
   }
 
-  render(){
+
+  componentDidMount() {
+    // getUserFromLandlordId(this.props.id)
+    getSingleListing(this.state.id)
+      .then(data => {
+        const formattedDate = dateFromTimestamp(data.date_available);
+        this.setState({
+          data,
+          formattedDate,
+          images: this.createArrayForImageGalleryFormat(data),
+        })
+        // gets the user id corresponding the landlord who created the listing
+        getUserFromLandlordId(this.state.data.landlords_id)
+          .then(landlordUserId => {
+            this.setState({
+              landlordUserId: landlordUserId.users_id,
+            })
+
+            // gets the user ID
+            if (localStorage.JWT_TOKEN) {
+              refetchUser({ token: localStorage.JWT_TOKEN })
+                .then(user => {
+                  this.setState({
+                    current_user: user.id,
+                  })
+                })
+            }
+          })
+
+      })
+
+  }
+
+
+
+  render() {
 
     return (
       <div className="default-flex-row-container">
@@ -65,14 +88,20 @@ class SingleRental extends Component {
           <div className="card-container">
             <div className="single-rental-card">
               <div className="image-container">
-                { this.state.data.photos ?
-                  <img alt="Rental Photo" src={this.state.data.photos[0]} />
+                {this.state.data.photos ?
+                  // <img alt="Rental Photo" src={this.state.data.photos[0]} />
+                  <ImageGallery
+                    items={this.state.images}
+                    showBullets={false}
+                    showPlayButton={false}
+                    showThumbnails={false}
+                  />
                   : <img alt="No Photo Available" src="/images/no-image.png" />
                 }
-                <div className="mask"></div>
-                <div >
+                <article className="mask"></article>
+                <article >
                   {this.state.data.street}, {this.state.data.city} | {this.state.data.postal_code}
-                </div>
+                </article>
               </div>
               <div className="rental-card-info">
                 <div className="summary">
@@ -94,11 +123,11 @@ class SingleRental extends Component {
                   <div>
                     <h4>Nearby Amenities</h4>
                     <YelpSearch
-                    latitude = {this.state.data.lat}
-                    longitude = {this.state.data.lng}
-                    radius = {"5000"}
-                    setYelpData = {this.setYelpData}
-                  />
+                      latitude={this.state.data.lat}
+                      longitude={this.state.data.lng}
+                      radius={"5000"}
+                      setYelpData={this.setYelpData}
+                    />
                   </div>
                 </div>
                 <div className="description">
@@ -108,15 +137,15 @@ class SingleRental extends Component {
                   <div className="landlord-contact-container">
 
                     {(this.state.landlordUserId && this.state.current_user && this.state.landlordUserId !== this.state.current_user) &&
-                        <Link to={"/messages/" + this.state.landlordUserId}>
-                            <img src={MessageIcon}/>  <br/>
-                            Contact
+                      <Link to={"/messages/" + this.state.landlordUserId}>
+                        <img src={MessageIcon} />  <br />
+                        Contact
                         </Link>}
                   </div>
 
                   {/* if user is not logged in, it will show a please login to contact landlord, there is a slight blink*/}
                   <div>
-                    {(this.state.landlordUserId && !this.state.current_user) && <p>Please login to contact landlord</p> }
+                    {(this.state.landlordUserId && !this.state.current_user) && <p>Please login to contact landlord</p>}
                   </div>
 
                 </div>
