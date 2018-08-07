@@ -130,8 +130,10 @@ class SingleRental extends Component {
 
                     {(this.state.landlordUserId && this.state.landlordUserId !== this.state.current_user) &&
                       <Link to={"/messages/" + this.state.landlordUserId}>
-                        <img src={MessageIcon} />  <br />
+                        <img src={MessageIcon} />
+                        <div>
                         Contact
+                        </div>
                         </Link>}
                   </div>
                 </div>
