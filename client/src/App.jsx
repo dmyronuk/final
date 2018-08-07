@@ -17,6 +17,7 @@ import Signup from "./users/Signup";
 import SingleRental from "./rentals/SingleRental.jsx";
 import MyRentals from "./rentals/MyRentals.jsx";
 import { refetchUser } from "./ajax/auth";
+import { getAllRatingsOfRatee } from "./ajax/ratings";
 
 // context
 // import AppProvider from "./provider.jsx";
@@ -50,11 +51,21 @@ class App extends Component {
     this.setState({ user: null });
   }
 
+  getRatingofRatee = (userID) => {
+    getAllRatingsOfRatee(userID).then(e => {
+      let sum = e.reduce((a, e) => {
+        return a + e.rating;
+      }, 0);
+      return this.setState({ rating: sum / e.length });
+    });
+  };
+
   componentDidMount(){
     if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
         this.setUser(user);
+        this.getRatingofRatee(user.id)
       })
     }
   }
@@ -68,7 +79,7 @@ class App extends Component {
 
           <PageMask toggleState={ this.state.maskClass} maskClickHandler={ this.toggleSidebar }/>
           <Header user={this.state.user} hamburgerClickHandler={ this.toggleSidebar } />
-          <Sidebar user={this.state.user} toggleState={this.state.sidebarClass} linkClickHandler={ this.toggleSidebar }/>
+          <Sidebar rating={this.state.rating} user={this.state.user} toggleState={this.state.sidebarClass} linkClickHandler={ this.toggleSidebar }/>
 
           <Switch>
             <Route exact path="/login" render={() => <Login setUser={this.setUser} />}/>
