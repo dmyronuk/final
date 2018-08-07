@@ -7,4 +7,14 @@ function toTitleCase(str) {
     );
   }
 
-export default toTitleCase;
+function toSingular(str, quantity) {
+  if (quantity === 1) {
+    return str.slice(0, str.length - 1);
+  }
+  return str;
+}
+
+export {
+  toTitleCase,
+  toSingular,
+}

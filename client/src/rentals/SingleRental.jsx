@@ -9,6 +9,7 @@ import { refetchUser } from "../ajax/auth";
 import MessageIcon from "../icons/message_icon3.png";
 import ImageGallery from "react-image-gallery";
 import numberWithCommas from "../helpers/number-formatters";
+import { toSingular } from "../helpers/name-formatters";
 
 import "../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
@@ -114,10 +115,10 @@ class SingleRental extends Component {
                           <td>${numberWithCommas(this.state.data.price)} / Month</td>
                         </tr>
                         <tr>
-                          <td>{this.state.data.bedrooms} Bedrooms</td>
+                          <td>{this.state.data.bedrooms} {toSingular("Bedrooms", this.state.data.bedrooms)} </td>
                         </tr>
                         <tr>
-                          <td>{this.state.data.bathrooms} Bathrooms</td>
+                          <td>{this.state.data.bathrooms} {toSingular("Bathrooms", this.state.data.bathrooms)}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -140,8 +141,10 @@ class SingleRental extends Component {
 
                     {(this.state.landlordUserId && this.state.landlordUserId !== this.state.current_user) &&
                       <Link to={"/messages/" + this.state.landlordUserId}>
-                        <img alt="Messages" src={MessageIcon} />  <br />
-                        Contact
+                        <img alt="Messages" src={MessageIcon} />
+                        <div>
+                          Contact
+                        </div>
                         </Link>}
                   </div>
                 </div>
