@@ -59,7 +59,7 @@ class MyRentals extends Component {
             <tr>
               <td className="add-listing-td" colSpan={3}>
                 <Link to={"/rentals/new"} >
-                  Add New Rental!
+                  + Add New Rental
                 </Link>
               </td>
             </tr>

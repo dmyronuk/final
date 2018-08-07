@@ -21,7 +21,6 @@ class RentalForm extends Component {
         postal_code: '',
         lat: 0,
         lng: 0,
-        unit: '',
         price: "",
         bedrooms: "",
         bathrooms: "",
@@ -31,6 +30,7 @@ class RentalForm extends Component {
       imageURLs: [],
       redirect: false,
       edit: false,
+      errors: null,
     }
     this.autocomplete = null
   }
@@ -88,7 +88,7 @@ class RentalForm extends Component {
     const currData = Object.assign({}, this.state.data)
     currData[e.target.name] = e.target.value
     this.setState({ data: currData });
-    console.log(this.state.landlordId);
+    console.log(this.state.data)
   }
 
   handlePlaceSelect = async () => {
@@ -114,7 +114,7 @@ class RentalForm extends Component {
   // {!this.state.landlordId && <Redirect to="/" />}
 
   render() {
-    const { street, city, province, postal_code, lat, lng, unit, price, bedrooms, bathrooms, date, description } = this.state.data;
+    const { street, city, province, postal_code, lat, lng, price, bedrooms, bathrooms, date, description } = this.state.data;
     if (!localStorage.JWT_TOKEN) {
       return <Redirect to="/login"/>
     } else if (this.state.landlordId === undefined) {
@@ -195,17 +195,6 @@ class RentalForm extends Component {
                   InputProps={{
                     readOnly: true,
                   }}
-                  onChange={this.handleChange} />
-              </div>
-
-              <div className="listing-field">
-                <TextField
-                  type="number"
-                  label="Unit Number"
-                  name="unit"
-                  fullWidth
-                  value={unit}
-                  min={0}
                   onChange={this.handleChange} />
               </div>
 
@@ -303,6 +292,7 @@ class RentalForm extends Component {
                 </div>
               </div>
             </section>
+            {this.state.errors && <div className="error">{this.state.errors[0]}</div>}
             <div className = "submit">
               <Button variant="contained" color="primary" onClick={this.handleSubmit}>{this.state.edit? "Submit Changes" : "Post Your Listing"}</Button>
             </div>
