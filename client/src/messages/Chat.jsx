@@ -46,7 +46,7 @@ class Chat extends Component {
             sender: user.id,
             recipient: this.state.id
           })
-          // .then(messages => { });
+        // .then(messages => { });
       });
     }
   };
@@ -80,7 +80,7 @@ class Chat extends Component {
       let sum = e.reduce((a, e) => {
         return a + e.rating;
       }, 0);
-      return this.setState({ ratingOfRecipient: sum / e.length });
+      return this.setState({ ratingOfRecipient: sum / e.length, ratingAmount: e.length });
     });
   };
 
@@ -161,7 +161,7 @@ class Chat extends Component {
         chatPartner: userInfo
       });
     });
-    
+
   }
 
   render() {
@@ -184,12 +184,15 @@ class Chat extends Component {
                 <div className="username">
                   {this.state.chatPartner && this.state.chatPartner.first_name}
                 </div>
+                <div>
+                  Number of Ratings: {this.state.ratingAmount}
+                </div>
                 <ReactStars
-                  half={true}
-                  edit={false}
-                  size={27}
-                  value={this.state.ratingOfRecipient}
-                />
+                    half={true}
+                    edit={false}
+                    size={27}
+                    value={this.state.ratingOfRecipient}
+                  />
               </div>
               <div className="rating-outer-container">
                 {!this.state.ratingSubmitted ? (
