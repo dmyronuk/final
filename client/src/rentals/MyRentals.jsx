@@ -14,6 +14,7 @@ class MyRentals extends Component {
   }
 
   componentDidMount() {
+    document.title = `My Listings | Kiro `
     const token = localStorage.getItem("JWT_TOKEN")
     axios.get('/api/landlord-listings', { headers: { Authorization: token } } )
     .then(listings => {
@@ -31,7 +32,7 @@ class MyRentals extends Component {
       <div className="rentals-manage-container">
         <BackgroundImage />
         <div className="rentals-manage-container">
-          {this.state.redirect && <Redirect to="/" />}
+          {this.state.redirect && <Redirect to="/error/401" />}
            <table>
             <tr>
               <th colSpan="3">My Listings</th>

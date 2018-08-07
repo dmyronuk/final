@@ -17,8 +17,8 @@ class SingleImage extends Component {
         </div>
         <div className="photo-info">
           {this.props.index === 0 &&
-            <div>Main</div> }
-          <button type="submit" onClick={() => this.props.handleDeleteImage(this.props.image)}>Remove</button><br/>
+            <div>Main Picture</div> }
+          <button className="picture-remove" type="submit" onClick={() => this.props.handleDeleteImage(this.props.image)}>Remove</button><br/>
         </div>
       </div>
     )
@@ -26,5 +26,3 @@ class SingleImage extends Component {
 }
 
 export default SingleImage
-
-// {this.props.index === 0 && <h3>Main Picture</h3>}

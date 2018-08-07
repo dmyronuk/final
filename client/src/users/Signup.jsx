@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { signup } from "../ajax/auth";
 import BackgroundImage from "../BackgroundImage";
+import toTitleCase from "../helpers/name-formatters";
 
 class Signup extends React.Component {
 
@@ -31,6 +32,8 @@ class Signup extends React.Component {
     const data = await signup(this.state);
     if(! data.errors){
       localStorage.setItem("JWT_TOKEN", data.token);
+      data.user.first_name = toTitleCase(data.user.first_name);
+      data.user.last_name = toTitleCase(data.user.last_name);
       this.props.setUser(data.user)
       this.setState({
         redirect: true
@@ -62,6 +65,10 @@ class Signup extends React.Component {
      form.classList.remove(errType);
     }, 3000)
     this.setState({errors: null});
+  }
+
+  componentDidMount(){
+    document.title = `Sign Up | Kiro`
   }
 
   render() {
