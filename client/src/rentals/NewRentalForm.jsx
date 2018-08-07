@@ -20,6 +20,10 @@ class NewRentalForm extends RentalForm {
       token: token,
     })
     .then(res => {
+      if(res.data.errors) {
+        this.setState({...this.state, errors: res.data.errors})
+        return
+      }
       (res.status === 200) && this.setState({redirect: true})
     });
   }

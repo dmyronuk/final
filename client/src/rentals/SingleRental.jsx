@@ -96,7 +96,7 @@ class SingleRental extends Component {
                   // <img alt="Rental Photo" src={this.state.data.photos[0]} />
                   <ImageGallery
                     items={this.state.images}
-                    showBullets={false}
+                    showFullscreenButton={false}
                     showPlayButton={false}
                     showThumbnails={false}
                   />

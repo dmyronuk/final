@@ -1,5 +1,6 @@
 const queries = require("../db/queries.js");
 const helpers = require("../helpers/helpers.js");
+const validations = require("../helpers/validations.js");
 const jwt = require("jsonwebtoken");
 var fs = require('fs');
 
@@ -40,7 +41,19 @@ let controller = {
   postListings: async function(req, res) {
     let imageUrls = req.body.images
     let data = req.body.data
+    let errors = []
+    let values = Object.values(data)
+    let integers = Object.keys(data).slice(6,9).map(key => ({[key]:data[key]}));
+    let integersErrors = validations.integerInputsAreValid(integers)
+
+    !validations.allFieldsPresent(values) && errors.push("All fields mandatory");
+    errors = errors.concat(integersErrors)
+
     let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
+    if (errors.length) {
+      res.json({errors: errors});
+      return
+    }
      queries.addNewListing(data, imageUrls, landlord.id)
        .then(data => {
          res.end();
@@ -56,6 +69,18 @@ let controller = {
     let listingId = req.params.id
     let imageUrls = req.body.imageURLs
     let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
+    let errors = []
+    let values = Object.values(listingData)
+    let integers = Object.keys(listingData).slice(6,9).map(key => ({[key]:listingData[key]}));
+    let integersErrors = validations.integerInputsAreValid(integers)
+
+    !validations.allFieldsPresent(values) && errors.push("All fields mandatory");
+    errors = errors.concat(integersErrors)
+
+    if (errors.length) {
+      res.json({errors: errors});
+      return
+    }
 
     queries.getListing(listingId)
       .then(rows => {

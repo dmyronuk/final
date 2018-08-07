@@ -1,17 +1,18 @@
 .map-container{
-  position:fixed;
-  height:$main-container-height;
-  width:$map-width;
+  position: fixed;
+  height: $main-container-height;
+  width: $map-width;
 }
 
 .map-listings-container{
-  margin-top:3rem;
-  margin-left:$map-width;
-  width:calc(100vw - $map-width);
-  min-height:100vh;
-  padding:1.5rem 1rem 1rem 1rem;
-  display:flex;
+  margin-top: 3rem;
+  margin-left: $map-width;
+  width: calc(100vw - $map-width);
+  min-height: 100vh;
+  padding: 1.5rem 1rem 1rem 1rem;
+  display: flex;
   flex-direction: column;
+  background: #eeeeee;
 
   .no-results{
     margin-top: 1rem;
@@ -21,26 +22,26 @@
   }
 
   .listing-map-card{
-    background:#eeeeee;
-    margin-bottom:1rem;
-    height:12rem;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    padding:1rem;
-    border:1px solid #dddddd;
-    box-shadow:-0.1rem 0.1rem 0.1rem #aaaaaa;
-    transition:background 0.6s;
+    background: white;
+    margin-bottom: 1rem;
+    height: 12rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #dddddd;
+    box-shadow: 0.1rem 0.1rem 0.1rem #aaaaaa;
+    transition: background 0.6s;
 
     &:hover{
-      background:darken(#eeeeee, 10%)
+      box-shadow: 0.2rem 0.2rem 0.2rem #888888;
     }
 
     .listing-map-img-container{
-      width:60%;
-      height:100%;
-      display:flex;
-      flex-direction:row;
+      width: 60%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
 
       img{
         object-fit: cover;
@@ -51,11 +52,11 @@
     }
 
     .listing-map-info-container{
-      height:100%;
+      height: 100%;
 
       h4{
-        font-size:1.1rem;
-        margin:0;
+        font-size: 1.1rem;
+        margin: 0;
 
       }
     }

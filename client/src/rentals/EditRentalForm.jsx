@@ -13,8 +13,21 @@ class EditRentalForm extends RentalForm {
     let listingId = this.props.match.params.id
     let listing = listingId && await getSingleListing(listingId)
     if (listing) {
+      let data =  {
+        street: listing.street,
+        city: listing.city,
+        province: listing.province,
+        postal_code: listing.postal_code,
+        lat: listing.lat,
+        lng: listing.lng,
+        price: listing.price,
+        bedrooms: listing.bedrooms,
+        bathrooms: listing.bathrooms,
+        date: listing.date_available.slice(0, 10),
+        description: listing.description,
+      }
       this.setState({
-        data: listing,
+        data: data,
         imageURLs: listing.photos || [],
         // edit: true,
         id: listing.id
@@ -32,22 +45,13 @@ class EditRentalForm extends RentalForm {
       token: token,
     })
     .then(res => {
+      if(res.data.errors) {
+        this.setState({...this.state, errors: res.data.errors})
+        return
+      }
       this.setState({redirect: true})
     })
   }
-
-  handleDelete = (e) => {
-    e.preventDefault();
-    console.log(this.props.match.params.id)
-    const token = localStorage.getItem("JWT_TOKEN");
-    axios.delete(`/api/listings/${this.props.match.params.id}`, {
-      data: { token: token,}
-    }).then(res => {
-      this.setState({redirect: true })
-    })
-    // this.setState({redirect: true })
-  }
-
 }
 
 export default EditRentalForm
