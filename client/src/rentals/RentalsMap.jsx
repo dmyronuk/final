@@ -8,6 +8,7 @@ class RentalsMap extends Component{
   constructor(props){
     super(props)
     this.state = {
+      showListingBox: false,
       activeInfoBoxId: null,
       googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
     }
@@ -21,6 +22,12 @@ class RentalsMap extends Component{
         listings,
         noResults,
       })
+    })
+  }
+
+  toggleMarker = (key) =>{
+    this.handleMarkerClick(key)
+    this.setState({showListingBox:true, clickedMarker:true}, ()=>{
     })
   }
 
@@ -41,21 +48,34 @@ class RentalsMap extends Component{
     })
   }
 
-  render(){
+  removeListingBoxFromMap = () => {
+    const currentMarkerState = this.state.showListingBox;
+    const clickedMarker = this.state.clickedMarker;
+    if (clickedMarker === true){
+      this.setState({clickedMarker: false},()=>{
+      })
+    } else{
+      this.setState({showListingBox: !currentMarkerState})
+    }
+  }
 
+  render(){
 
     return(
       <div>
         <RentalSearchForm handleSearchSubmit={this.handleSearchSubmit} />
         {this.state.listings &&
           <MapComponent
-            listings = {this.state.listings}
-            googleMapURL = { this.state.googleMapURL }
-            loadingElement = {<div  />}
-            containerElement = {<div className="map-container" />}
-            mapElement = {<div style={{ height: `100%` }} />}
-            handleMarkerClick = { this.handleMarkerClick }
+            listings={this.state.listings}
+            googleMapURL={this.state.googleMapURL}
+            loadingElement={<div />}
+            containerElement={<div className="map-container" onClick={this.removeListingBoxFromMap} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            handleMarkerClick={this.handleMarkerClick}
             activeInfoBoxId = { this.state.activeInfoBoxId }
+            showListingBox = { this.state.showListingBox }
+            toggleMarker = { this.toggleMarker }
+            removeListingBoxFromMap = {this.removeListingBoxFromMap}
           />
         }
         <div className ="map-listings-container">
