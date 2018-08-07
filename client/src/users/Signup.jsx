@@ -67,6 +67,10 @@ class Signup extends React.Component {
     this.setState({errors: null});
   }
 
+  componentDidMount(){
+    document.title = `Sign Up | Kiro`
+  }
+
   render() {
     return (
       <div className="default-flex-column-container">

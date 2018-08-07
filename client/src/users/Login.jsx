@@ -61,6 +61,10 @@ class Login extends Component {
     this.setState({ errors: null });
   }
 
+  componentDidMount(){
+    document.title = `Login | Kiro`
+  }
+
   render() {
     return (
 

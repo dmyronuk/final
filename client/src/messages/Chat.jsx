@@ -91,7 +91,6 @@ class Chat extends Component {
   };
 
   componentDidMount() {
-    document.title = `Messages | Kiro `
     this.getRatingofRatee();
     this.socket = new WebSocket("ws://localhost:8080");
     this.socket.addEventListener("open", e => {
@@ -157,11 +156,12 @@ class Chat extends Component {
 
     //get the username of the other user connected to chat
     getUsernameById(this.state.id, localStorage.JWT_TOKEN).then(userInfo => {
+      document.title = `Chat - ${userInfo.first_name} | Kiro `
       this.setState({
         chatPartner: userInfo
       });
     });
-
+    
   }
 
   render() {

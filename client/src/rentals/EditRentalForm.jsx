@@ -7,6 +7,7 @@ class EditRentalForm extends RentalForm {
 
 
   async componentDidMount() {
+    document.title = `Edit Listing | Kiro`
     super.componentDidMount()
     this.setState({edit: true})
     let listingId = this.props.match.params.id

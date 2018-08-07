@@ -16,6 +16,7 @@ import Sidebar from "./navigation/Sidebar";
 import Signup from "./users/Signup";
 import SingleRental from "./rentals/SingleRental.jsx";
 import MyRentals from "./rentals/MyRentals.jsx";
+import Unauthorized from "./Unauthorized.jsx";
 import { refetchUser } from "./ajax/auth";
 
 // context
@@ -83,6 +84,7 @@ class App extends Component {
             <Route exact path="/messages" component={ MyMessages } />
             <Route exact path="/" component= { Home } />
             <Route exact path="/rentals/manage" component={ MyRentals } />
+            <Route exact path="/error/401" component={ Unauthorized } />
             <Route component={ NotFound } />
           </Switch>
         </div>

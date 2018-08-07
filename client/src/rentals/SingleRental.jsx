@@ -48,6 +48,7 @@ class SingleRental extends Component {
     getSingleListing(this.state.id)
     .then(data => {
       const formattedDate = dateFromTimestamp(data.date_available);
+      document.title = `${data.street} | Kiro`
       this.setState({
         data,
         formattedDate,

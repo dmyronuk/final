@@ -3,6 +3,10 @@ import axios from 'axios';
 
 class NewRentalForm extends RentalForm {
 
+  componentDidUpdate(){
+    document.title = `New Listing | Kiro`;
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     const token = localStorage.getItem("JWT_TOKEN");
