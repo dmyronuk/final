@@ -4,7 +4,7 @@ import CityImage from "./images/grey-aerial.jpg";
 const BackgroundImage = (props) => {
   return(
     <div className="main-bg-container">
-      <img src={ CityImage } />
+      <img alt="CityImage" src={ CityImage } />
     </div>
   )
 }

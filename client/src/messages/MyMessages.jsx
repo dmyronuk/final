@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { getUserProfile } from "../ajax/profile";
-import { getAllRatingsOfUser } from "../ajax/ratings";
 import { getAllThreads } from "../ajax/threads";
 import SingleThread  from "./SingleThread.jsx";
 import { refetchUser } from "../ajax/auth";

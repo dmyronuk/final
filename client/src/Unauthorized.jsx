@@ -4,10 +4,6 @@ import { Button } from "@material-ui/core";
 
 class Unauthorized extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     document.title = "Unauthorized Request"
   }
