@@ -20,7 +20,6 @@ class EditRentalForm extends RentalForm {
         postal_code: listing.postal_code,
         lat: listing.lat,
         lng: listing.lng,
-        unit: 0,
         price: listing.price,
         bedrooms: listing.bedrooms,
         bathrooms: listing.bathrooms,

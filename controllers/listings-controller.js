@@ -43,8 +43,8 @@ let controller = {
     let data = req.body.data
     let errors = []
     let values = Object.values(data)
-    let integers = Object.keys(data).slice(6,10).map(key => ({[key]:data[key]}));
-    let integersErrors = validations.isIntegerInputs(integers)
+    let integers = Object.keys(data).slice(6,9).map(key => ({[key]:data[key]}));
+    let integersErrors = validations.integerInputsAreValid(integers)
 
     !validations.allFieldsPresent(values) && errors.push("All fields mandatory");
     errors = errors.concat(integersErrors)
@@ -71,8 +71,8 @@ let controller = {
     let landlord = await queries.getLandlorByUserId(req.decodedToken.id)
     let errors = []
     let values = Object.values(listingData)
-    let integers = Object.keys(listingData).slice(6,10).map(key => ({[key]:listingData[key]}));
-    let integersErrors = validations.isIntegerInputs(integers)
+    let integers = Object.keys(listingData).slice(6,9).map(key => ({[key]:listingData[key]}));
+    let integersErrors = validations.integerInputsAreValid(integers)
 
     !validations.allFieldsPresent(values) && errors.push("All fields mandatory");
     errors = errors.concat(integersErrors)

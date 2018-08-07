@@ -27,12 +27,12 @@ module.exports = {
     return a === b;
   },
 
-  isIntegerInputs: (inputs) => {
+  integerInputsAreValid: (inputs) => {
     let errors = []
     inputs.forEach(input => {
       let key = Object.keys(input)[0]
       let val = Number(input[key])
-      if (typeof val !== 'number' || val <= 0) {
+      if (typeof val !== 'number' || val <= 0 || val > 6001 || key === 'bedrooms' && val >= 10 || key === 'bathrooms' && val >= 10) {
         errors.push(`Invalid ${key} input`)
       }
     })

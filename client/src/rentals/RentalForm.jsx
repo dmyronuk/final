@@ -21,7 +21,6 @@ class RentalForm extends Component {
         postal_code: '',
         lat: 0,
         lng: 0,
-        unit: '',
         price: "",
         bedrooms: "",
         bathrooms: "",
@@ -115,7 +114,7 @@ class RentalForm extends Component {
   // {!this.state.landlordId && <Redirect to="/" />}
 
   render() {
-    const { street, city, province, postal_code, lat, lng, unit, price, bedrooms, bathrooms, date, description } = this.state.data;
+    const { street, city, province, postal_code, lat, lng, price, bedrooms, bathrooms, date, description } = this.state.data;
     if (!localStorage.JWT_TOKEN) {
       return <Redirect to="/login"/>
     } else if (this.state.landlordId === undefined) {
@@ -195,17 +194,6 @@ class RentalForm extends Component {
                   InputProps={{
                     readOnly: true,
                   }}
-                  onChange={this.handleChange} />
-              </div>
-
-              <div className="listing-field">
-                <TextField
-                  type="number"
-                  label="Unit Number"
-                  name="unit"
-                  fullWidth
-                  value={unit}
-                  min={0}
                   onChange={this.handleChange} />
               </div>
 
