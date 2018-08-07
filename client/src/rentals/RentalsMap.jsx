@@ -4,8 +4,8 @@ import RentalMapCard from "./RentalMapCard";
 import RentalSearchForm from "./SearchForm";
 import { getAllListings, getAllListingsFromQuery } from "../ajax/listings"
 
-class RentalsMap extends Component{
-  constructor(props){
+class RentalsMap extends Component {
+  constructor(props) {
     super(props)
     this.state = {
       showListingBox: false,
@@ -16,19 +16,29 @@ class RentalsMap extends Component{
 
   handleSearchSubmit = (queryObj) => {
     getAllListingsFromQuery(queryObj)
-    .then(listings => {
-      const noResults = listings.length === 0;
-      this.setState({
-        listings,
-        noResults,
+      .then(listings => {
+        const noResults = listings.length === 0;
+        this.setState({
+          listings,
+          noResults,
+        })
       })
+  }
+
+  toggleMarker = (key) => {
+    this.handleMarkerClick(key)
+    this.setState({ showListingBox: true, clickedMarker: true }, () => {
     })
   }
 
-  toggleMarker = (key) =>{
-    this.handleMarkerClick(key)
-    this.setState({showListingBox:true, clickedMarker:true}, ()=>{
-    })
+  removeListingBoxFromMap = () => {
+    const clickedMarker = this.state.clickedMarker;
+    if (clickedMarker === true) {
+      this.setState({ clickedMarker: false }, () => {
+      })
+    } else {
+      this.setState({ showListingBox: false })
+    }
   }
 
   handleMarkerClick = (key) => {
@@ -37,31 +47,21 @@ class RentalsMap extends Component{
     })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     document.title = `Map View | Kiro`
     getAllListings()
-    .then(listings => {
-      console.log(listings)
-      this.setState({
-        listings
+      .then(listings => {
+        console.log(listings)
+        this.setState({
+          listings
+        })
       })
-    })
   }
 
-  removeListingBoxFromMap = () => {
-    const currentMarkerState = this.state.showListingBox;
-    const clickedMarker = this.state.clickedMarker;
-    if (clickedMarker === true){
-      this.setState({clickedMarker: false},()=>{
-      })
-    } else{
-      this.setState({showListingBox: !currentMarkerState})
-    }
-  }
 
-  render(){
+  render() {
 
-    return(
+    return (
       <div>
         <RentalSearchForm handleSearchSubmit={this.handleSearchSubmit} />
         {this.state.listings &&
@@ -72,19 +72,19 @@ class RentalsMap extends Component{
             containerElement={<div className="map-container" onClick={this.removeListingBoxFromMap} />}
             mapElement={<div style={{ height: `100%` }} />}
             handleMarkerClick={this.handleMarkerClick}
-            activeInfoBoxId = { this.state.activeInfoBoxId }
-            showListingBox = { this.state.showListingBox }
-            toggleMarker = { this.toggleMarker }
-            removeListingBoxFromMap = {this.removeListingBoxFromMap}
+            activeInfoBoxId={this.state.activeInfoBoxId}
+            showListingBox={this.state.showListingBox}
+            toggleMarker={this.toggleMarker}
+            removeListingBoxFromMap={this.removeListingBoxFromMap}
           />
         }
-        <div className ="map-listings-container">
+        <div className="map-listings-container">
           {this.state.listings && this.state.listings.map((elem, i) =>
-              <RentalMapCard
-                key={i}
-                id={elem.id}
-                data={elem}
-              />
+            <RentalMapCard
+              key={i}
+              id={elem.id}
+              data={elem}
+            />
           )}
           {this.state.noResults &&
             <div className="no-results">No Results</div>
