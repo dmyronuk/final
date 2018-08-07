@@ -53,8 +53,8 @@ class Chat extends Component {
 
   addNewRating = async e => {
     if (localStorage.JWT_TOKEN) {
-      let userObj = await refetchUser({ token: localStorage.JWT_TOKEN });
       e.preventDefault();
+      let userObj = await refetchUser({ token: localStorage.JWT_TOKEN });
       this.setState({ ratingSubmitted: true });
       return axios.post("/api/ratings", {
         rater: userObj.id,
