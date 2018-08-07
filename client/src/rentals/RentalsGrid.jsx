@@ -22,6 +22,7 @@ class RentalsGrid extends Component{
   }
 
   componentDidMount(){
+    document.title = `Grid View | Kiro`
     getAllListings()
     .then(listings => {
       this.setState({

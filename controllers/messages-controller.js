@@ -21,7 +21,7 @@ let controller = {
   addNewMessage: function(req, res) {
     const sender = req.body.sender;
     const recipient = req.body.recipient;
-    const message = req.body.message;
+    const message = req.body.text;
     queries.addNewMessage(sender, recipient, message)
       .then(messages => {
         // console.log(messages);

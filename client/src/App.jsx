@@ -16,6 +16,7 @@ import Sidebar from "./navigation/Sidebar";
 import Signup from "./users/Signup";
 import SingleRental from "./rentals/SingleRental.jsx";
 import MyRentals from "./rentals/MyRentals.jsx";
+import Unauthorized from "./Unauthorized.jsx";
 import { refetchUser } from "./ajax/auth";
 import { getAllRatingsOfRatee } from "./ajax/ratings";
 
@@ -77,7 +78,7 @@ class App extends Component {
         <div className="main-container">
 
 
-          <PageMask toggleState={ this.state.maskClass} maskClickHandler={ this.toggleSidebar }/>
+          <PageMask toggleState={ this.state.maskClass} maskClickHandler={ this.toggleSidebar} user={this.state.user}/>
           <Header user={this.state.user} hamburgerClickHandler={ this.toggleSidebar } />
           <Sidebar rating={this.state.rating} user={this.state.user} toggleState={this.state.sidebarClass} linkClickHandler={ this.toggleSidebar }/>
 
@@ -94,6 +95,7 @@ class App extends Component {
             <Route exact path="/messages" component={ MyMessages } />
             <Route exact path="/" component= { Home } />
             <Route exact path="/rentals/manage" component={ MyRentals } />
+            <Route exact path="/error/401" component={ Unauthorized } />
             <Route component={ NotFound } />
           </Switch>
         </div>

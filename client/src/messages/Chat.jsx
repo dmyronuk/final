@@ -46,7 +46,7 @@ class Chat extends Component {
             sender: user.id,
             recipient: this.state.id
           })
-          .then(messages => { });
+          // .then(messages => { });
       });
     }
   };
@@ -156,11 +156,12 @@ class Chat extends Component {
 
     //get the username of the other user connected to chat
     getUsernameById(this.state.id, localStorage.JWT_TOKEN).then(userInfo => {
+      document.title = `Chat - ${userInfo.first_name} | Kiro `
       this.setState({
         chatPartner: userInfo
       });
     });
-
+    
   }
 
   render() {

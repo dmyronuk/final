@@ -2,6 +2,11 @@ import RentalForm from "./RentalForm";
 import axios from 'axios';
 
 class NewRentalForm extends RentalForm {
+  FORM_TITLE = "New Listing"
+
+  componentDidUpdate(){
+    document.title = `New Listing | Kiro`;
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()

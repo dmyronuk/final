@@ -16,6 +16,7 @@ class MyMessages extends Component {
   }
 
   componentDidMount(){
+    document.title = `Messages | Kiro `
     if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {

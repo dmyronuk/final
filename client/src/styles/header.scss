@@ -1,7 +1,10 @@
+$nav-color: #212121;
+
 .header-top{
   top: 0px;
   width: 100vw;
-  background: #444444;
+  /*background: $nav-color;*/
+  background-image: -webkit-linear-gradient(bottom, #222222 0%, #555555);
   display: flex;
   position: fixed;
   flex-direction: row;
@@ -25,7 +28,7 @@
   height: 3rem;
   width: 3.5rem;
   border-radius: 0.05rem;
-  background-color: #444444;
+  background-color: transparent;
 
   img{
     height: 100%;
@@ -52,8 +55,8 @@
     }
   }
 
-  .navbar-email{
+  /*.navbar-email{
     color: white;
-  }
+  }*/
 }
 

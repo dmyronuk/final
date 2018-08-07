@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { categorySearchByLocation } from "../ajax/yelp"
 import EducationIcon from "../icons/education_icon1.png";
 import EntertainmentIcon from "../icons/entertainment_icon1.png";
-import RestaurantIcon from "../icons/restaurants_icon5.png";
+import RestaurantIcon from "../icons/fork_knife.png";
 
 
 class YelpSearch extends Component {

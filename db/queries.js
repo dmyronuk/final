@@ -1,5 +1,3 @@
-// require("dotenv").config();
-
 var knex = require("knex")({
   client: "pg",
   connection: {
@@ -9,36 +7,6 @@ var knex = require("knex")({
     database : process.env.DB_NAME,
   }
 });
-
-//console.log(process.env);
-// getAllUsers1 = () => {
-//   return knex("users").select();
-// }
-
-// getAllUsers1().then(users => {
-//   let data = JSON.stringify(users);
-//   console.log(data);
-// });
-
-
-
-// knex("users").select()
-// .then(users => {
-//   let data = JSON.stringify(users);
-//   console.log(data);
-// });
-
-
-
-// function hello() {
-//   return knex("users").select();
-// }
-
-// hello().then(users => {
-//   let data = JSON.stringify(users);
-//   console.log(data);
-// });
-
 
 module.exports = (function() {
   // declare utility functions
@@ -57,6 +25,17 @@ module.exports = (function() {
     .orderBy('created_at')
     // .limit(100)
   }
+
+  // Converts first letter of each word to uppercase and rest to lowercase
+  function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
+  }
+
 
   return {
     // public interface
@@ -251,7 +230,7 @@ module.exports = (function() {
 
   signup: data => {
     return knex('users')
-    .insert({first_name: data.first_name, last_name: data.last_name, email: data.email, password_digest: data.hashed_password })
+    .insert({first_name: toTitleCase(data.first_name), last_name: toTitleCase(data.last_name), email: data.email, password_digest: data.hashed_password })
     .returning('id')
     .then(user => {
       if (data.user_type === "landlord") {

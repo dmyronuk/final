@@ -9,6 +9,8 @@ import {fetchLandlord} from "../ajax/auth.js";
 import BackgroundImage from "../BackgroundImage";
 
 class RentalForm extends Component {
+  FORM_TITLE = null;
+
   constructor(props) {
     super(props)
     this.state = {
@@ -124,13 +126,15 @@ class RentalForm extends Component {
       <div>
         <BackgroundImage/>
         <div className="new-rental-container">
-          {this.state.redirect && <Redirect to="/rentals/my" />}
+          {this.state.redirect && <Redirect to="/rentals/manage" />}
           <form className="new-listing-container" onSubmit={this.handleSubmit}>
-          <h2>Your Listing</h2>
+            <h2>{this.FORM_TITLE}</h2>
 
-            <h3> Address </h3>
-            <div className="address-container">
-              <div className="textfield">
+            <div className="heading-container">
+              <h3> Address </h3>
+            </div>
+            <section>
+              <div className="listing-field">
                 <TextField
                   id="autocomplete"
                   label="Type Address Here"
@@ -140,7 +144,7 @@ class RentalForm extends Component {
                 />
               </div>
 
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   required
                   fullWidth
@@ -154,7 +158,7 @@ class RentalForm extends Component {
               </div>
 
 
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   required
                   fullWidth
@@ -167,7 +171,7 @@ class RentalForm extends Component {
                   onChange={this.handleChange} />
               </div>
 
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   required
                   fullWidth
@@ -180,7 +184,7 @@ class RentalForm extends Component {
                   onChange={this.handleChange} />
               </div>
 
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   required
                   fullWidth
@@ -193,7 +197,7 @@ class RentalForm extends Component {
                   onChange={this.handleChange} />
               </div>
 
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   type="number"
                   label="Unit Number"
@@ -204,12 +208,14 @@ class RentalForm extends Component {
                   onChange={this.handleChange} />
               </div>
 
+            </section>
+
+            <div className="heading-container">
+              <h3>Details</h3>
             </div>
+            <section >
 
-              <h3> Listing Details </h3>
-            <div className="listing-description-container">
-
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   inputStyle={{ fontSize: '2rem' }}
                   type="number"
@@ -223,7 +229,7 @@ class RentalForm extends Component {
                 />
               </div>
 
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   inputStyle={{ fontSize: '2rem' }}
                   label="Bedrooms"
@@ -237,7 +243,7 @@ class RentalForm extends Component {
                 />
               </div>
 
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   inputStyle={{ fontSize: '2rem' }}
                   label="Bathrooms"
@@ -251,7 +257,7 @@ class RentalForm extends Component {
                 />
               </div>
 
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   inputStyle={{ fontSize: '2rem' }}
                   label="Date Available"
@@ -265,7 +271,7 @@ class RentalForm extends Component {
                   require
                 />
               </div>
-              <div className="textfield">
+              <div className="listing-field">
                 <TextField
                   inputStyle={{ fontSize: '2rem' }}
                   multiline
@@ -277,22 +283,25 @@ class RentalForm extends Component {
                   value={description}
                   onChange={this.handleChange} />
               </div>
-            </div>
+            </section>
 
 
+            <div className="heading-container">
               <h3> Images </h3>
-            <div className="images-container">
-              <input
-                ref={(ref) => { this.uploadInput = ref; }}
-                type="file" onChange={this.handleUploadImage}
-                accept=".jpg, .jpeg, .png" />
             </div>
+            <section>
+              <div className="listing-field">
+                <input
+                  ref={(ref) => { this.uploadInput = ref; }}
+                  type="file" onChange={this.handleUploadImage}
+                  accept=".jpg, .jpeg, .png" />
+              </div>
+            </section>
             <div className = "submit">
-              <Button variant="contained" color="primary" onClick={this.handleSubmit}>{this.state.edit? "Submit Changes" : "Post Your Listing"}</Button>
+              <Button variant="contained" color="primary" onClick={this.handleSubmit}>{this.state.edit? "Submit" : "Post Your Listing"}</Button>
             </div>
           </form>
 
-          {this.state.edit && <button onClick={this.handleDelete}> Delete </button>}
           {this.createImgTag(this.state.imageURLs)}
         </div>
       </div>

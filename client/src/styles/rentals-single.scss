@@ -1,45 +1,49 @@
 .card-container{
   display: flex;
   flex-direction: row;
-  margin: 1.5rem 0;
-  border: 1px solid #999999;
+  margin: 1rem 0;
   box-shadow: -0.3rem 0.3rem 0.8rem #aaaaaa;
-  max-height: 80vh;
+  max-height: 83vh;
 
   .single-rental-card{
+    border: 1px solid #aaaaaa;
+    position: relative;
     background: #eeeeee;
     width: 50vw;
+    min-width: 40rem;
+    min-height:30rem;
     display: flex;
     flex-direction: column;
 
-    .image-container{
-      position: relative;
-      width: 50vw;
-      height: 50vh;
+    .image-gallery-slides{
+      height: 28rem;
+    }
+
+    .image-gallery-slide img {
+      flex: 1;
+      object-fit: cover;
+      overflow: hidden;
+    }
+
+    .mask{
+      height: 3.5rem;
+      top: -3.5rem;
+      width: 100%;
+      background: black;
+      opacity: 0.5;
+      position: absolute;
+    }
+
+    .single-card-address-container{
+      color: white;
+      background: transparent;
       display: flex;
-      flex-direction: row;
-      img{
-        flex: 1;
-        object-fit: cover;
-        overflow: hidden;
-      }
-
-      .mask{
-        background: black;
-        opacity: 0.5;
-      }
-
-      article{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 4rem;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-      }
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      height: 3.5rem;
+      top: -3.5rem;
+      position: absolute;
     }
 
     .rental-card-info{
@@ -49,6 +53,7 @@
       justify-content: space-evenly;
       padding: 1rem;
       position: relative;
+      min-height: 11rem;
 
       .summary{
         display: flex;
@@ -75,6 +80,8 @@
       justify-content: space-between;
 
       .landlord-contact-container{
+        align-self: flex-end;
+        width: 4rem;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
@@ -94,7 +101,9 @@
   .yelp-results-container{
     background: #eeeeee;
     transition: width 1s;
-    border-left: 1px solid #999999;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #aaaaaa;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
