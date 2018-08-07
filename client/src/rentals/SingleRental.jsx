@@ -143,7 +143,7 @@ class SingleRental extends Component {
                       <Link to={"/messages/" + this.state.landlordUserId}>
                         <img alt="Messages" src={MessageIcon} />
                         <div>
-                          Contact
+                          Chat
                         </div>
                         </Link>}
                   </div>

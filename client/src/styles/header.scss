@@ -16,7 +16,15 @@ $nav-color: #212121;
   .app-title{
     color: white;
     font-size: 2.5rem;
+
+    img {
+      width: 3rem;
+      height: 2rem;
+      filter: brightness(300%) invert(0.1);
+    }
   }
+
+
 }
 /*  filter invert */
 
@@ -57,6 +65,6 @@ $nav-color: #212121;
 
   /*.navbar-email{
     color: white;
-  }*/
-}
+    }*/
+  }
 

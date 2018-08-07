@@ -26,11 +26,17 @@
     .messages-link{
       position: absolute;
 
+      &:hover img {
+        filter: invert(0.2);
+      }
+
       img{
         height: 1.8rem;
         width: 1.8rem;
         filter: grayscale(1) invert(1);
         margin-right: 0.5rem;
+
+
       }
     }
 
