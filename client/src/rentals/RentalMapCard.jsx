@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import dateFromTimestamp from "../helpers/time-formatters";
-import numberWithCommas from "../helpers/number-formatters";
+import { numberWithCommas } from "../helpers/number-formatters";
 import { toSingular } from "../helpers/name-formatters";
 
 
@@ -22,7 +22,7 @@ const RentalMapCard = (props) => {
             <h4>{props.data.street}, {props.data.city}</h4>
             <div>{props.data.bedrooms} {toSingular("Bedrooms", props.data.bedrooms)}</div>
             <div>{props.data.bathrooms} {toSingular("Bathrooms", props.data.bathrooms)}</div>
-            <div>${numberWithCommas(props.data.price)} / month</div>
+            <div>${numberWithCommas(props.data.price)} / Month</div>
             <div>Available {date}</div>
           </div>
         </div>

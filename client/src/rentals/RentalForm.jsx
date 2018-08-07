@@ -141,6 +141,7 @@ class RentalForm extends Component {
                   ref="input"
                   required
                   fullWidth
+                  autoFocus
                 />
               </div>
 

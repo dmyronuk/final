@@ -4,4 +4,11 @@ const numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export default numberWithCommas;
+const metresToKm = (metres) => {
+  return (metres / 1000).toFixed(2);
+}
+
+export {
+  numberWithCommas,
+  metresToKm,
+}
