@@ -7,7 +7,7 @@ return(
     <Link to={"/rentals/" + props.id}>
       <div className="listing-grid-card">
         <div className="listing-grid-photo-container">
-          { props.data.photos ?
+          { props.data.photos[0] ?
             <img alt="Rental Property" src={props.data.photos[0]} />
             : <img alt="Not Available" src="/images/no-image.jpg" />
           }

@@ -17,6 +17,7 @@ class SingleRental extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      yelpResultsHeight: 0,
       id: Number(this.props.match.params.id),
       yelpResultsClass: "hidden",
     }
@@ -71,7 +72,16 @@ class SingleRental extends Component {
           })
         }
       })
+
+      const rentalCardHeight = this.rentalCard.clientHeight;
+      this.setState({ yelpResultsHeight: rentalCardHeight });
+
     })
+  }
+
+  componentDidUpdate(){
+    //dynamically resize yelp results to match the height of the rental card
+
   }
 
   render() {
@@ -79,7 +89,7 @@ class SingleRental extends Component {
       <div className="default-flex-row-container">
         {this.state.data &&
           <div className="card-container">
-            <div className="single-rental-card">
+            <div className="single-rental-card" ref={ (rentalCard) => this.rentalCard = rentalCard}>
 
                 {this.state.data.photos ?
                   // <img alt="Rental Photo" src={this.state.data.photos[0]} />
@@ -89,7 +99,7 @@ class SingleRental extends Component {
                     showPlayButton={false}
                     showThumbnails={false}
                   />
-                  : <img alt="No Photo Available" src="/images/no-image.png" />
+                  : <img alt="Resource Not Available" src="/images/no-image.png" />
                 }
               <div className="rental-card-info">
                 <div className="mask"></div>
@@ -130,7 +140,7 @@ class SingleRental extends Component {
 
                     {(this.state.landlordUserId && this.state.landlordUserId !== this.state.current_user) &&
                       <Link to={"/messages/" + this.state.landlordUserId}>
-                        <img src={MessageIcon} />  <br />
+                        <img alt="Messages" src={MessageIcon} />  <br />
                         Contact
                         </Link>}
                   </div>
@@ -139,7 +149,11 @@ class SingleRental extends Component {
             </div>
             <div className={this.state.yelpResultsClass + " yelp-results-container"}>
               {this.state.yelpResults &&
-                <YelpResults results={this.state.yelpResults} searchTerm={this.state.yelpSearchTerm} />
+                <YelpResults
+                  results={this.state.yelpResults}
+                  searchTerm={this.state.yelpSearchTerm}
+                  height={this.state.yelpResultsHeight}
+                />
               }
             </div>
 

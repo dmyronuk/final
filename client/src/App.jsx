@@ -1,4 +1,4 @@
-import React, { Component, createContext } from "react";
+import React, { Component } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Chat from "./messages/Chat.jsx";
 import Header from "./Header.jsx";
@@ -20,13 +20,6 @@ import Unauthorized from "./Unauthorized.jsx";
 import { refetchUser } from "./ajax/auth";
 import { getAllRatingsOfRatee } from "./ajax/ratings";
 
-// context
-// import AppProvider from "./provider.jsx";
-// import AppContext from "./provider.jsx";
-
-
-
-let UserContext = React.createContext()
 
 class App extends Component {
   constructor(props){
