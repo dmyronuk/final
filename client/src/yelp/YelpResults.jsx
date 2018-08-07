@@ -2,17 +2,19 @@ import React from "react";
 
 const YelpResults = (props) => {
   const searchTerm = props.searchTerm[0].toUpperCase() + props.searchTerm.slice(1)
+  const columnStyle = {height: props.height}
+  console.log("Yelp style", columnStyle)
 
   return(
-    <div className="default-flex-column-container">
+    <div className="default-flex-column-container" style={columnStyle}>
       <div className="search-category">
         <h3>Local {searchTerm}</h3>
       </div>
       { props.results.map(amenity => {
         const distance = Math.round(amenity.distance) + "m"
         return(
-          <a href={amenity.url}>
-            <div key={amenity.id} className="yelp-results-item">
+          <a key={amenity.id} href={amenity.url}>
+            <div className="yelp-results-item">
               <header>{amenity.name}</header>
               <div className="image-container">
                 <img

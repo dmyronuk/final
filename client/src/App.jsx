@@ -1,4 +1,4 @@
-import React, { Component, createContext } from "react";
+import React, { Component } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Chat from "./messages/Chat.jsx";
 import Header from "./Header.jsx";
@@ -18,13 +18,6 @@ import SingleRental from "./rentals/SingleRental.jsx";
 import MyRentals from "./rentals/MyRentals.jsx";
 import { refetchUser } from "./ajax/auth";
 
-// context
-// import AppProvider from "./provider.jsx";
-// import AppContext from "./provider.jsx";
-
-
-
-let UserContext = React.createContext()
 
 class App extends Component {
   constructor(props){
