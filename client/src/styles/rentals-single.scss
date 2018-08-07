@@ -6,7 +6,7 @@
   max-height: 83vh;
 
   .single-rental-card{
-    border: 1px solid #999999;
+    border: 1px solid #aaaaaa;
     position: relative;
     background: #eeeeee;
     width: 50vw;
@@ -16,7 +16,7 @@
     flex-direction: column;
 
     .image-gallery-slides{
-      height: 20rem;
+      height: 28rem;
     }
 
     .image-gallery-slide img {
@@ -101,7 +101,9 @@
   .yelp-results-container{
     background: #eeeeee;
     transition: width 1s;
-    border-left: 1px solid #999999;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #aaaaaa;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;

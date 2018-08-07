@@ -41,7 +41,7 @@ class Sidebar extends Component {
           <div className="img-container">
             <img alt="Messages Icon" src={ProfileIcon} id="profile-icon" />
           </div>
-          {this.props.user && <div>{this.props.user.first_name}</div>}
+          <div>Grid View</div>
         </div>
 
         <Link to="/rentals/grid" onClick={this.props.linkClickHandler}>
@@ -51,13 +51,13 @@ class Sidebar extends Component {
             </div>
             <div>Grid view</div>
           </div>
-        </Link>
-        <Link to="/rentals/map" onClick={this.props.linkClickHandler}>
-          <div className="sidebar-item">
-            <div className="img-container">
-              <img alt="Map Icon" src={MapIcon} id="map-icon" />
-            </div>
-            <div>Map view</div>
+          <div>Map View</div>
+        </div>
+      </Link>
+      <Link to="/messages" onClick={props.linkClickHandler}>
+        <div className="sidebar-item">
+          <div className="img-container">
+            <img alt="Messages Icon" src={ MessagesIcon } id="messages-icon" />
           </div>
         </Link>
         <Link to="/messages" onClick={this.props.linkClickHandler}>
@@ -65,7 +65,7 @@ class Sidebar extends Component {
             <div className="img-container">
               <img alt="Messages Icon" src={MessagesIcon} id="messages-icon" />
             </div>
-            <div>Messages</div>
+            <div>Manage Listings</div>
           </div>
         </Link>
 

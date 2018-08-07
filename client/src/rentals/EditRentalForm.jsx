@@ -4,7 +4,7 @@ import dateFromTimestamp from "../helpers/time-formatters";
 import axios from 'axios';
 
 class EditRentalForm extends RentalForm {
-
+  FORM_TITLE = "Edit Listing"
 
   async componentDidMount() {
     document.title = `Edit Listing | Kiro`
