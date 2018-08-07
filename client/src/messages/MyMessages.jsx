@@ -22,8 +22,9 @@ class MyMessages extends Component {
       .then(user => {
         getAllThreads(user.id)
         .then(threads => {
+          const noMessages = threads.length === 0;
           this.setState({
-            threads
+            threads, noMessages
           })
         })
       })
@@ -36,7 +37,7 @@ class MyMessages extends Component {
         <BackgroundImage />
         {!localStorage.JWT_TOKEN && <Redirect to="/login"/> }
         {this.state.threads &&
-          <div className="default-flex-column-container converstions-container">
+          <div className="default-flex-column-container conversations-container">
             <table>
               <tr>
                 <th colspan={3}>Messages</th>
@@ -44,6 +45,11 @@ class MyMessages extends Component {
               {this.state.threads.map((data, i) => {
                 return <SingleThread key={i} theKey={i} thread={data}/>
               })}
+              {this.state.noMessages &&
+                <tr>
+                  <td colSpan={3}> You currently have no messages</td>
+                </tr>
+              }
             </table>
           </div>
         }

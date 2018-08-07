@@ -8,7 +8,7 @@ import dateFromTimestamp from "../helpers/time-formatters";
 import { refetchUser } from "../ajax/auth";
 import MessageIcon from "../icons/message_icon3.png";
 import ImageGallery from "react-image-gallery";
-import numberWithCommas from "../helpers/number-formatters";
+import { numberWithCommas } from "../helpers/number-formatters";
 import { toSingular } from "../helpers/name-formatters";
 
 import "../../node_modules/react-image-gallery/styles/css/image-gallery.css";

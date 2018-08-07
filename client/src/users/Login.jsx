@@ -84,7 +84,9 @@ class Login extends Component {
                 value={this.state.email}
                 onChange={this.handleChange}
                 className="login-input"
-                placeholder="Email" />
+                placeholder="Email"
+                autoFocus />
+
               <input
                 type="password"
                 name="password"

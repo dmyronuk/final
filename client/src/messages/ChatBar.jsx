@@ -27,7 +27,9 @@ class ChatBar extends Component {
           className="chatbar-message"
           onChange = {this.changeMessage}
           onKeyPress= {submitMessage}
-          placeholder="Type a message" />
+          placeholder="Type a message"
+          autoFocus
+          />
       </footer>
     )
   }

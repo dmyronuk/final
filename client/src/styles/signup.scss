@@ -44,8 +44,8 @@
   overflow: hidden;
   animation: input_opacity 0.2s cubic-bezier(.55, 0, .1, 1);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12),
-              0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  0 1px 5px 0 rgba(0, 0, 0, 0.12),
+  0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 .register > header {
@@ -60,8 +60,8 @@
   color: #FAFAFA;
   animation: scale_header 0.6s cubic-bezier(.55, 0, .1, 1), text_opacity 1s cubic-bezier(.55, 0, .1, 1);
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-              0px 1px 5px 0px rgba(0, 0, 0, 0.12),
-              0px 3px 1px -2px rgba(0, 0, 0, 0.2);
+  0px 1px 5px 0px rgba(0, 0, 0, 0.12),
+  0px 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 .register > header:before {
@@ -178,8 +178,8 @@
   color: #FAFAFA;
   background: #E37F00;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.137255),
-              0px 1px 5px 0px rgba(0, 0, 0, 0.117647),
-              0px 3px 1px -2px rgba(0, 0, 0, 0.2);
+  0px 1px 5px 0px rgba(0, 0, 0, 0.117647),
+  0px 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 .register-button:hover {
@@ -198,6 +198,14 @@
   border-radius: 3px;
   overflow: hidden;
   margin-top: 1rem;
+
+  &:hover {
+    background-color: #dddddd;
+  }
+
+  &:hover select {
+    cursor: pointer;
+  }
 }
 
 .select-style select {
@@ -207,7 +215,7 @@
   box-shadow: none;
   background: transparent;
   background-image: none;
-  -webkit-appearance: none;
+  /*-webkit-appearance: none;*/
 }
 
 .select-style select:focus {
