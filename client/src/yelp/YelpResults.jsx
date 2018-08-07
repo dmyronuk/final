@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactStars from "react-stars";
+import { metresToKm } from "../helpers/number-formatters";
 
 class YelpResults extends Component{
 
@@ -17,13 +18,13 @@ class YelpResults extends Component{
 
     return(
       <div className="default-flex-column-container" style={columnStyle}>
-        <div className="search-category" ref={(el) => { this.yelpHeader = el; }}>>
+        <div className="search-category" ref={(el) => { this.yelpHeader = el; }}>
           <h3>Local {searchTerm}</h3>
         </div>
         {this.props.results.map(amenity => {
-          const distance = Math.round(amenity.distance) + "m"
+          const distance = metresToKm(amenity.distance) + " km"
           return(
-            <a key={amenity.id} href={amenity.url}>
+            <a className="yelp-results-link" key={amenity.id} href={amenity.url}>
               <div className="yelp-results-item">
                 <header>{amenity.name}</header>
                 <div className="image-container">

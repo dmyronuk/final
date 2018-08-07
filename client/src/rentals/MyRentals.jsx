@@ -53,13 +53,13 @@ class MyRentals extends Component {
             }
             {this.state.noListings &&
               <tr>
-                <td colSpan={3}> Nothing Here</td>
+                <td colSpan={3}> You currently have no rentals</td>
               </tr>
             }
             <tr>
               <td className="add-listing-td" colSpan={3}>
                 <Link to={"/rentals/new"} >
-                  Add
+                  Add New Rental!
                 </Link>
               </td>
             </tr>

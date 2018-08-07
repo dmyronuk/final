@@ -91,6 +91,7 @@ class Signup extends React.Component {
                   value={this.state.first_name}
                   onChange={this.handleChange}
                   placeholder="First Name"
+                  autoFocus
                 />
               </div>
               <div>
