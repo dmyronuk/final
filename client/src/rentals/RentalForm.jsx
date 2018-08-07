@@ -31,6 +31,7 @@ class RentalForm extends Component {
       imageURLs: [],
       redirect: false,
       edit: false,
+      errors: null,
     }
     this.autocomplete = null
   }
@@ -88,7 +89,7 @@ class RentalForm extends Component {
     const currData = Object.assign({}, this.state.data)
     currData[e.target.name] = e.target.value
     this.setState({ data: currData });
-    console.log(this.state.landlordId);
+    console.log(this.state.data)
   }
 
   handlePlaceSelect = async () => {
@@ -302,6 +303,7 @@ class RentalForm extends Component {
                 </div>
               </div>
             </section>
+            {this.state.errors && <div className="error">{this.state.errors[0]}</div>}
             <div className = "submit">
               <Button variant="contained" color="primary" onClick={this.handleSubmit}>{this.state.edit? "Submit Changes" : "Post Your Listing"}</Button>
             </div>
