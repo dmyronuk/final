@@ -11,11 +11,17 @@ const MapComponent = withScriptjs(withGoogleMap((props) => {
     const showInfoBox = props.activeInfoBoxId === i ? true : false;
     return (
       <RentalMarker
-        key={i}
+        key={i+1}
         id={i}
+        photo={elem.photos[0]}
         position={position}
+        price={elem.price}
+        bedrooms={elem.bedrooms}
+        bathrooms={elem.bathrooms}
         address={elem.street + ", " + elem.city}
+        toggleMarker = { props.toggleMarker }
         handleMarkerClick = { props.handleMarkerClick }
+        showListingBox = { props.showListingBox }
         showInfoBox = { showInfoBox }
       />
     )
@@ -23,7 +29,7 @@ const MapComponent = withScriptjs(withGoogleMap((props) => {
 
   return (
     <GoogleMap
-      defaultZoom={11}
+      defaultZoom={12}
       defaultCenter={{ lat: 43.6532, lng: -79.3832 }}
     >
       {props.listings && listingMarkers}
