@@ -110,7 +110,7 @@ class Signup extends React.Component {
                   name="phone"
                   value={this.state.phone}
                   onChange={this.handleChange}
-                  placeholder="Phone"
+                  placeholder="123-456-7890"
                 />
               </div>
               <div>
