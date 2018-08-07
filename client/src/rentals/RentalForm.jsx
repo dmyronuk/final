@@ -278,22 +278,25 @@ class RentalForm extends Component {
                   onChange={this.handleChange} />
               </div>
             </div>
-
-
-              <h3> Images </h3>
-            <div className="images-container">
+            <h3> Images </h3>
+            <div className="photos-container">
               <input
                 ref={(ref) => { this.uploadInput = ref; }}
                 type="file" onChange={this.handleUploadImage}
                 accept=".jpg, .jpeg, .png" />
+                <div className="photo-grid-container">
+                  {this.createImgTag(this.state.imageURLs)}
+                </div>
             </div>
             <div className = "submit">
               <Button variant="contained" color="primary" onClick={this.handleSubmit}>{this.state.edit? "Submit Changes" : "Post Your Listing"}</Button>
+              {this.state.edit &&
+                <Button variant="contained" color="primary" onClick={this.handleDelete}>
+                  Delete
+                </Button>
+              }
             </div>
           </form>
-
-          {this.state.edit && <button onClick={this.handleDelete}> Delete </button>}
-          {this.createImgTag(this.state.imageURLs)}
         </div>
       </div>
     )

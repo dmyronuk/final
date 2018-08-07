@@ -10,15 +10,21 @@ class SingleImage extends Component {
   }
 
   render() {
-    console.log('SingleImage has rendered/re-rendered')
     return (
-      <div>
-        {this.props.index === 0 && <h3>Main Picture</h3>}
-         <button type="submit" onClick={() => this.props.handleDeleteImage(this.props.image)}>Remove</button><br/>
-        <img src={this.props.image} alt="img" />
+      <div className="photo-grid-card">
+        <div className="photo-grid-photo-container">
+          <img src={this.props.image} alt="img" />
+        </div>
+        <div className="photo-info">
+          {this.props.index === 0 &&
+            <div>Main</div> }
+          <button type="submit" onClick={() => this.props.handleDeleteImage(this.props.image)}>Remove</button><br/>
+        </div>
       </div>
     )
   }
 }
 
 export default SingleImage
+
+// {this.props.index === 0 && <h3>Main Picture</h3>}
