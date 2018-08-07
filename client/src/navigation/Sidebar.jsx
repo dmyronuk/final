@@ -14,7 +14,7 @@ const Sidebar = (props) => {
           <div className="img-container">
             <img alt="Messages Icon" src={ ProfileIcon } id="profile-icon" />
           </div>
-          {props.user && <div>{props.user.first_name}</div>}
+          {props.user && <div>Hi {props.user.first_name}</div>}
       </div>
 
       <Link to="/rentals/grid" onClick={props.linkClickHandler}>

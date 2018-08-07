@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { signup } from "../ajax/auth";
 import BackgroundImage from "../BackgroundImage";
-import toTitleCase from "../helpers/name-formatters";
+import { toTitleCase } from "../helpers/name-formatters";
 
 class Signup extends React.Component {
 
