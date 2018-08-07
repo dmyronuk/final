@@ -55,6 +55,7 @@ class App extends Component {
   };
 
   componentDidMount(){
+    console.log(this.context.history)
     if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
