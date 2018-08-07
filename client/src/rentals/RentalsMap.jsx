@@ -34,7 +34,6 @@ class RentalsMap extends Component{
     document.title = `Map View | Kiro`
     getAllListings()
     .then(listings => {
-      console.log(listings)
       this.setState({
         listings
       })

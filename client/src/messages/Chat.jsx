@@ -161,7 +161,7 @@ class Chat extends Component {
         chatPartner: userInfo
       });
     });
-    
+
   }
 
   render() {
@@ -176,7 +176,7 @@ class Chat extends Component {
             <header>
               <div className="messages-link">
                 <Link to="/messages">
-                  <img src={BackArrow} />
+                  <img alt="Back Arrow" src={BackArrow} />
                 </Link>
               </div>
               <div className="username-container">

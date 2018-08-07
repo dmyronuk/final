@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
+import TrashIcon from "../icons/trash.png";
 import BackgroundImage from "../BackgroundImage";
 
 class MyRentals extends Component {
@@ -11,6 +12,16 @@ class MyRentals extends Component {
       redirect: false,
       listings: [],
     }
+  }
+
+  deleteListing = (listingId) => {
+    const token = localStorage.getItem("JWT_TOKEN");
+    axios.delete(`/api/listings/${listingId}`, {
+      data: { token: token }
+    }).then(res => {
+      const updatedListings = this.state.listings.filter(elem => elem.id != listingId);
+      this.setState({listings: updatedListings});
+    })
   }
 
   componentDidMount() {
@@ -34,35 +45,42 @@ class MyRentals extends Component {
         <div className="rentals-manage-container">
           {this.state.redirect && <Redirect to="/error/401" />}
            <table>
-            <tr>
-              <th colSpan="3">My Listings</th>
-            </tr>
-            {this.state.listings.map((listing, i) =>
-                <tr>
-                  <td>
-                   {listing.street}, {listing.city}
-                  </td>
-                  <td>
-                    <Link to={`/rentals/${listing.id}`}>Show</Link>
-                  </td>
-                  <td>
-                    <Link to={`/rentals/${listing.id}/edit`}>Edit</Link>
-                  </td>
-                </tr>
-              )
-            }
-            {this.state.noListings &&
+            <tbody>
               <tr>
-                <td colSpan={3}> Nothing Here</td>
+                <th colSpan="4">My Listings</th>
               </tr>
-            }
-            <tr>
-              <td className="add-listing-td" colSpan={3}>
-                <Link to={"/rentals/new"} >
-                  Add
-                </Link>
-              </td>
-            </tr>
+              {this.state.listings.map((listing, i) =>
+                  <tr>
+                    <td>
+                     {listing.street}, {listing.city}
+                    </td>
+                    <td>
+                      <Link to={`/rentals/${listing.id}`}>Show</Link>
+                    </td>
+                    <td>
+                      <Link to={`/rentals/${listing.id}/edit`}>Edit</Link>
+                    </td>
+                    <td>
+                      <button onClick={() => this.deleteListing(listing.id)}>
+                        <img src={ TrashIcon }/>
+                      </button>
+                    </td>
+                  </tr>
+                )
+              }
+              {this.state.noListings &&
+                <tr>
+                  <td colSpan={3}> Nothing Here</td>
+                </tr>
+              }
+              <tr>
+                <td className="add-listing-td" colSpan={4}>
+                  <Link to={"/rentals/new"} >
+                    Add
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
