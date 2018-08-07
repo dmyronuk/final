@@ -1,3 +1,5 @@
+$yelp-search-icon-color: #ef4d43;
+
 .yelp-search-container{
   display:flex;
   flex-direction:row;
@@ -5,15 +7,16 @@
 
   button{
     border-radius: 0.3rem;
-    border:solid 1px darken(#ee4035, 10%);
+    border:solid 1px darken($yelp-search-icon-color, 10%);
     margin:0.2rem;
     width: 4vw;
     height: 4vw;
-    background: #ee4035;
-    transition:background 1s;
+    background: $yelp-search-icon-color;
+    transition:background 0.3s;
 
     &:hover{
-      background:lighten(#ee4035, 5%);;
+      background:darken(#ee4035, 10%);
+      transition:background 0.3s;
     }
 
     img{

@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { signup } from "../ajax/auth";
 import BackgroundImage from "../BackgroundImage";
-import toTitleCase from "../helpers/name-formatters";
+import { toTitleCase } from "../helpers/name-formatters";
 
 class Signup extends React.Component {
 
@@ -91,6 +91,7 @@ class Signup extends React.Component {
                   value={this.state.first_name}
                   onChange={this.handleChange}
                   placeholder="First Name"
+                  autoFocus
                 />
               </div>
               <div>
@@ -110,7 +111,7 @@ class Signup extends React.Component {
                   name="phone"
                   value={this.state.phone}
                   onChange={this.handleChange}
-                  placeholder="Phone"
+                  placeholder="123-456-7890"
                 />
               </div>
               <div>

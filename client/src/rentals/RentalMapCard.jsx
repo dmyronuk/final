@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import dateFromTimestamp from "../helpers/time-formatters";
-import numberWithCommas from "../helpers/number-formatters";
+import { numberWithCommas } from "../helpers/number-formatters";
+import { toSingular } from "../helpers/name-formatters";
+
 
 const RentalMapCard = (props) => {
 
@@ -11,16 +13,16 @@ const RentalMapCard = (props) => {
       <Link to={"/rentals/" + props.id}>
         <div className="listing-map-card">
           <div className="listing-map-img-container">
-            { props.data.photos ?
+            { props.data.photos[0] ?
               <img alt="Rental Property" src={props.data.photos[0]} />
               : <img alt="Not Available" src="/images/no-image.png" />
             }
           </div>
           <div className="listing-map-info-container">
             <h4>{props.data.street}, {props.data.city}</h4>
-            <div>{props.data.bedrooms} Bedrooms</div>
-            <div>{props.data.bathrooms} Bathrooms</div>
-            <div>${numberWithCommas(props.data.price)} / month</div>
+            <div>{props.data.bedrooms} {toSingular("Bedrooms", props.data.bedrooms)}</div>
+            <div>{props.data.bathrooms} {toSingular("Bathrooms", props.data.bathrooms)}</div>
+            <div>${numberWithCommas(props.data.price)} / Month</div>
             <div>Available {date}</div>
           </div>
         </div>

@@ -1,46 +1,59 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactStars from "react-stars";
+import { metresToKm } from "../helpers/number-formatters";
 
-const YelpResults = (props) => {
-  const searchTerm = props.searchTerm[0].toUpperCase() + props.searchTerm.slice(1)
+class YelpResults extends Component{
 
-  return (
-    <div className="default-flex-column-container">
-      <div className="search-category">
-        <h3>Local {searchTerm}</h3>
+  scrollToTop = () => {
+    this.yelpHeader.scrollIntoView({ behavior: "instant" });
+  }
+
+  componentDidUpdate() {
+    this.scrollToTop();
+  }
+
+  render(){
+    const searchTerm = this.props.searchTerm[0].toUpperCase() + this.props.searchTerm.slice(1);
+    const columnStyle = {height: this.props.height};
+
+    return(
+      <div className="default-flex-column-container" style={columnStyle}>
+        <div className="search-category" ref={(el) => { this.yelpHeader = el; }}>
+          <h3>Local {searchTerm}</h3>
+        </div>
+        {this.props.results.map(amenity => {
+          const distance = metresToKm(amenity.distance) + " km"
+          return(
+            <a className="yelp-results-link" key={amenity.id} href={amenity.url}>
+              <div className="yelp-results-item">
+                <header>{amenity.name}</header>
+                <div className="image-container">
+                  <img
+                    alt={amenity.name + "image"}
+                    src={amenity.image_url}
+                    onError={(e) => { e.target.src = "/images/no-image.jpg" }}
+                  />
+                </div>
+                <div className="yelp-results-info-container">
+                  <div>{distance}</div>
+                  <div>{amenity.location.address1}</div>
+                  <div>{amenity.display_phone}</div>
+                  {/* <div>{amenity.rating}</div> */}
+                  <ReactStars
+                    half={true}
+                    edit={false}
+                    size={20}
+                    value={amenity.rating}
+                  />
+                </div>
+              </div>
+            </a>
+          )
+        })
+        }
       </div>
-      {props.results.map(amenity => {
-        const distance = Math.round(amenity.distance) + "m"
-        return (
-          <a href={amenity.url}>
-            <div key={amenity.id} className="yelp-results-item">
-              <header>{amenity.name}</header>
-              <div className="image-container">
-                <img
-                  alt={amenity.name + "image"}
-                  src={amenity.image_url}
-                  onError={(e) => { e.target.src = "/images/no-image.jpg" }}
-                />
-              </div>
-              <div className="yelp-results-info-container">
-                <div>{distance}</div>
-                <div>{amenity.location.address1}</div>
-                <div>{amenity.display_phone}</div>
-                {/* <div>{amenity.rating}</div> */}
-                <ReactStars
-                  half={true}
-                  edit={false}
-                  size={20}
-                  value={amenity.rating}
-                />
-              </div>
-            </div>
-          </a>
-        )
-      })
-      }
-    </div>
-  )
+    )
+  }
 }
 
 export default YelpResults;

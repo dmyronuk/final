@@ -13,7 +13,7 @@ class RatingsForm extends Component {
     return (
 
       <div>
-        <form>
+        <form onSubmit={this.props.addNewRating}>
           <label>
             Rate this user:
           </label>
@@ -23,7 +23,7 @@ class RatingsForm extends Component {
               value={this.props.rating}
               onChange={this.props.handleRatingChange}
             />
-          <button id="rating-button" onClick={this.props.addNewRating} variant="contained" color="primary">
+          <button id="rating-button" onSubmit={this.props.addNewRating} variant="contained" color="primary">
             Rate
           </button>
         </form>
