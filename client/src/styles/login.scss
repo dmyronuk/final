@@ -32,6 +32,7 @@
   height: auto;
   padding: 5px;
   box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .login {
@@ -56,9 +57,9 @@
   margin: -10px -10px 0px -10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background: $blue-header;
-  font-family: 'Roboto', sans-serif;
   font-size: 1.3rem;
   color: white;
+  font-family: 'Montserrat', sans-serif;
   animation: scale_header 0.6s cubic-bezier(.55, 0, .1, 1), text_opacity 1s cubic-bezier(.55, 0, .1, 1);
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
               0px 1px 5px 0px rgba(0, 0, 0, 0.12),
@@ -77,7 +78,6 @@
   margin: -10px 0 0 -10px;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.156);
-  font-family: 'Roboto', sans-serif;
   font-size: 0.9rem;
   color: transparent;
   z-index: 5;
@@ -125,7 +125,6 @@
   box-sizing: border-box;
   background: transparent;
   font-size: 1rem;
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   opacity: 1;
   animation: input_opacity 0.8s cubic-bezier(.55, 0, .1, 1);
@@ -147,6 +146,7 @@
   padding: 10px;
   margin: 35px -25px -25px -25px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .login-button {
@@ -154,8 +154,7 @@
   border: none;
   border-radius: 3px;
   background: transparent;
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   color: #E37F00;
   cursor: pointer;
