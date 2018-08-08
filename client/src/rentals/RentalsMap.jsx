@@ -27,15 +27,13 @@ class RentalsMap extends Component {
 
   toggleMarker = (key) => {
     this.handleMarkerClick(key)
-    this.setState({ showListingBox: true, clickedMarker: true }, () => {
-    })
+    this.setState({ showListingBox: true, clickedMarker: true })
   }
 
   removeListingBoxFromMap = () => {
     const clickedMarker = this.state.clickedMarker;
     if (clickedMarker === true) {
-      this.setState({ clickedMarker: false }, () => {
-      })
+      this.setState({ clickedMarker: false })
     } else {
       this.setState({ showListingBox: false })
     }
@@ -50,12 +48,11 @@ class RentalsMap extends Component {
   componentDidMount() {
     document.title = `Map View | Kiro`
     getAllListings()
-      .then(listings => {
-        console.log(listings)
-        this.setState({
-          listings
-        })
+    .then(listings => {
+      this.setState({
+        listings
       })
+    })
   }
 
 

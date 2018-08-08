@@ -1,6 +1,5 @@
 import RentalForm from "./RentalForm";
 import { getSingleListing } from "../ajax/listings";
-import dateFromTimestamp from "../helpers/time-formatters";
 import axios from 'axios';
 
 class EditRentalForm extends RentalForm {
@@ -52,19 +51,6 @@ class EditRentalForm extends RentalForm {
       this.setState({redirect: true})
     })
   }
-
-  handleDelete = (e) => {
-    e.preventDefault();
-    console.log(this.props.match.params.id)
-    const token = localStorage.getItem("JWT_TOKEN");
-    axios.delete(`/api/listings/${this.props.match.params.id}`, {
-      data: { token: token,}
-    }).then(res => {
-      this.setState({redirect: true })
-    })
-    // this.setState({redirect: true })
-  }
-
 }
 
 export default EditRentalForm

@@ -5,10 +5,6 @@ import Button from '@material-ui/core/Button';
 
 class Home extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     document.title = `Kiro`
     this.forceUpdate()

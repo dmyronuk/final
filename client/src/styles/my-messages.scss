@@ -1,6 +1,7 @@
 .conversations-container{
   margin-top: $default-table-margin-top;
 
+
   table{
     background: white;
     border-radius: 0.3rem;
@@ -8,6 +9,7 @@
     min-width: 20rem;
     box-shadow: $default-table-shadow;
     border-collapse: collapse;
+    
   }
 
   th{
@@ -15,10 +17,12 @@
     background: #0392cf;
     font-size: $default-th-font-size;
     padding: $default-th-padding;
+    font-family: 'Raleway', sans-serif;
   }
 
   tr{
     transition:background 1s;
+    font-family: 'Poppins', sans-serif;
 
 
 

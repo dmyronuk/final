@@ -26,7 +26,7 @@ class YelpResults extends Component{
           <h3>Local {searchTerm}</h3>
         </div>
         {this.sortByKey(this.props.results, "distance").map(amenity => {
-          const distance = metresToKm(amenity.distance) + " km"
+          const distance = metresToKm(amenity.distance) + " km away"
           return(
             <a className="yelp-results-link" key={amenity.id} href={amenity.url}>
               <div className="yelp-results-item">

@@ -12,11 +12,36 @@ $nav-color: #212121;
   justify-content: center;
   height: $header-height;
   z-index: 5000;
+      // font-family: 'Raleway', sans-serif;
+  // font-family: 'Montserrat', sans-serif;
+  // font-family: 'Poppins', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 
   .app-title{
     color: white;
     font-size: 2.5rem;
+
+    .app-title-part1 {
+    }
+
+    .app-title-part2 {
+    }
+
+    .app-title-part3 {
+    }
+
+    .app-title-part4 {
+    }
+
+    img {
+      width: 3rem;
+      height: 2rem;
+      margin-left: 0.5rem;
+      /*filter: brightness(300%) invert(0.1);*/
+    }
   }
+
+
 }
 /*  filter invert */
 
@@ -57,6 +82,6 @@ $nav-color: #212121;
 
   /*.navbar-email{
     color: white;
-  }*/
-}
+    }*/
+  }
 

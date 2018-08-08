@@ -4,7 +4,7 @@ import MapIcon from "../icons/map_icon1.png";
 import GridIcon from "../icons/grid_icon2.png";
 import MessagesIcon from "../icons/message_icon1.png";
 import NewRentalIcon from "../icons/new_house_icon2.png";
-import ProfileIcon from "../icons/user_icon2.png";
+import ProfileIcon from "../icons/user_icon1.png";
 
 const Sidebar = (props) => {
   return(

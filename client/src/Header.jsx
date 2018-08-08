@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import hamburger from "./icons/hamburger.png";
+import kiroIcon from "./icons/kiro_logo3.png";
 
 function Header(props){
   return (
@@ -9,7 +10,13 @@ function Header(props){
         <img alt="Menu Toggle" src={hamburger}/>
       </button>
       <Link to={"/"}>
-        <h1 className="app-title">Kiro</h1>
+        <h1 className="app-title">
+          <span className="app-title-part1">K</span>
+          <span className="app-title-part2">i</span>
+          <span className="app-title-part3">r</span>
+          <span className="app-title-part4">o</span>
+          <img alt="Logo" src={kiroIcon}/>
+        </h1>
       </Link>
         <div className="nav-login-container">
           { !props.user ?

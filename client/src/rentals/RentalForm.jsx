@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import { getSingleListing } from "../ajax/listings";
 import { Redirect } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import SingleImage from './SingleImage.jsx';
 import TextField from '@material-ui/core/TextField';
-import {fetchLandlord} from "../ajax/auth.js";
+import { fetchLandlord } from "../ajax/auth.js";
 import BackgroundImage from "../BackgroundImage";
 import ScriptCache from "../helpers/ScriptCache.js";
 
@@ -37,11 +36,11 @@ class RentalForm extends Component {
   }
 
   componentDidMount() {
-    if(localStorage.JWT_TOKEN){
-      fetchLandlord({token: localStorage.JWT_TOKEN})
-      .then(res => {
-        this.setState({landlordId : res.id})
-      })
+    if (localStorage.JWT_TOKEN) {
+      fetchLandlord({ token: localStorage.JWT_TOKEN })
+        .then(res => {
+          this.setState({ landlordId: res.id })
+        })
     }
   }
   componentDidUpdate() {
@@ -61,15 +60,15 @@ class RentalForm extends Component {
     axios.post('/api/upload', data,
       { headers: { Authorization: localStorage.getItem("JWT_TOKEN") } }
     )
-    .then(res => {
-      let prevUrls = this.state.imageURLs;
-      this.setState({
-        imageURLs: [...prevUrls, res.data.file],
+      .then(res => {
+        let prevUrls = this.state.imageURLs;
+        this.setState({
+          imageURLs: [...prevUrls, res.data.file],
+        })
       })
-    })
-    .catch(err => {
-      alert("Sorry, we only accept image files.")
-    })
+      .catch(err => {
+        alert("Sorry, we only accept image files.")
+      })
   }
 
   handleDeleteImage = (imageURL) => {
@@ -77,19 +76,18 @@ class RentalForm extends Component {
     let index = imagesArr.indexOf(imageURL);
     if (index > -1) {
       imagesArr.splice(index, 1);
-      this.setState({...this.state, imageURLs: imagesArr})
+      this.setState({ ...this.state, imageURLs: imagesArr })
     }
   }
 
   createImgTag(arr) {
-    return arr.map((elm, i) => <SingleImage key={i} index={i} image={elm} handleDeleteImage={this.handleDeleteImage}/>)
+    return arr.map((elm, i) => <SingleImage key={i} index={i} image={elm} handleDeleteImage={this.handleDeleteImage} />)
   }
 
   handleChange = (e) => {
     const currData = Object.assign({}, this.state.data)
     currData[e.target.name] = e.target.value
     this.setState({ data: currData });
-    console.log(this.state.data)
   }
 
   handlePlaceSelect = async () => {
@@ -97,7 +95,7 @@ class RentalForm extends Component {
     let addressObject = await this.autocomplete.getPlace()
     if (!addressObject.address_components) return
     let address = addressObject.address_components
-    let geocoder = new window.google.maps.Geocoder();
+    // let geocoder = new window.google.maps.Geocoder();
     // Google Geocode call
     // geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
     let currData = Object.assign({}, this.state.data, {
@@ -120,15 +118,17 @@ class RentalForm extends Component {
     });
     const { street, city, province, postal_code, lat, lng, price, bedrooms, bathrooms, date, description } = this.state.data;
     if (!localStorage.JWT_TOKEN) {
-      return <Redirect to="/login"/>
-    } else if (this.state.landlordId === undefined) {
-      return <div> Loading... </div>
-    } else if (!this.state.landlordId) {
-      return <Redirect to="/" />
+      return <Redirect to="/login" />
     }
+    //  else if (this.state.landlordId === undefined) {
+    //   return <div> Loading... </div>
+    // }
+    // else if (!this.state.landlordId) {
+    //   return <Redirect to="/" />
+    // }
     return (
       <div>
-        <BackgroundImage/>
+        <BackgroundImage />
         <div className="new-rental-container">
           {this.state.redirect && <Redirect to="/rentals/manage" />}
           <form className="new-listing-container" onSubmit={this.handleSubmit}>
@@ -142,7 +142,6 @@ class RentalForm extends Component {
                 <TextField
                   id="autocomplete"
                   label="Type Address Here"
-                  ref="input"
                   required
                   fullWidth
                   autoFocus
@@ -211,7 +210,7 @@ class RentalForm extends Component {
 
               <div className="listing-field">
                 <TextField
-                  inputStyle={{ fontSize: '2rem' }}
+                  inputstyle={{ fontSize: '2rem' }}
                   type="number"
                   label="Price"
                   name="price"
@@ -225,7 +224,7 @@ class RentalForm extends Component {
 
               <div className="listing-field">
                 <TextField
-                  inputStyle={{ fontSize: '2rem' }}
+                  inputstyle={{ fontSize: '2rem' }}
                   label="Bedrooms"
                   type="number"
                   name="bedrooms"
@@ -239,7 +238,7 @@ class RentalForm extends Component {
 
               <div className="listing-field">
                 <TextField
-                  inputStyle={{ fontSize: '2rem' }}
+                  inputstyle={{ fontSize: '2rem' }}
                   label="Bathrooms"
                   type="number"
                   name="bathrooms"
@@ -253,7 +252,7 @@ class RentalForm extends Component {
 
               <div className="listing-field">
                 <TextField
-                  inputStyle={{ fontSize: '2rem' }}
+                  inputstyle={{ fontSize: '2rem' }}
                   label="Date Available"
                   type="date"
                   name="date"
@@ -262,12 +261,12 @@ class RentalForm extends Component {
                     shrink: true,
                   }}
                   onChange={this.handleChange}
-                  require
+                  required
                 />
               </div>
               <div className="listing-field">
                 <TextField
-                  inputStyle={{ fontSize: '2rem' }}
+                  inputstyle={{ fontSize: '2rem' }}
                   multiline
                   required
                   fullWidth
@@ -297,8 +296,8 @@ class RentalForm extends Component {
               </div>
             </section>
             {this.state.errors && <div className="error">{this.state.errors[0]}</div>}
-            <div className = "submit">
-              <Button variant="contained" color="primary" onClick={this.handleSubmit}>{this.state.edit? "Submit Changes" : "Post Your Listing"}</Button>
+            <div className="submit">
+              <Button variant="contained" color="primary" onClick={this.handleSubmit}>{this.state.edit ? "Submit Changes" : "Post Your Listing"}</Button>
             </div>
           </form>
         </div>

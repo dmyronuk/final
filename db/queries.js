@@ -101,8 +101,8 @@ module.exports = (function() {
     .join("neighbourhoods", "listings.neighbourhoods_id", "neighbourhoods.id")
     .join("listing_specifications", "listings.id", "listing_specifications.listings_id")
     .where((builder) => {
-      builder.where("listing_addresses.street", "like", `%${queryObj.query}%`)
-      .orWhere("neighbourhoods.name", "like", `%${queryObj.query}%`)
+      builder.where("listing_addresses.street", "like", `%${toTitleCase(queryObj.query)}%`)
+      .orWhere("neighbourhoods.name", "like", `%${toTitleCase(queryObj.query)}%`)
     })
     .modify((builder) => {
       const number_bedrooms = Number(queryObj.bedrooms);

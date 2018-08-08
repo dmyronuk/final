@@ -46,7 +46,7 @@ class Chat extends Component {
             sender: user.id,
             recipient: this.state.id
           })
-          // .then(messages => { });
+        // .then(messages => { });
       });
     }
   };
@@ -80,7 +80,7 @@ class Chat extends Component {
       let sum = e.reduce((a, e) => {
         return a + e.rating;
       }, 0);
-      return this.setState({ ratingOfRecipient: sum / e.length });
+      return this.setState({ ratingOfRecipient: sum / e.length, ratingAmount: e.length });
     });
   };
 
@@ -94,7 +94,6 @@ class Chat extends Component {
     this.getRatingofRatee();
     this.socket = new WebSocket("ws://localhost:8080");
     this.socket.addEventListener("open", e => {
-      console.log("connected to server");
 
       // sends
       if (localStorage.JWT_TOKEN) {
@@ -103,7 +102,6 @@ class Chat extends Component {
             type: "postSocket",
             talking_pair: { current_user: user.id, other_user: this.state.id }
           };
-          console.log(socketData);
           this.socket.send(JSON.stringify(socketData));
         });
       }
@@ -161,7 +159,7 @@ class Chat extends Component {
         chatPartner: userInfo
       });
     });
-    
+
   }
 
   render() {
@@ -176,7 +174,7 @@ class Chat extends Component {
             <header>
               <div className="messages-link">
                 <Link to="/messages">
-                  <img src={BackArrow} />
+                  <img alt="Back Arrow" src={BackArrow} />
                 </Link>
               </div>
               <div className="username-container">
@@ -184,12 +182,15 @@ class Chat extends Component {
                 <div className="username">
                   {this.state.chatPartner && this.state.chatPartner.first_name}
                 </div>
+                <div>
+                  Number of Ratings: {this.state.ratingAmount}
+                </div>
                 <ReactStars
-                  half={true}
-                  edit={false}
-                  size={27}
-                  value={this.state.ratingOfRecipient}
-                />
+                    half={true}
+                    edit={false}
+                    size={27}
+                    value={this.state.ratingOfRecipient}
+                  />
               </div>
               <div className="rating-outer-container">
                 {!this.state.ratingSubmitted ? (

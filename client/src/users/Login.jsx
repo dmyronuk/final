@@ -52,6 +52,7 @@ class Login extends Component {
       case "All fields required":
         errType = "error_1"
         break;
+      default:
     }
     let form = document.getElementById('form')
     form.classList.add(errType)

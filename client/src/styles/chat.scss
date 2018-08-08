@@ -22,15 +22,22 @@
     z-index: 1000;
     font-size: 1rem;
     box-shadow: 0 0.1rem 0.1rem #777777;
+    font-family: 'Poppins', sans-serif;
 
     .messages-link{
       position: absolute;
+
+      &:hover img {
+        filter: invert(0.2);
+      }
 
       img{
         height: 1.8rem;
         width: 1.8rem;
         filter: grayscale(1) invert(1);
         margin-right: 0.5rem;
+
+
       }
     }
 
@@ -62,6 +69,7 @@
   }
 
   .message-list{
+    font-family: 'Ubuntu', sans-serif;
     position: relative;
     overflow-y: scroll;
     height: 60vh;
@@ -106,6 +114,7 @@
 }
 
 .chatbar {
+  font-family: 'Ubuntu', sans-serif;
   min-width: 23rem;
   position: absolute;
   bottom: 0;

@@ -58,6 +58,7 @@ class Signup extends React.Component {
       case "Passwords do not match" :
         errType = "error_4"
         break;
+      default:
     }
     let form = document.getElementById('form')
     form.classList.add(errType)

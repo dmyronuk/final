@@ -20,9 +20,12 @@
       padding: $default-th-padding;
       font-size: $default-th-font-size;
       color: white;
+      font-family: 'Poppins', sans-serif;
+
     }
 
     tr{
+      font-family: 'Ubuntu', sans-serif;
       border-bottom: 1px solid #cccccc;
     }
 
@@ -32,6 +35,11 @@
 
     .add-listing-td{
       text-align: center;
+    }
+
+    img{
+      width: 2.3rem;
+      heigth: 2.3rem;
     }
   }
 }

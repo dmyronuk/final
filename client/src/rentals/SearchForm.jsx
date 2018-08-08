@@ -51,7 +51,7 @@ class RentalSearchForm extends Component{
     return(
       <div className="rental-search-container">
         <div className="rental-icon-container">
-          <img src={searchIcon}/>
+          <img alt="searchIcon" src={searchIcon}/>
         </div>
 
         <div className="rental-input-container">
