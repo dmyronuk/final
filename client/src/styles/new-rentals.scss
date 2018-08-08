@@ -101,13 +101,25 @@
   background:rgba(0, 0, 0, .5);
   width:100%;
   text-align:center;
-  padding:0.4rem 0;
+  padding:0.6rem 0 0 0;
+
+  div {
+    padding: 0.1rem;
+  }
 }
 
 .picture-remove {
   margin: 0 12rem 0 12rem;
-  color: #ee4035;
-  background-color: inherit;
+  color: white;
+  background-color: red;
+  border-radius: 1rem;
+  padding: 0.2rem 0;
+
+  font-weight: bold;
+  &:hover {
+    background-color: white;
+    color: red;
+  }
 }
 
 .error {
