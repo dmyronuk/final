@@ -59,7 +59,6 @@ let controller = {
          res.end();
        })
        .catch(error => {
-         console.log(error);
          res.json({status: "refused"});
        })
   },
@@ -108,11 +107,6 @@ let controller = {
         photos = data[0].photos
         photos.forEach(elm =>
           fs.unlink("./public" + elm.replace("http://localhost:3001", ""), (err) => {
-            if (err) {
-              console.log("failed to delete local image:"+err);
-            } else {
-              console.log('successfully deleted local image');
-            }
           })
         )
         queries.deleteListing(listingId)
@@ -122,4 +116,5 @@ let controller = {
       })
   }
 };
+
 module.exports = controller;

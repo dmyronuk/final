@@ -9,9 +9,8 @@ class RatingsForm extends Component {
       ratingSubmitted: this.props.ratingSubmitted,
     }
   }
-  render (){
+  render () {
     return (
-
       <div>
         <form onSubmit={this.props.addNewRating}>
           <label>

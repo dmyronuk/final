@@ -30,9 +30,7 @@ function authMiddleware(req,res,next) {
 }
 
 module.exports = function(app) {
-    /**
-     * Listings
-     */
+    // LISTINGS
     //public routes
     app.post('/api/listings/search', listingsController.searchListings);
     app.post('/api/listings/:id/yelp', yelpController.categorySearchByLocation);
@@ -44,22 +42,16 @@ module.exports = function(app) {
     app.delete('/api/listings/:id', authMiddleware, listingsController.deleteListing);
     app.patch('/api/listings/:id', authMiddleware, listingsController.editListing);
 
-    /**
-     * Photo
-     */
+    // PHOTOS
     //protected routes
     app.post('/api/upload', authMiddleware, photoController.uploadFile);
 
-    /**
-     * Messages
-     */
+    // MESSAGES
     app.get ('/api/messages', messagesController.getAllMessages);
     app.get('/api/filtered-messages', messagesController.getFilteredMessages);
     app.post('/api/newMessage', messagesController.addNewMessage);
 
-    /**
-     * Users
-     */
+    // USERS
     //public routes
     app.post('/api/signup', usersController.signup);
     app.post('/api/profile', usersController.profile)

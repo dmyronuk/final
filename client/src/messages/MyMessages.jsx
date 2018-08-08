@@ -8,12 +8,12 @@ import BackgroundImage from "../BackgroundImage";
 
 
 class MyMessages extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {}
   }
 
-  componentDidMount(){
+  componentDidMount() {
     document.title = `Messages | Kiro `
     if(localStorage.JWT_TOKEN){
       refetchUser({token: localStorage.JWT_TOKEN})
@@ -29,7 +29,7 @@ class MyMessages extends Component {
     }
   }
 
-  render(){
+  render() {
     return(
       <div>
         <BackgroundImage />
@@ -54,7 +54,6 @@ class MyMessages extends Component {
           </div>
         }
       </div>
-
     )
   }
 }

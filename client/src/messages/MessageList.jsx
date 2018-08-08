@@ -15,7 +15,7 @@ class MessageList extends Component {
     this.scrollToBottom();
   }
 
-  render(){
+  render() {
     return (
       <div className="message-list">
         <ul>
