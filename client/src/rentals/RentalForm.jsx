@@ -38,6 +38,9 @@ class RentalForm extends Component {
     if (localStorage.JWT_TOKEN) {
       fetchLandlord({ token: localStorage.JWT_TOKEN })
         .then(res => {
+          if(!res.id) {
+            this.setState({redirect: true})
+          }
           this.setState({ landlordId: res.id })
         })
     }
@@ -70,7 +73,8 @@ class RentalForm extends Component {
       })
   }
 
-  handleDeleteImage = (imageURL) => {
+  handleDeleteImage = (imageURL, e) => {
+    e.preventDefault()
     let imagesArr = this.state.imageURLs
     let index = imagesArr.indexOf(imageURL);
     if (index > -1) {
@@ -108,16 +112,13 @@ class RentalForm extends Component {
   // {!this.state.landlordId && <Redirect to="/" />}
 
   render() {
-    const { street, city, province, postal_code, price, bedrooms, bathrooms, date, description } = this.state.data;
+    const { street, city, province, postal_code, lat, lng, price, bedrooms, bathrooms, date, description } = this.state.data;
     if (!localStorage.JWT_TOKEN) {
       return <Redirect to="/login" />
-    } else if (this.state.landlordId === undefined) {
-      return <div> Loading... </div>
-    } else if (!this.state.landlordId) {
-      return <Redirect to="/" />
     }
     return (
       <div>
+        {this.state.redirect && <Redirect to="/" />}
         <BackgroundImage />
         <div className="new-rental-container">
           {this.state.redirect && <Redirect to="/rentals/manage" />}
