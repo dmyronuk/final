@@ -1,4 +1,4 @@
-var faker = require('faker');
+const faker = require('faker');
 
 const bcrypt = require('bcryptjs');
 
@@ -8,6 +8,10 @@ function randomParagraphGen() {
     paragraph += " " + faker.hacker.phrase();
   }
   return paragraph;
+}
+
+function randomDateGen() {
+  return faker.date.recent();
 }
 
 // returns an integer from min to max inclusive
@@ -278,7 +282,7 @@ exports.seed = function(knex, Promise) {
       bedrooms: numberBedroomsGen(),
       bathrooms: numberBathroomsGen(),
       description: randomParagraphGen(),
-      date_available: new Date("2019 02 19 15:45"),
+      date_available: randomDateGen(),
       listings_id: listings[0].id,
       // address: "46 Spadina Ave, Toronto, ON",
     },
@@ -286,7 +290,7 @@ exports.seed = function(knex, Promise) {
       bedrooms: numberBedroomsGen(),
       bathrooms: numberBathroomsGen(),
       description: randomParagraphGen(),
-      date_available: new Date("2019 02 19 15:45"),
+      date_available: randomDateGen(),
       listings_id: listings[1].id,
       // address: "725 Bathurst St, Toronto, ON M5S 2R5",
     },
@@ -294,7 +298,7 @@ exports.seed = function(knex, Promise) {
       bedrooms: numberBedroomsGen(),
       bathrooms: numberBathroomsGen(),
       description: randomParagraphGen(),
-      date_available: new Date("2019 02 19 15:45"),
+      date_available: randomDateGen(),
       listings_id: listings[2].id,
      // address: "25 Breadalbane St, Toronto, ON M4Y 1C2",
 
@@ -303,7 +307,7 @@ exports.seed = function(knex, Promise) {
     bedrooms: numberBedroomsGen(),
     bathrooms: numberBathroomsGen(),
     description: randomParagraphGen(),
-    date_available: new Date("2019 02 19 15:45"),
+    date_available: randomDateGen(),
     listings_id: listings[3].id,
      // address: "195-271 Albany Ave, Toronto, ON M5R 3C7",
    },
@@ -311,7 +315,7 @@ exports.seed = function(knex, Promise) {
     bedrooms: numberBedroomsGen(),
     bathrooms: numberBathroomsGen(),
     description: randomParagraphGen(),
-    date_available: new Date("2019 02 19 15:45"),
+    date_available: randomDateGen(),
     listings_id: listings[4].id,
      // address: "67-3 Armstrong Ave, Toronto, ON M6H 1V9",
    },
@@ -319,7 +323,7 @@ exports.seed = function(knex, Promise) {
     bedrooms: numberBedroomsGen(),
     bathrooms: numberBathroomsGen(),
     description: randomParagraphGen(),
-    date_available: new Date("2019 02 19 15:45"),
+    date_available: randomDateGen(),
     listings_id: listings[5].id,
      // address: "2-24 St Annes Rd, Toronto, ON M6J 2C1",
    },
@@ -327,7 +331,7 @@ exports.seed = function(knex, Promise) {
     bedrooms: numberBedroomsGen(),
     bathrooms: numberBathroomsGen(),
     description: randomParagraphGen(),
-    date_available: new Date("2019 02 19 15:45"),
+    date_available: randomDateGen(),
     listings_id: listings[6].id,
      // address: "34 Heydon Park Rd, Toronto, ON M6J 2C8",
    },
@@ -335,7 +339,7 @@ exports.seed = function(knex, Promise) {
     bedrooms: numberBedroomsGen(),
     bathrooms: numberBathroomsGen(),
     description: randomParagraphGen(),
-    date_available: new Date("2019 02 19 15:45"),
+    date_available: randomDateGen(),
     listings_id: listings[7].id,
      // address: "224 Wallace Ave, Toronto, ON M6H 1V5",
    },
@@ -343,7 +347,7 @@ exports.seed = function(knex, Promise) {
     bedrooms: numberBedroomsGen(),
     bathrooms: numberBathroomsGen(),
     description: randomParagraphGen(),
-    date_available: new Date("2019 02 19 15:45"),
+    date_available: randomDateGen(),
     listings_id: listings[8].id,
      // address: "133 Yorkville Ave, Toronto, ON M5R 1C4",
    },
@@ -351,7 +355,7 @@ exports.seed = function(knex, Promise) {
     bedrooms: numberBedroomsGen(),
     bathrooms: numberBathroomsGen(),
     description: randomParagraphGen(),
-    date_available: new Date("2019 02 19 15:45"),
+    date_available: randomDateGen(),
     listings_id: listings[9].id,
      // address: "169 Dufferin St, Toronto, ON M6K 1Y9",
    },
@@ -359,7 +363,7 @@ exports.seed = function(knex, Promise) {
     bedrooms: numberBedroomsGen(),
     bathrooms: numberBathroomsGen(),
     description: randomParagraphGen(),
-    date_available: new Date("2019 02 19 15:45"),
+    date_available: randomDateGen(),
     listings_id: listings[10].id,
      // address: "345 Dufferin St, Toronto, ON M6K 3G1",
    },
@@ -367,7 +371,7 @@ exports.seed = function(knex, Promise) {
     bedrooms: numberBedroomsGen(),
     bathrooms: numberBathroomsGen(),
     description: randomParagraphGen(),
-    date_available: new Date("2019 02 19 15:45"),
+    date_available: randomDateGen(),
     listings_id: listings[11].id,
      // address: "70-8 Brookfield St, Toronto, ON M6J 3A9",
    },
