@@ -37,21 +37,23 @@ class MyMessages extends Component {
         {!localStorage.JWT_TOKEN && <Redirect to="/login"/>}
         {this.state.threads &&
           <div className="default-flex-column-container conversations-container">
-            <table>
-              <tbody>
-                <tr>
-                  <th colSpan={2}>Messages</th>
-                </tr>
-                {this.state.threads.map((data, i) => {
-                  return <SingleThread key={i} theKey={i} thread={data}/>
-                })}
-                {this.state.noMessages &&
+            <div>
+              <table>
+                <tbody>
                   <tr>
-                    <td colSpan={2}> You currently have no messages</td>
+                    <th colSpan={2}>Messages</th>
                   </tr>
-                }
-              </tbody>
-            </table>
+                  {this.state.threads.map((data, i) => {
+                    return <SingleThread key={i} theKey={i} thread={data}/>
+                  })}
+                  {this.state.noMessages &&
+                    <tr>
+                      <td colSpan={2}> You currently have no messages</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
           </div>
         }
       </div>
