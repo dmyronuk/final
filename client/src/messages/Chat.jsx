@@ -23,7 +23,7 @@ class Chat extends Component {
     };
   }
 
-  // allow user to add a new message
+  // allow users to add a new message
   addNewMessage = content => {
     if (localStorage.JWT_TOKEN) {
       refetchUser({ token: localStorage.JWT_TOKEN }).then(user => {
@@ -46,7 +46,6 @@ class Chat extends Component {
             sender: user.id,
             recipient: this.state.id
           })
-        // .then(messages => { });
       });
     }
   };
@@ -133,8 +132,8 @@ class Chat extends Component {
           throw new Error("Unknown event type: " + data.type);
       }
     };
-    //check if logged in
 
+    //check if logged in
     if (localStorage.JWT_TOKEN) {
       refetchUser({ token: localStorage.JWT_TOKEN })
         .then(user => {

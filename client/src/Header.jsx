@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import hamburger from "./icons/hamburger.png";
 import kiroIcon from "./icons/kiro_logo3.png";
 
-function Header(props){
+function Header(props) {
   return (
     <header className="header-top">
       <button alt="Sidebar Toggle Button" className="toggle-nav" onClick={props.hamburgerClickHandler}>

@@ -10,7 +10,6 @@ var knex = require("knex")({
 
 module.exports = (function() {
   // declare utility functions
-  // function xyz () {}
  function getFilteredMessages (sender, recipient) {
     return knex('messages')
     .join('users', 'messages.sender', 'users.id')
@@ -36,10 +35,13 @@ module.exports = (function() {
     );
   }
 
+  function toUpperCase(str) {
+    return str.toUpperCase();
+  }
 
   return {
+
     // public interface
-    // xyz
     getAllUsers: () => {
     return knex("users").select();
   },
@@ -103,6 +105,9 @@ module.exports = (function() {
     .where((builder) => {
       builder.where("listing_addresses.street", "like", `%${toTitleCase(queryObj.query)}%`)
       .orWhere("neighbourhoods.name", "like", `%${toTitleCase(queryObj.query)}%`)
+      .orWhere("listing_addresses.postal_code", "like", `%${toUpperCase(queryObj.query)}%`)
+      .orWhere("listing_addresses.city", "like", `%${toTitleCase(queryObj.query)}%`)
+      .orWhere("listing_addresses.province ", "like", `%${toTitleCase(queryObj.query)}%`)
     })
     .modify((builder) => {
       const number_bedrooms = Number(queryObj.bedrooms);

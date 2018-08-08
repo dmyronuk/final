@@ -490,7 +490,6 @@ exports.seed = function(knex, Promise) {
       ]).returning("*");
   }
 
-
   return deleteListingSpecifications()
   .then(deleteListingAddresses)
   .then(deleteListings)
@@ -500,10 +499,6 @@ exports.seed = function(knex, Promise) {
   .then(deleteTenants)
   .then(deleteRatings)
   .then(deleteUsers)
-
-  // .then(deleteListingSpecifications)
-
-
   .then(insertUsers)
   .then(users =>  {
     return insertRatings(users)
@@ -515,7 +510,6 @@ exports.seed = function(knex, Promise) {
           return insertMessages(users)
           .then(insertNeighbourhoods)
           .then(neighbourhoods => {
-            // console.log(neighbourhoods);
             return insertListings(landlords, neighbourhoods)
             .then(listings => {
               return insertListingSpecifications(listings)
@@ -528,7 +522,4 @@ exports.seed = function(knex, Promise) {
       })
     })
   });
-
-    // .then(insertStudents)
-    // .then(students => insertLessons(students))
-  }
+}

@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import BackgroundImage from "../BackgroundImage";
 
 class MyMessages extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {}
   }
@@ -30,7 +30,7 @@ class MyMessages extends Component {
     }
   }
 
-  render(){
+  render() {
     return(
       <div>
         <BackgroundImage />

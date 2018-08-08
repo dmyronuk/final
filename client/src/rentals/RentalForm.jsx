@@ -94,9 +94,6 @@ class RentalForm extends Component {
     let addressObject = await this.autocomplete.getPlace()
     if (!addressObject.address_components) return
     let address = addressObject.address_components
-    // let geocoder = new window.google.maps.Geocoder();
-    // Google Geocode call
-    // geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
     let currData = Object.assign({}, this.state.data, {
       street: addressObject.name,
       city: address[3].long_name,
@@ -106,7 +103,6 @@ class RentalForm extends Component {
       lng: addressObject.geometry.location.lng(),
     })
     this.setState({ data: currData })
-    // })
 
   }
   // {!this.state.landlordId && <Redirect to="/" />}
@@ -298,7 +294,6 @@ class RentalForm extends Component {
       </div>
     )
   }
-
 }
 
 export default RentalForm
