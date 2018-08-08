@@ -50,7 +50,7 @@ class MyRentals extends Component {
                 <th colSpan="4">My Listings</th>
               </tr>
               {this.state.listings.map((listing, i) =>
-                  <tr>
+                  <tr key={i}>
                     <td>
                       {listing.street}, {listing.city}
                     </td>
