@@ -1,10 +1,14 @@
-var faker = require('faker');
+const faker = require('faker');
 
 const bcrypt = require('bcryptjs');
 
 const descriptions = require("../descriptions")
 
 var neighbourhoods = require("../neighbourhoods")
+
+function randomDateGen() {
+  return faker.date.recent();
+}
 
 // returns an integer from min to max inclusive
 function randomIntegerGenerator(min, max) {

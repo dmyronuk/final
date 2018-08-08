@@ -21,10 +21,23 @@ $nav-color: #212121;
     color: white;
     font-size: 2.5rem;
 
+    .app-title-part1 {
+    }
+
+    .app-title-part2 {
+    }
+
+    .app-title-part3 {
+    }
+
+    .app-title-part4 {
+    }
+
     img {
       width: 3rem;
       height: 2rem;
-      filter: brightness(300%) invert(0.1);
+      margin-left: 0.5rem;
+      /*filter: brightness(300%) invert(0.1);*/
     }
   }
 
