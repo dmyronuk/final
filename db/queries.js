@@ -100,11 +100,9 @@ module.exports = (function() {
   getAllListingsByQuery: (queryObj) => {
     return knex("listings")
     .join("listing_addresses", "listings.id", "listing_addresses.listings_id")
-    .join("neighbourhoods", "listings.neighbourhoods_id", "neighbourhoods.id")
     .join("listing_specifications", "listings.id", "listing_specifications.listings_id")
     .where((builder) => {
       builder.where("listing_addresses.street", "like", `%${toTitleCase(queryObj.query)}%`)
-      .orWhere("neighbourhoods.name", "like", `%${toTitleCase(queryObj.query)}%`)
       .orWhere("listing_addresses.postal_code", "like", `%${toUpperCase(queryObj.query)}%`)
       .orWhere("listing_addresses.city", "like", `%${toTitleCase(queryObj.query)}%`)
       .orWhere("listing_addresses.province ", "like", `%${toTitleCase(queryObj.query)}%`)
@@ -122,7 +120,7 @@ module.exports = (function() {
       if (number_bathrooms === 4) {
         builder.where("listing_specifications.bathrooms", ">=", number_bathrooms);
       } else if(queryObj.bathrooms !== "Any"){
-        builder.where("listing_specifications.bathrooms", ">=", number_bathrooms);
+        builder.where("listing_specifications.bathrooms", number_bathrooms);
       }
     })
     .where("listings.price", "<", queryObj.maxPrice)

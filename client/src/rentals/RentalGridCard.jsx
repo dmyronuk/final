@@ -15,7 +15,7 @@ return(
         </div>
         <div className="listing-grid-info">
           <div className="listing-grid-address">{props.data.street}, {props.data.city}</div>
-          <div>{props.data.bedrooms} {toSingular("Bedrooms", props.data.bedrooms)} | {props.data.bathrooms} {toSingular("Bathrooms", props.data.bedrooms)} | ${numberWithCommas(props.data.price)} / Month</div>
+          <div>{props.data.bedrooms} {toSingular("Bedrooms", props.data.bedrooms)} | {props.data.bathrooms} {toSingular("Bathrooms", props.data.bathrooms)} | ${numberWithCommas(props.data.price)} / Month</div>
         </div>
       </div>
     </Link>
