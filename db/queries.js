@@ -120,7 +120,7 @@ module.exports = (function() {
       if (number_bathrooms === 4) {
         builder.where("listing_specifications.bathrooms", ">=", number_bathrooms);
       } else if(queryObj.bathrooms !== "Any"){
-        builder.where("listing_specifications.bathrooms", ">=", number_bathrooms);
+        builder.where("listing_specifications.bathrooms", number_bathrooms);
       }
     })
     .where("listings.price", "<", queryObj.maxPrice)

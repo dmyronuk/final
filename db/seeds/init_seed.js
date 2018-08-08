@@ -1,10 +1,7 @@
 const faker = require('faker');
-
 const bcrypt = require('bcryptjs');
-
 const descriptions = require("../descriptions")
-
-var neighbourhoods = require("../neighbourhoods")
+const neighbourhoods = require("../neighbourhoods")
 
 function randomDateGen() {
   return faker.date.recent();
@@ -85,14 +82,26 @@ exports.seed = function (knex, Promise) {
         email: "bob@gmail.com",
         password_digest: bcrypt.hashSync("bob", 10),
       },
+      {
+        first_name: "Vincent",
+        last_name: "Goodman",
+        email: "vincent@gmail.com",
+        password_digest: bcrypt.hashSync("vincent", 10),
+      },
     ]).returning("*");
   }
 
   function insertLandlords(users) {
-    return knex('landlords').insert([{
+    return knex('landlords').insert([
+    {
       phone_number: "647-234-2345",
       users_id: users[0].id,
-    }, ]).returning("*");
+    },
+    {
+      phone_number: "416-234-4839",
+      users_id: users[3].id,
+    },
+    ]).returning("*");
   }
 
   function insertTenants(users) {
@@ -177,7 +186,7 @@ exports.seed = function (knex, Promise) {
         lat: 43.672512,
         lng: -79.412786,
         price: randomCostGen(),
-        landlords_id: landlords[0].id,
+        landlords_id: landlords[1].id,
         neighbourhoods_id: neighbourhoods[0].id,
         photos: ["/images/listing4.1.jpg", "/images/listing4.2.jpg", "/images/listing4.3.jpg"]
       },
@@ -187,7 +196,7 @@ exports.seed = function (knex, Promise) {
         lat: 43.664022,
         lng: -79.439156,
         price: randomCostGen(),
-        landlords_id: landlords[0].id,
+        landlords_id: landlords[1].id,
         neighbourhoods_id: neighbourhoods[1].id,
         photos: ["/images/listing5.1.jpg", "/images/listing5.2.jpg"]
       },
@@ -478,10 +487,6 @@ exports.seed = function (knex, Promise) {
     .then(deleteTenants)
     .then(deleteRatings)
     .then(deleteUsers)
-
-    // .then(deleteListingSpecifications)
-
-
     .then(insertUsers)
     .then(users => {
       return insertRatings(users)
@@ -506,7 +511,4 @@ exports.seed = function (knex, Promise) {
             })
         })
     });
-
-  // .then(insertStudents)
-  // .then(students => insertLessons(students))
 }
