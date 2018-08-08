@@ -7,8 +7,6 @@ import { refetchUser } from "../ajax/auth";
 import { Redirect } from "react-router-dom";
 import BackgroundImage from "../BackgroundImage";
 
-
-
 class MyMessages extends Component {
   constructor(props){
     super(props)
@@ -16,8 +14,9 @@ class MyMessages extends Component {
   }
 
   componentDidMount(){
-    document.title = `Messages | Kiro `
+    document.title = "Messages | Kiro";
     if(localStorage.JWT_TOKEN){
+      this.props.setNextRedirectUrl("/");
       refetchUser({token: localStorage.JWT_TOKEN})
       .then(user => {
         getAllThreads(user.id)
@@ -27,6 +26,8 @@ class MyMessages extends Component {
           })
         })
       })
+    }else{
+      this.props.setNextRedirectUrl("/messages");
     }
   }
 
@@ -34,7 +35,7 @@ class MyMessages extends Component {
     return(
       <div>
         <BackgroundImage />
-        {!localStorage.JWT_TOKEN && <Redirect to="/login"/> }
+        {!localStorage.JWT_TOKEN && <Redirect to="/login"/>}
         {this.state.threads &&
           <div className="default-flex-column-container converstions-container">
             <table>
@@ -48,7 +49,6 @@ class MyMessages extends Component {
           </div>
         }
       </div>
-
     )
   }
 }

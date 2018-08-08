@@ -67,31 +67,4 @@ const Sidebar = (props) => {
   )
 }
 
-export default Sidebar
-
-
-
-
-// class Sidebar extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       isLandlord: false,
-//     };
-//   }
-
-//   // checkIfLandlord = async () => {
-//   //   if (localStorage.JWT_TOKEN) {
-//   //     let landlord = await fetchLandlord({ token: localStorage.JWT_TOKEN })
-//   //     if (landlord.id !== false) {
-//   //       return true;
-//   //     }
-//   //   }
-//   //   return false
-//   // }
-
-//   // componentDidMount() {
-//   //   this.checkIfLandlord().then(e => {
-//   //     return this.setState({ isLandlord: e })
-//   //   })
-//   // }
+export default Sidebar;

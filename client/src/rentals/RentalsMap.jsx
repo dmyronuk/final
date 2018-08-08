@@ -31,7 +31,7 @@ class RentalsMap extends Component{
   }
 
   componentDidMount(){
-    document.title = `Map View | Kiro`
+    document.title = "Map View | Kiro";
     getAllListings()
     .then(listings => {
       this.setState({
@@ -41,8 +41,6 @@ class RentalsMap extends Component{
   }
 
   render(){
-
-
     return(
       <div>
         <RentalSearchForm handleSearchSubmit={this.handleSearchSubmit} />
