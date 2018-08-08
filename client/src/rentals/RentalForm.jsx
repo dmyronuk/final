@@ -98,6 +98,7 @@ class RentalForm extends Component {
     let addressObject = await this.autocomplete.getPlace()
     if (!addressObject.address_components) return
     let address = addressObject.address_components
+    if (address.length < 6) return
     let currData = Object.assign({}, this.state.data, {
       street: addressObject.name,
       city: address[3].long_name,
@@ -109,7 +110,6 @@ class RentalForm extends Component {
     this.setState({ data: currData })
 
   }
-  // {!this.state.landlordId && <Redirect to="/" />}
 
   render() {
     const { street, city, province, postal_code, lat, lng, price, bedrooms, bathrooms, date, description } = this.state.data;
