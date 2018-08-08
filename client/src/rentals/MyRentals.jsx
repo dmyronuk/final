@@ -19,7 +19,7 @@ class MyRentals extends Component {
     axios.delete(`/api/listings/${listingId}`, {
       data: { token: token }
     }).then(res => {
-      const updatedListings = this.state.listings.filter(elem => elem.id != listingId);
+      const updatedListings = this.state.listings.filter(elem => elem.id !== listingId);
       this.setState({listings: updatedListings});
     })
   }
@@ -50,7 +50,7 @@ class MyRentals extends Component {
                 <th colSpan="4">My Listings</th>
               </tr>
               {this.state.listings.map((listing, i) =>
-                  <tr>
+                  <tr key={i}>
                     <td>
                       {listing.street}, {listing.city}
                     </td>
@@ -62,7 +62,7 @@ class MyRentals extends Component {
                     </td>
                     <td>
                       <button onClick={() => this.deleteListing(listing.id)}>
-                        <img src={ TrashIcon }/>
+                        <img alt="TrashIcon" src={ TrashIcon }/>
                       </button>
                     </td>
                   </tr>

@@ -1,6 +1,5 @@
 import RentalForm from "./RentalForm";
 import { getSingleListing } from "../ajax/listings";
-import dateFromTimestamp from "../helpers/time-formatters";
 import axios from 'axios';
 
 class EditRentalForm extends RentalForm {

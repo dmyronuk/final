@@ -94,7 +94,6 @@ class Chat extends Component {
     this.getRatingofRatee();
     this.socket = new WebSocket("ws://localhost:8080");
     this.socket.addEventListener("open", e => {
-      console.log("connected to server");
 
       // sends
       if (localStorage.JWT_TOKEN) {
@@ -103,7 +102,6 @@ class Chat extends Component {
             type: "postSocket",
             talking_pair: { current_user: user.id, other_user: this.state.id }
           };
-          console.log(socketData);
           this.socket.send(JSON.stringify(socketData));
         });
       }

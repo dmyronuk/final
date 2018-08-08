@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import { getSingleListing } from "../ajax/listings";
 import { Redirect } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import SingleImage from './SingleImage.jsx';
@@ -96,7 +95,7 @@ class RentalForm extends Component {
     let addressObject = await this.autocomplete.getPlace()
     if (!addressObject.address_components) return
     let address = addressObject.address_components
-    let geocoder = new window.google.maps.Geocoder();
+    // let geocoder = new window.google.maps.Geocoder();
     // Google Geocode call
     // geocoder.geocode( { 'address': `${addressObject.name} ${address[3].long_name} ${address[6].long_name}`}, (results, status) => {
     let currData = Object.assign({}, this.state.data, {
@@ -114,7 +113,7 @@ class RentalForm extends Component {
   // {!this.state.landlordId && <Redirect to="/" />}
 
   render() {
-    const { street, city, province, postal_code, lat, lng, price, bedrooms, bathrooms, date, description } = this.state.data;
+    const { street, city, province, postal_code, price, bedrooms, bathrooms, date, description } = this.state.data;
     if (!localStorage.JWT_TOKEN) {
       return <Redirect to="/login"/>
     } else if (this.state.landlordId === undefined) {
