@@ -10,7 +10,7 @@ class Unauthorized extends Component {
 
   render() {
     return (
-      <div>
+      <div className="default-flex-column-container">
         <h2>Not Authorized.</h2>
         <Link to="/">
           <Button
