@@ -7,6 +7,7 @@ import SingleImage from './SingleImage.jsx';
 import TextField from '@material-ui/core/TextField';
 import {fetchLandlord} from "../ajax/auth.js";
 import BackgroundImage from "../BackgroundImage";
+import ScriptCache from "../helpers/ScriptCache.js";
 
 class RentalForm extends Component {
   FORM_TITLE = null;
@@ -114,6 +115,9 @@ class RentalForm extends Component {
   // {!this.state.landlordId && <Redirect to="/" />}
 
   render() {
+    this.scriptCache = ScriptCache({
+      google: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&libraries=places`,
+    });
     const { street, city, province, postal_code, lat, lng, price, bedrooms, bathrooms, date, description } = this.state.data;
     if (!localStorage.JWT_TOKEN) {
       return <Redirect to="/login"/>

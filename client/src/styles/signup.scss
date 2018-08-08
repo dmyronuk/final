@@ -15,8 +15,8 @@
 
 @keyframes error_before {
   0%   {height: 1rem; background: rgba(0, 0, 0, 0.156); color: transparent;}
-  10%  {height: 9rem; background: #FAFAFA; color: #C62828}
-  90%  {height: 9rem; background: #FAFAFA; color: #C62828}
+  10%  {height: 6rem; background: #FAFAFA; color: #C62828}
+  90%  {height: 6rem; background: #FAFAFA; color: #C62828}
   100% {height: 1rem; background: rgba(0, 0, 0, 0.156); color: transparent;}
 }
 
@@ -31,6 +31,7 @@
   height: auto;
   padding: 5px;
   box-sizing: border-box;
+  margin: 3rem;
 }
 
 .register {
