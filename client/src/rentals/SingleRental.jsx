@@ -46,7 +46,6 @@ class SingleRental extends Component {
   }
 
   componentDidMount() {
-    // getUserFromLandlordId(this.props.id)
     getSingleListing(this.state.id)
     .then(data => {
       const formattedDate = dateFromTimestamp(data.date_available);

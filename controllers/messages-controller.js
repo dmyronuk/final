@@ -24,24 +24,9 @@ let controller = {
     const message = req.body.text;
     queries.addNewMessage(sender, recipient, message)
       .then(messages => {
-        // console.log(messages);
-        // res.json(messages);
         res.sendStatus(200);
       })
   }
 }
-
-// queries.thread(1)
-//       .then(messages => {
-//         // console.log(messages);
-//         // res.json(messages);
-//         // res.sendStatus(200);
-//         console.log(messages);
-//       })
-
-// queries.thread(1)
-// .then();
-// .then(cool => { cool });
-
 
 module.exports = controller;

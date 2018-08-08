@@ -28,7 +28,6 @@ class EditRentalForm extends RentalForm {
       this.setState({
         data: data,
         imageURLs: listing.photos || [],
-        // edit: true,
         id: listing.id
       })
     }

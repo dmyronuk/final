@@ -4,7 +4,6 @@ import React from "react";
 //when the sidebar is open we can click on the mask and it will hide the sidbar and mask
 //we only want to attach the toggle handler if the mask is always visible
 const PageMask = (props) => {
-  //if the div
   return <div className={props.toggleState + " page-mask"} onClick={props.maskClickHandler} />
 }
 

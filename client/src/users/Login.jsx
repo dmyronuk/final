@@ -8,7 +8,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nextUrl: "/",
+      nextUrl: props.nextUrl ? props.nextUrl : "/",
       redirect: false,
       email: "",
       password: "",
