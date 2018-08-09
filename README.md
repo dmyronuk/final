@@ -4,8 +4,8 @@
 Lighthouse Labs web development bootcamp final project
 
 ## Features + Screenshots
-![Single Listing](https://raw.githubusercontent.com/buzzjam/final/master/screenshots/single_listing.png)
-![Map](https://raw.githubusercontent.com/buzzjam/final/master/screenshots/map.png)
+![Single Listing](https://raw.githubusercontent.com/buzzjam/final/working/screenshots/single_listing.png)
+![Map](https://raw.githubusercontent.com/buzzjam/final/working/screenshots/map.png)
 
 ## Usage
 - From root run npm install

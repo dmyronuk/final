@@ -47,7 +47,8 @@ class RentalForm extends Component {
   }
   componentDidUpdate() {
     let options = {
-      componentRestrictions: { country: "CA" }
+      componentRestrictions: { country: "CA" },
+      types: ['address'],
     }
     this.autocomplete = new window.google.maps.places.Autocomplete(document.getElementById('autocomplete'), options)
     this.autocomplete.addListener("place_changed", this.handlePlaceSelect)
@@ -96,20 +97,21 @@ class RentalForm extends Component {
   handlePlaceSelect = async () => {
     // Google Place Autocomplete call
     let addressObject = await this.autocomplete.getPlace()
-    if (!addressObject.address_components) return
+    if (!addressObject || !("address_components" in addressObject)) {
+      return
+    }
     let address = addressObject.address_components
     let currData = Object.assign({}, this.state.data, {
       street: addressObject.name,
       city: address[3].long_name,
-      province: address[5].long_name,
-      postal_code: address[address.length > 7 ? 7 : 6].long_name,
+      province: address[5] ? address[5].long_name : "CA",
+      postal_code: address[address.length-1].long_name,
       lat: addressObject.geometry.location.lat(),
       lng: addressObject.geometry.location.lng(),
     })
     this.setState({ data: currData })
 
   }
-  // {!this.state.landlordId && <Redirect to="/" />}
 
   render() {
     const { street, city, province, postal_code, lat, lng, price, bedrooms, bathrooms, date, description } = this.state.data;
