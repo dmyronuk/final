@@ -1,14 +1,10 @@
-"use strict";
-
+const jwt = require("jsonwebtoken");
 const listingsController = require('./controllers/listings-controller.js');
 const photoController = require('./controllers/photo-controller.js');
 const yelpController = require('./controllers/yelp-controller.js');
 const messagesController = require('./controllers/messages-controller.js');
 const usersController = require('./controllers/users-controller.js');
 const ratingsController = require('./controllers/ratings-controller.js');
-
-const jwt = require("jsonwebtoken");
-
 
 function authMiddleware(req,res,next) {
   let token = req.body.token || req.headers.authorization

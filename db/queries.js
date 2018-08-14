@@ -22,7 +22,6 @@ module.exports = (function() {
       this.where('sender', recipient).andWhere('recipient', sender)
     })
     .orderBy('created_at')
-    // .limit(100)
   }
 
   // Converts first letter of each word to uppercase and rest to lowercase

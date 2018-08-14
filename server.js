@@ -20,10 +20,6 @@ var knex = require("knex")({
   }
 });
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.text());
 app.use(bodyParser.json({
   type: 'application / vnd.api + json'
 }));
@@ -57,12 +53,6 @@ wss.broadcast = (data, ws) => {
       user.send(JSON.stringify(data));
     }
   });
-  // DON'T REMOVE UNTIL FOR SURE THE CODE ABOVE WORKS!
-  // wss.clients.forEach(function each(client) {
-  //   if (client.readyState === WebSocket.OPEN) {
-  //     client.send(JSON.stringify(data));
-  //   }
-  // });
 }
 
 
@@ -89,7 +79,6 @@ wss.on('connection', (ws) => {
   });
 
   ws.on('close', () => {
-    // finds who the user is
     var index = usersWs.indexOf(ws);
 
     // removes user connected and who they are talking to if that user exists
