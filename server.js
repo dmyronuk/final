@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const PORT = 3001;
 
-const usersWs = []; // manually store connected websocket objects
-const contacts = []; // who the websockets are and who they are contacting
+//open websocket connections
+const usersWs = [];
+const contacts = [];
 
 require("dotenv").config();
 
@@ -34,19 +34,16 @@ app.listen(PORT, '0.0.0.0', 'localhost', () => {
   console.log(`Server running on Port ${PORT}`);
 })
 
-// web socket server
 const WebSocket = require('ws');
 const SocketServer = WebSocket.Server;
 const wss = new SocketServer({ port: 8080 });
 
-
-// broadcast to specific users
+// broadcast messages to appropriate users
 wss.broadcast = (data, ws) => {
   const sender = data.sender;
   const recipient = data.recipient;
 
-  // manually check who to send the message to because don't want everyone to see the new socket message
-  // only the sender and its corresponding recipient should see the message
+  //only the sender and its corresponding recipient should see the message
   usersWs.forEach(function each(user, index) {
     const contact = contacts[index];
     if ((contact.current_user === sender && contact.other_user === recipient) || (contact.current_user === recipient && contact.other_user === sender && user.readyState === WebSocket.OPEN)) {
